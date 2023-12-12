@@ -1,38 +1,43 @@
 import React, { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { AuthContext } from "../../../context/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./SignUp.css";
+import axios from "axios";
+import { signupApi } from "../../Api/AuthApi";
+import { saveToken } from "../../Functions/AuthFunctions";
+import { connect } from "react-redux";
+import { AUTHENTICATED } from "../../Redux/ActionTypes";
 
-const SignUp = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+const SignUp = (props) => {
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const navigate = useNavigate();
 
   const handleSignup = (data) => {
-    const userInfo = { displayName: data.name };
-    createUser(data.email, data.password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        if (user.uid) {
-          toast.success("User Registered Successfully please login");
-          navigate("/");
-          window.location.reload();
-        }
 
-        updateUser(userInfo)
-          .then(() => {})
-          .catch((err) => console.log(err));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    signupApi(data).then(data => {
+      if (data.error) throw data.message
+
+      saveToken(data.value.token)
+      navigate('/')
+      window.location.reload(false)
+
+    })
+      .catch(err => console.log(err))
+
   };
 
   return (
@@ -40,20 +45,39 @@ const SignUp = () => {
       <div className="shadow-lg p-10 rounded w-[500px] signup">
         <form onSubmit={handleSubmit(handleSignup)}>
           <h2 className="text-black text-center text-3xl">Sign Up</h2>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Signup as</span>
+            </label>
+
+            <select {...register("role", {
+              required: "This field is required",
+            })} name="role" id="" className="w-full">
+
+              <option value="">Select</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+            {errors.role && (
+              <p className="text-red-400  text-xs mt-2">{errors.role?.message}</p>
+            )}
+          </div>
+
           <div>
             <label className="label">
               <span className="label-text">Name</span>
             </label>
             <input
               type="text"
-              {...register("name", {
+              {...register("username", {
                 required: "This field is required",
               })}
-              name="name"
+              name="username"
               className="input input-bordered w-full"
             />
-            {errors.name && (
-              <p className="text-gray-500">{errors.name?.message}</p>
+            {errors.username && (
+              <p className="text-red-400  text-xs mt-2">{errors.username?.message}</p>
             )}
           </div>
 
@@ -70,7 +94,24 @@ const SignUp = () => {
               className="input input-bordered w-full"
             />
             {errors.email && (
-              <p className="text-gray-500">{errors.email?.message}</p>
+              <p className="text-red-400  text-xs mt-2">{errors.email?.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Mobile</span>
+            </label>
+            <input
+              type="tel"
+              {...register("mobile", {
+                required: "This field is required",
+              })}
+              name="mobile"
+              className="input input-bordered w-full"
+            />
+            {errors.mobile && (
+              <p className="text-red-400  text-xs mt-2">{errors.mobile?.message}</p>
             )}
           </div>
 
@@ -83,11 +124,11 @@ const SignUp = () => {
               {...register("password", {
                 required: "This field is required",
                 minLength: {
-                  value: 6,
+                  // value: 6,
                   message: "Password must be 6 character long",
                 },
                 pattern: {
-                  value: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])./,
+                  // value: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])./,
                   message:
                     "Password should contain at least one uppercase,lowercase & number",
                 },
@@ -96,7 +137,7 @@ const SignUp = () => {
               className="input input-bordered w-full"
             />
             {errors.password && (
-              <p className="text-gray-600 text-xs mt-2">
+              <p className="text-red-400 text-xs mt-2">
                 {errors.password?.message}
               </p>
             )}
@@ -121,4 +162,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default connect(mapStateToProps)(SignUp);

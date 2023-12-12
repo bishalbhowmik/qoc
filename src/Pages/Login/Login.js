@@ -1,28 +1,28 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import '../../Pages/Home/SignUp/SignUp';
+import '../SignUp/SignUp';
+import { signinApi } from '../../Api/AuthApi';
+import { saveToken } from '../../Functions/AuthFunctions';
 
 const Login = () => {
-    const { register,handleSubmit,formState: { errors }} = useForm();
-    const {loginUser} = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
     const navigate = useNavigate();
 
-    const handleLogin = (data) =>{
-        loginUser(data.email,data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            toast.success('Login Successfull');
-            navigate('/');
-            window.location.reload();
+    const handleLogin = (data) => {
+
+        signinApi(data).then(data => {
+            if (data.error) throw data.message
+
+            saveToken(data.value.token)
+            navigate('/')
+            window.location.reload(false)
 
         })
-        .catch(err =>{
-            console.log(err);
-        })
+            .catch(err => console.log(err))
+
     }
     return (
         <div className='flex flex-col items-center justify-center h-[100vh] bg-[#FAF8FF]'>
@@ -47,14 +47,14 @@ const Login = () => {
                         </label>
                         <input type="password" {...register("password", {
                             required: "This field is required",
-                            minLength: { value: 6, message: 'Password must be 6 character long' }
+                            // minLength: { value: 6, message: 'Password must be 6 character long' }
                         })} name="password" className="input input-bordered w-full" />
                         {errors.password && <p>{errors.password?.message}</p>}
 
                     </div>
 
                     <div className='text-red-500'>
-                        
+
                     </div>
 
                     <button className='btn btn-accent w-full text-white'>Login</button>
@@ -67,7 +67,7 @@ const Login = () => {
                     </div>
 
                 </form>
-                <button  className='btn btn-outline w-full'>Continue With Google</button>
+                <button className='btn btn-outline w-full'>Continue With Google</button>
             </div>
         </div>
     );

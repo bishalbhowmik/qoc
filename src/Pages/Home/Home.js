@@ -8,6 +8,14 @@ import tutor from "../../assets/find-tutor.png";
 import person from "../../assets/person.png";
 import student from "../../assets/student.png";
 import styles from "./Home.module.css";
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+
+  }
+}
 
 function Home() {
   return (
@@ -595,4 +603,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default connect(mapStateToProps)(Home)

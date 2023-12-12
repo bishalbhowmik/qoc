@@ -3,8 +3,23 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "../PoftfolioNav/BottomNav.module.css";
+import { connect } from "react-redux";
 
-const BottomNav = () => {
+
+const mapStateToProps = (state) => {
+
+  console.log('From Layout: ', state)
+
+  return {
+    authenticated: state.authenticated,
+    decodedToken: state.decodedToken
+  }
+}
+
+
+
+const BottomNav = (props) => {
+
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
 
@@ -31,9 +46,7 @@ const BottomNav = () => {
             </Link>
           </li>
           <li>
-            <Link to="skills" smooth={true} duration={500}>
-              Find Tutors
-            </Link>
+            {props.decodedToken && props.decodedToken.hasOwnProperty('role') && props.decodedToken.role === 'teacher' ? <Link to="/teacher" smooth={true} duration={500}>Find Job</Link> : <Link to="/student" smooth={true} duration={500}>Find Tutors</Link>}
           </li>
           <li>
             <Link to="" smooth={true} duration={500}>
@@ -43,20 +56,35 @@ const BottomNav = () => {
         </ul>
 
         <ul className="hidden md:flex gap-x-5">
-          <li>
-            <Link to="/login" smooth={true} duration={500}>
-              <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
-                Login
-              </button>
-            </Link>
-          </li>
-          <li>
-            <Link to="/signup" smooth={true} duration={500}>
-              <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
-                Signup
-              </button>
-            </Link>
-          </li>
+
+          {!props.authenticated ? <>
+          {console.log('Test', props.authenticated)}
+            <li>
+              <Link to="/login" smooth={true} duration={500}>
+                <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
+                  Login
+                </button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/signup" smooth={true} duration={500}>
+                <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
+                  Signup
+                </button>
+              </Link>
+            </li>
+          </> : <>
+
+              <li>
+                <Link to="/logout" smooth={true} duration={500}>
+                  <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
+                    Logout
+                  </button>
+                </Link>
+              </li>
+          </>}
+
         </ul>
 
         {/* Hamburger */}
@@ -126,4 +154,4 @@ const BottomNav = () => {
   );
 };
 
-export default BottomNav;
+export default connect(mapStateToProps)(BottomNav);
