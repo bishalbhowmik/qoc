@@ -8,8 +8,6 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
 
-  console.log('From Layout: ', state)
-
   return {
     authenticated: state.authenticated,
     decodedToken: state.decodedToken
@@ -35,6 +33,7 @@ const BottomNav = (props) => {
         {/* menu */}
 
         <ul id={styles.menu} className="hidden md:flex gap-x-5 font-semibold">
+
           <li>
             <Link to="/" smooth={true} duration={500}>
               Home
@@ -46,19 +45,26 @@ const BottomNav = (props) => {
             </Link>
           </li>
           <li>
-            {props.decodedToken && props.decodedToken.hasOwnProperty('role') && props.decodedToken.role === 'teacher' ? <Link to="/teacher" smooth={true} duration={500}>Find Job</Link> : <Link to="/student" smooth={true} duration={500}>Find Tutors</Link>}
+            {props.decodedToken && props.decodedToken.hasOwnProperty('role') && props.decodedToken.role === 'teacher' ? <Link to="/find-tuition" smooth={true} duration={500}>Find tuition</Link> : <Link to="/find-tutor" smooth={true} duration={500}>Find Tutors</Link>}
           </li>
           <li>
             <Link to="" smooth={true} duration={500}>
               About Us
             </Link>
           </li>
+
+
         </ul>
+
+
+
+
+
+
 
         <ul className="hidden md:flex gap-x-5">
 
           {!props.authenticated ? <>
-          {console.log('Test', props.authenticated)}
             <li>
               <Link to="/login" smooth={true} duration={500}>
                 <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
@@ -76,13 +82,21 @@ const BottomNav = (props) => {
             </li>
           </> : <>
 
-              <li>
-                <Link to="/logout" smooth={true} duration={500}>
-                  <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
-                    Logout
-                  </button>
-                </Link>
-              </li>
+            <li>
+              <Link to={props.decodedToken && props.decodedToken.hasOwnProperty('role') && (props.decodedToken.role === 'teacher' ? '/teacher-dashboard' : props.decodedToken.role === 'student' ? 'student-dashboard' : props.decodedToken.role === 'admin' ? '/admin-dashboard' : '')} smooth={true} duration={500}>
+                <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
+                  Dashboard
+                </button>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/logout" smooth={true} duration={500}>
+                <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
+                  Logout
+                </button>
+              </Link>
+            </li>
           </>}
 
         </ul>

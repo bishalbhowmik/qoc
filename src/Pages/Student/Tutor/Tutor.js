@@ -1,0 +1,72 @@
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { getStudentAllTuition } from '../../../Api/Student/TuitionApi'
+
+const mapStateToProps = (state) => {
+
+  return {
+    authenticated: state.authenticated,
+    decodedToken: state.decodedToken
+  }
+}
+
+export const Tutor = (props) => {
+
+  const [tuition, setTuition] = useState([])
+
+  useEffect(() => {
+
+    getStudentAllTuition(props.decodedToken._id).then(data => {
+
+      if (data.error) throw data.message
+      console.log(data)
+      setTuition([...data.data])
+
+    }).catch(err => {
+      console.log(err)
+    })
+
+  }, [props])
+
+
+  let tuitionShow
+
+  if (tuition.length === 0) return <div className='p-48 text-center'>No Tuition found</div>
+  tuitionShow = tuition.map((item, index) => {
+    return (
+      <div className='col-span-4 card bg-neutral text-neutral-content'>
+        <div className="card-body">
+          <div className="text-xl">
+            {item.subject} <br /> <br />
+            Teacher Name: {item.confirmedTeacherId.username} <br />
+            Contact: {item.confirmedTeacherId.mobile} <br /> <br />
+            Time: {item.time} <br /> <br />
+
+          </div>
+
+          <span className={`inline-flex badge ${item.confirmed ? 'badge-success' : 'badge-error'}`}>Confirmed</span> <br />
+        </div>
+
+      </div>
+    )
+  })
+
+
+
+
+  return (
+    <div>
+      <Link className='btn btn-neutral' to='/student-dashboard/create-tuition'>Post Tuition</Link>
+
+      <div className='grid grid-cols-12 gap-4 mt-5'>
+        {tuitionShow}
+      </div>
+    </div>
+  )
+}
+
+
+
+
+export default connect(mapStateToProps)(Tutor)
