@@ -2,23 +2,20 @@ import axios from "axios"
 
 
 
-export const createMcq = async (state) => {
+export const createBroadQuestionApi = async (state) => {
 
 
     let obj = {
         question: state.question,
-        options: [{ option: 'a', value: state.a }, { option: 'b', value: state.b }, { option: 'c', value: state.c }, { option: 'd', value: state.d }],
-        answer: String(state.answer).toLocaleLowerCase(),
-        hints: state.hints,
+        answer: state.answer,
         difficulty: state.difficulty,
-        explanation: state.explanation,
         curriculumId: state.curriculumId,
         subjectId: state.subjectId,
         chapterId: state.chapterId,
         moduleId: state.moduleId,
     }
 
-    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/mcq/", obj, {
+    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/broad-question/", obj, {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
@@ -30,9 +27,9 @@ export const createMcq = async (state) => {
 }
 
 
-export const getMcqByCriteriaApi = async (obj) => {
+export const getBroadQuestionApi = async (obj) => {
 
-    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/mcq/get", obj, {
+    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/broad-question/get", obj, {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'

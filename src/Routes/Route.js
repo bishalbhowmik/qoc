@@ -37,6 +37,9 @@ import TeacherChapter from "../Pages/Teacher/TeacherCourse/TeacherChapter";
 import TeacherModule from "../Pages/Teacher/TeacherCourse/TeacherModule";
 import Mcq from "../Pages/Admin/Mcq/Mcq";
 import BroadQuestion from "../Pages/Admin/BroadQuestion/BroadQuestion";
+import StudentAllExam from "../Pages/Student/StudentExam/StudentAllExam";
+import StudentExam from "../Pages/Student/StudentExam/StudentExam";
+import ExamDetails from "../Pages/Admin/Exam/ExamDetails";
 
 
 
@@ -128,6 +131,10 @@ export const router = createBrowserRouter([
           path: "broad-question",
           element: <BroadQuestion />,
         },
+        {
+          path: "exam-details/:examId",
+          element: <ExamDetails />,
+        },
 
         ]
       },
@@ -215,6 +222,14 @@ export const router = createBrowserRouter([
           {
             path: "module",
             element: <StudentModule />,
+          },
+          {
+            path: "all-exam",
+            element: <StudentAllExam />,
+          },
+          {
+            path: "exam",
+            element: <StudentExam />,
           },
 
         ]

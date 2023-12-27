@@ -45,7 +45,7 @@ const BottomNav = (props) => {
             </Link>
           </li>
           <li>
-            {props.decodedToken && props.decodedToken.hasOwnProperty('role') && props.decodedToken.role === 'teacher' ? <Link to="/find-tuition" smooth={true} duration={500}>Find tuition</Link> : <Link to="/find-tutor" smooth={true} duration={500}>Find Tutors</Link>}
+            {props.decodedToken && props.decodedToken.hasOwnProperty('role') && props.decodedToken.role === 'teacher' ? <Link to="/find-tuition" smooth={true} duration={500}>Find tuition</Link> : <Link to="/find-tuition" smooth={true} duration={500}>Find tuition</Link>}
           </li>
           <li>
             <Link to="" smooth={true} duration={500}>

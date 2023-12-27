@@ -32,8 +32,11 @@ export const Tutor = (props) => {
 
   let tuitionShow
 
-  if (tuition.length === 0) return <div className='p-48 text-center'>No Tuition found</div>
-  tuitionShow = tuition.map((item, index) => {
+  if (tuition.length === 0){
+    tuitionShow = <div className='p-48 text-center col-span-12'>No Tuition found</div>
+  }
+  else{
+    tuitionShow = tuition.map((item, index) => {
     return (
       <div className='col-span-4 card bg-neutral text-neutral-content'>
         <div className="card-body">
@@ -51,6 +54,8 @@ export const Tutor = (props) => {
       </div>
     )
   })
+  }
+  
 
 
 

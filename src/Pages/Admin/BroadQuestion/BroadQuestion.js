@@ -4,8 +4,8 @@ import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
-import { createMcq, getAllMcqApi } from '../../../Api/Admin/McqApi'
 import AllBroadQuestion from './AllBroadQuestion'
+import { createBroadQuestionApi, getBroadQuestionApi } from '../../../Api/Admin/BroadQuestionApi'
 
 export const BroadQuestion = (props) => {
 
@@ -15,15 +15,9 @@ export const BroadQuestion = (props) => {
   const [module, setModule] = useState([])
   const [state, setState] = useState({
     question: '',
-    option: [],
-    a: '',
-    b: '',
-    c: '',
-    d: '',
     answer: '',
-    hints: '',
     difficulty: 'easy',
-    explanation: '',
+
     curriculumId: '',
     subjectId: '',
     chapterId: '',
@@ -32,17 +26,17 @@ export const BroadQuestion = (props) => {
 
   useEffect(() => {
 
-    // getAllCurriculumApi().then(data => {
-    //   if (data.error) {
-    //     setCurriculum([])
-    //     setSubject([])
-    //     setChapter([])
-    //     setModule([])
-    //   }
-    //   else {
-    //     setCurriculum(['', ...data.data])
-    //   }
-    // })
+    getAllCurriculumApi().then(data => {
+      if (data.error) {
+        setCurriculum([])
+        setSubject([])
+        setChapter([])
+        setModule([])
+      }
+      else {
+        setCurriculum(['', ...data.data])
+      }
+    })
 
   }, [])
 
@@ -119,21 +113,16 @@ export const BroadQuestion = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // createMcq(state).then(data => {
-    //   console.log(data)
-    //   setState({
-    //     ...state,
-    //     question: '',
-    //     option: [],
-    //     a: '',
-    //     b: '',
-    //     c: '',
-    //     d: '',
-    //     answer: '',
-    //     hints: '',
-    //     explanation: '',
-    //   })
-    // })
+    createBroadQuestionApi(state).then(data => {
+
+      console.log(data)
+
+      // setState({
+      //   ...state,
+      //   question: '',
+      //   answer: '',
+      // })
+    })
   }
 
   return (
@@ -196,38 +185,11 @@ export const BroadQuestion = (props) => {
               <textarea required name='question' onChange={e => handleChange(e)} value={state.question} type="text" placeholder="Type here" className="input input-bordered w-full textarea" />
             </div>
 
-            <div className='mb-5'>Options: </div>
+            
 
             <div className='mb-5'>
-              <span className="me-3">A </span>
-              <input required onChange={e => handleChange(e)} name='a' value={state.a} type="text" className="file-input file-input-bordered w-full max-w-xs mb-5" />
-            </div>
-            <div className='mb-5'>
-              <span className="me-3">B </span>
-              <input required onChange={e => handleChange(e)} name='b' value={state.b} type="text" className="file-input file-input-bordered w-full max-w-xs mb-5" />
-            </div>
-            <div className='mb-5'>
-              <span className="me-3">C </span>
-              <input onChange={e => handleChange(e)} name='c' value={state.c} type="text" className="file-input file-input-bordered w-full max-w-xs mb-5" />
-            </div>
-            <div className='mb-5'>
-              <span className="me-3">D </span>
-              <input onChange={e => handleChange(e)} name='d' value={state.d} type="text" className="file-input file-input-bordered w-full max-w-xs mb-5" />
-            </div>
-
-            <div className='mb-5'>
-              <span className="label label-text">Correct Answer: </span>
-              <input required name='answer' onChange={e => handleChange(e)} value={state.answer} type="text" placeholder="Type A, B, C or D" className="input input-bordered w-full" />
-            </div>
-
-            <div className='mb-5'>
-              <span className="label label-text">Hints: </span>
-              <input name='hints' onChange={e => handleChange(e)} value={state.hints} type="text" placeholder="Type here" className="input input-bordered w-full" />
-            </div>
-
-            <div className='mb-5'>
-              <span className="label label-text">Explanation: </span>
-              <input name='explanation' onChange={e => handleChange(e)} value={state.explanation} type="text" placeholder="Type here" className="input input-bordered w-full" />
+              <span className="label label-text">Answer: </span>
+              <input required name='answer' onChange={e => handleChange(e)} value={state.answer} type="text" placeholder="Type here" className="input input-bordered w-full" />
             </div>
 
             <div className='mb-5'>

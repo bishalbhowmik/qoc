@@ -41,10 +41,12 @@ export const FindTuition = (props) => {
 
     tuitionShow = tuition.map((item, index) => {
         return (
-            <div className='col-span-3 card bg-neutral text-neutral-content'>
+            <div className='col-span-3 my-10 glass card bg-neutral text-neutral-content'>
                 <div className="card-body">
-                    <div className="card-title">
+                    <div className="card-title mb-4">
                         Subject: {item.subject} <br />
+                        Salary: {item.salary} <br />
+                        Time: {item.time} <br />
                     </div>
 
                     <button className='btn btn-primary' onClick={() => apply(item._id)}>Apply</button>
@@ -58,7 +60,7 @@ export const FindTuition = (props) => {
 
     return (
         <div>
-            <div className='grid grid-cols-12 gap-4 mt-5'>
+            <div className='grid grid-cols-12 gap-4 mt-5 p-5'>
                 {tuitionShow}
             </div>
         </div>

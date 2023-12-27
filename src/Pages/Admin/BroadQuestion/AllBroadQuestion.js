@@ -6,6 +6,7 @@ import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getMcqByCriteriaApi } from '../../../Api/Admin/McqApi'
+import { getBroadQuestionApi } from '../../../Api/Admin/BroadQuestionApi'
 
 export const AllBroadQuestion = (props) => {
 
@@ -14,7 +15,7 @@ export const AllBroadQuestion = (props) => {
     const [subject, setSubject] = useState([])
     const [chapter, setChapter] = useState([])
     const [module, setModule] = useState([])
-    const [mcq, setMcq] = useState([])
+    const [broadQuestion, setBroadQuestion] = useState([])
     const [state, setState] = useState({
         curriculumId: '',
         subjectId: '',
@@ -24,26 +25,26 @@ export const AllBroadQuestion = (props) => {
 
     useEffect(() => {
 
-        // getAllCurriculumApi().then(data => {
-        //     if (data.error) {
-        //         setCurriculum([])
-        //         setSubject([])
-        //         setChapter([])
-        //         setModule([])
-        //     }
-        //     else {
-        //         setCurriculum(['', ...data.data])
-        //     }
-        // })
+        getAllCurriculumApi().then(data => {
+            if (data.error) {
+                setCurriculum([])
+                setSubject([])
+                setChapter([])
+                setModule([])
+            }
+            else {
+                setCurriculum(['', ...data.data])
+            }
+        })
 
-        // getMcqByCriteriaApi({}).then(data => {
-        //     if (data.error) throw data.message
-        //     setMcq([...data.data])
-        // })
-        //     .catch(err => {
-        //         console.error(err)
-        //         setMcq([])
-        //     })
+        getBroadQuestionApi({}).then(data => {
+            if (data.error) throw data.message
+            setBroadQuestion([...data.data])
+        })
+            .catch(err => {
+                console.error(err)
+                setBroadQuestion([])
+            })
 
     }, [])
 
@@ -117,29 +118,29 @@ export const AllBroadQuestion = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // getMcqByCriteriaApi(state).then(data => {
-        //     if (data.error) throw data.message
-        //     setMcq([...data.data])
-        // })
-        //     .catch(err => {
-        //         console.error(err)
-        //         setMcq([])
-        //     })
+        getBroadQuestionApi(state).then(data => {
+            if (data.error) throw data.message
+            setBroadQuestion([...data.data])
+        })
+            .catch(err => {
+                console.error(err)
+                setBroadQuestion([])
+            })
     }
 
 
 
-    let mcqShow
-    if (mcq.length === 0) {
-        mcqShow = 'No broad question available'
+    let broadQuestionShow
+    if (broadQuestion.length === 0) {
+        broadQuestionShow = 'No broad question available'
     }
     else {
-        mcqShow = mcq.map((item, index) => {
+        broadQuestionShow = broadQuestion.map((item, index) => {
             return (
                 <div className='card card-body border my-3'>
                     <div className='font-bold'>{index + 1}. {item.question}</div>
-                    <div className='flex justify-between mt-3'>
-                        {item.options.map(item => <div>{item.option}. {item.value}</div>)}
+                    <div className='mt-3'>
+                        <strong>Answer: </strong>{item.answer}
                     </div>
                 </div>
             )
@@ -197,7 +198,7 @@ export const AllBroadQuestion = (props) => {
 
 
             <div className='my-10'>
-                {mcqShow}
+                {broadQuestionShow}
             </div>
 
 

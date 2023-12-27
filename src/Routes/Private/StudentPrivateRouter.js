@@ -21,7 +21,8 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
                 <Link to='/student-dashboard/course' className='block text-white m-4 hover:underline'>Course</Link>
                 <Link to='/student-dashboard/tutor' className='block text-white m-4 hover:underline'>Tutor</Link>
                 <Link to='/student-dashboard/batch' className='block text-white m-4 hover:underline'>Batch</Link>
-                {/* <Link to='/student-dashboard/job' className='block text-white m-4 hover:underline'>Jobs</Link> */}
+                <Link to='/student-dashboard/all-exam' className='block text-white m-4 hover:underline'>All Exam</Link>
+                {/* <Link to='/student-dashboard/all-exam' className='block text-white m-4 hover:underline'>Exam</Link> */}
             </div>
             <div className='col-span-10'> <Outlet /></div>
 
