@@ -33,7 +33,7 @@ export const StudentCurriculum = (props) => {
     else {
         subjectShow = subject.map((item, index) => {
             return (
-                <Link to='/student-dashboard/subject' state={{ subject: item }} className='card col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/student-dashboard/subject' state={{ subject: item }} className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.subject}</div>
                     </div>

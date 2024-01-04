@@ -71,7 +71,7 @@ export const TuitionAdmin = (props) => {
 
   tuitionShow = tuition.map((item, index) => {
     return (
-      <div className='col-span-3 card bg-neutral text-neutral-content'>
+      <div className=' col-span-12 md:col-span-3  card bg-neutral text-neutral-content'>
         <div className="card-body">
 
           ID: {item.tuitionNumber} <br />

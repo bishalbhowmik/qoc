@@ -32,12 +32,12 @@ export const StudentSubject = (props) => {
 
     let chapterShow
     if (chapter.length === 0) {
-        chapterShow = <div className='p-40 text-center col-span-12'>Not chapter found</div>
+        chapterShow = <div className='text-center col-span-12'>Not chapter found</div>
     }
     else {
         chapterShow = chapter.map((item, index) => {
             return (
-                <Link to='/student-dashboard/chapter' state={{ chapter: item }} className='card col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/student-dashboard/chapter' state={{ chapter: item }} className='card  col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.chapter}</div>
                     </div>

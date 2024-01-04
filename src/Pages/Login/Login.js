@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,6 +8,7 @@ import { saveToken } from '../../Functions/AuthFunctions';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const [message, setMessage] = useState('')
 
     const navigate = useNavigate();
 
@@ -16,12 +17,13 @@ const Login = () => {
         signinApi(data).then(data => {
             if (data.error) throw data.message
 
+            setMessage(data.message)
             saveToken(data.value.token)
             navigate('/')
             window.location.reload(false)
 
         })
-            .catch(err => console.log(err))
+            .catch(err => setMessage(err))
 
     }
     return (
@@ -59,7 +61,9 @@ const Login = () => {
 
                     <button className='btn btn-accent w-full text-white'>Login</button>
 
-                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to Doctors Portal? <Link to='/' className='text-secondary'>Create New Account</Link></h3>
+                    <div className='my-4 text-center text-red-500'>{message}</div>
+
+                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to QOC Learning? <Link to='/signup' className='text-secondary'>Create New Account</Link></h3>
 
                     <div className="flex flex-col w-full border-opacity-50">
 

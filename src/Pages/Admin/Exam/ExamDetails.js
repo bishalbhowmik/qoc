@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getAExamApi, updateMarksApi } from '../../../Api/Admin/ExamApi'
-import { Buffer } from 'buffer';
+import bufferToDataUrl from 'buffer-to-data-url';
 
 export const ExamDetails = (props) => {
 
@@ -59,7 +59,7 @@ export const ExamDetails = (props) => {
 
                     {exam.broadQuestionsId.length > 0 ? <>
                         <td className='bg-slate-200'>{item.broadQuestionMarks}</td>
-                        <td className='bg-slate-200'><button onClick={e => viewScript(item)} className='btn btn-sm btn-ghost'>View</button></td>
+                        <td className=''><button onClick={e => viewScript(item)} className='btn btn-sm btn-ghost'>View</button></td>
                     </> : ''}
                 </tr>
             )
@@ -87,14 +87,9 @@ export const ExamDetails = (props) => {
 
     }
 
+    let imageBuffer = selectedItem && selectedItem.hasOwnProperty('script') ? bufferToDataUrl(selectedItem.script.contentType, selectedItem.script.data) : ''
 
-    let dataUrl = '';
-    if (selectedItem && selectedItem.hasOwnProperty('script')) {
-        const base64Data = Buffer.from(selectedItem.script.data).toString('base64');
-        dataUrl = `data:${selectedItem.script.contentType};base64,${base64Data}`;
-    } else {
-        console.error('Invalid selectedItem.script object:', selectedItem.script);
-    }
+    
 
     return (
         <div>
@@ -132,7 +127,7 @@ export const ExamDetails = (props) => {
 
 
                 <dialog id="viewScriptModal" className="modal">
-                    <div className="modal-box w-10/12 max-w-5xl">
+                    <div className="modal-box w-11/12 max-w-7xl">
                         <form method="dialog">
                             {/* if there is a button in form, it will close the modal */}
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
@@ -152,18 +147,14 @@ export const ExamDetails = (props) => {
 
 
                             <div className='text-center text-xl my-10'>Script</div>
+
+
                             {/* buffer to image */}
 
 
                             <div>
-
-                                <object data={dataUrl} type="application/pdf"  width="100%" height="100%"></object>
+                                <object title={selectedItem.script.name} className='h-screen' data={imageBuffer} width="100%"></object>
                             </div>
-
-
-
-
-
 
                         </div> : ''}
 

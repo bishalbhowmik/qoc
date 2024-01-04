@@ -34,7 +34,7 @@ export const TuitionTeacher = (props) => {
 
   confirmedTuitionShow = confirmedTuition.map((item, index) => {
     return (
-      <div className='col-span-6 card bg-slate-700 text-neutral-content'>
+      <div className=' col-span-12 md:col-span-6 card bg-slate-700 text-neutral-content'>
         <div className="card-body">
           <div className="text-xl">
             Code: {item.tuitionNumber} <br />

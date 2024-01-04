@@ -148,7 +148,7 @@ export const Exam = (props) => {
   else{
     examShow = exam.map(item => {
       return (
-        <Link to={`/admin-dashboard/exam-details/${item._id}`} className='card card-body glass my-10 me-5 bg-slate-700 text-white'>
+        <Link to={`/admin-dashboard/exam-details/${item._id}`} className='card card-body glass my-10 bg-slate-700 text-white'>
           <div className='flex justify-between'>
             <div className='font-bold'>Exam Name: {item.exam}</div>
             <div className=''>Total Marks: {item.totalMarks}</div>

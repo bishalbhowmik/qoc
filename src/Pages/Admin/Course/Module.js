@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { createChapterApi, getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { createModuleApi, getModulesApi } from '../../../Api/Admin/ModuleApi'
+import bufferToDataUrl from 'buffer-to-data-url'
 
 
 export const Module = (props) => {
@@ -60,7 +61,7 @@ export const Module = (props) => {
                 {location.state ? location.state.module.materials.map(item => {
                     return (<div className='card glass my-10 m-auto'>
                         <div className="card-body">
-                            {item.name}
+                            <object className='' height='700px' data={bufferToDataUrl(item.contentType, item.data)} type=""></object>
                         </div>
                     </div>)
                 }) : ''}

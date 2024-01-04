@@ -37,7 +37,7 @@ export const TeacherSubject = (props) => {
     else {
         chapterShow = chapter.map((item, index) => {
             return (
-                <Link to='/teacher-dashboard/chapter' state={{ chapter: item }} className='card col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/teacher-dashboard/chapter' state={{ chapter: item }} className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.chapter}</div>
                     </div>

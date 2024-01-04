@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, Outlet } from 'react-router-dom'
 
@@ -13,17 +13,31 @@ const mapStateToProps = (state) => {
 export const TeacherPrivateRouter = ({ children, authenticated, decodedToken, ...rest }) => {
 
 
+    const [open, setOpen] = useState(false)
+
+
     return authenticated && decodedToken && decodedToken.hasOwnProperty('role') && (decodedToken.role === 'teacher' || decodedToken.role === 'admin') ? <div>
 
-        <div className='grid grid-cols-12 gap-4'>
-            <div className='col-span-2 p-1 bg-rose-950 position-fixed h-screen rounded-e-md'>
+
+
+        <div className='md:hidden top-1 my-5 mx-3'>
+            <br />
+            <div onClick={() => setOpen(!open)} className='inline md:hidden bg-blue-600 text-white p-2 cursor-pointer'>Menu</div>
+            <div className={`my-2 bg-slate-700 text-white ${open ? 'block' : 'hidden'}`}>
                 <Link to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
-                {/* <Link to='/teacher-dashboard/teacher' className='block text-white m-4 hover:underline'>Teachers</Link> */}
-                {/* <Link to='/teacher-dashboard/exam' className='block text-white m-4 hover:underline'>Exam</Link> */}
                 <Link to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
                 <Link to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
             </div>
-            <div className='col-span-10'> <Outlet /></div>
+        </div>
+
+
+        <div className='grid grid-cols-12 gap-4'>
+            <div className='col-span-2 p-1 bg-rose-950 position-fixed h-screen rounded-e-md hidden md:block'>
+                <Link to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
+                <Link to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
+                <Link to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
+            </div>
+            <div className='col-span-12 md:col-span-10 md:pe-4 md:p-0 p-4'> <Outlet /></div>
 
         </div>
 

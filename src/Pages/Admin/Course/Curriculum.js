@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { createSubjectsApi, getSubjectsApi } from '../../../Api/Admin/SubjectApi'
+import bufferToDataUrl from 'buffer-to-data-url'
 
 export const Curriculum = (props) => {
 
@@ -61,7 +62,7 @@ export const Curriculum = (props) => {
     else {
         subjectShow = subject.map((item, index) => {
             return (
-                <Link to='/admin-dashboard/subject' state={{ subject: item }} className='card col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/admin-dashboard/subject' state={{ subject: item }} className='card col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.subject}</div>
                     </div>
@@ -92,7 +93,7 @@ export const Curriculum = (props) => {
                 {location.state ? location.state.curriculum.outlines.map(item => {
                     return (<div className='card glass my-10 shadow-lg m-auto'>
                         <div className="card-body">
-                            {item.name}
+                            <object className='' height='700px' data={bufferToDataUrl(item.contentType, item.data)} type=""></object>
                         </div>
                     </div>)
                 }) : ''}

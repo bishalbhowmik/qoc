@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -18,6 +18,8 @@ const mapStateToProps = (state) => {
 
 const SignUp = (props) => {
 
+  const [message, setMessage] = useState('')
+
   const {
     register,
     handleSubmit,
@@ -29,14 +31,17 @@ const SignUp = (props) => {
   const handleSignup = (data) => {
 
     signupApi(data).then(data => {
+
+      console.log(data)
       if (data.error) throw data.message
 
+      setMessage(data.message)
       saveToken(data.value.token)
       navigate('/')
       window.location.reload(false)
 
     })
-      .catch(err => console.log(err))
+      .catch(err => setMessage(err))
 
   };
 
@@ -53,7 +58,7 @@ const SignUp = (props) => {
 
             <select {...register("role", {
               required: "This field is required",
-            })} name="role" id="" className="w-full">
+            })} name="role" id="" className="w-full select select-bordered">
 
               <option value="">Select</option>
               <option value="student">Student</option>
@@ -144,6 +149,9 @@ const SignUp = (props) => {
           </div>
 
           <button className="btn btn-accent w-full text-white">SignUp</button>
+
+          <div className='my-4 text-center text-red-500'>{message}</div>
+          
 
           <h3 className="text-sm mt-4 w-[90%] text-center">
             Already have an account?{" "}

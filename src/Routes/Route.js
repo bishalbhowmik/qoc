@@ -40,6 +40,7 @@ import BroadQuestion from "../Pages/Admin/BroadQuestion/BroadQuestion";
 import StudentAllExam from "../Pages/Student/StudentExam/StudentAllExam";
 import StudentExam from "../Pages/Student/StudentExam/StudentExam";
 import ExamDetails from "../Pages/Admin/Exam/ExamDetails";
+import Assignment from "../Pages/Student/Assignment/Assignment";
 
 
 
@@ -230,6 +231,10 @@ export const router = createBrowserRouter([
           {
             path: "exam",
             element: <StudentExam />,
+          },
+          {
+            path: "assignment",
+            element: <Assignment />,
           },
 
         ]

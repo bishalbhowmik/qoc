@@ -41,7 +41,7 @@ export const FindTuition = (props) => {
 
     tuitionShow = tuition.map((item, index) => {
         return (
-            <div className='col-span-3 my-10 glass card bg-neutral text-neutral-content'>
+            <div className=' col-span-12 md:col-span-3 my-10 glass card bg-neutral text-neutral-content'>
                 <div className="card-body">
                     <div className="card-title mb-4">
                         Subject: {item.subject} <br />
@@ -49,7 +49,9 @@ export const FindTuition = (props) => {
                         Time: {item.time} <br />
                     </div>
 
-                    <button className='btn btn-primary' onClick={() => apply(item._id)}>Apply</button>
+                    {
+                        props.authenticated && props.decodedToken.hasOwnProperty('role') && props.decodedToken['role'] === 'teacher' ? <button className='btn btn-primary' onClick={() => apply(item._id)}>Apply</button> : ''
+                    }
                 </div>
 
             </div>
