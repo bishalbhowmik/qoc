@@ -8,21 +8,24 @@ export const AssignmentHelp = (props) => {
   const [state, setState] = useState({
     title: '',
   })
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState({ message: '', error: false })
   const [assignment, setAssignment] = useState([])
 
   useEffect(() => {
 
     checkAssignmentPremiumApi().then(data => {
+
       if (data.error) throw data.message
+
       else {
+        setMessage({ message: data.message, error: data.error })
         getAllAssignmentApi({ studentId: props.decodedToken.studentId }).then(data => {
           setAssignment(data.data)
         })
 
       }
 
-    }).catch(err => setMessage(err))
+    }).catch(err => setMessage({ message: err, error: true }))
 
 
   }, [props])
@@ -44,28 +47,33 @@ export const AssignmentHelp = (props) => {
     e.preventDefault()
     createAssignmentApi({ ...state, studentId: props.decodedToken._id }).then(data => {
       if (data.error) throw data.message
-      setMessage(data.message)
-    }).catch(err => setMessage(err))
+      setMessage({ message: data.message, error: data.error })
+    }).catch(err => setMessage({ message: err, error: true }))
   }
 
 
 
   const buyPremium = () => {
 
-    createAssignmentPaymentApi({}).then(data => {
-      console.log(data)
+    createAssignmentPaymentApi({ studentId: props.decodedToken._id }).then(data => {
+      if (data.data.status === 'SUCCESS') {
+        window.location.replace(data.data.GatewayPageURL)
+      }
+      else {
+        window.alert(data.message)
+      }
     })
   }
 
   return (
     <div>
 
-      <div role="alert" className="alert mb-7">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-info shrink-0 w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <span>{message}</span>
+      <div role="alert" className={`alert ${message.error ? 'alert-warning' : 'alert-success'} mb-7 shadow-lg`}>
+        {message.error ? <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
+        
+        <span>{message.message}</span>
         <div>
-          {/* <button className="btn btn-sm">Deny</button> */}
-          <button onClick={buyPremium} className="btn btn-sm btn-primary">Buy Premium</button>
+          {message.error && <button className='btn btn-sm btn-dark' onClick={() => buyPremium()}>Buy Premium</button>}
         </div>
       </div>
 
@@ -90,7 +98,7 @@ export const AssignmentHelp = (props) => {
             <br />
             <button className='btn btn-success mt-4' type="submit">Submit</button>
 
-            <div className='p-3 text-center text-capitalize'>{message}</div>
+            <div className='p-3 text-center text-capitalize'>{message.message}</div>
 
           </form>
 

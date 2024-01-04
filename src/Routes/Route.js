@@ -41,6 +41,9 @@ import StudentAllExam from "../Pages/Student/StudentExam/StudentAllExam";
 import StudentExam from "../Pages/Student/StudentExam/StudentExam";
 import ExamDetails from "../Pages/Admin/Exam/ExamDetails";
 import Assignment from "../Pages/Student/Assignment/Assignment";
+import Success from "../Pages/Payment/Success";
+import Cancel from "../Pages/Payment/Cancel";
+import Fail from "../Pages/Payment/Fail";
 
 
 
@@ -73,6 +76,20 @@ export const router = createBrowserRouter([
       {
         path: "/find-tuition",
         element: <FindTuition />,
+      },
+
+      {
+        path: "/success",
+        element: <Success />,
+      },
+
+      {
+        path: "/cancel",
+        element: <Cancel />,
+      },
+      {
+        path: "/fail",
+        element: <Fail />,
       },
 
 
