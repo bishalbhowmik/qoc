@@ -1,20 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import '../SignUp/SignUp';
 import { signinApi } from '../../Api/AuthApi';
 import { saveToken } from '../../Functions/AuthFunctions';
+import Spinner from '../../components/Spinner'
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [message, setMessage] = useState('')
+    const [spin, setSpin] = useState(false)
 
     const navigate = useNavigate();
 
     const handleLogin = (data) => {
 
+        setSpin(true)
         signinApi(data).then(data => {
+            setSpin(false)
             if (data.error) throw data.message
 
             setMessage(data.message)
@@ -73,6 +76,8 @@ const Login = () => {
                 </form>
                 <button className='btn btn-outline w-full'>Continue With Google</button>
             </div>
+
+            {spin ? <Spinner /> : ''}
         </div>
     );
 };

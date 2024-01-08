@@ -29,6 +29,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link to='/admin-dashboard/exam' className='block text-white m-4 hover:underline'>Exam</Link>
                     <Link to='/admin-dashboard/course' className='block text-white m-4 hover:underline'>Course</Link>
                     <Link to='/admin-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
+                    <Link to='/admin-dashboard/assignment' className='block text-white m-4 hover:underline'>Assignment</Link>
                 </div>
             </div>
 
@@ -41,6 +42,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link to='/admin-dashboard/exam' className='block text-white m-4 hover:underline'>Exam</Link>
                     <Link to='/admin-dashboard/course' className='block text-white m-4 hover:underline'>Course</Link>
                     <Link to='/admin-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
+                    <Link to='/admin-dashboard/assignment' className='block text-white m-4 hover:underline'>Assignment</Link>
                 </div>
                 <div className='col-span-12 md:col-span-10 md:pe-4 md:p-0 p-4'> <Outlet /></div>
 

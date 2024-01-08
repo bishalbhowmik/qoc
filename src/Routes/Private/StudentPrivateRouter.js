@@ -1,4 +1,6 @@
 
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, Outlet } from 'react-router-dom'
@@ -19,7 +21,12 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
 
         <div className='md:hidden top-1'>
             <br />
-            <div onClick={() => setOpen(!open)} className='inline md:hidden bg-blue-600 text-white p-2 cursor-pointer'>menu</div>
+            <div className='md:hidden px-2'>
+                <span onClick={() => setOpen(!open)} className='bg-blue-600 text-white p-2 cursor-pointer rounded'>
+                    <FontAwesomeIcon className='fas fa-xl' icon={faBars} />
+                    
+                </span>
+            </div>
             <div className={`mt-2 bg-slate-700 text-white ${open ? 'block' : 'hidden'}`}>
                 <Link to='/student-dashboard/course' className='block text-white m-4 hover:underline'>Course</Link>
                 <Link to='/student-dashboard/tutor' className='block text-white m-4 hover:underline'>Tutor</Link>
@@ -37,7 +44,7 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
                 <Link to='/student-dashboard/all-exam' className='block text-white m-4 hover:underline'>All Exam</Link>
                 <Link to='/student-dashboard/assignment' className='block text-white m-4 hover:underline'>Assignment Help</Link>
             </div>
-            <div className='col-span-12 md:col-span-9'> <Outlet /></div>
+            <div className='col-span-12 md:col-span-9 my-10'> <Outlet /></div>
 
         </div>
 

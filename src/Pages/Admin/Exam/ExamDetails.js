@@ -119,48 +119,43 @@ export const ExamDetails = (props) => {
                     </thead>
                     <tbody> {participantsShow} </tbody>
                 </table>
+            </div>
+
+
+            <dialog id="viewScriptModal" className="modal">
+                <div className="modal-box w-11/12 max-w-7xl">
+                    <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                    </form>
 
 
 
+                    {Object.keys(selectedItem).length != 0 ? <div>
 
+                        <h3 className="font-bold text-lg">Script of {selectedItem.studentId.username}</h3>
 
-
-
-                <dialog id="viewScriptModal" className="modal">
-                    <div className="modal-box w-11/12 max-w-7xl">
-                        <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
-                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        <form onSubmit={e => handleSubmit(e)} className='my-10 p-10 border rounded-lg bg-orange-100 text-center' action="">
+                            <input onChange={e => handleChange(e)} name='broadQuestionMarks' value={state.broadQuestionMarks} placeholder='Enter marks' className='input input-bordered ' type="number" />
+                            <button type='submit' className='btn btn-ghost ms-5'>Update</button>
                         </form>
 
 
 
-                        {Object.keys(selectedItem).length != 0 ? <div>
-
-                            <h3 className="font-bold text-lg">Script of {selectedItem.studentId.username}</h3>
-
-                            <form onSubmit={e => handleSubmit(e)} className='my-10 p-10 border rounded-lg bg-orange-100 text-center' action="">
-                                <input onChange={e => handleChange(e)} name='broadQuestionMarks' value={state.broadQuestionMarks} placeholder='Enter marks' className='input input-bordered ' type="number" />
-                                <button type='submit' className='btn btn-ghost ms-5'>Update</button>
-                            </form>
+                        <div className='text-center text-xl my-10'>Script</div>
 
 
-
-                            <div className='text-center text-xl my-10'>Script</div>
-
-
-                            {/* buffer to image */}
+                        {/* buffer to image */}
 
 
-                            <div>
-                                <object title={selectedItem.script.name} className='h-screen' data={imageBuffer} width="100%"></object>
-                            </div>
+                        <div>
+                            <object title={selectedItem.script.name} className='h-screen w-full' data={imageBuffer} width="100%"></object>
+                        </div>
 
-                        </div> : ''}
+                    </div> : ''}
 
-                    </div>
-                </dialog>
-            </div>
+                </div>
+            </dialog>
 
 
         </div>

@@ -42,8 +42,6 @@ export const StudentDashboard = (props) => {
 
     getAStudent(props.decodedToken._id).then(data => {
 
-      console.log(data)
-
       if (data.error) throw data.message
 
       setState({

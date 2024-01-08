@@ -27,6 +27,7 @@ export const TeacherPrivateRouter = ({ children, authenticated, decodedToken, ..
                 <Link to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
                 <Link to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
                 <Link to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
+                <Link to='/teacher-dashboard/batch' className='block text-white m-4 hover:underline'>Batch</Link>
             </div>
         </div>
 
@@ -36,6 +37,7 @@ export const TeacherPrivateRouter = ({ children, authenticated, decodedToken, ..
                 <Link to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
                 <Link to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
                 <Link to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
+                <Link to='/teacher-dashboard/batch' className='block text-white m-4 hover:underline'>Batch</Link>
             </div>
             <div className='col-span-12 md:col-span-10 md:pe-4 md:p-0 p-4'> <Outlet /></div>
 

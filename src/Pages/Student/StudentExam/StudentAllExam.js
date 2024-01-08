@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getExamByIdApi } from '../../../Api/Student/ExamApi'
 import { Link } from 'react-router-dom'
+import Spinner from '../../../components/Spinner'
 
 const mapStateToProps = (state) => {
     return {
@@ -15,11 +16,14 @@ export const StudentAllExam = (props) => {
 
     const [message, setMessage] = useState(false)
     const [exam, setExam] = useState([])
+    const [spin, setSpin] = useState(false)
 
     useEffect(() => {
 
-        getExamByIdApi(props.decodedToken._id).then(data => {
+        setSpin(true)
 
+        getExamByIdApi(props.decodedToken._id).then(data => {
+            setSpin(false)
             if (data.error) { throw data.message }
             else {
                 setMessage(data.message)
@@ -46,6 +50,9 @@ export const StudentAllExam = (props) => {
             <div className='p-2 text-center my-10 capitalize font-bold text-2xl'>{message}</div>
 
             {examShow}
+
+
+            {spin ? <Spinner /> : ''}
 
         </div>
     )
