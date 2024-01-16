@@ -117,7 +117,7 @@ const BottomNav = (props) => {
           className={
             !nav
               ? "hidden"
-              : "absolute top-0 left-0 w-full h-screen bg-[#0a192f] flex flex-col justify-center items-center z-10"
+              : "absolute top-0 left-0 w-screen h-screen bg-[#0a192f] flex flex-col justify-center items-center z-10"
           }
         >
           <li className="py-4 text-2xl">
@@ -133,14 +133,14 @@ const BottomNav = (props) => {
           </li>
 
           <li className="py-4 text-2xl">
-            <Link onClick={handleClick} to="about" smooth={true} duration={500}>
+            <Link  onClick={handleClick} to="about" smooth={true} duration={500}>
               About
             </Link>
           </li>
 
           {!props.authenticated ? <>
             <li className="py-4 text-2xl">
-              <Link to="/login" smooth={true} duration={500}>
+              <Link onClick={handleClick} to="/login" smooth={true} duration={500}>
                 <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
                   Login
                 </button>
@@ -148,7 +148,7 @@ const BottomNav = (props) => {
             </li>
 
             <li className="py-4 text-2xl">
-              <Link to="/signup" smooth={true} duration={500}>
+              <Link onClick={handleClick}  to="/signup" smooth={true} duration={500}>
                 <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
                   Signup
                 </button>
@@ -157,7 +157,7 @@ const BottomNav = (props) => {
           </> : <>
 
               <li className="py-4 text-2xl">
-              <Link to={props.decodedToken && props.decodedToken.hasOwnProperty('role') && (props.decodedToken.role === 'teacher' ? '/teacher-dashboard' : props.decodedToken.role === 'student' ? 'student-dashboard' : props.decodedToken.role === 'admin' ? '/admin-dashboard' : '')} smooth={true} duration={500}>
+              <Link onClick={handleClick}  to={props.decodedToken && props.decodedToken.hasOwnProperty('role') && (props.decodedToken.role === 'teacher' ? '/teacher-dashboard' : props.decodedToken.role === 'student' ? 'student-dashboard' : props.decodedToken.role === 'admin' ? '/admin-dashboard' : '')} smooth={true} duration={500}>
                 <button className=" border border-normal rounded-full px-7 py-2 text-sm text-normal font-normal hover:bg-normal hover:text-white">
                   Dashboard
                 </button>
@@ -165,7 +165,7 @@ const BottomNav = (props) => {
             </li>
 
               <li className="py-4 text-2xl">
-              <Link to="/logout" smooth={true} duration={500}>
+              <Link onClick={handleClick}  to="/logout" smooth={true} duration={500}>
                 <button className="bg-normal px-7 py-2 rounded-full font-normal text-sm hover:bg-normalH text-white">
                   Logout
                 </button>

@@ -1,3 +1,4 @@
+import bufferToDataUrl from "buffer-to-data-url";
 
 export const timeCheck = (startTime, endTime) => {
 
@@ -11,4 +12,17 @@ export const timeCheck = (startTime, endTime) => {
             return false
     }
 
+}
+
+
+
+export const showFile = file => {
+
+    let newWindow = window.open();
+
+    newWindow.document.write(`
+
+        <object width='100%' height='100%'  data='${bufferToDataUrl(file.contentType, file.data)}'></object>
+        
+        `);
 }

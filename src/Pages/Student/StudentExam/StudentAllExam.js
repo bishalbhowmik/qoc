@@ -23,6 +23,7 @@ export const StudentAllExam = (props) => {
         setSpin(true)
 
         getExamByIdApi(props.decodedToken._id).then(data => {
+            console.log(data)
             setSpin(false)
             if (data.error) { throw data.message }
             else {

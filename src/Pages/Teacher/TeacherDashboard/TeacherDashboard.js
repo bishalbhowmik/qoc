@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTeacher } from '../../../Api/Admin/TeacherApi'
 import { updateTeacherInfoApi } from '../../../Api/Teacher/TeacherApi'
+import bufferToDataUrl from 'buffer-to-data-url'
 
 export const TeacherDashboard = (props) => {
 
@@ -16,6 +17,7 @@ export const TeacherDashboard = (props) => {
     checkQocExam: '',
     contactAgree: '',
     institution: '',
+    gender: '',
     address: '',
     city: '',
     state: '',
@@ -23,7 +25,6 @@ export const TeacherDashboard = (props) => {
     country: '',
     bio: '',
     description: '',
-    image: '',
     isPremium: '',
     premiumEnd: '',
   })
@@ -31,8 +32,6 @@ export const TeacherDashboard = (props) => {
   useEffect(() => {
 
     getTeacher({ _id: props.decodedToken._id }).then(data => {
-
-      console.log('Hey: ',data.data[0])
 
       setState({
         ...state,
@@ -45,6 +44,7 @@ export const TeacherDashboard = (props) => {
         useQocExam: data.data[0].useQocExam,
         contactAgree: data.data[0].contactAgree,
         institution: data.data[0].institution,
+        gender: data.data[0].gender,
         address: data.data[0].address,
         city: data.data[0].city,
         state: data.data[0].state,
@@ -53,9 +53,8 @@ export const TeacherDashboard = (props) => {
         bio: data.data[0].bio,
         description: data.data[0].description,
         image: data.data[0].image,
-        isPremium: data.data[0].isPremium,
-        premiumEnd: data.data[0].premiumEnd,
-
+        isPremium: data.data[0].batch.isPremium,
+        premiumEnd: new Date(data.data[0].batch.endTime).toLocaleString(),
       })
     })
 
@@ -72,24 +71,30 @@ export const TeacherDashboard = (props) => {
   const handleSubmit = e => {
 
     e.preventDefault()
-    
+
     updateTeacherInfoApi(props.decodedToken._id, state).then(data => {
       console.log(data)
     })
   }
 
 
+  // console.log(state)
 
   return (
     <div>
+
+      <div className='w-full'>
+        <img className='rounded-full w-2/12 m-auto my-5' src={state.image && state.image.contentType && state.image != '' ? bufferToDataUrl(state.image.contentType, state.image.data) : 'male.png'} alt="picture" />
+        <div className='text-center font-bold text-xl' style={{ letterSpacing: '2px' }}>{props.decodedToken.username}</div>
+      </div>
 
       <div>
         <form onSubmit={e => handleSubmit(e)} action="">
 
           <div className='grid grid-cols-12 gap-4'>
             <div className='col-span-12 md:col-span-6'>
-              <label className='label label-text mt-5' htmlFor="">Username: </label>
-              <input disabled className='input input-bordered w-full shadow' onChange={e => handleChange(e)} value={state.username} name='username' type="text" />
+              <label className='label label-text mt-5' htmlFor="">Picture: </label>
+              <input className='file-input w-full shadow' onChange={e => handleChange(e)} name='image' type="file" />
             </div>
             <div className='col-span-12 md:col-span-6'>
               <label className='label label-text mt-5' htmlFor="">Email: </label>
@@ -98,6 +103,14 @@ export const TeacherDashboard = (props) => {
             <div className='col-span-12 md:col-span-6'>
               <label className='label label-text mt-5' htmlFor="">Mobile: </label>
               <input className='input input-bordered w-full shadow' onChange={e => handleChange(e)} value={state.mobile} name='mobile' type="text" />
+            </div>
+            <div className='col-span-12 md:col-span-6'>
+              <label className='label label-text mt-5' htmlFor="">Gender: </label>
+              <select className='select-bordered select w-full shadow' onChange={e => handleChange(e)} name="gender" value={state.gender} id="">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Others</option>
+              </select>
             </div>
             <div className='col-span-12 md:col-span-6'>
               <label className='label label-text mt-5' htmlFor="">Degree: </label>

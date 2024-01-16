@@ -87,7 +87,7 @@ export const AssignmentHelp = (props) => {
   }
 
   let assignmentShow
-  if (assignment.length === 0) assignmentShow = <div className='col-span-12 text-center'>No assignment found</div>
+  if (assignment.length === 0) assignmentShow = <div className='container col-span-12text-center'>No assignment found</div>
 
   else {
     assignmentShow = assignment.map((item, index) => {

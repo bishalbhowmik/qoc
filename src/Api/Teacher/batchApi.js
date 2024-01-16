@@ -1,9 +1,9 @@
 import axios from "axios"
 
 
-export const createBatchPaymentApi = async (obj) => {
+export const createTeacherPaymentApi = async (obj) => {
 
-    let batch = axios.post(process.env.REACT_APP_BACKEND_URL + '/api/batch/payment', obj, {
+    let batch = axios.post(process.env.REACT_APP_BACKEND_URL + '/api/teacher/payment', obj, {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
@@ -13,9 +13,9 @@ export const createBatchPaymentApi = async (obj) => {
 
 }
 
-export const checkBatchPremiumApi = async () => {
+export const checkTeacherPremiumApi = async () => {
 
-    let batch = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/batch/check-premium', {
+    let batch = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/teacher/check-premium', {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }

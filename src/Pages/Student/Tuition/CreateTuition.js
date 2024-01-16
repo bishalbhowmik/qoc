@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
 
 export const CreateTuition = (props) => {
 
+  const [message, setMessage] = useState('')
+
   const [state, setState] = useState({
     studentId: props.decodedToken._id,
     subject: '',
@@ -39,10 +41,10 @@ export const CreateTuition = (props) => {
 
     e.preventDefault()
 
-    console.log(state)
-
     createTuitionApi({ ...state, time: new Date().toTimeString(state.time) }).then(data => {
       console.log(data)
+      setMessage(data.message)
+
     })
 
   }
@@ -83,6 +85,8 @@ export const CreateTuition = (props) => {
 
 
         <button className='btn btn-success mt-7' type="submit">Create</button>
+
+        {message != '' && <div className='my-5 p-4 bg-green-200 rounded font-bold'>{message}</div>}
 
       </form>
 

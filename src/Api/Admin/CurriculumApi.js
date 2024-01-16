@@ -27,3 +27,44 @@ export const getAllCurriculumApi = async () => {
     return curriculum
 
 }
+
+export const getACurriculumApi = async (id) => {
+
+    let curriculum = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/curriculum/' + id, {
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+        }
+    }).then(data => data.data)
+
+
+    return curriculum
+
+}
+
+export const removeCurriculumOutlineApi = async (curriculumId, pos) => {
+
+    let curriculum = axios.put(process.env.REACT_APP_BACKEND_URL + '/api/curriculum/remove-outline/' + curriculumId + '/' + pos, {}, {
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+        }
+    }).then(data => data.data)
+
+
+    return curriculum
+
+}
+
+
+export const addCurriculumOutlineApi = async (curriculumId, obj) => {
+
+    let curriculum = axios.put(process.env.REACT_APP_BACKEND_URL + '/api/curriculum/add-outline/' + curriculumId, obj, {
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+            "Content-Type": 'multipart/form-data'
+        }
+    }).then(data => data.data)
+
+
+    return curriculum
+
+}

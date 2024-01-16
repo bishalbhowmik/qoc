@@ -46,6 +46,11 @@ import Cancel from "../Pages/Payment/Cancel";
 import Fail from "../Pages/Payment/Fail";
 import Assignment from "../Pages/Admin/Assignment/Assignment";
 import TeacherBatch from "../Pages/Teacher/TeacherBatch/TeacherBatch";
+import MyBatch from "../Pages/Student/Batch/MyBatch";
+import BatchDashboard from "../Pages/Student/Batch/BatchDashboard";
+import TeacherBatchDashboard from "../Pages/Teacher/TeacherBatch/TeacherBatchDashboard";
+import AdminBatch from "../Pages/Admin/Batch/AdminBatch";
+import AdminBatchDashboard from "../Pages/Admin/Batch/AdminBatchDashboard";
 
 
 
@@ -155,10 +160,18 @@ export const router = createBrowserRouter([
           path: "exam-details/:examId",
           element: <ExamDetails />,
         },
-          {
-            path: "assignment",
-            element:  <Assignment />,
-          },
+        {
+          path: "assignment",
+          element: <Assignment />,
+        },
+        {
+          path: "batch",
+          element: <AdminBatch />,
+        },
+        {
+          path: "batch/dashboard/:batchId",
+          element: <AdminBatchDashboard />,
+        },
 
         ]
       },
@@ -203,7 +216,11 @@ export const router = createBrowserRouter([
           },
           {
             path: "batch",
-            element:  <TeacherBatch />,
+            element: <TeacherBatch />,
+          },
+          {
+            path: "batch/dashboard/:batchId",
+            element: <TeacherBatchDashboard />,
           },
 
 
@@ -262,6 +279,15 @@ export const router = createBrowserRouter([
           {
             path: "assignment",
             element: <AssignmentStudent />,
+          },
+
+          {
+            path: "my-batch",
+            element: <MyBatch />,
+          },
+          {
+            path: "my-batch/dashboard/:batchId",
+            element: <BatchDashboard />,
           },
 
         ]

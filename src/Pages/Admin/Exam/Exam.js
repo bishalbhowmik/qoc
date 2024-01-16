@@ -30,7 +30,7 @@ export const Exam = (props) => {
     negativeMarking: '',
     perMcqMarks: '',
     totalMarks: ''
-    
+
 
   })
 
@@ -48,14 +48,14 @@ export const Exam = (props) => {
       }
     })
 
-    getAllExamApi().then(data => {
-      if(data.error) throw data.message
+    getAllExamApi({}).then(data => {
+      if (data.error) throw data.message
       setExam([...data.data])
 
     })
-    .catch(err => {
-      window.alert(err)
-    })
+      .catch(err => {
+        window.alert(err)
+      })
 
   }, [])
 
@@ -132,20 +132,23 @@ export const Exam = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    createExamApi(state).then(data => {
-      if(data.error) throw data.message
+
+
+    createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString(), endTime: new Date(state.endTime).toLocaleString() }).then(data => {
+      console.log(data)
+      if (data.error) throw data.message
       setMessage(data.message)
     })
-    .catch(err => {
-      setMessage(err)
-    })
+      .catch(err => {
+        setMessage(err)
+      })
 
   }
 
 
   let examShow
-  if(exam.length === 0){ examShow = <div className='p-5 bg-neutral text-white my-5'>No Exam Created</div>}
-  else{
+  if (exam.length === 0) { examShow = <div className='p-5 bg-neutral text-white my-5'>No Exam Created</div> }
+  else {
     examShow = exam.map(item => {
       return (
         <Link to={`/admin-dashboard/exam-details/${item._id}`} className='card card-body glass my-10 bg-slate-700 text-white'>
@@ -256,7 +259,7 @@ export const Exam = (props) => {
 
             <div className='mb-5'>
               <span className="label label-text">Negative Marking (%):</span>
-              <input className='input input-bordered w-full' onChange={e=>handleChange(e)} value={state.negativeMarking} name='negativeMarking' type="number" /> 
+              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.negativeMarking} name='negativeMarking' type="number" />
             </div>
             <div className='mb-5'>
               <span className="label label-text">Per MCQ Marks: </span>

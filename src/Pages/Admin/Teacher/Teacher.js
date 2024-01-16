@@ -117,8 +117,8 @@ export const Teacher = (props) => {
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Review:  </strong>{selected.review}</div>
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Grading:  </strong>{selected.grading}</div>
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Contact Agree:  </strong>{selected.contactAgree}</div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium:  </strong>{selected.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}</div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium End:  </strong>{selected.premiumEnd && new Date(selected.premiumEnd).toLocaleString()}</div>
+            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium:  </strong>{selected.batch.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}</div>
+            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium End:  </strong>{selected.batch.endTime && new Date(selected.batch.endTime).toLocaleString()}</div>
 
 
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Use Times QOC Exam: </strong>{selected.useQocExam}</div>

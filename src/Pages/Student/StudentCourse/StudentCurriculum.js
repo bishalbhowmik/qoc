@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { createSubjectsApi, getSubjectsApi } from '../../../Api/Admin/SubjectApi'
+import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
+import bufferToDataUrl from 'buffer-to-data-url'
+import { showFile } from '../../../Functions/CustomFunction'
+import { getACurriculumApi } from '../../../Api/Admin/CurriculumApi'
 
 export const StudentCurriculum = (props) => {
 
     const location = useLocation()
     const [subject, setSubject] = useState([])
+    const [outlines, setOutlines] = useState([])
 
     useEffect(() => {
 
         if (location.state) {
 
             const { curriculum } = location.state
+
+            getACurriculumApi(curriculum._id).then(data => {
+                if (data.error) throw data.message
+                setOutlines([...data.data.outlines])
+            })
 
             getSubjectsApi(curriculum._id).then(data => {
                 if (data.error) throw data.message
@@ -24,7 +33,8 @@ export const StudentCurriculum = (props) => {
 
     }, [location]);
 
-   
+
+
 
     let subjectShow
     if (subject.length === 0) {
@@ -58,13 +68,16 @@ export const StudentCurriculum = (props) => {
 
             <div>
                 <div className='text-center my-20'><span className='bg-red-800 p-3 text-white rounded'>OUTLINES</span></div>
-                {location.state ? location.state.curriculum.outlines.map(item => {
-                    return (<div className='card glass my-10 shadow-lg m-auto'>
-                        <div className="card-body">
-                            {item.name}
-                        </div>
-                    </div>)
-                }) : ''}
+
+                <div className='flex flex-col md:flex-row'>
+                    {outlines.map(item => {
+                        return (
+                            <div onClick={() => showFile(item)} className="btn btn-outline md:me-4 p-2 mt-2">
+                                {item.name}
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
 
         </div>

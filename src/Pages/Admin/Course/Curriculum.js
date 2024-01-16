@@ -3,21 +3,34 @@ import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { createSubjectsApi, getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import bufferToDataUrl from 'buffer-to-data-url'
+import { getAllExamApi } from '../../../Api/Admin/ExamApi'
+import { showFile } from '../../../Functions/CustomFunction'
+import axios from 'axios'
+import { addCurriculumOutlineApi, getACurriculumApi, removeCurriculumOutlineApi } from '../../../Api/Admin/CurriculumApi'
 
 export const Curriculum = (props) => {
 
     const location = useLocation()
+    const [outlines, setOutlines] = useState([])
     const [subject, setSubject] = useState([])
+    
     const [state, setState] = useState({
         subject: '',
         paid: false
     })
+
+    const [updateState, setUpdateState] = useState({})
 
     useEffect(() => {
 
         if (location.state) {
 
             const { curriculum } = location.state
+
+            getACurriculumApi(curriculum._id).then(data => {
+                if (data.error) throw data.message
+                setOutlines([...data.data.outlines])
+            })
 
             getSubjectsApi(curriculum._id).then(data => {
                 if (data.error) throw data.message
@@ -72,12 +85,28 @@ export const Curriculum = (props) => {
     }
 
 
+    const removeOutline = (position) => {
+        removeCurriculumOutlineApi(location.state.curriculum._id, position).then(data => {
+            console.log(data)
+        })
+    }
+
+    const addOutline = (e) => {
+
+        e.preventDefault()
+        addCurriculumOutlineApi(location.state.curriculum._id, updateState).then(data => {
+            console.log(data)
+        })
+
+    }
+
 
     return (
         <div>
 
             <div className='my-10 text-2xl text-center font-bold'>Curriculum - {location.state ? location.state.curriculum.curriculum : ''}</div>
-            <div className='mb-16 text-center'><span className='bg-red-800 p-3 text-white rounded'>ALL SUBJECTS</span></div>
+
+            <div className='bg-red-800 p-3 mb-16 text-center'><span className='text-white rounded'>ALL SUBJECTS</span></div>
 
             <button onClick={() => document.getElementById('addSubjectModal').showModal()} className='btn btn-success'>Add Subject</button>
 
@@ -89,17 +118,23 @@ export const Curriculum = (props) => {
             </div>
 
             <div>
-                <div className='text-center my-20'><span className='bg-red-800 p-3 text-white rounded'>OUTLINES</span></div>
-                {location.state ? location.state.curriculum.outlines.map(item => {
-                    return (<div className='card glass my-10 shadow-lg m-auto'>
-                        <div className="card-body">
-                            <object className='' height='700px' data={bufferToDataUrl(item.contentType, item.data)} type=""></object>
-                        </div>
-                    </div>)
-                }) : ''}
+                <div className='text-center my-10 bg-red-800 p-3'><span className=' text-white rounded'>OUTLINES</span></div>
+                <div className='flex flex-col md:flex-row flex-wrap'>
+                    {outlines.map((item, index) => {
+                        return (<div className='my-10 flex border p-2 shadow bg-slate-100 me-3'>
+                            <div onClick={() => showFile(item)} className="btn btn-outline">{item.name}</div>
+                            <button onClick={() => removeOutline(index)} className='btn btn-error'>X</button>
+                        </div>)
+                    })}
+                </div>
+
+                <div className='my-10'>
+                    <form onSubmit={e => addOutline(e)} action="">
+                        <input required multiple onChange={e => setUpdateState({ ...updateState, outlines: e.target.files })} className='file-input' type="file" name="outlines" id="" />
+                        <button className='btn btn-info' type='submit'>Add outline</button>
+                    </form>
+                </div>
             </div>
-
-
 
 
             {/* Modal Start*/}
@@ -149,13 +184,10 @@ export const Curriculum = (props) => {
 
 
 
-
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Curriculum)
+export default connect(mapStateToProps)(Curriculum)

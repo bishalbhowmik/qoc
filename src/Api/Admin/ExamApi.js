@@ -16,9 +16,9 @@ export const createExamApi = async (obj) => {
 }
 
 
-export const getAllExamApi = async () => {
+export const getAllExamApi = async (obj) => {
 
-    let exam = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/exam/', {
+    let exam = axios.post(process.env.REACT_APP_BACKEND_URL + '/api/exam/get', obj ,{
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
