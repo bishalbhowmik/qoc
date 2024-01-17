@@ -6,6 +6,7 @@ import bufferToDataUrl from 'buffer-to-data-url'
 import { getASubjectsApi } from '../../../Api/Admin/SubjectApi'
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { showFile } from '../../../Functions/CustomFunction'
+import Spinner from '../../../components/Spinner'
 
 
 export const TeacherSubject = (props) => {
@@ -13,6 +14,7 @@ export const TeacherSubject = (props) => {
     const [chapter, setChapter] = useState([])
     const [outlines, setOutlines] = useState([])
     const [materials, setMaterials] = useState([])
+    const [spin, setSpin] = useState(false)
     const [exam, setExam] = useState([])
     const [state, setState] = useState({
         chapter: '',
@@ -25,7 +27,11 @@ export const TeacherSubject = (props) => {
 
             const { subject } = location.state
 
+            setSpin(true)
+
             getASubjectsApi(subject._id).then(data => {
+
+                
                 if (data.error) throw data.message
                 setOutlines([...data.data.outlines])
                 setMaterials([...data.data.materials])
@@ -43,6 +49,8 @@ export const TeacherSubject = (props) => {
 
 
             getChaptersApi(subject._id).then(data => {
+
+                setSpin(false)
                 if (data.error) throw data.message
                 setChapter([...data.data])
             }).catch(err => {
@@ -55,12 +63,12 @@ export const TeacherSubject = (props) => {
 
     let chapterShow
     if (chapter.length === 0) {
-        chapterShow = <div className='text-center col-span-12'>Not chapter found</div>
+        chapterShow = <div className='text-center col-span-full'>Not chapter found</div>
     }
     else {
         chapterShow = chapter.map((item, index) => {
             return (
-                <Link to='/teacher-dashboard/chapter' state={{ chapter: item }} className='card  col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/teacher-dashboard/chapter' state={{ chapter: item }} className='card text-white bg-red-950  glass hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.chapter}</div>
                     </div>
@@ -79,7 +87,7 @@ export const TeacherSubject = (props) => {
 
             <div className='bg-red-800 p-3 mb-16 text-xl text-center'><span className='text-white rounded'>ALL CHAPTERS</span> </div>
 
-            <div className='grid gap-10 grid-cols-12 mt-10'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
                 {chapterShow}
             </div>
 
@@ -139,7 +147,7 @@ export const TeacherSubject = (props) => {
 
                                 <div className='my-5'>
                                     <div className='font-bold mb-2'>Solution: </div>
-                                    {item.solution && <object className='' height='700px' data={bufferToDataUrl(item.solution.contentType, item.solution.data)} type=""></object>}
+                                    {item.solution && <button onClick={() => showFile(item.solution)} className="btn btn-neutral" >{item.solution.name}</button>}
                                 </div>
 
                             </div>
@@ -150,6 +158,8 @@ export const TeacherSubject = (props) => {
 
                 </div>
             </div>
+
+            {spin && <Spinner />}
 
         </div>
     )

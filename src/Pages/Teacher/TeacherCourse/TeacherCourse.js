@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
+import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { Link } from 'react-router-dom'
+import Spinner from '../../../components/Spinner'
 
 
 const mapStateToProps = (state) => {
@@ -18,21 +19,25 @@ export const TeacherCourse = (props) => {
 
   const [curriculum, setCurriculum] = useState([])
 
+  const [spin, setSpin] = useState(false)
+
   useEffect(() => {
 
-    getAllCurriculumApi().then(data => {
+    setSpin(true)
 
+    getAllCurriculumApi().then(data => {
+      setSpin(false)
       if (data.error) throw data.message
       setCurriculum([...data.data])
 
-    }).catch(err => console.log(err))
+    }).catch(err => setSpin(false))
 
   }, [])
 
 
 
   let curriculumShow
-  if (curriculum.length === 0) return <div className='p-40 text-center'>Not Curriculum found</div>
+  if (curriculum.length === 0) curriculumShow = <div className='p-40 text-center'>Not Curriculum found</div>
 
   curriculumShow = curriculum.map((item, index) => {
     return (
@@ -56,6 +61,8 @@ export const TeacherCourse = (props) => {
       <div className='grid gap-10 grid-cols-12 mt-10'>
         {curriculumShow}
       </div>
+
+      {spin && <Spinner /> }
 
     </div>
   )

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { addCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { Link } from 'react-router-dom'
-
+import Spinner from '../../../components/Spinner'
 
 const mapStateToProps = (state) => {
 
@@ -17,6 +17,7 @@ export const Course = (props) => {
 
 
   const [curriculum, setCurriculum] = useState([])
+  const [spin, setSpin] = useState(false)
   const [state, setState] = useState({
     curriculum: ''
   })
@@ -26,7 +27,10 @@ export const Course = (props) => {
 
   useEffect(() => {
 
+    setSpin(true)
     getAllCurriculumApi().then(data => {
+
+      setSpin(false)
 
       if (data.error) throw data.message
       setCurriculum([...data.data])
@@ -40,8 +44,10 @@ export const Course = (props) => {
 
     e.preventDefault()
 
-    addCurriculumApi(state).then(data => {
+    setSpin(true)
 
+    addCurriculumApi(state).then(data => {
+      setSpin(false)
       if (data.error) throw data.message
       console.log(data.message)
 
@@ -124,7 +130,7 @@ export const Course = (props) => {
         </div>
       </dialog>
 
-
+      {spin && <Spinner />}
     </div>
   )
 }

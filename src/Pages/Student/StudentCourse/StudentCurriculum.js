@@ -5,25 +5,29 @@ import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import bufferToDataUrl from 'buffer-to-data-url'
 import { showFile } from '../../../Functions/CustomFunction'
 import { getACurriculumApi } from '../../../Api/Admin/CurriculumApi'
+import Spinner from '../../../components/Spinner'
 
 export const StudentCurriculum = (props) => {
 
     const location = useLocation()
     const [subject, setSubject] = useState([])
     const [outlines, setOutlines] = useState([])
+    const [spin, setSpin] = useState(false)
 
     useEffect(() => {
 
         if (location.state) {
 
             const { curriculum } = location.state
-
+            setSpin(true)
             getACurriculumApi(curriculum._id).then(data => {
                 if (data.error) throw data.message
                 setOutlines([...data.data.outlines])
             })
 
             getSubjectsApi(curriculum._id).then(data => {
+
+                setSpin(false)
                 if (data.error) throw data.message
                 setSubject([...data.data])
             }).catch(err => {
@@ -38,12 +42,12 @@ export const StudentCurriculum = (props) => {
 
     let subjectShow
     if (subject.length === 0) {
-        subjectShow = <div className='p-40 text-center col-span-12'>Not Subject found</div>
+        subjectShow = <div className='text-center col-span-full'>Not Subject found</div>
     }
     else {
         subjectShow = subject.map((item, index) => {
             return (
-                <Link to='/student-dashboard/subject' state={{ subject: item }} className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/student-dashboard/subject' state={{ subject: item }} className='card  bg-red-950 text-white glass hover:shadow-lg'>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.subject}</div>
                     </div>
@@ -62,7 +66,7 @@ export const StudentCurriculum = (props) => {
 
 
 
-            <div className='grid gap-10 grid-cols-12 mt-10'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
                 {subjectShow}
             </div>
 
@@ -80,6 +84,7 @@ export const StudentCurriculum = (props) => {
                 </div>
             </div>
 
+            {spin && <Spinner />}
         </div>
     )
 }

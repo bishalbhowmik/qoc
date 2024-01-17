@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-
 import { createModuleApi, getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import { getAChapterApi } from '../../../Api/Admin/ChapterApi'
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import bufferToDataUrl from 'buffer-to-data-url'
+import Spinner from '../../../components/Spinner'
 
 
 export const StudentChapter = (props) => {
@@ -14,6 +14,7 @@ export const StudentChapter = (props) => {
     const location = useLocation()
     const [modules, setModules] = useState([])
     const [materials, setMaterials] = useState([])
+    const [spin, setSpin] = useState(false)
     const [exam, setExam] = useState([])
     const [state, setState] = useState({
         module: '',
@@ -25,7 +26,7 @@ export const StudentChapter = (props) => {
         if (location.state) {
 
             let { chapter } = location.state
-
+            setSpin(true)
             getAChapterApi(chapter._id).then(data => {
                 console.log(data)
                 if (data.error) throw data.message
@@ -43,6 +44,7 @@ export const StudentChapter = (props) => {
                 })
 
             getModulesApi(chapter._id).then(data => {
+                setSpin(false)
                 if (data.error) throw data.message
                 setModules([...data.data])
             }).catch(err => {
@@ -56,12 +58,12 @@ export const StudentChapter = (props) => {
 
     let moduleShow
     if (modules.length === 0) {
-        moduleShow = <div className='p-40 text-center col-span-12'>Not module found</div>
+        moduleShow = <div className='text-center col-span-full'>Not module found</div>
     }
     else {
         moduleShow = modules.map((item, index) => {
             return (
-                <Link to='/student-dashboard/module' state={{ module: item }} className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <Link to='/student-dashboard/module' state={{ module: item }} className='card  text-white bg-red-950 glass bg-inherit hover:bg-slate-600 hover:text-white '>
                     <div className="card-body items-center">
                         <div className="card-title text-center">{item.module}</div>
                     </div>
@@ -81,7 +83,7 @@ export const StudentChapter = (props) => {
             <div className='bg-red-800 p-3 mb-16 text-xl text-center'> <span className='text-white rounded'>All MODULES</span></div>
 
 
-            <div className='grid gap-10 grid-cols-12 mt-10'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-5  mt-10'>
                 {moduleShow}
             </div>
 
@@ -128,7 +130,7 @@ export const StudentChapter = (props) => {
 
                                 <div className='my-5'>
                                     <div className='font-bold mb-2'>Solution: </div>
-                                    {item.solution && <object className='' height='700px' data={bufferToDataUrl(item.solution.contentType, item.solution.data)} type=""></object>}
+                                    {item.solution && <button onClick={() => showFile(item.solution)} className="btn btn-neutral" >{item.solution.name}</button>}
                                 </div>
 
                                 <div className='my-5'>
@@ -145,6 +147,8 @@ export const StudentChapter = (props) => {
                 </div>
 
             </div>
+
+            {spin && <Spinner />}
 
         </div>
     )

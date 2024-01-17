@@ -6,13 +6,14 @@ import { createModuleApi, getAModuleApi, getModulesApi } from '../../../Api/Admi
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import bufferToDataUrl from 'buffer-to-data-url'
 import { showFile } from '../../../Functions/CustomFunction'
+import Spinner from '../../../components/Spinner'
 
 
 export const TeacherModule = (props) => {
 
     const [exam, setExam] = useState([])
     const [materials, setMaterials] = useState([])
-
+    const [spin, setSpin] = useState(false)
     const location = useLocation()
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export const TeacherModule = (props) => {
         if (location.state) {
 
             let { module } = location.state
-
+            setSpin(true)
             getAModuleApi(module._id).then(data => {
                 console.log(data)
                 if (data.error) throw data.message
@@ -29,6 +30,7 @@ export const TeacherModule = (props) => {
 
 
             getAllExamApi({ moduleId: module._id }).then(data => {
+                setSpin(false)
                 if (data.error) throw data.message
                 setExam([...data.data])
 
@@ -89,7 +91,7 @@ export const TeacherModule = (props) => {
 
                                 <div className='my-5'>
                                     <div className='font-bold mb-2'>Solution: </div>
-                                    {item.solution && <object className='' height='700px' data={bufferToDataUrl(item.solution.contentType, item.solution.data)} type=""></object>}
+                                    {item.solution && <button onClick={() => showFile(item.solution)} className="btn btn-neutral" >{item.solution.name}</button>}
                                 </div>
 
                                 <div className='my-5'>
@@ -106,6 +108,8 @@ export const TeacherModule = (props) => {
                 </div>
 
             </div>
+
+            {spin && <Spinner />}
 
         </div>
     )

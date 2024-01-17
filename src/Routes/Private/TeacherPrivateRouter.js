@@ -24,7 +24,6 @@ export const TeacherPrivateRouter = ({ children, authenticated, decodedToken, ..
             <br />
             <div onClick={() => setOpen(!open)} className='inline md:hidden bg-blue-600 text-white p-2 cursor-pointer'>Menu</div>
             <div className={`my-2 bg-slate-700 text-white ${open ? 'block' : 'hidden'}`}>
-                <Link onClick={() => setOpen(!open)} to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
                 <Link onClick={() => setOpen(!open)} to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
                 <Link onClick={() => setOpen(!open)} to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
                 <Link onClick={() => setOpen(!open)} to='/teacher-dashboard/batch' className='block text-white m-4 hover:underline'>Batch</Link>
@@ -34,7 +33,6 @@ export const TeacherPrivateRouter = ({ children, authenticated, decodedToken, ..
 
         <div className='grid grid-cols-12 gap-4'>
             <div className='col-span-2 p-1 bg-rose-950 position-fixed h-screen rounded-e-md hidden md:block'>
-                <Link to='/teacher-dashboard/student' className='block text-white m-4 hover:underline'>Student</Link>
                 <Link to='/teacher-dashboard/course' className='block text-white m-4 hover:underline'>Courses</Link>
                 <Link to='/teacher-dashboard/tuition' className='block text-white m-4 hover:underline'>tuitions</Link>
                 <Link to='/teacher-dashboard/batch' className='block text-white m-4 hover:underline'>Batch</Link>

@@ -7,13 +7,15 @@ import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import axios from 'axios'
 import { addCurriculumOutlineApi, getACurriculumApi, removeCurriculumOutlineApi } from '../../../Api/Admin/CurriculumApi'
+import Spinner from '../../../components/Spinner'
 
 export const Curriculum = (props) => {
 
     const location = useLocation()
     const [outlines, setOutlines] = useState([])
     const [subject, setSubject] = useState([])
-    
+    const [spin, setSpin] = useState(false)
+
     const [state, setState] = useState({
         subject: '',
         paid: false
@@ -26,13 +28,14 @@ export const Curriculum = (props) => {
         if (location.state) {
 
             const { curriculum } = location.state
-
+            setSpin(true)
             getACurriculumApi(curriculum._id).then(data => {
                 if (data.error) throw data.message
                 setOutlines([...data.data.outlines])
             })
 
             getSubjectsApi(curriculum._id).then(data => {
+                setSpin(false)
                 if (data.error) throw data.message
                 setSubject([...data.data])
             }).catch(err => {
@@ -56,15 +59,16 @@ export const Curriculum = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log(state)
+        setSpin(true)
 
         createSubjectsApi({ ...state, curriculumId: location.state ? location.state.curriculum._id : '' }).then(data => {
-            console.log(data)
-            // if(data.error) throw data
+            setSpin(false)
+            if(data.error) throw data.message
+            window.alert(data.message)
         })
-        // .catch(err => {
-        //     console.log(err.data)
-        // })
+        .catch(err => {
+            window.alert(err.data)
+        })
     }
 
 
@@ -86,16 +90,20 @@ export const Curriculum = (props) => {
 
 
     const removeOutline = (position) => {
+        setSpin(true)
         removeCurriculumOutlineApi(location.state.curriculum._id, position).then(data => {
-            console.log(data)
+            setSpin(false)
+            window.alert(data.message)
         })
     }
 
     const addOutline = (e) => {
 
         e.preventDefault()
+        setSpin(true)
         addCurriculumOutlineApi(location.state.curriculum._id, updateState).then(data => {
-            console.log(data)
+            setSpin(false)
+            window.alert(data.message)
         })
 
     }
@@ -183,7 +191,7 @@ export const Curriculum = (props) => {
             </dialog>
 
 
-
+            {spin && <Spinner />}
         </div>
     )
 }
