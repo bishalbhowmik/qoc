@@ -6,6 +6,7 @@ export const getApprovedTuitionApi = async (id) => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
             'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+            
 
         }
     }).then(data => data.data)
