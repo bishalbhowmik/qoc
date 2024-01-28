@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 bg-normal rounded text-white">
-      <div className="grid grid-flow-col gap-6">
+    <div className="footer md:footer-center p-10 bg-normal rounded text-white">
+      <div className="grid grid-flow-row md:grid-flow-col gap-4">
         <Link to="" className="link link-hover">
           About
         </Link>
@@ -16,9 +16,6 @@ const Footer = () => {
         </Link>
         <Link to="" className="link link-hover">
           Privacy & Policy
-        </Link>
-        <Link target="_blank" className="link link-hover">
-          Terms & Conditions
         </Link>
         <Link target="_blank" className="link link-hover">
           Cookies
@@ -67,7 +64,7 @@ const Footer = () => {
       <div>
         <p>Copyright © 2023 QOC</p>
       </div>
-    </footer>
+    </div>
   );
 };
 

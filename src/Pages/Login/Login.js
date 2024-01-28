@@ -1,28 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../context/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import '../../Pages/Home/SignUp/SignUp';
+import '../SignUp/SignUp';
+import { signinApi } from '../../Api/AuthApi';
+import { saveToken } from '../../Functions/AuthFunctions';
+import Spinner from '../../components/Spinner'
 
 const Login = () => {
-    const { register,handleSubmit,formState: { errors }} = useForm();
-    const {loginUser} = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [message, setMessage] = useState('')
+    const [spin, setSpin] = useState(false)
+
     const navigate = useNavigate();
 
-    const handleLogin = (data) =>{
-        loginUser(data.email,data.password)
-        .then(result =>{
-            const user = result.user;
-            console.log(user);
-            toast.success('Login Successfull');
-            navigate('/');
-            window.location.reload();
+    const handleLogin = (data) => {
+
+        setSpin(true)
+        signinApi(data).then(data => {
+            setSpin(false)
+            if (data.error) throw data.message
+
+            setMessage(data.message)
+            saveToken(data.value.token)
+            navigate('/')
+            window.location.reload(false)
 
         })
-        .catch(err =>{
-            console.log(err);
-        })
+            .catch(err => setMessage(err))
+
     }
     return (
         <div className='flex flex-col items-center justify-center h-[100vh] bg-[#FAF8FF]'>
@@ -47,19 +52,21 @@ const Login = () => {
                         </label>
                         <input type="password" {...register("password", {
                             required: "This field is required",
-                            minLength: { value: 6, message: 'Password must be 6 character long' }
+                            // minLength: { value: 6, message: 'Password must be 6 character long' }
                         })} name="password" className="input input-bordered w-full" />
                         {errors.password && <p>{errors.password?.message}</p>}
 
                     </div>
 
                     <div className='text-red-500'>
-                        
+
                     </div>
 
                     <button className='btn btn-accent w-full text-white'>Login</button>
 
-                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to Doctors Portal? <Link to='/' className='text-secondary'>Create New Account</Link></h3>
+                    <div className='my-4 text-center text-red-500'>{message}</div>
+
+                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to QOC Learning? <Link to='/signup' className='text-secondary'>Create New Account</Link></h3>
 
                     <div className="flex flex-col w-full border-opacity-50">
 
@@ -67,8 +74,10 @@ const Login = () => {
                     </div>
 
                 </form>
-                <button  className='btn btn-outline w-full'>Continue With Google</button>
+                <button className='btn btn-outline w-full'>Continue With Google</button>
             </div>
+
+            {spin ? <Spinner /> : ''}
         </div>
     );
 };
