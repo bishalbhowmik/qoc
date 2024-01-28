@@ -51,6 +51,11 @@ import BatchDashboard from "../Pages/Student/Batch/BatchDashboard";
 import TeacherBatchDashboard from "../Pages/Teacher/TeacherBatch/TeacherBatchDashboard";
 import AdminBatch from "../Pages/Admin/Batch/AdminBatch";
 import AdminBatchDashboard from "../Pages/Admin/Batch/AdminBatchDashboard";
+import BatchPaperSolution from "../Pages/Student/BatchPaperSolution/BatchPaperSolution";
+import AdminResource from "../Pages/Admin/AdminResource/AdminResource";
+import Resource from "../Pages/Resource/Resource";
+import Payment from "../Pages/Student/Payment/Payment";
+import Transaction from "../Pages/Admin/Transaction/Transaction";
 
 
 
@@ -97,6 +102,10 @@ export const router = createBrowserRouter([
       {
         path: "/fail",
         element: <Fail />,
+      },
+      {
+        path: "/resource",
+        element: <Resource />,
       },
 
 
@@ -172,7 +181,14 @@ export const router = createBrowserRouter([
           path: "batch/dashboard/:batchId",
           element: <AdminBatchDashboard />,
         },
-
+        {
+          path: "resource",
+          element: <AdminResource />,
+        },
+        {
+          path: "transaction",
+          element: <Transaction />,
+        },
         ]
       },
 
@@ -288,6 +304,14 @@ export const router = createBrowserRouter([
           {
             path: "my-batch/dashboard/:batchId",
             element: <BatchDashboard />,
+          },
+          {
+            path: "batch-paper-solution",
+            element: <BatchPaperSolution />,
+          },
+          {
+            path: "payment",
+            element: <Payment />,
           },
 
         ]

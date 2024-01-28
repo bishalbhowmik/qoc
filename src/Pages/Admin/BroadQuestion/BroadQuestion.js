@@ -6,6 +6,7 @@ import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import AllBroadQuestion from './AllBroadQuestion'
 import { createBroadQuestionApi, getBroadQuestionApi } from '../../../Api/Admin/BroadQuestionApi'
+import Spinner from '../../../components/Spinner'
 
 export const BroadQuestion = (props) => {
 
@@ -13,6 +14,7 @@ export const BroadQuestion = (props) => {
   const [subject, setSubject] = useState([])
   const [chapter, setChapter] = useState([])
   const [module, setModule] = useState([])
+  const [spin, setSpin] = useState(false)
   const [state, setState] = useState({
     question: '',
     answer: '',
@@ -46,7 +48,10 @@ export const BroadQuestion = (props) => {
     if (e.target.value != '') {
       if (e.target.name === 'curriculumId') {
 
+        setSpin(true)
+
         getSubjectsApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setSubject([])
             setChapter([])
@@ -66,7 +71,9 @@ export const BroadQuestion = (props) => {
       }
 
       else if (e.target.name === 'subjectId') {
+        setSpin(true)
         getChaptersApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setChapter([])
             setModule([])
@@ -83,7 +90,9 @@ export const BroadQuestion = (props) => {
       }
 
       else if (e.target.name === 'chapterId') {
+        setSpin(true)
         getModulesApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setModule([])
             setState({ ...state, [e.target.name]: e.target.value, moduleId: '' })
@@ -112,16 +121,16 @@ export const BroadQuestion = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    setSpin(true)
     createBroadQuestionApi(state).then(data => {
+      setSpin(false)
+      window.alert(data.message)
 
-      console.log(data)
-
-      // setState({
-      //   ...state,
-      //   question: '',
-      //   answer: '',
-      // })
+      setState({
+        ...state,
+        question: '',
+        answer: '',
+      })
     })
   }
 
@@ -204,6 +213,7 @@ export const BroadQuestion = (props) => {
             <button className='btn btn-warning block' type="submit">Confirm</button>
           </form>
         </div>
+        {spin && <Spinner />}
       </dialog>
 
     </div>

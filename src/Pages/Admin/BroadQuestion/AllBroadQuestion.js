@@ -7,6 +7,7 @@ import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getMcqByCriteriaApi } from '../../../Api/Admin/McqApi'
 import { getBroadQuestionApi } from '../../../Api/Admin/BroadQuestionApi'
+import Spinner from '../../../components/Spinner'
 
 export const AllBroadQuestion = (props) => {
 
@@ -15,6 +16,7 @@ export const AllBroadQuestion = (props) => {
     const [subject, setSubject] = useState([])
     const [chapter, setChapter] = useState([])
     const [module, setModule] = useState([])
+    const [spin, setSpin] = useState(false)
     const [broadQuestion, setBroadQuestion] = useState([])
     const [state, setState] = useState({
         curriculumId: '',
@@ -25,7 +27,9 @@ export const AllBroadQuestion = (props) => {
 
     useEffect(() => {
 
+        setSpin(true)
         getAllCurriculumApi().then(data => {
+
             if (data.error) {
                 setCurriculum([])
                 setSubject([])
@@ -38,6 +42,7 @@ export const AllBroadQuestion = (props) => {
         })
 
         getBroadQuestionApi({}).then(data => {
+            setSpin(false)
             if (data.error) throw data.message
             setBroadQuestion([...data.data])
         })
@@ -53,8 +58,11 @@ export const AllBroadQuestion = (props) => {
 
         if (e.target.value != '') {
             if (e.target.name === 'curriculumId') {
+                setSpin(true)
 
                 getSubjectsApi(e.target.value).then(data => {
+
+                    setSpin(false)
                     if (data.error) {
                         setSubject([])
                         setChapter([])
@@ -73,7 +81,9 @@ export const AllBroadQuestion = (props) => {
             }
 
             else if (e.target.name === 'subjectId') {
+                setSpin(true)
                 getChaptersApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setChapter([])
                         setModule([])
@@ -90,7 +100,9 @@ export const AllBroadQuestion = (props) => {
             }
 
             else if (e.target.name === 'chapterId') {
+                setSpin(true)
                 getModulesApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setModule([])
                         setState({ ...state, [e.target.name]: e.target.value, moduleId: '' })
@@ -118,7 +130,10 @@ export const AllBroadQuestion = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSpin(true)
         getBroadQuestionApi(state).then(data => {
+            window.alert(data.message)
+            setSpin(false)
             if (data.error) throw data.message
             setBroadQuestion([...data.data])
         })
@@ -201,7 +216,7 @@ export const AllBroadQuestion = (props) => {
                 {broadQuestionShow}
             </div>
 
-
+            {spin && <Spinner spin={spin} />}
 
         </div>
     )

@@ -3,6 +3,7 @@ import { AUTHENTICATED } from "./ActionTypes"
 const initialState = {
     decodedToken: {},
     authenticated: false,
+    conversation: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -15,7 +16,12 @@ const reducer = (state = initialState, action) => {
         }
     }
 
-
+    if (action.type === 'ADD_MESSAGE') {
+        return {
+            ...state,
+            conversation: [...state.conversation, action.payload]
+        }
+    }
 
     return state
 }

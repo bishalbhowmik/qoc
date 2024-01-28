@@ -9,6 +9,8 @@ import person from "../../assets/person.png";
 import student from "../../assets/student.png";
 import styles from "./Home.module.css";
 import { connect } from "react-redux";
+import Chat from "../Chat/Chat";
+import MessengerChat from "../Chat/MessengerChat";
 
 const mapStateToProps = (state) => {
   console.log(state);
@@ -599,6 +601,10 @@ function Home() {
           </div>
         </div>
       </section>
+
+
+      <MessengerChat />
+      {/* <Chat /> */}
     </div>
   );
 }

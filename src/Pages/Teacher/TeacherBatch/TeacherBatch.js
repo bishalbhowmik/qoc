@@ -13,7 +13,8 @@ export const TeacherBatch = (props) => {
     description: '',
     startDate: '',
     fees: '',
-    classLink: ''
+    classLink: '',
+    pastPaperSolution: false
   })
   const [message, setMessage] = useState({ message: '', error: true })
   const [batch, setBatch] = useState([])
@@ -31,7 +32,7 @@ export const TeacherBatch = (props) => {
 
         setSpin(true)
 
-        getAllBatchApi({teacherId: props.decodedToken._id}).then(data => {
+        getAllBatchApi({ teacherId: props.decodedToken._id }).then(data => {
           setSpin(false)
           if (data.error) throw data.message
           setBatch([...data.data])
@@ -161,11 +162,17 @@ export const TeacherBatch = (props) => {
             <label className='label label-text mt-4' htmlFor="">Class Link</label>
             <input required placeholder='Enter class link without "https://"' className='w-full input input-bordered' onChange={e => handleChange(e)} value={state.classLink} type="text" name='classLink' /> <br />
 
+            <label className='label label-text mt-4' htmlFor="">Is it past paper solution batch?</label>
+            <select className='select select-bordered w-full' onChange={e => handleChange(e)} value={state.pastPaperSolution} name="pastPaperSolution" id="">
+              <option value="true">Yes</option>
+              <option value="false" selected>No</option>
+            </select>
+
             <button className='btn btn-success mt-4' type="submit">Submit</button>
 
             <div className='p-3 text-center text-capitalize'>{message.message}</div>
 
-          </form> 
+          </form>
 
         </div>
       </dialog>

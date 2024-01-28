@@ -6,6 +6,7 @@ import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getMcqByCriteriaApi } from '../../../Api/Admin/McqApi'
+import Spinner from '../../../components/Spinner'
 
 export const AllMcq = (props) => {
 
@@ -13,6 +14,7 @@ export const AllMcq = (props) => {
     const [curriculum, setCurriculum] = useState([])
     const [subject, setSubject] = useState([])
     const [chapter, setChapter] = useState([])
+    const [spin, setSpin] = useState(false)
     const [module, setModule] = useState([])
     const [mcq, setMcq] = useState([])
     const [state, setState] = useState({
@@ -24,6 +26,7 @@ export const AllMcq = (props) => {
 
     useEffect(() => {
 
+        setSpin(true)
         getAllCurriculumApi().then(data => {
             if (data.error) {
                 setCurriculum([])
@@ -37,6 +40,7 @@ export const AllMcq = (props) => {
         })
 
         getMcqByCriteriaApi({}).then(data => {
+            setSpin(false)
             if (data.error) throw data.message
             setMcq([...data.data])
         })
@@ -52,8 +56,9 @@ export const AllMcq = (props) => {
 
         if (e.target.value != '') {
             if (e.target.name === 'curriculumId') {
-
+                setSpin(true)
                 getSubjectsApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setSubject([])
                         setChapter([])
@@ -72,7 +77,9 @@ export const AllMcq = (props) => {
             }
 
             else if (e.target.name === 'subjectId') {
+                setSpin(true)
                 getChaptersApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setChapter([])
                         setModule([])
@@ -89,7 +96,9 @@ export const AllMcq = (props) => {
             }
 
             else if (e.target.name === 'chapterId') {
+                setSpin(true)
                 getModulesApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setModule([])
                         setState({ ...state, [e.target.name]: e.target.value, moduleId: '' })
@@ -117,7 +126,10 @@ export const AllMcq = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setSpin(true)
         getMcqByCriteriaApi(state).then(data => {
+            window.alert(data.message)
+            setSpin(false)
            if(data.error) throw data.message
             setMcq([...data.data])
         })
@@ -200,7 +212,7 @@ export const AllMcq = (props) => {
                 {mcqShow}
             </div>
 
-
+            {spin && <Spinner />}
 
         </div>
     )

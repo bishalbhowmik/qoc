@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 export const AdminDashboard = (props) => {
   return (
     <div className=''>
-      <h2 className='text-3xl p-40 text-center'>Welcome to Admin Dashboard</h2>
+      <h2 className='text-3xl py-40 text-center '>Welcome to Admin Dashboard</h2>
     </div>
   )
 }

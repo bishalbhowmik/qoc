@@ -13,6 +13,7 @@ export const StudentExam = (props) => {
     const [examStatus, setExamStatus] = useState(false)
     const [examScript, setExamScript] = useState({})
     const [message, setMessage] = useState('')
+    const [remainingTime, setRemainingTime] = useState('')
 
 
     useEffect(() => {
@@ -40,7 +41,7 @@ export const StudentExam = (props) => {
 
 
     if (new Date() < new Date(state.exam.startTime)) {
-        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString()}</div>
+        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString()} <br /> Time Remaining: {remainingTime}</div>
     }
 
     if (examStatus) {
@@ -49,17 +50,17 @@ export const StudentExam = (props) => {
 
             <div>
                 {examScript.$__parent.mcqsId.length != 0 ? <div>
-                    <div className='font-bold text-center my-10 text-xl underline'>MCQ Marks</div> 
+                    <div className='font-bold text-center my-10 text-xl underline'>MCQ Marks</div>
                     <div className='card card-body glass mb-5'>
                         <div><strong className='me-3'>Correct Answer:</strong> {examScript._doc.correctMcq} </div>
                         <div><strong className='me-3'>Wrong Answer:</strong> {examScript._doc.wrongMcq} </div>
                         <div><strong className='me-3'>Negative Mark:</strong> {examScript.$__parent.negativeMarking} </div>
                         <div><strong className='me-3'>No Answer:</strong> {examScript._doc.noAnswer} </div>
                         <div><strong className='me-3'>Total Marks:</strong> {examScript._doc.mcqMarks} </div>
-                        
+
                     </div>
 
-                </div>: ''}   
+                </div> : ''}
 
                 {examScript.$__parent.broadQuestionsId.length != 0 ? <div>
                     <div className='font-bold text-center my-10 text-xl underline'>Broad Question Marks</div>
@@ -78,7 +79,7 @@ export const StudentExam = (props) => {
 
     const handleChange = (e) => {
 
-        
+
         if (e.target.type === 'file') {
             setExamForm({ ...examForm, [e.target.name]: e.target.files[0] })
         } else {
@@ -125,7 +126,7 @@ export const StudentExam = (props) => {
                 script: examForm.hasOwnProperty('script') ? examForm.script : null,
             }
 
-            
+
             submitExamApi(state.exam._id, obj).then(data => {
                 window.location.reload()
                 // console.log(data)
@@ -137,10 +138,31 @@ export const StudentExam = (props) => {
         }
     }
 
+
+
+    setInterval(() => {
+        if(state && state.exam){
+            // console.log(state.exam.endTime)
+            let now = new Date()
+            let end = new Date(state.exam.endTime)
+            let timeDifference = end - now;
+
+            let seconds = Math.floor((timeDifference / 1000) % 60);
+            let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+            let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+            setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`)
+        }
+    }, 1000)
+
     return (
         <div>
 
-            <div className='font-bold text-center my-10 text-2xl'>{state.exam.exam}</div>
+            <div className='font-bold text-center  text-2xl'>{state.exam.exam}</div>
+            <div className='font-bold text-center mb-10 text-xl text-red-800'>Time Remaining: {remainingTime}</div>
+
+
+            <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString()}</div>
+
             {state.exam.hasOwnProperty('mcqsId') && state.exam.mcqsId.length != 0 ?
 
                 <div>
@@ -148,13 +170,13 @@ export const StudentExam = (props) => {
                     <div className='font-bold text-center my-10 text-xl underline'>MCQ</div>
 
                     <form onSubmit={e => handleSubmit(e)} action="">
+
                         {
                             state.exam.mcqsId.map((item, index) => {
 
                                 return (
                                     <div className='my-3 card card-body glass shadow-lg'>
                                         {index + 1}. {item.question} <br />
-                                        {item.answer}
                                         {item.options.map((option, index) => <div>
 
                                             <div className='flex items-center'>

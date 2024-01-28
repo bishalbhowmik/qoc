@@ -6,6 +6,7 @@ import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import AllMcq from './AllMcq'
 import { createMcq, getAllMcqApi } from '../../../Api/Admin/McqApi'
+import Spinner from '../../../components/Spinner'
 
 export const Mcq = (props) => {
 
@@ -13,6 +14,7 @@ export const Mcq = (props) => {
     const [subject, setSubject] = useState([])
     const [chapter, setChapter] = useState([])
     const [module, setModule] = useState([])
+    const [spin, setSpin] = useState(false)
     const [state, setState] = useState({
         question: '',
         option: [],
@@ -32,7 +34,9 @@ export const Mcq = (props) => {
 
     useEffect(() => {
 
+        setSpin(true)
         getAllCurriculumApi().then(data => {
+            setSpin(false)
             if (data.error) {
                 setCurriculum([])
                 setSubject([])
@@ -50,9 +54,11 @@ export const Mcq = (props) => {
     const handleChange = (e) => {
 
         if (e.target.value != '') {
-            if (e.target.name === 'curriculumId') {
 
+            if (e.target.name === 'curriculumId') {
+                setSpin(true)
                 getSubjectsApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setSubject([])
                         setChapter([])
@@ -72,7 +78,9 @@ export const Mcq = (props) => {
             }
 
             else if (e.target.name === 'subjectId') {
+                setSpin(true)
                 getChaptersApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setChapter([])
                         setModule([])
@@ -89,7 +97,9 @@ export const Mcq = (props) => {
             }
 
             else if (e.target.name === 'chapterId') {
+                setSpin(true)
                 getModulesApi(e.target.value).then(data => {
+                    setSpin(false)
                     if (data.error) {
                         setModule([])
                         setState({ ...state, [e.target.name]: e.target.value, moduleId: '' })
@@ -118,9 +128,10 @@ export const Mcq = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        setSpin(true)
         createMcq(state).then(data => {
-            console.log(data)
+            setSpin(false)
+            window.alert(data.message)
             setState({
                 ...state,
                 question: '',
@@ -242,7 +253,11 @@ export const Mcq = (props) => {
                         <button className='btn btn-warning block' type="submit">Confirm</button>
                     </form>
                 </div>
+
+                {spin && <Spinner />}
             </dialog>
+
+
 
         </div>
     )
@@ -252,4 +267,5 @@ const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Mcq)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mcq);

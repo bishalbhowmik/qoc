@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getAExamApi, updateMarksApi } from '../../../Api/Admin/ExamApi'
 import bufferToDataUrl from 'buffer-to-data-url';
+import Spinner from '../../../components/Spinner';
 
 export const ExamDetails = (props) => {
 
@@ -10,15 +11,16 @@ export const ExamDetails = (props) => {
     const [participants, setParticipants] = useState([])
     const [exam, setExam] = useState({})
     const [selectedItem, setSelectedItem] = useState({})
+    const [spin, setSpin] = useState(false)
     const [state, setState] = useState({
         broadQuestionMarks: ''
     })
 
     useEffect(() => {
-
+        setSpin(true)
         getAExamApi(examId).then(data => {
 
-            console.log(data)
+            setSpin(false)
             if (data.error) throw data.message
             setParticipants([...data.data.participants])
             setExam(data.data)
@@ -77,13 +79,11 @@ export const ExamDetails = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        setSpin(true)
         updateMarksApi(examId, selectedItem.studentId._id, state).then(data => {
-            console.log(data)
-        })
-
-        // console.log(state)
-        
+            setSpin(false)
+            window.alert(data.message)
+        })        
 
     }
 
@@ -155,9 +155,11 @@ export const ExamDetails = (props) => {
                     </div> : ''}
 
                 </div>
+
+                {spin && <Spinner />}
             </dialog>
 
-
+            {spin && <Spinner />}
         </div>
     )
 }

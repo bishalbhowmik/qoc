@@ -6,6 +6,7 @@ import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import { createExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { Link } from 'react-router-dom'
+import Spinner from '../../../components/Spinner'
 
 export const Exam = (props) => {
 
@@ -15,6 +16,7 @@ export const Exam = (props) => {
   const [chapter, setChapter] = useState([])
   const [module, setModule] = useState([])
   const [exam, setExam] = useState([])
+  const [spin, setSpin] = useState(false)
   const [state, setState] = useState({
 
     exam: '',
@@ -36,6 +38,7 @@ export const Exam = (props) => {
 
   useEffect(() => {
 
+    setSpin(true)
     getAllCurriculumApi().then(data => {
       if (data.error) {
         setCurriculum([])
@@ -49,6 +52,7 @@ export const Exam = (props) => {
     })
 
     getAllExamApi({}).then(data => {
+      setSpin(false)
       if (data.error) throw data.message
       setExam([...data.data])
 
@@ -64,8 +68,9 @@ export const Exam = (props) => {
 
     if (e.target.value != '') {
       if (e.target.name === 'curriculumId') {
-
+        setSpin(true)
         getSubjectsApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setSubject([])
             setChapter([])
@@ -85,7 +90,9 @@ export const Exam = (props) => {
       }
 
       else if (e.target.name === 'subjectId') {
+        setSpin(true)
         getChaptersApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setChapter([])
             setModule([])
@@ -102,7 +109,9 @@ export const Exam = (props) => {
       }
 
       else if (e.target.name === 'chapterId') {
+        setSpin(true)
         getModulesApi(e.target.value).then(data => {
+          setSpin(false)
           if (data.error) {
             setModule([])
             setState({ ...state, [e.target.name]: e.target.value, moduleId: '' })
@@ -132,10 +141,10 @@ export const Exam = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-
+    setSpin(true)
 
     createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString(), endTime: new Date(state.endTime).toLocaleString() }).then(data => {
-      console.log(data)
+      setSpin(false)
       if (data.error) throw data.message
       setMessage(data.message)
     })
@@ -182,20 +191,6 @@ export const Exam = (props) => {
       <div>
         {examShow}
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       <dialog id="createExamModal" className="modal">
         <div className="modal-box w-10/12 max-w-5xl">
@@ -286,8 +281,11 @@ export const Exam = (props) => {
             <div className='p-5 bg-neutral text-white my-5'>{message}</div>
           </form>
         </div>
+
+        {spin && <Spinner />}
       </dialog>
 
+      {spin && <Spinner />}
 
     </div>
   )

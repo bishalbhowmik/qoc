@@ -53,7 +53,10 @@ export const StudentCourse = (props) => {
     <div>
 
 
-      <div className='my-16 text-2xl text-center font-bold'>ALL CURRICULUMS</div>
+      <div className="text-center mb-16">
+        <h1 className='text-3xl text-black font-bold mb-2'>Sharpen Your Edge with Expert Courses</h1>
+        <p style={{ letterSpacing: '1.3px' }} className='text-[#979797]'> Unlock a World of Learning Excellence with Engaging and Comprehensive Courses Designed for Every Student's Success. </p>
+      </div>
 
       <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
         {curriculumShow}

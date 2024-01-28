@@ -62,6 +62,13 @@ export const Tutor = (props) => {
 
   return (
     <div>
+
+      <div className="text-center mb-16">
+        <h1 className='text-3xl text-black font-bold mb-2'>Discover Your Perfect Mentor</h1>
+        <p style={{ letterSpacing: '1.3px' }} className='text-lg text-[#979797]'>Unlock Learning Potential with a Personalized Journey - Find the Right Tutor to Fuel Your Academic Success.</p>
+      </div>
+
+
       <Link className='btn btn-neutral' to='/student-dashboard/create-tuition'>Post Tuition</Link>
 
       <div className='grid grid-cols-12 gap-4 mt-5'>

@@ -13,7 +13,7 @@ export const Batch = (props) => {
   useEffect(() => {
 
     setSpin(true)
-    getAllBatchApi({}).then(data => {
+    getAllBatchApi({ pastPaperSolution: false }).then(data => {
 
       setSpin(false)
       if (data.error) throw data.message
@@ -57,9 +57,8 @@ export const Batch = (props) => {
               <div className='text-lg'><strong>Teacher: </strong>{item.teacherId.username}</div>
               <div className='text-lg'><strong>Email: </strong>{item.teacherId.email}</div>
               <div className='text-lg'><strong>Joining Fee: </strong>{item.fees} BDT</div>
-
               <div className='text-lg'><strong>Start Date: </strong> {new Date(item.startDate).toLocaleString()}</div>
-              <div className='text-lg'><strong>Description: </strong>{item.description}</div>
+              <div className='mt-5'>{item.description}</div>
             </div>
           </div>
 
@@ -74,7 +73,12 @@ export const Batch = (props) => {
   return (
     <div className=''>
 
-    <Link to='/student-dashboard/my-batch' className='btn btn-accent'>My Batch</Link>
+      <div className="text-center mb-16">
+        <h1 className='text-3xl text-black font-bold mb-2'>Elevate Learning Together, Batch by Batch</h1>
+        <p style={{ letterSpacing: '1.3px' }} className='text-lg text-[#979797]'>Join Forces in Dedicated Batches for Personalized Tutoring and Collective Academic Excellence.</p>
+      </div>
+
+      <Link to='/student-dashboard/my-batch' className='btn btn-accent'>My Batch</Link>
 
       <div className='container grid grid-cols-1 md:grid-cols-2 gap-5 my-10'>
         {batchShow}

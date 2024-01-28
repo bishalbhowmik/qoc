@@ -26,7 +26,7 @@ export const StudentCurriculum = (props) => {
             })
 
             getSubjectsApi(curriculum._id).then(data => {
-
+                
                 setSpin(false)
                 if (data.error) throw data.message
                 setSubject([...data.data])

@@ -7,6 +7,7 @@ import { getAChapterApi } from '../../../Api/Admin/ChapterApi'
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import bufferToDataUrl from 'buffer-to-data-url'
 import Spinner from '../../../components/Spinner'
+import { getFocusApi } from '../../../Api/Admin/FocusApi'
 
 
 export const StudentChapter = (props) => {
@@ -15,6 +16,7 @@ export const StudentChapter = (props) => {
     const [modules, setModules] = useState([])
     const [materials, setMaterials] = useState([])
     const [spin, setSpin] = useState(false)
+    const [focus, setFocus] = useState([]);
     const [exam, setExam] = useState([])
     const [state, setState] = useState({
         module: '',
@@ -36,7 +38,7 @@ export const StudentChapter = (props) => {
 
             getAllExamApi({ chapterId: chapter._id }).then(data => {
                 if (data.error) throw data.message
-                setExam([...data.data])
+                setExam(data.data.filter(item => !item.hasOwnProperty('moduleId')))
 
             })
                 .catch(err => {
@@ -50,6 +52,13 @@ export const StudentChapter = (props) => {
             }).catch(err => {
                 console.log(err)
             })
+
+
+            getFocusApi({ chapterId: chapter._id }).then((data) => {
+                console.log(data)
+                if (data.error) throw data.message;
+                setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId') && new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
+            }).catch(err => { })
         }
 
     }, [location]);
@@ -96,6 +105,25 @@ export const StudentChapter = (props) => {
                         return (
                             <div onClick={() => showFile(item)} className="btn btn-outline md:me-4 p-2 mt-2">
                                 {item.name}
+                            </div>
+                        )
+                    })}
+                </div>
+
+
+                <div className="bg-red-800 p-3 text-center my-10 text-xl">
+                    <span className="text-white rounded">Focus</span>
+                </div>
+
+                <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                    {focus.map(item => {
+                        return (
+                            <div className="card border hover:border-red-800 hover:shadow-lg card-body">
+                                <div className=" card-title">{item.title}</div>
+                                <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div>
+                                <div className="my-5">{item.description}</div>
+                                <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
+
                             </div>
                         )
                     })}

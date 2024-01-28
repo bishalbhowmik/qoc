@@ -8,6 +8,8 @@ import { showFile } from '../../../Functions/CustomFunction'
 import axios from 'axios'
 import { addCurriculumOutlineApi, getACurriculumApi, removeCurriculumOutlineApi } from '../../../Api/Admin/CurriculumApi'
 import Spinner from '../../../components/Spinner'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 export const Curriculum = (props) => {
 
@@ -63,12 +65,12 @@ export const Curriculum = (props) => {
 
         createSubjectsApi({ ...state, curriculumId: location.state ? location.state.curriculum._id : '' }).then(data => {
             setSpin(false)
-            if(data.error) throw data.message
+            if (data.error) throw data.message
             window.alert(data.message)
         })
-        .catch(err => {
-            window.alert(err.data)
-        })
+            .catch(err => {
+                window.alert(err.data)
+            })
     }
 
 
@@ -129,9 +131,9 @@ export const Curriculum = (props) => {
                 <div className='text-center my-10 bg-red-800 p-3'><span className=' text-white rounded'>OUTLINES</span></div>
                 <div className='flex flex-col md:flex-row flex-wrap'>
                     {outlines.map((item, index) => {
-                        return (<div className='my-10 flex border p-2 shadow bg-slate-100 me-3'>
-                            <div onClick={() => showFile(item)} className="btn btn-outline">{item.name}</div>
-                            <button onClick={() => removeOutline(index)} className='btn btn-error'>X</button>
+                        return (<div className='my-3 flex border-2 p-2 shadow me-3 hover:badge-outline rounded'>
+                            <div><span onClick={() => showFile(item)} className="p-3 hover:text-red-800 cursor-pointer">{item.name} </span><span onClick={() => removeOutline(index)} className='hover:text-red-800 p-3 fa-xl rounded cursor-pointer'> <FontAwesomeIcon icon={faCircleXmark} /> </span></div>
+
                         </div>)
                     })}
                 </div>
