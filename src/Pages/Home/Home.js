@@ -307,7 +307,7 @@ function Home() {
             </p>
           </div>
 
-          <div className="">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
             <div className="relative w-[90%] md:w-[90%] mx-auto">
               <img className="w-[100%] h-[315px]" src={course} alt="course" />
