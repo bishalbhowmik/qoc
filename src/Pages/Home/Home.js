@@ -12,11 +12,6 @@ import { connect } from "react-redux";
 import Chat from "../Chat/Chat";
 import MessengerChat from "../Chat/MessengerChat";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 const mapStateToProps = (state) => {
   console.log(state);
@@ -314,134 +309,39 @@ function Home() {
 
           <div className="">
 
-            <div style={{ width: "80vw", margin: 'auto auto' }} className="">
-              <Swiper
-                slidesPerView={size > 766 ? 3 : 1}
-                spaceBetween={20}
-                slidesPerGroup={size > 766 ? 3 : 1}
-                loop={true}
-                loopFillGroupWithBlank={true}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
-                className="mySwiper"
-                style={{height: '50vh'}}
+            <div className="relative w-[90%] md:w-[90%] mx-auto">
+              <img className="w-[100%] h-[315px]" src={course} alt="course" />
 
-              >
+              <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                  DEVELOPMENT
+                </button>{" "}
+                <br />
+                <span className="flex items-center justify-between mb-2">
+                  <span className="text-[#FFB800] text-[12px]">
+                    <i className="fa-solid fa-star mr-[2px]" />
+                    <i className="fa-solid fa-star mr-[2px]" />
+                    <i className="fa-solid fa-star mr-[2px]" />
+                    <i className="fa-solid fa-star mr-[2px]" />
+                    <i className="fa-solid fa-star mr-[2px]" />
+                    <span className="text-[#928787] ml-2">5.4(199)</span>
+                  </span>
+                  <span className="text-[12px] text-[#9b1620] font-semibold ">
+                    02 september, 2023
+                  </span>
+                </span>
+                <h3 className="text-[16px] font-semibold mb-3 text-black">
+                  The Complete Web Developer Guideline 2023
+                </h3>
+                <p className="mb-3">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                </p>
+                <button className="text-[#ac1823]">
+                  Book Now <i className="fa-solid fa-chevron-right" />
+                </button>
+              </div>
 
-                <SwiperSlide className="">
-                  <div className="relative w-[90%] md:w-[90%] mx-auto">
-                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
-
-                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
-                        DEVELOPMENT
-                      </button>{" "}
-                      <br />
-                      <span className="flex items-center justify-between mb-2">
-                        <span className="text-[#FFB800] text-[12px]">
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <span className="text-[#928787] ml-2">5.4(199)</span>
-                        </span>
-                        <span className="text-[12px] text-[#9b1620] font-semibold ">
-                          02 september, 2023
-                        </span>
-                      </span>
-                      <h3 className="text-[16px] font-semibold mb-3 text-black">
-                        The Complete Web Developer Guideline 2023
-                      </h3>
-                      <p className="mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                      </p>
-                      <button className="text-[#ac1823]">
-                        Book Now <i className="fa-solid fa-chevron-right" />
-                      </button>
-                    </div>
-
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div className="relative w-[85%] md:w-[90%] mx-auto">
-                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
-
-                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
-                        DEVELOPMENT
-                      </button>{" "}
-                      <br />
-                      <span className="flex items-center justify-between mb-2">
-                        <span className="text-[#FFB800] text-[12px]">
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <span className="text-[#928787] ml-2">5.4(199)</span>
-                        </span>
-                        <span className="text-[12px] text-[#9b1620] font-semibold ">
-                          02 september, 2023
-                        </span>
-                      </span>
-                      <h3 className="text-[16px] font-semibold mb-3 text-black">
-                        The Complete Web Developer Guideline 2023
-                      </h3>
-                      <p className="mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                      </p>
-                      <button className="text-[#ac1823]">
-                        Book Now <i className="fa-solid fa-chevron-right" />
-                      </button>
-                    </div>
-                  </div>
-
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div className="relative w-[85%] md:w-[90%] mx-auto">
-                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
-
-                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
-                        DEVELOPMENT
-                      </button>{" "}
-                      <br />
-                      <span className="flex items-center justify-between mb-2">
-                        <span className="text-[#FFB800] text-[12px]">
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <i className="fa-solid fa-star mr-[2px]" />
-                          <span className="text-[#928787] ml-2">5.4(199)</span>
-                        </span>
-                        <span className="text-[12px] text-[#9b1620] font-semibold ">
-                          02 september, 2023
-                        </span>
-                      </span>
-                      <h3 className="text-[16px] font-semibold mb-3 text-black">
-                        The Complete Web Developer Guideline 2023
-                      </h3>
-                      <p className="mb-3">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                      </p>
-                      <button className="text-[#ac1823]">
-                        Book Now <i className="fa-solid fa-chevron-right" />
-                      </button>
-                    </div>
-                  </div>
-
-                </SwiperSlide>
-
-              </Swiper>
             </div>
-            
 
           </div>
 
