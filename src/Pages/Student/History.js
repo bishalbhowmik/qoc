@@ -24,170 +24,168 @@ const mapStateToProps = (state) => {
 
 export const History = (props) => {
 
-    const [state, setState] = useState({
-        username: '',
-        email: '',
-        mobile: '',
-        country: '',
-        curriculumId: '',
-    })
+    const [tab, setTab] = useState('exam')
+
     const [spin, setSpin] = useState(false)
-    const [focus, setFocus] = useState([])
-    const [batches, setBatches] = useState([])
-    const [upcoming, setUpcoming] = useState([])
     const [assignments, setAssignments] = useState([])
     const [exam, setExam] = useState([])
-    const [curriculum, setCurriculum] = useState([])
+    const [documents, setDocuments] = useState([])
+    const [transactions, setTransactions] = useState([])
 
     useEffect(() => {
 
         setSpin(true)
-        getAllCurriculumApi().then(data => {
-
-            if (data.error) throw data.message
-
-            setCurriculum([...data.data])
-
-        }).catch(err => {
-            window.alert(err)
-        })
-
-        getAStudent(props.decodedToken._id).then(data => {
-
-            if (data.error) throw data.message
-
-            setState({
-                ...state,
-                username: data.data.username,
-                email: data.data.email,
-                mobile: data.data.mobile,
-                country: data.data.country,
-                curriculumId: data.data.curriculum,
-                // password: data.data.password,
-            })
-
-        }).catch(err => {
-            console.log(err)
-        })
-
-
-        getFocusApi({}).then((data) => {
-            setSpin(false)
-            if (data.error) throw data.message;
-            setFocus(data.data.filter(item => new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
-        }).catch(err => { })
-
 
         getAllActivityApi(props.decodedToken._id).then(data => {
             console.log(data)
             if (data.error) throw data.message
             setAssignments([...data.data.postedAssignment])
-            setBatches([...data.data.batches])
             setExam([...data.data.submittedExam])
-            setUpcoming([...data.data.upcomingCourse])
+            setTransactions([...data.data.transactions])
         }).catch(err => {
-            console.log(err)
+            window.alert(err)
         })
 
     }, [props])
 
 
-    const handleChange = (e) => {
 
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
+    let allTabs = document.getElementsByClassName('myTab')
 
-    }
-
-    const handleSubmit = (e) => {
-
-        e.preventDefault()
-
-        updateStudent(props.decodedToken._id, state).then(data => {
-            console.log(data)
-        })
-            .catch(err => {
-                console.log(err)
-            })
-
+    for (let i = 0; i < allTabs.length; i++) {
+        if (allTabs[i].id === tab) {
+            allTabs[i].classList.add('border-b-4', 'border-primary', 'font-bold')
+        }
+        else {
+            allTabs[i].classList.remove('border-b-4', 'border-primary', 'font-bold')
+        }
     }
 
 
     return (
         <div className=''>
 
-            <div className='my-14 grid grid-cols-1 md:grid-cols-12 gap-14'>
 
-                <div className='col-span-full md:col-span-9'>
-                    
+            <div>
+                <div className='flex border-b my-5'>
+                    <div onClick={e => setTab('exam')} id='exam' className='me-5 p-5 hover:bg-slate-100 myTab border-b-4 border-primary cursor-pointer'>Exam</div>
+                    {/* <div onClick={e => setTab('documents')} id='documents' className='me-5 p-5 hover:bg-slate-100 myTab border-b-4 border-primary cursor-pointer'>Documents</div> */}
+                    <div onClick={e => setTab('assignment')} id='assignment' className='me-5 p-5 myTab hover:bg-slate-100 cursor-pointer'>Assignment</div>
+                    <div onClick={e => setTab('transactions')} id='transactions' className='me-5 p-5 myTab hover:bg-slate-100 cursor-pointer'>Transactions</div>
                 </div>
-
-
-                <div className=' col-span-full md:col-span-3'>
-
-                </div>
-
-                {/* {spin && <Spinner />} */}
-
             </div>
 
+            {tab === 'exam' && (
+                <div>
+
+                    <div className="overflow-x-auto">
+                        <table className="table my-10">
+                            <thead>
+                                <tr>
+                                    <th>Exam</th>
+                                    <th>Date</th>
+                                    <th>Total Marks</th>
+                                    <th>MCQ</th>
+                                    <th>Broad Question</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {exam.length === 0 ? <div>No exam found</div> : exam.map(item => {
+                                    return (
+                                        <tr key={item._id}>
+                                            <td>{item.exam}</td>
+                                            <td>{new Date(item.startTime).toLocaleString()}</td>
+                                            <td>{item.totalMarks}</td>
+                                            {item.participants && item.participants.map(participant => {
+
+                                                if (participant.studentId === props.decodedToken._id) {
 
 
-            <div className='grid grid-cols-1 md:grid-cols-12 gap-14'>
-                <div className='col-span-full md:col-span-9'>
-                    <div className='text-xl font-bold mb-5 border-b pb-3'>Recent Activities</div>
+                                                    return (<>
 
+                                                        <td>
+                                                            {participant.mcqMarks ? participant.mcqMarks : '---'}
+                                                        </td>
 
-                    <div className='grid grid-cols-1 md:grid-cols-12 gap-14'>
+                                                        <td>
+                                                            {participant.broadQuestionMarks ? participant.broadQuestionMarks : '---'}
+                                                        </td>
+                                                        <td>
+                                                            {(participant.mcqMarks ? Number(participant.mcqMarks) : 0) + participant.broadQuestionMarks ? Number(participant.broadQuestionMarks) : 0}
+                                                        </td>
+                                                    </>
 
-                        <div className='col-span-full md:col-span-6'>
-                            <div className='font-bold my-3'>Exams</div>
-                            {exam.length === 0 ? <div>No exam found</div> : exam.map(item => {
-                                return (
-                                    <div className='flex mb-4 cursor-pointer'>
-                                        <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                                        <div>
-                                            <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                        <div className='col-span-full md:col-span-6'>
-                            <div className='font-bold my-3'>Assignment</div>
-                            {assignments.length === 0 ? <div>No assignment found</div> : assignments.map(item => {
-                                return (
-                                    <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
-                                        <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                                        <div>
-                                            <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-
-
+                                                    )
+                                                }
+                                            })}
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
                     </div>
+                </div>)}
 
-                </div>
-
-                <div className='col-span-full md:col-span-3'>
-                    <div className='text-xl font-bold mb-5 border-b pb-3'>Running Batch</div>
-                    {batches.length === 0 ? <div>No assignment found</div> : batches.map(item => {
+            {tab === 'assignment' && (
+                <div className='my-10'>
+                    {assignments.length === 0 ? <div>No assignment found</div> : assignments.map(item => {
+                        console.log(item)
                         return (
-                            <div className='flex mb-4 cursor-pointer'>
+                            <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
                                 <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
                                 <div>
-                                    <Link to={'my-batch/dashboard/' + item._id} className=''> <span className=''>{item.title}</span></Link> <br />
+                                    <span className='italic'>Posted a new assignment ~ <span className=''>{item.title} </span></span> <br />
+                                    <div className='italic text-sm'> - { item.answer.length === 0 ? 'Not solved yet' : 'solved'}</div>
                                 </div>
+
+
                             </div>
                         )
                     })}
                 </div>
-            </div>
+            )}
+
+        
+            {tab === 'transactions' && (
+                <div>
+
+                    <table className="table my-10">
+                        <thead>
+                            <tr className=' bg-red-700 text-white'>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Trans ID</th>
+                                <th>Date</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {transactions.length === 0 ? <div>No transaction found</div> : transactions.map((item, index) => {
+                                console.log(item)
+                                return (
+                                    <tr className={`hover my-3 ${item.status === 'VALID' ? 'bg-green-200' : item.status === 'FAILED' ? 'bg-red-200' : 'bg-yellow-200'}`}>
+                                        <td>{index + 1}</td>
+                                        <td>{ item.title}</td>
+                                        <td>{item.amount}</td>
+                                        <td>{item.status}</td>
+                                        <td>{item.transId}</td>
+                                        <td>{item.tranDate}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+
+
+                    
+                </div>
+            )}
+
+
+
 
         </div>
     )
