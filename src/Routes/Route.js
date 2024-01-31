@@ -57,6 +57,7 @@ import Resource from "../Pages/Resource/Resource";
 import Payment from "../Pages/Student/Payment/Payment";
 import Transaction from "../Pages/Admin/Transaction/Transaction";
 import UpcomingCourse from "../Pages/Admin/UpcomingCourse/UpcomingCourse";
+import History from "../Pages/Student/History";
 
 
 
@@ -317,6 +318,11 @@ export const router = createBrowserRouter([
           {
             path: "payment",
             element: <Payment />,
+          },
+
+          {
+            path: "history",
+            element: <History />,
           },
 
         ]

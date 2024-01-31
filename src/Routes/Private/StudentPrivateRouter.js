@@ -1,5 +1,5 @@
 
-import { faBars, faBook, faBookOpenReader, faCaretDown, faCaretUp, faChalkboardUser, faCircleInfo, faMoneyBill1Wave, faPersonChalkboard, faSquareCaretDown, faSquareCaretUp, faUserGroup } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBook, faBookOpenReader, faCaretDown, faCaretUp, faChalkboardUser, faCircleInfo, faClockRotateLeft, faMoneyBill1Wave, faPersonChalkboard, faSquareCaretDown, faSquareCaretUp, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
@@ -35,6 +35,7 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
                     <Link onClick={() => setOpen(!open)} to='/student-dashboard/batch-paper-solution' className='block p-3 hover:underline'><FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /> Batch (Paper Solution)</Link>
                     <Link onClick={() => setOpen(!open)} to='/student-dashboard/all-exam' className='block p-3 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' /> All Exam</Link>
                     <Link onClick={() => setOpen(!open)} to='/student-dashboard/assignment' className='block p-3 hover:underline'> <FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' /> Assignment Help</Link>
+                    <Link onClick={() => setOpen(!open)} to='/student-dashboard/history' className='block p-3 hover:underline'> <FontAwesomeIcon icon={faClockRotateLeft} className='fas fa-lg me-4' /> History</Link>
                     <Link onClick={() => setOpen(!open)} to='/student-dashboard/payment' className='block p-3 hover:underline'> <FontAwesomeIcon icon={faMoneyBill1Wave} className='fas fa-lg me-4' />Payment</Link>
                 </div>
             </div>
@@ -47,6 +48,7 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
                     <Link to='/student-dashboard/batch-paper-solution' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /> Batch (Paper Solution)</Link>
                     <Link to='/student-dashboard/all-exam' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' /> All Exam</Link>
                     <Link to='/student-dashboard/assignment' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' /> Assignment Help</Link>
+                    <Link to='/student-dashboard/history' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faClockRotateLeft} className='fas fa-lg me-4' /> History</Link>
                     <Link to='/student-dashboard/payment' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faMoneyBill1Wave} className='fas fa-lg me-4' />Payment</Link>
                 </div>
                 <div className='col-span-12 md:col-span-10 my-10 p-3 mx-0'> <Outlet /></div>
