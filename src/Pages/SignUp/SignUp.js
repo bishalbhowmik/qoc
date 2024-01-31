@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { signupApi } from "../../Api/AuthApi";
 import { saveToken } from "../../Functions/AuthFunctions";
 import { connect } from "react-redux";
 import { AUTHENTICATED } from "../../Redux/ActionTypes";
+import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
 
 
 const mapStateToProps = (state) => {
@@ -18,7 +19,23 @@ const mapStateToProps = (state) => {
 
 const SignUp = (props) => {
 
+
+  const [curriculum, setCurriculum] = useState([])
   const [message, setMessage] = useState('')
+  const [spin, setSpin] = useState(false);
+
+  useEffect(() => {
+    setSpin(true)
+    getAllCurriculumApi().then(data => {
+      setSpin(false)
+      if (data.error) {
+        setCurriculum([])
+      }
+      else {
+        setCurriculum([...data.data])
+      }
+    })
+  }, [])
 
   const {
     register,
@@ -32,7 +49,6 @@ const SignUp = (props) => {
 
     signupApi(data).then(data => {
 
-      console.log(data)
       if (data.error) throw data.message
 
       setMessage(data.message)
@@ -66,6 +82,23 @@ const SignUp = (props) => {
             </select>
             {errors.role && (
               <p className="text-red-400  text-xs mt-2">{errors.role?.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label">
+              <span className="label-text">Curriculum</span>
+            </label>
+
+            <select {...register("curriculumId", {
+              required: "This field is required",
+            })} name="curriculumId" id="" className="w-full select select-bordered">
+
+              <option value="">Select</option>
+              {curriculum.map((item, index) => <option value={item._id}>{item.curriculum}</option>)}
+            </select>
+            {errors.curriculumId && (
+              <p className="text-red-400  text-xs mt-2">{errors.curriculumId?.message}</p>
             )}
           </div>
 
@@ -151,7 +184,7 @@ const SignUp = (props) => {
           <button className="btn btn-accent w-full text-white">SignUp</button>
 
           <div className='my-4 text-center text-red-500'>{message}</div>
-          
+
 
           <h3 className="text-sm mt-4 w-[90%] text-center">
             Already have an account?{" "}

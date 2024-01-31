@@ -25,9 +25,12 @@ export const StudentSubject = (props) => {
 
     useEffect(() => {
 
+        // const subject = useState()
+
         if (location.state) {
 
             const { subject } = location.state
+
             setSpin(true)
             getASubjectsApi(subject._id).then(data => {
                 if (data.error) throw data.message

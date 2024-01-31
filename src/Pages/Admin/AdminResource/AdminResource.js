@@ -138,10 +138,6 @@ export const AdminResource = (props) => {
   return (
     <div>
 
-      <div className="bg-red-800 p-3 text-center my-10 text-xl">
-        <span className="text-white rounded">Resource</span>
-      </div>
-
       <div>
 
         <div className="my-10 ">

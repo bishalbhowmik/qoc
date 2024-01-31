@@ -39,3 +39,16 @@ export const getAllStudent = async () => {
 
     return data
 }
+
+
+export const getAllActivityApi = async (id) => {
+
+    let data = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/student/activity/' + id, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
+        }
+    }).then(data => data.data)
+
+    return data
+}

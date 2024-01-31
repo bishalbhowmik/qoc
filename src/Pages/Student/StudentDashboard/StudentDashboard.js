@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
-import { getAStudent, updateStudent } from '../../../Api/Student/StudentApi'
+import { getAStudent, getAllActivityApi, updateStudent } from '../../../Api/Student/StudentApi'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarCheck, faHandsClapping, faMoneyBill1, faMoneyBillTransfer, faSackDollar } from '@fortawesome/free-solid-svg-icons'
 import { getFocusApi } from '../../../Api/Admin/FocusApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
 import { getTransactionApi } from '../../../Api/Student/PaymentApi'
+import { Link } from 'react-router-dom'
 
 
 
@@ -32,7 +33,10 @@ export const StudentDashboard = (props) => {
   })
   const [spin, setSpin] = useState(false)
   const [focus, setFocus] = useState([])
-  const [transaction, setTransaction] = useState([])
+  const [batches, setBatches] = useState([])
+  const [upcoming, setUpcoming] = useState([])
+  const [assignments, setAssignments] = useState([])
+  const [exam, setExam] = useState([])
   const [curriculum, setCurriculum] = useState([])
 
   useEffect(() => {
@@ -45,7 +49,7 @@ export const StudentDashboard = (props) => {
       setCurriculum([...data.data])
 
     }).catch(err => {
-      console.log(err)
+      window.alert(err)
     })
 
     getAStudent(props.decodedToken._id).then(data => {
@@ -74,9 +78,13 @@ export const StudentDashboard = (props) => {
     }).catch(err => { })
 
 
-    getTransactionApi(props.decodedToken._id).then(data => {
+    getAllActivityApi(props.decodedToken._id).then(data => {
+      console.log(data)
       if (data.error) throw data.message
-      setTransaction([...data.data])
+      setAssignments([...data.data.postedAssignment])
+      setBatches([...data.data.batches])
+      setExam([...data.data.submittedExam])
+      setUpcoming([...data.data.upcomingCourse])
     }).catch(err => {
       console.log(err)
     })
@@ -132,9 +140,26 @@ export const StudentDashboard = (props) => {
 
         <div className=' col-span-full md:col-span-3'>
 
+
+
           <div className='mb-10'>
-            <div className='text-2xl font-bold mb-5 border-b'>To Do</div>
-            {focus.length === 0 ? <div></div> : focus.map(item => {
+            <div className='text-xl font-bold mb-5 border-b pb-3'>Upcoming Course</div>
+            {upcoming.length === 0 ? <div>We are working!</div> : upcoming.map(item => {
+              return (
+                <div className='flex mb-4 cursor-pointer'>
+                  <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                  <div>
+                    <span>{item.title}</span> <br />
+                    <span className='text-sm'>Starting on ~ {new Date(item.startDate).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className='mb-10'>
+            <div className='text-xl font-bold mb-5 border-b pb-3'>To Do</div>
+            {focus.length === 0 ? <div>No task to do!</div> : focus.map(item => {
               return (
                 <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.attachment)}>
                   <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
@@ -148,29 +173,70 @@ export const StudentDashboard = (props) => {
 
           </div>
 
-          <div className='mb-10'>
-            <div className='text-2xl font-bold mb-5 border-b'>Recent Transactions</div>
-            {transaction.length === 0 ? <div></div> : transaction.map(item => {
-              return (
-                <div className='flex mb-4 cursor-pointer'>
-                  <div className='mt-3'><FontAwesomeIcon icon={faSackDollar} className='fas fa-xl text-rose-700 me-6' /></div>
-                  <div>
-                    <span><strong className='font-bold'>{item.status}</strong> - {item.amount} BDT</span> <br />
-                    <span className='text-sm'>{item.tranDate}</span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
         </div>
 
-        {spin && <Spinner />}
+        {/* {spin && <Spinner />} */}
 
       </div>
 
 
-      {/* <form onSubmit={e => handleSubmit(e)} action="">
+
+      <div className='grid grid-cols-1 md:grid-cols-12 gap-14'>
+        <div className='col-span-full md:col-span-9'>
+          <div className='text-xl font-bold mb-5 border-b pb-3'>Recent Activities</div>
+
+
+          <div className='grid grid-cols-1 md:grid-cols-12 gap-14'>
+
+            <div className='col-span-full md:col-span-6'>
+              <div className='font-bold my-3'>Exams</div>
+              {exam.length === 0 ? <div>No exam found</div> : exam.map(item => {
+                return (
+                  <div className='flex mb-4 cursor-pointer'>
+                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                    <div>
+                      <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div className='col-span-full md:col-span-6'>
+              <div className='font-bold my-3'>Assignment</div>
+              {assignments.length === 0 ? <div>No assignment found</div> : assignments.map(item => {
+                return (
+                  <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
+                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                    <div>
+                      <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <div className='col-span-full md:col-span-3'>
+          <div className='text-xl font-bold mb-5 border-b pb-3'>Running Batch</div>
+          {batches.length === 0 ? <div>No assignment found</div> : batches.map(item => {
+            return (
+              <div className='flex mb-4 cursor-pointer'>
+                <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                <div>
+                  <Link to={'my-batch/dashboard/' + item._id} className=''> <span className=''>{item.title}</span></Link> <br />
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+{/* 
+      <form onSubmit={e => handleSubmit(e)} action="">
         <div className='my-3'>
           <label className='label label-text' htmlFor="">Username</label>
           <input className='input input-bordered' type="text" name='username' disabled value={state.username} />

@@ -5,10 +5,11 @@ export const getApprovedTuitionApi = async (id) => {
     let data = axios.get(process.env.REACT_APP_BACKEND_URL + '/api/tuition/approved', {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
-            
+            'Access-Control-Allow-Origin': '*',
+            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),            
 
-        }
+        },
+        
     }).then(data => data.data)
 
     return data

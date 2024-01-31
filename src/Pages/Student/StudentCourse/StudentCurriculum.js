@@ -13,19 +13,23 @@ export const StudentCurriculum = (props) => {
     const [subject, setSubject] = useState([])
     const [outlines, setOutlines] = useState([])
     const [spin, setSpin] = useState(false)
+    const [curriculumName, setCurriculumName] = useState('')
 
     useEffect(() => {
 
         if (location.state) {
 
             const { curriculum } = location.state
+
             setSpin(true)
-            getACurriculumApi(curriculum._id).then(data => {
+            getACurriculumApi(curriculum).then(data => {
+                console.log(data)
                 if (data.error) throw data.message
                 setOutlines([...data.data.outlines])
+                setCurriculumName(data.data.curriculum)
             })
 
-            getSubjectsApi(curriculum._id).then(data => {
+            getSubjectsApi(curriculum).then(data => {
                 
                 setSpin(false)
                 if (data.error) throw data.message
@@ -61,8 +65,8 @@ export const StudentCurriculum = (props) => {
     return (
         <div>
 
-            <div className='my-10 text-2xl text-center font-bold'>Curriculum - {location.state ? location.state.curriculum.curriculum : ''}</div>
-            <div className='mb-16 text-center'><span className='bg-red-800 p-3 text-white rounded'>ALL SUBJECTS</span></div>
+            <div className='my-10 text-2xl text-center font-bold'>{curriculumName}</div>
+            <div  className='bg-red-800 p-3 mb-16 text-xl text-center'><span className='text-white rounded'>ALL SUBJECTS</span></div>
 
 
 
@@ -71,7 +75,7 @@ export const StudentCurriculum = (props) => {
             </div>
 
             <div>
-                <div className='text-center my-20'><span className='bg-red-800 p-3 text-white rounded'>OUTLINES</span></div>
+                <div className='bg-red-800 p-3 my-16 text-xl text-center'><span className='text-white rounded'>OUTLINES</span></div>
 
                 <div className='flex flex-col md:flex-row'>
                     {outlines.map(item => {
