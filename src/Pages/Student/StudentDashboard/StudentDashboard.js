@@ -175,7 +175,7 @@ export const StudentDashboard = (props) => {
 
         </div>
 
-        {/* {spin && <Spinner />} */}
+        {spin && <Spinner />}
 
       </div>
 

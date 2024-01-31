@@ -34,10 +34,10 @@ export const Chat = (props) => {
     }
 
     return (
-        <div>
+        <div className='text-sm'>
 
             {show &&
-                <div className='fixed bottom-0 right-0 me-10 mb-32 glass w-3/4 md:w-2/4 lg:w-1.5/4 h-2/3 rounded-lg'>
+                <div className='fixed bottom-0 right-0 me-10 mb-32 glass w-11/12 md:w-2/4 lg:w-1/4 h-2/3 rounded-lg'>
 
                     <div className='p-5 text-center font-bold'>Ask to QOC AI Assistant</div>
 
@@ -71,9 +71,9 @@ export const Chat = (props) => {
 
 
 
-            <div onClick={() => setShow(!show)} className='fixed bottom-0 right-0 me-10 mb-10 shadow-2xl cursor-pointer'>
+            <div onClick={() => setShow(!show)} className='fixed bottom-0 right-0 me-10 mb-10 shadow-2xl cursor-pointer rounded-full'>
 
-                <div className='border rounded-full shadow-2xl p-3 bg-red-800 text-white'>
+                <div className='shadow-2xl p-3 text-white border rounded-full bg-red-800'>
                     <FontAwesomeIcon className='fas fa-2xl' icon={faRobot} />
                 </div>
                 {/* <div className='font-bold ms-1'>Chat AI</div> */}

@@ -12,6 +12,12 @@ import { connect } from "react-redux";
 import Chat from "../Chat/Chat";
 import MessengerChat from "../Chat/MessengerChat";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 const mapStateToProps = (state) => {
   console.log(state);
   return {
@@ -20,6 +26,10 @@ const mapStateToProps = (state) => {
 }
 
 function Home() {
+
+  let size = window.innerWidth
+
+
   return (
     <div>
       {/* Second Section */}
@@ -32,12 +42,12 @@ function Home() {
           <div id={styles.second_left} className="mt-10">
             <h1
               id={styles.second_header}
-              className="text-[3vw] font-semibold my-5"
+              className="text-[3vw] font-semibold my-5 text-black"
             >
               Together we achieve <br />
               Educational <span className="text-[#AC1823]">excellence</span>
             </h1>
-            <p id={styles.second_info} className="mb-5 text-[1.1vw] lg:w-[80%]">
+            <p id={styles.second_info} className="mb-5 text-[1.1vw] lg:w-[80%] text-black">
               Over 11 international curriculum, like Cambridge, Edexcel, NCTB
               and lot more. Moreover, we offer free exams, vast study materials
               and expert teachers that can truly enrich your path of learning.
@@ -109,7 +119,7 @@ function Home() {
 
       {/* Fourth Section */}
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 container mx-auto pb-10">
+      <section className="grid grid-cols-1 lg:grid-cols-2 container mx-auto pb-10 px-5 md:px-0">
         <div className="flex items-center justify-center hidden lg:block">
           <img className="w-[573px] " src={banner2} alt="banner-2" />
         </div>
@@ -180,7 +190,7 @@ function Home() {
 
       {/* Fifth Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] py-20">
+      <section className="bg-[#F1F1F1] h-[auto] py-20 px-5 md:px-0">
         <div className="container mx-auto">
           <div className="pt-10">
             <h1 className="text-[36px] font-semibold mb-3">
@@ -195,7 +205,7 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-            <div className="mx-auto w-[60%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
+            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
               <img className="w-[100%] rounded-lg" src={person} alt="person" />
               <div className="flex flex-col gap-y-3 items-center justify-center">
                 <h1 className="text-3xl">Jhon Doe</h1>
@@ -212,7 +222,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="mx-auto w-[60%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
+            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
               <img className="w-[100%] rounded-lg" src={person} alt="person" />
               <div className="flex flex-col gap-y-3 items-center justify-center">
                 <h1 className="text-3xl">Jhon Doe</h1>
@@ -229,7 +239,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="mx-auto w-[60%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
+            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
               <img className="w-[100%] rounded-lg" src={person} alt="person" />
               <div className="flex flex-col gap-y-3 items-center justify-center">
                 <h1 className="text-3xl">Jhon Doe</h1>
@@ -288,7 +298,7 @@ function Home() {
 
       {/* Seventh Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] pt-10 pb-20">
+      <section className="bg-[#F1F1F1] h-[auto] pt-10 pb-20 px-5 md:px-0">
         <div className="container mx-auto">
           <div className="pt-10">
             <h1 className="text-[36px] font-semibold mb-3">
@@ -302,106 +312,140 @@ function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-44 md:gap-y-40">
-            <div className="relative w-[60%] md:w-[90%] mx-auto">
-              <img className="w-[100%] h-[315px]" src={course} alt="course" />
+          <div className="">
 
-              <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                <button className="bg-[#FFB800] text-white px-4 py-2 text-xs rounded-lg mb-3">
-                  DEVELOPMENT
-                </button>{" "}
-                <br />
-                <span className="flex items-center justify-between mb-2">
-                  <span className="text-[#FFB800] text-[12px]">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <span className="text-[#928787] ml-2">5.4(199)</span>
-                  </span>
-                  <span className="text-[12px] text-[#9b1620] font-semibold ">
-                    02 september, 2023
-                  </span>
-                </span>
-                <h3 className="text-[16px] font-semibold mb-3">
-                  The Complete Web Developer Guideline 2023
-                </h3>
-                <p className="mb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                </p>
-                <button className="text-[#ac1823]">
-                  Book Now <i className="fa-solid fa-chevron-right" />
-                </button>
-              </div>
-            </div>
-            <div className="relative w-[60%] md:w-[90%] mx-auto">
-              <img className="w-[100%] h-[315px]" src={course} alt="course" />
+            <div style={{ width: "80vw", margin: 'auto auto' }} className="">
+              <Swiper
+                slidesPerView={size > 766 ? 3 : 1}
+                spaceBetween={20}
+                slidesPerGroup={size > 766 ? 3 : 1}
+                loop={true}
+                loopFillGroupWithBlank={true}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+                className="mySwiper"
+                style={{height: '50vh'}}
 
-              <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                <button className="bg-[#FFB800] text-white px-4 py-2 text-xs rounded-lg mb-3">
-                  DEVELOPMENT
-                </button>{" "}
-                <br />
-                <span className="flex items-center justify-between mb-2">
-                  <span className="text-[#FFB800] text-[12px]">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <span className="text-[#928787] ml-2">5.4(199)</span>
-                  </span>
-                  <span className="text-[12px] text-[#9b1620] font-semibold ">
-                    02 september, 2023
-                  </span>
-                </span>
-                <h3 className="text-[16px] font-semibold mb-3">
-                  The Complete Web Developer Guideline 2023
-                </h3>
-                <p className="mb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                </p>
-                <button className="text-[#ac1823]">
-                  Book Now <i className="fa-solid fa-chevron-right" />
-                </button>
-              </div>
-            </div>
-            <div className="relative w-[60%] md:w-[90%] mx-auto">
-              <img className="w-[100%] h-[315px]" src={course} alt="course" />
+              >
 
-              <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                <button className="bg-[#FFB800] text-white px-4 py-2 text-xs rounded-lg mb-3">
-                  DEVELOPMENT
-                </button>{" "}
-                <br />
-                <span className="flex items-center justify-between mb-2">
-                  <span className="text-[#FFB800] text-[12px]">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <span className="text-[#928787] ml-2">5.4(199)</span>
-                  </span>
-                  <span className="text-[12px] text-[#9b1620] font-semibold ">
-                    02 september, 2023
-                  </span>
-                </span>
-                <h3 className="text-[16px] font-semibold mb-3">
-                  The Complete Web Developer Guideline 2023
-                </h3>
-                <p className="mb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                </p>
-                <button className="text-[#ac1823]">
-                  Book Now <i className="fa-solid fa-chevron-right" />
-                </button>
-              </div>
+                <SwiperSlide className="">
+                  <div className="relative w-[90%] md:w-[90%] mx-auto">
+                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
+
+                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                        DEVELOPMENT
+                      </button>{" "}
+                      <br />
+                      <span className="flex items-center justify-between mb-2">
+                        <span className="text-[#FFB800] text-[12px]">
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <span className="text-[#928787] ml-2">5.4(199)</span>
+                        </span>
+                        <span className="text-[12px] text-[#9b1620] font-semibold ">
+                          02 september, 2023
+                        </span>
+                      </span>
+                      <h3 className="text-[16px] font-semibold mb-3 text-black">
+                        The Complete Web Developer Guideline 2023
+                      </h3>
+                      <p className="mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                      </p>
+                      <button className="text-[#ac1823]">
+                        Book Now <i className="fa-solid fa-chevron-right" />
+                      </button>
+                    </div>
+
+                  </div>
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <div className="relative w-[85%] md:w-[90%] mx-auto">
+                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
+
+                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                        DEVELOPMENT
+                      </button>{" "}
+                      <br />
+                      <span className="flex items-center justify-between mb-2">
+                        <span className="text-[#FFB800] text-[12px]">
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <span className="text-[#928787] ml-2">5.4(199)</span>
+                        </span>
+                        <span className="text-[12px] text-[#9b1620] font-semibold ">
+                          02 september, 2023
+                        </span>
+                      </span>
+                      <h3 className="text-[16px] font-semibold mb-3 text-black">
+                        The Complete Web Developer Guideline 2023
+                      </h3>
+                      <p className="mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                      </p>
+                      <button className="text-[#ac1823]">
+                        Book Now <i className="fa-solid fa-chevron-right" />
+                      </button>
+                    </div>
+                  </div>
+
+                </SwiperSlide>
+
+                <SwiperSlide>
+                  <div className="relative w-[85%] md:w-[90%] mx-auto">
+                    <img className="w-[100%] h-[315px]" src={course} alt="course" />
+
+                    <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                      <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                        DEVELOPMENT
+                      </button>{" "}
+                      <br />
+                      <span className="flex items-center justify-between mb-2">
+                        <span className="text-[#FFB800] text-[12px]">
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <i className="fa-solid fa-star mr-[2px]" />
+                          <span className="text-[#928787] ml-2">5.4(199)</span>
+                        </span>
+                        <span className="text-[12px] text-[#9b1620] font-semibold ">
+                          02 september, 2023
+                        </span>
+                      </span>
+                      <h3 className="text-[16px] font-semibold mb-3 text-black">
+                        The Complete Web Developer Guideline 2023
+                      </h3>
+                      <p className="mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                      </p>
+                      <button className="text-[#ac1823]">
+                        Book Now <i className="fa-solid fa-chevron-right" />
+                      </button>
+                    </div>
+                  </div>
+
+                </SwiperSlide>
+
+              </Swiper>
             </div>
+            
+
           </div>
 
-          <div className="flex items-center justify-center mt-52">
+          <div className="flex items-center justify-center mt-5">
             <button className="bg-normal hover:bg-normalH text-white text-sm w-48 h-11 rounded-full">
               View All Courses
             </button>
@@ -500,9 +544,9 @@ function Home() {
 
       {/* Ninth Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] py-24">
+      <section className="bg-[#F1F1F1] h-[auto] py-24 px-5 md:px-0">
         <div className="container mx-auto">
-          <div className="w-[70%]">
+          <div className="w-[100%]">
             <h1 className="text-[36px] font-semibold mb-3">
               What Our <span className="text-[#ac1823]">Student Say</span>
             </h1>
@@ -515,7 +559,7 @@ function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-16">
-            <div className="w-[70%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+            <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
               <h1 className="text-lg md:text-2xl text-center mb-2">
                 “Love mathematics because of Besnik Academy”
               </h1>
@@ -543,7 +587,7 @@ function Home() {
               </div>
             </div>
 
-            <div className="w-[70%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+            <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
               <h1 className="text-lg md:text-2xl text-center mb-2">
                 “Love mathematics because of Besnik Academy”
               </h1>
@@ -604,7 +648,7 @@ function Home() {
 
 
       <MessengerChat />
-      {/* <Chat /> */}
+      <Chat />
     </div>
   );
 }
