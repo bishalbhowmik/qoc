@@ -9,18 +9,32 @@ import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
 import { getTransactionApi } from '../../../Api/Student/PaymentApi'
 import { Link } from 'react-router-dom'
-import { Bar, Line } from 'react-chartjs-2';
+
 import {
   Chart as ChartJS,
-  BarElement,
-  Legend,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
   Title,
   Tooltip,
+  Legend,
+  ArcElement
 } from 'chart.js';
+import { Doughnut, Line } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
+
+
 
 const mapStateToProps = (state) => {
 
@@ -47,6 +61,9 @@ export const StudentDashboard = (props) => {
   const [upcoming, setUpcoming] = useState([])
   const [assignments, setAssignments] = useState([])
   const [exam, setExam] = useState([])
+  const [mcqData, setMcqData] = useState([])
+  const [bqData, setBqData] = useState([])
+  const [scoreData, setScoreData] = useState([])
   const [curriculum, setCurriculum] = useState([])
 
   useEffect(() => {
@@ -82,14 +99,14 @@ export const StudentDashboard = (props) => {
 
 
     getFocusApi({}).then((data) => {
-      setSpin(false)
+      
       if (data.error) throw data.message;
       setFocus(data.data.filter(item => new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
     }).catch(err => { })
 
 
     getAllActivityApi(props.decodedToken._id).then(data => {
-      console.log(data)
+      setSpin(false)
       if (data.error) throw data.message
       setAssignments([...data.data.postedAssignment])
       setBatches([...data.data.batches])
@@ -100,6 +117,26 @@ export const StudentDashboard = (props) => {
     })
 
   }, [props])
+
+
+  exam.map(item => {
+    // item.participants.map(i => i.studentId === props.decodedToken._id ? i.broadQuestionMarks : null)
+    item.participants.map(i => {
+      if (i.studentId === props.decodedToken._id) {
+
+        // console.log('broad: ',i.broadQuestionMarks)
+        // console.log('Mcq',i.mcqMarks)
+        // console.log('Total: ',((i.broadQuestionMarks + i.mcqMarks) / item.totalMarks) * 100)
+
+        bqData.push(i.broadQuestionMarks ? i.broadQuestionMarks: 0)
+
+        mcqData.push(i.mcqMarks ? i.mcqMarks : 0)
+
+        let total = (((i.broadQuestionMarks + i.mcqMarks) / item.totalMarks) * 100)
+        scoreData.push( total ? total : 0)
+      }
+    })
+  })
 
 
   const handleChange = (e) => {
@@ -127,18 +164,9 @@ export const StudentDashboard = (props) => {
 
 
 
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-    PointElement,
-    LineElement,
 
-    
-  );
+
+
 
   const options = {
     responsive: true,
@@ -148,20 +176,65 @@ export const StudentDashboard = (props) => {
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+        text: 'Chart.js Line Chart',
       },
     },
   };
 
-  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-  const data = {
-    labels,
+
+  const barData2 = {
+
+    labels: exam.map(item => item.exam),
+
     datasets: [
       {
-        label: 'Dataset 1',
-        data: labels.map(() => [1,2,3,4,5,6,7,, 100, 400]),
+        label: 'MCQ',
+        data: mcqData,
+        borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+      {
+        label: 'Broad Question',
+        data: bqData,
+        borderColor: 'rgb(255, 159, 64)',
+        backgroundColor: 'rgba(255, 159, 64, 1)',
+      },
+      {
+        label: 'Score (%)',
+        data: scoreData,
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      },
+    ],
+  };
+
+
+
+  const piData = {
+
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+        ],
+        borderWidth: 1,
       },
     ],
   };
@@ -177,8 +250,13 @@ export const StudentDashboard = (props) => {
 
 
 
+
+
+
   return (
     <div className=''>
+
+
 
       <div>
         <div className=' text-slate-400'>Hello {props.decodedToken.username}! Welcome back <FontAwesomeIcon icon={faHandsClapping} className=' text-amber-600' /></div>
@@ -199,9 +277,22 @@ export const StudentDashboard = (props) => {
           </div>
 
 
-          <div className=''>
-            <Line options={options} data={data} />;
+          <div className='grid grid-cols-1 md:grid-cols-12 gap-4 mt-16'>
+            <div className='col-span-full md:col-span-4 border rounded-lg shadow p-3'>
+              <Doughnut data={piData} />
+            </div>
+            <div className='col-span-full md:col-span-8 border rounded-lg shadow p-3'>
+              <Line options={options} data={barData2} />
+
+            </div>
           </div>
+
+
+          {/* <div className='flex justify-center w-full'>
+            <div className='w-2/5 mt-10'>
+              
+            </div>
+          </div> */}
         </div>
 
 

@@ -34,6 +34,7 @@ export const ExamDetails = (props) => {
 
 
     const viewScript = (item) => {
+        console.log('Script: ', item)
         document.getElementById('viewScriptModal').showModal()
         setSelectedItem(item)
         setState({
@@ -149,7 +150,8 @@ export const ExamDetails = (props) => {
 
 
                         <div>
-                            <object title={selectedItem.script.name} className='h-screen w-full' data={imageBuffer} width="100%"></object>
+                            {selectedItem.script && <object title={selectedItem.script.name} className='h-screen w-full' data={imageBuffer} width="100%"></object>}
+                            
                         </div>
 
                     </div> : ''}

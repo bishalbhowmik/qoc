@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { timeCheck } from '../../../Functions/CustomFunction'
 import { getAExamMarksApi, submitExamApi } from '../../../Api/Student/ExamApi'
+import Spinner from '../../../components/Spinner'
 
 export const StudentExam = (props) => {
 
     const [mcq, setMcq] = useState([])
+    const [spin, setSpin] = useState([])
     const [broadQuestion, setBroadQuestion] = useState([])
     const [examForm, setExamForm] = useState({})
     const { state } = useLocation()
@@ -19,12 +21,12 @@ export const StudentExam = (props) => {
     useEffect(() => {
 
         if (state) {
+            setSpin(true)
             getAExamMarksApi(state.exam._id, props.decodedToken._id).then(data => {
+                setSpin(false)
                 if (data.error) throw data.message
                 setExamStatus(true)
                 setExamScript(data.data)
-                console.log(data.data)
-
             })
                 .catch(err => {
                     // window.alert(err)
@@ -36,12 +38,12 @@ export const StudentExam = (props) => {
 
 
     if (!state) {
-        return <div className='text-center text-2xl font-bold mt-10'>No Exam Found</div>
+        return <div className='text-center text-2xl font-bold mt-10'>No Exam Found {spin && <Spinner />} </div>
     }
 
 
     if (new Date() < new Date(state.exam.startTime)) {
-        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString()} <br /> Time Remaining: {remainingTime}</div>
+        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString()} <br /> Time Remaining: {remainingTime} {spin && <Spinner />}</div>
     }
 
     if (examStatus) {
@@ -70,11 +72,13 @@ export const StudentExam = (props) => {
                 </div> : ''}
             </div>
 
+            {spin && <Spinner />}
+
         </div>
     }
 
     if (new Date() > new Date(state.exam.endTime)) {
-        return <div className='text-center text-2xl font-bold mt-10'>Exam has been ended</div>
+        return <div className='text-center text-2xl font-bold mt-10'>Exam has been ended {spin && <Spinner />}</div>
     }
 
     const handleChange = (e) => {
@@ -141,7 +145,7 @@ export const StudentExam = (props) => {
 
 
     setInterval(() => {
-        if(state && state.exam){
+        if (state && state.exam) {
             // console.log(state.exam.endTime)
             let now = new Date()
             let end = new Date(state.exam.endTime)
@@ -177,7 +181,7 @@ export const StudentExam = (props) => {
                                 return (
                                     <div className='my-3 card card-body glass shadow-lg'>
                                         {index + 1}. {item.question} <br />
-                                        {item.options.map((option, index) => <div>
+                                        {item.options && item.options.map((option, index) => <div>
 
                                             <div className='flex items-center'>
                                                 <input onChange={e => handleChange(e)} value={option.option} name={item._id} className='radio' type='radio' />
@@ -226,6 +230,9 @@ export const StudentExam = (props) => {
                 </form>
 
             </div>
+
+
+            {spin && <Spinner />}
 
         </div>
     )

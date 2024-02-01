@@ -34,6 +34,7 @@ export const Transaction = (props) => {
                     <td>{item.userInfo.email}</td>
                     <td>{item.userInfo.role}</td>
                     <td>{item.amount}</td>
+                    <td>{item.title}</td>
                     <td>{item.status}</td>
                     <td>{item.transId}</td>
                     <td>{item.tranDate}</td>
@@ -58,6 +59,7 @@ export const Transaction = (props) => {
                         <th>Email</th>
                         <th>Role</th>
                         <th>Amount</th>
+                        <th>Reason</th>
                         <th>Status</th>
                         <th>Trans ID</th>
                         <th>Date</th>
