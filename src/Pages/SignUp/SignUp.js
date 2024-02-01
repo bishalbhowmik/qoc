@@ -9,6 +9,8 @@ import { saveToken } from "../../Functions/AuthFunctions";
 import { connect } from "react-redux";
 import { AUTHENTICATED } from "../../Redux/ActionTypes";
 import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandsClapping } from "@fortawesome/free-solid-svg-icons";
 
 
 const mapStateToProps = (state) => {
@@ -62,8 +64,15 @@ const SignUp = (props) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-[100vh] bg-[#FAF8FF]">
-      <div className="shadow-lg p-10 rounded w-[500px] signup">
+    <div className=" flex flex-col items-center justify-center py-16 ">
+
+      <div className='text-center mb-10'>
+        <FontAwesomeIcon className='text-amber-500 fa-2xl mb-5' icon={faHandsClapping} />
+        <div className='text-4xl font-semibold mb-5'>Welcome To QOC</div>
+        <div style={{ letterSpacing: "1px" }}>Create an account</div>
+      </div>
+
+      <div className="shadow-lg p-5 md:p-10 rounded signup">
         <form onSubmit={handleSubmit(handleSignup)}>
           <h2 className="text-black text-center text-3xl">Sign Up</h2>
 
@@ -193,11 +202,11 @@ const SignUp = (props) => {
             </Link>
           </h3>
 
-          <div className="flex flex-col w-full border-opacity-50">
+          {/* <div className="flex flex-col w-full border-opacity-50">
             <div className="divider">OR</div>
-          </div>
+          </div> */}
         </form>
-        <button className="btn btn-outline w-full">Continue With Google</button>
+        {/* <button className="btn btn-outline w-full">Continue With Google</button> */}
       </div>
     </div>
   );

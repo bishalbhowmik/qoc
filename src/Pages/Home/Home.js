@@ -11,6 +11,8 @@ import styles from "./Home.module.css";
 import { connect } from "react-redux";
 import Chat from "../Chat/Chat";
 import MessengerChat from "../Chat/MessengerChat";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 
 const mapStateToProps = (state) => {
@@ -22,7 +24,25 @@ const mapStateToProps = (state) => {
 
 function Home() {
 
-  let size = window.innerWidth
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
 
 
   return (
@@ -305,47 +325,173 @@ function Home() {
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex
             </p>
+
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
-            <div className="relative w-[90%] md:w-[90%] mx-auto">
-              <img className="w-[100%] h-[315px]" src={course} alt="course" />
+          <Carousel
+            swipeable={true}
+            // draggable={true}
+            showDots={true}
+            responsive={responsive}
+            // ssr={true} // means to render carousel on server-side.
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={3000}
+          // keyBoardControl={true}
+          // customTransition="all .5"
+          // transitionDuration={500}
+          >
+            <div style={{ height: "500px" }}>
+              <div className="relative w-[90%] md:w-[90%] mx-auto">
+                <img className="w-[100%] h-[315px]" src={course} alt="course" />
 
-              <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
-                <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
-                  DEVELOPMENT
-                </button>{" "}
-                <br />
-                <span className="flex items-center justify-between mb-2">
-                  <span className="text-[#FFB800] text-[12px]">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <span className="text-[#928787] ml-2">5.4(199)</span>
+                <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                  <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                    DEVELOPMENTT
+                  </button>{" "}
+                  <br />
+                  <span className="flex items-center justify-between mb-2">
+                    <span className="text-[#FFB800] text-[12px]">
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <span className="text-[#928787] ml-2">5.4(199)</span>
+                    </span>
+                    <span className="text-[12px] text-[#9b1620] font-semibold ">
+                      02 september, 2023
+                    </span>
                   </span>
-                  <span className="text-[12px] text-[#9b1620] font-semibold ">
-                    02 september, 2023
-                  </span>
-                </span>
-                <h3 className="text-[16px] font-semibold mb-3 text-black">
-                  The Complete Web Developer Guideline 2023
-                </h3>
-                <p className="mb-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
-                </p>
-                <button className="text-[#ac1823]">
-                  Book Now <i className="fa-solid fa-chevron-right" />
-                </button>
+                  <h3 className="text-[16px] font-semibold mb-3 text-black">
+                    The Complete Web Developer Guideline 2023
+                  </h3>
+                  <p className="mb-3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                  </p>
+                  <button className="text-[#ac1823]">
+                    Book Now <i className="fa-solid fa-chevron-right" />
+                  </button>
+                </div>
+
               </div>
-
             </div>
 
-          </div>
+            <div>
+              <div className="relative w-[90%] md:w-[90%] mx-auto">
+                <img className="w-[100%] h-[315px]" src={course} alt="course" />
 
-          <div className="flex items-center justify-center mt-5">
+                <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                  <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                    DEVELOPMENT
+                  </button>{" "}
+                  <br />
+                  <span className="flex items-center justify-between mb-2">
+                    <span className="text-[#FFB800] text-[12px]">
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <span className="text-[#928787] ml-2">5.4(199)</span>
+                    </span>
+                    <span className="text-[12px] text-[#9b1620] font-semibold ">
+                      02 september, 2023
+                    </span>
+                  </span>
+                  <h3 className="text-[16px] font-semibold mb-3 text-black">
+                    The Complete Web Developer Guideline 2023
+                  </h3>
+                  <p className="mb-3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                  </p>
+                  <button className="text-[#ac1823]">
+                    Book Now <i className="fa-solid fa-chevron-right" />
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+              <div className="relative w-[90%] md:w-[90%] mx-auto">
+                <img className="w-[100%] h-[315px]" src={course} alt="course" />
+
+                <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                  <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                    DEVELOPMENT
+                  </button>{" "}
+                  <br />
+                  <span className="flex items-center justify-between mb-2">
+                    <span className="text-[#FFB800] text-[12px]">
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <span className="text-[#928787] ml-2">5.4(199)</span>
+                    </span>
+                    <span className="text-[12px] text-[#9b1620] font-semibold ">
+                      02 september, 2023
+                    </span>
+                  </span>
+                  <h3 className="text-[16px] font-semibold mb-3 text-black">
+                    The Complete Web Developer Guideline 2023
+                  </h3>
+                  <p className="mb-3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                  </p>
+                  <button className="text-[#ac1823]">
+                    Book Now <i className="fa-solid fa-chevron-right" />
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+              <div className="relative w-[90%] md:w-[90%] mx-auto">
+                <img className="w-[100%] h-[315px]" src={course} alt="course" />
+
+                <div className="w-[90%] h-[auto] bg-white rounded-lg absolute top-[50%] left-[5%] p-6">
+                  <button className="bg-red-800 text-white px-4 py-2 text-xs rounded-lg mb-3">
+                    DEVELOPMENT
+                  </button>{" "}
+                  <br />
+                  <span className="flex items-center justify-between mb-2">
+                    <span className="text-[#FFB800] text-[12px]">
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <i className="fa-solid fa-star mr-[2px]" />
+                      <span className="text-[#928787] ml-2">5.4(199)</span>
+                    </span>
+                    <span className="text-[12px] text-[#9b1620] font-semibold ">
+                      02 september, 2023
+                    </span>
+                  </span>
+                  <h3 className="text-[16px] font-semibold mb-3 text-black">
+                    The Complete Web Developer Guideline 2023
+                  </h3>
+                  <p className="mb-3">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
+                  </p>
+                  <button className="text-[#ac1823]">
+                    Book Now <i className="fa-solid fa-chevron-right" />
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </Carousel>;
+
+
+
+
+
+          <div className="flex items-center justify-center mt-0 md:mt-5">
             <button className="bg-normal hover:bg-normalH text-white text-sm w-48 h-11 rounded-full">
               View All Courses
             </button>
@@ -458,90 +604,122 @@ function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-16">
-            <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
-              <h1 className="text-lg md:text-2xl text-center mb-2">
-                “Love mathematics because of Besnik Academy”
-              </h1>
-              <p className="text-sm md:text-[17px] text-center">
-                "The curriculum was directly targeted toward applied techniques
-                with high profile projects – real datasets with industry
-                partners. It helped me achieve my career transition goal."
-              </p>
+          <div className="">
 
-              <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
-                <div>
-                  <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
-                  <p className="text-xs xl:text-sm">Ontario, Canada</p>
-                  <span className="text-[#FFB800] text-[10px] xl:text-xs ">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                  </span>
-                </div>
-                <div>
-                  <img src={student} alt="student" />
+            <Carousel
+              swipeable={true}
+              draggable={true}
+              showDots={true}
+              responsive={responsive}
+              // ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={true }
+              autoPlaySpeed={3000}
+              // keyBoardControl={true}
+              // customTransition="all .5"
+              // transitionDuration={500}
+              // containerClass="carousel-container"
+              // removeArrowOnDeviceType={["tablet", "mobile"]}
+              // deviceType={this.props.deviceType}
+              // dotListClass="custom-dot-list-style"
+              // itemClass="carousel-item-padding-40-px"
+            >
+              <div className="px-2" style={{height: "350px"}}>
+                <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+                  <h1 className="text-lg md:text-2xl text-center mb-2">
+                    “Love mathematics because of Besnik Academy”
+                  </h1>
+                  <p className="text-sm md:text-[17px] text-center">
+                    "The curriculum was directly targeted toward applied techniques
+                    with high profile projects – real datasets with industry
+                    partners. It helped me achieve my career transition goal."
+                  </p>
+
+                  <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
+                    <div>
+                      <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
+                      <p className="text-xs xl:text-sm">Ontario, Canada</p>
+                      <span className="text-[#FFB800] text-[10px] xl:text-xs ">
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                      </span>
+                    </div>
+                    <div>
+                      <img src={student} alt="student" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
-              <h1 className="text-lg md:text-2xl text-center mb-2">
-                “Love mathematics because of Besnik Academy”
-              </h1>
-              <p className="text-sm md:text-[17px] text-center">
-                "The curriculum was directly targeted toward applied techniques
-                with high profile projects – real datasets with industry
-                partners. It helped me achieve my career transition goal."
-              </p>
+              <div className="px-2" >
+                <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+                  <h1 className="text-lg md:text-2xl text-center mb-2">
+                    “Love mathematics because of Besnik Academy”
+                  </h1>
+                  <p className="text-sm md:text-[17px] text-center">
+                    "The curriculum was directly targeted toward applied techniques
+                    with high profile projects – real datasets with industry
+                    partners. It helped me achieve my career transition goal."
+                  </p>
 
-              <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
-                <div>
-                  <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
-                  <p className="text-xs xl:text-sm">Ontario, Canada</p>
-                  <span className="text-[#FFB800] text-[10px] xl:text-xs ">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                  </span>
-                </div>
-                <div>
-                  <img src={student} alt="student" />
-                </div>
-              </div>
-            </div>
-
-            <div className="w-[70%] md:w-[90%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
-              <h1 className="text-lg md:text-2xl text-center mb-2">
-                “Love mathematics because of Besnik Academy”
-              </h1>
-              <p className="text-sm md:text-[17px] text-center">
-                "The curriculum was directly targeted toward applied techniques
-                with high profile projects – real datasets with industry
-                partners. It helped me achieve my career transition goal."
-              </p>
-
-              <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
-                <div>
-                  <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
-                  <p className="text-xs xl:text-sm">Ontario, Canada</p>
-                  <span className="text-[#FFB800] text-[10px] xl:text-xs ">
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                    <i className="fa-solid fa-star mr-[2px]" />
-                  </span>
-                </div>
-                <div>
-                  <img src={student} alt="student" />
+                  <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
+                    <div>
+                      <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
+                      <p className="text-xs xl:text-sm">Ontario, Canada</p>
+                      <span className="text-[#FFB800] text-[10px] xl:text-xs ">
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                      </span>
+                    </div>
+                    <div>
+                      <img src={student} alt="student" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div className="px-2 " >
+                <div className="w-[70%] md:w-[90%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+                  <h1 className="text-lg md:text-2xl text-center mb-2">
+                    “Love mathematics because of Besnik Academy”
+                  </h1>
+                  <p className="text-sm md:text-[17px] text-center">
+                    "The curriculum was directly targeted toward applied techniques
+                    with high profile projects – real datasets with industry
+                    partners. It helped me achieve my career transition goal."
+                  </p>
+
+                  <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
+                    <div>
+                      <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
+                      <p className="text-xs xl:text-sm">Ontario, Canada</p>
+                      <span className="text-[#FFB800] text-[10px] xl:text-xs ">
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                      </span>
+                    </div>
+                    <div>
+                      <img src={student} alt="student" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+       
+            </Carousel>;
+            
+
+            
+
+            
           </div>
         </div>
       </section>

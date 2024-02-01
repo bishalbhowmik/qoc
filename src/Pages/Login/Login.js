@@ -5,6 +5,8 @@ import '../SignUp/SignUp';
 import { signinApi } from '../../Api/AuthApi';
 import { saveToken } from '../../Functions/AuthFunctions';
 import Spinner from '../../components/Spinner'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClapperboard, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -31,8 +33,16 @@ const Login = () => {
 
     }
     return (
-        <div className='flex flex-col items-center justify-center h-[100vh] bg-[#FAF8FF]'>
-            <div className='shadow-lg p-10 rounded w-[500px] signup'>
+        <div className='flex flex-col items-center justify-center py-16'>
+            
+            <div className='text-center mb-10'>
+                <FontAwesomeIcon className='text-amber-500 fa-2xl mb-5' icon={faHandsClapping} />
+                <div className='text-4xl font-semibold mb-5'>Welcome Back</div>
+                <div style={{letterSpacing: "1px"}}>Please login to access your account</div>
+            </div>
+            
+            
+            <div className='shadow-lg p-5 md:p-10 rounded signup'>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <h2 className='text-black text-center text-3xl'>Login</h2>
                     <div>
@@ -69,13 +79,13 @@ const Login = () => {
 
                     <h3 className='text-sm mt-4 w-[90%] text-center'>New to QOC Learning? <Link to='/signup' className='text-secondary'>Create New Account</Link></h3>
 
-                    <div className="flex flex-col w-full border-opacity-50">
+                    {/* <div className="flex flex-col w-full border-opacity-50">
 
                         <div className="divider">OR</div>
-                    </div>
+                    </div> */}
 
                 </form>
-                <button className='btn btn-outline w-full'>Continue With Google</button>
+                {/* <button className='btn btn-outline w-full'>Continue With Google</button> */}
             </div>
 
             {spin ? <Spinner /> : ''}

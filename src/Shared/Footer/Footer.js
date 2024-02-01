@@ -63,8 +63,8 @@ const Footer = () => {
       </div>
       <div>
         <p>Copyright © 2023 QOC</p>
-        <div className="flex h-full align-middle">
-          <div className="h-auto justify-center align-middle mt-2 me-2">Developed & Maintained by </div>
+        <div className="flex h-full items-center">
+          <div className="h-auto justify-center align-middle me-2">Developed & Maintained by </div>
           <div>
             <a target="_blank" className="font-bold" href="https://www.facebook.com/koncepttechofficial"><img className="w-10" src="/logo.svg" alt="" /></a>
           </div>

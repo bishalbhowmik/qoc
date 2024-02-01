@@ -9,8 +9,18 @@ import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
 import { getTransactionApi } from '../../../Api/Student/PaymentApi'
 import { Link } from 'react-router-dom'
-
-
+import { Bar, Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  BarElement,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+} from 'chart.js';
 
 const mapStateToProps = (state) => {
 
@@ -115,6 +125,58 @@ export const StudentDashboard = (props) => {
   }
 
 
+
+
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    PointElement,
+    LineElement,
+
+    
+  );
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+  };
+
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: labels.map(() => [1,2,3,4,5,6,7,, 100, 400]),
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  };
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className=''>
 
@@ -134,6 +196,11 @@ export const StudentDashboard = (props) => {
 
               <div><button className='btn'>Get started</button></div>
             </div>
+          </div>
+
+
+          <div className=''>
+            <Line options={options} data={data} />;
           </div>
         </div>
 
@@ -235,7 +302,7 @@ export const StudentDashboard = (props) => {
         </div>
       </div>
 
-{/* 
+      {/* 
       <form onSubmit={e => handleSubmit(e)} action="">
         <div className='my-3'>
           <label className='label label-text' htmlFor="">Username</label>
