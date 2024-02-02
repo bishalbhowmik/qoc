@@ -58,6 +58,7 @@ import Payment from "../Pages/Student/Payment/Payment";
 import Transaction from "../Pages/Admin/Transaction/Transaction";
 import UpcomingCourse from "../Pages/Admin/UpcomingCourse/UpcomingCourse";
 import History from "../Pages/Student/History";
+import TeacherPayment from "../Pages/Teacher/TeacherPayment/TeacherPayment";
 
 
 
@@ -243,6 +244,10 @@ export const router = createBrowserRouter([
           {
             path: "batch/dashboard/:batchId",
             element: <TeacherBatchDashboard />,
+          },
+          {
+            path: "payment",
+            element: <TeacherPayment />,
           },
 
 
