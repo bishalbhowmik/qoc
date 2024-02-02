@@ -37,7 +37,7 @@ export const History = (props) => {
         setSpin(true)
 
         getAllActivityApi(props.decodedToken._id).then(data => {
-            console.log(data)
+            setSpin(false)
             if (data.error) throw data.message
             setAssignments([...data.data.postedAssignment])
             setExam([...data.data.submittedExam])
@@ -186,6 +186,7 @@ export const History = (props) => {
 
 
 
+            {spin && <Spinner />}
 
         </div>
     )

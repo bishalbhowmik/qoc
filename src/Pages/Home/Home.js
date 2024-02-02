@@ -485,7 +485,7 @@ function Home() {
 
               </div>
             </div>
-          </Carousel>;
+          </Carousel>
 
 
 
@@ -624,8 +624,8 @@ function Home() {
               // dotListClass="custom-dot-list-style"
               // itemClass="carousel-item-padding-40-px"
             >
-              <div className="px-2" style={{height: "350px"}}>
-                <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+              <div className="px-2" style={{height: "400px"}}>
+                <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
                   <h1 className="text-lg md:text-2xl text-center mb-2">
                     “Love mathematics because of Besnik Academy”
                   </h1>
@@ -654,8 +654,8 @@ function Home() {
                 </div>
               </div>
 
-              <div className="px-2" >
-                <div className="w-[80%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+              <div className="px-2" style={{ height: "400px" }}>
+                <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
                   <h1 className="text-lg md:text-2xl text-center mb-2">
                     “Love mathematics because of Besnik Academy”
                   </h1>
@@ -684,8 +684,8 @@ function Home() {
                 </div>
               </div>
 
-              <div className="px-2 " >
-                <div className="w-[70%] md:w-[90%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+              <div className="px-2" style={{ height: "400px" }}>
+                <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
                   <h1 className="text-lg md:text-2xl text-center mb-2">
                     “Love mathematics because of Besnik Academy”
                   </h1>
@@ -713,8 +713,9 @@ function Home() {
                   </div>
                 </div>
               </div>
+
        
-            </Carousel>;
+            </Carousel>
             
 
             

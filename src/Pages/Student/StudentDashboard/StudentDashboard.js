@@ -99,7 +99,7 @@ export const StudentDashboard = (props) => {
 
 
     getFocusApi({}).then((data) => {
-      
+
       if (data.error) throw data.message;
       setFocus(data.data.filter(item => new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
     }).catch(err => { })
@@ -128,12 +128,12 @@ export const StudentDashboard = (props) => {
         // console.log('Mcq',i.mcqMarks)
         // console.log('Total: ',((i.broadQuestionMarks + i.mcqMarks) / item.totalMarks) * 100)
 
-        bqData.push(i.broadQuestionMarks ? i.broadQuestionMarks: 0)
+        bqData.push(i.broadQuestionMarks ? i.broadQuestionMarks : 0)
 
         mcqData.push(i.mcqMarks ? i.mcqMarks : 0)
 
         let total = (((i.broadQuestionMarks + i.mcqMarks) / item.totalMarks) * 100)
-        scoreData.push( total ? total : 0)
+        scoreData.push(total ? total : 0)
       }
     })
   })
@@ -348,28 +348,34 @@ export const StudentDashboard = (props) => {
 
             <div className='col-span-full md:col-span-6'>
               <div className='font-bold my-3'>Exams</div>
-              {exam.length === 0 ? <div>No exam found</div> : exam.map(item => {
-                return (
-                  <div className='flex mb-4 cursor-pointer'>
-                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                    <div>
-                      <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
+              {exam.length === 0 ? <div>No exam found</div> : exam.map((item, index) => {
+
+                if (index < 5) {
+                  return (
+                    <div className='flex mb-4 cursor-pointer'>
+                      <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                      <div>
+                        <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
+                      </div>
                     </div>
-                  </div>
-                )
+                  )
+                }
+
               })}
             </div>
             <div className='col-span-full md:col-span-6'>
               <div className='font-bold my-3'>Assignment</div>
-              {assignments.length === 0 ? <div>No assignment found</div> : assignments.map(item => {
-                return (
-                  <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
-                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                    <div>
-                      <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
+              {assignments.length === 0 ? <div>No assignment found</div> : assignments.map((item, index) => {
+                if (index < 5) {
+                  return (
+                    <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
+                      <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                      <div>
+                        <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
+                      </div>
                     </div>
-                  </div>
-                )
+                  )
+                }
               })}
             </div>
 
