@@ -11,13 +11,13 @@ export const Payment = (props) => {
 
 
     const createCoursePayment = () => {
+
         createCoursePaymentApi({ studentId: props.decodedToken._id }).then(data => {
             console.log(data)
-            if (data.data.status === 'SUCCESS') {
-                window.location.replace(data.data.GatewayPageURL)
+            if (!data.error) {
+                window.location.replace(data.data.bkashURL)
             }
             else {
-
                 window.alert(data.message)
             }
         })
@@ -26,8 +26,10 @@ export const Payment = (props) => {
     const buyAssignmentPremium = () => {
 
         createAssignmentPaymentApi({ studentId: props.decodedToken._id }).then(data => {
-            if (data.data.status === 'SUCCESS') {
-                window.location.replace(data.data.GatewayPageURL)
+
+            // console.log(data)
+            if (!data.error) {
+                window.location.replace(data.data.bkashURL)
             }
             else {
                 window.alert(data.message)
@@ -52,7 +54,7 @@ export const Payment = (props) => {
                         <li>Find Tution</li>
                     </ul>
                     <Link to='/student-dashboard/curriculum' state={{ curriculum: props.decodedToken.curriculumId }}> <button class="btn-primary">Get Started</button></Link>
-                   
+
                 </div>
 
 
@@ -65,7 +67,7 @@ export const Payment = (props) => {
                         <li>Get Daily Focus</li>
                         <li>Find Tution</li>
                     </ul>
-                    <button onClick={createCoursePayment}  class="btn-primary">Get Started</button>
+                    <button onClick={createCoursePayment} class="btn-primary">Get Started</button>
                 </div>
 
 
@@ -82,7 +84,7 @@ export const Payment = (props) => {
                     <button onClick={buyAssignmentPremium} class="btn-primary">Get Started</button>
                 </div>
 
-                
+
 
                 <div class="pricing-box pricing-box-bg-image text-center">
                     <h5>Batch</h5>
@@ -96,10 +98,10 @@ export const Payment = (props) => {
                     <Link to='/student-dashboard/batch'><button class="btn-primary">Get Started</button></Link>
                 </div>
 
-                
+
             </div>
 
-            
+
 
         </div>
     )

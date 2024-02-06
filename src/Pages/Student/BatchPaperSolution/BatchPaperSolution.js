@@ -28,8 +28,8 @@ export const BatchPaperSolution = (props) => {
   const joinBatch = (batchId) => {
 
     joiningBatchApi({ batchId: batchId, studentId: props.decodedToken._id }).then(data => {
-      if (data.data.status === 'SUCCESS') {
-        window.location.replace(data.data.GatewayPageURL)
+      if (!data.error) {
+        window.location.replace(data.data.bkashURL)
       }
       else {
         window.alert(data.message)

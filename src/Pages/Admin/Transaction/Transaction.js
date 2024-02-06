@@ -27,7 +27,7 @@ export const Transaction = (props) => {
         transactionShow = transaction.map((item, index) => {
 
             return (
-                <tr className={`hover my-3 ${item.status==='VALID' ? 'bg-green-200' : item.status==='FAILED' ? 'bg-red-200' : 'bg-yellow-200'}`}>
+                <tr className={`hover my-3 ${item.status==='success' ? 'bg-green-200' : item.status==='failed' ? 'bg-red-200' : 'bg-yellow-200'}`}>
                     <td>{index + 1}</td>
                     <td>{item.userInfo.username}</td>
                     <td>{item.userInfo.mobile}</td>
@@ -36,7 +36,7 @@ export const Transaction = (props) => {
                     <td>{item.amount}</td>
                     <td>{item.title}</td>
                     <td>{item.status}</td>
-                    <td>{item.transId}</td>
+                    <td>{item.paymentID}</td>
                     <td>{item.tranDate}</td>
                 </tr>
             )
@@ -61,7 +61,7 @@ export const Transaction = (props) => {
                         <th>Amount</th>
                         <th>Reason</th>
                         <th>Status</th>
-                        <th>Trans ID</th>
+                        <th>Payment ID</th>
                         <th>Date</th>
 
                     </tr>

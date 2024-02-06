@@ -136,7 +136,7 @@ export const History = (props) => {
                                 <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
                                 <div>
                                     <span className='italic'>Posted a new assignment ~ <span className=''>{item.title} </span></span> <br />
-                                    <div className='italic text-sm'> - { item.answer.length === 0 ? 'Not solved yet' : 'solved'}</div>
+                                    <div className='italic text-sm'> - {item.answer.length === 0 ? 'Not solved yet' : 'solved'}</div>
                                 </div>
 
 
@@ -146,7 +146,7 @@ export const History = (props) => {
                 </div>
             )}
 
-        
+
             {tab === 'transactions' && (
                 <div>
 
@@ -166,12 +166,12 @@ export const History = (props) => {
                             {transactions.length === 0 ? <div>No transaction found</div> : transactions.map((item, index) => {
                                 console.log(item)
                                 return (
-                                    <tr className={`hover my-3 ${item.status === 'VALID' ? 'bg-green-200' : item.status === 'FAILED' ? 'bg-red-200' : 'bg-yellow-200'}`}>
+                                    <tr className={`hover my-3 ${item.status === 'success' ? 'bg-green-200' : item.status === 'fail' ? 'bg-red-200' : 'bg-yellow-200'}`}>
                                         <td>{index + 1}</td>
-                                        <td>{ item.title}</td>
+                                        <td>{item.title}</td>
                                         <td>{item.amount}</td>
                                         <td>{item.status}</td>
-                                        <td>{item.transId}</td>
+                                        <td>{item.paymentID}</td>
                                         <td>{item.tranDate}</td>
                                     </tr>
                                 )
@@ -180,7 +180,7 @@ export const History = (props) => {
                     </table>
 
 
-                    
+
                 </div>
             )}
 

@@ -71,6 +71,7 @@ export const AssignmentHelp = (props) => {
   const buyPremium = () => {
 
     createAssignmentPaymentApi({ studentId: props.decodedToken._id }).then(data => {
+      console.log(data)
       if (data.data.status === 'SUCCESS') {
         window.location.replace(data.data.GatewayPageURL)
       }
