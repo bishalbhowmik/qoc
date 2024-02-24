@@ -101,3 +101,20 @@ export const addSubjectMaterialsApi = async (subjectId, obj) => {
     return subject
 
 }
+
+
+export const deleteSubjectApi = async (id) => {
+
+    let subject = axios.delete(process.env.REACT_APP_BACKEND_URL + '/api/subject/' + id, {
+
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+            // "Content-Type": 'multipart/form-data'
+        }
+
+    }).then(data => data.data)
+
+
+    return subject
+
+}

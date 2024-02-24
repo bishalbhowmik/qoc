@@ -68,3 +68,20 @@ export const addCurriculumOutlineApi = async (curriculumId, obj) => {
     return curriculum
 
 }
+
+
+export const deleteCurriculumApi = async (id) => {
+
+    let curriculum = axios.delete(process.env.REACT_APP_BACKEND_URL + '/api/curriculum/' + id, {
+
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+            // "Content-Type": 'multipart/form-data'
+        }
+
+    }).then(data => data.data)
+
+
+    return curriculum
+
+}

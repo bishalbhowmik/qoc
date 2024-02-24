@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { addChapterMaterialsApi, createChapterApi, getChaptersApi, removeChapterMaterialsApi } from "../../../Api/Admin/ChapterApi";
-import { createModuleApi, getModulesApi } from "../../../Api/Admin/ModuleApi";
+import { createModuleApi, deleteModuleApi, getModulesApi } from "../../../Api/Admin/ModuleApi";
 import bufferToDataUrl from "buffer-to-data-url";
 import { getAllExamApi, uploadSolutionApi } from "../../../Api/Admin/ExamApi";
 import { showFile } from "../../../Functions/CustomFunction";
@@ -106,17 +106,32 @@ export const Chapter = (props) => {
       });
   };
 
+
+  const deleteModule = id => {
+
+    if (window.confirm("Along with module deletion, all data (Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+      deleteModuleApi(id).then(data => {
+        window.alert(data.message)
+      })
+    }
+
+
+  }
+
   let moduleShow;
   if (modules.length === 0) {
     moduleShow = <div className="p-40 text-center col-span-12">Not module found</div>;
   } else {
     moduleShow = modules.map((item, index) => {
       return (
-        <Link to="/admin-dashboard/module" state={{ module: item }} className="card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white ">
-          <div className="card-body items-center">
-            <div className="card-title text-center">{item.module}</div>
-          </div>
-        </Link>
+        <div className="card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white">
+          <Link to="/admin-dashboard/module" state={{ module: item }}>
+            <div className="card-body items-center">
+              <div className="card-title text-center">{item.module}</div>
+            </div>
+          </Link>
+          <div onClick={() => deleteModule(item._id)} className="btn btn-ghost">delete Module</div>
+        </div>
       );
     });
   }

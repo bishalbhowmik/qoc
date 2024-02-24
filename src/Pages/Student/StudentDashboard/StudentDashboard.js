@@ -399,44 +399,6 @@ export const StudentDashboard = (props) => {
         </div>
       </div>
 
-      {/* 
-      <form onSubmit={e => handleSubmit(e)} action="">
-        <div className='my-3'>
-          <label className='label label-text' htmlFor="">Username</label>
-          <input className='input input-bordered' type="text" name='username' disabled value={state.username} />
-        </div>
-
-        <div className='my-3'>
-          <label className='label label-text' htmlFor="">email</label>
-          <input className='input input-bordered' type="text" name='email' disabled value={state.email} />
-        </div>
-
-
-        <div className='my-3'>
-          <label className='label label-text' htmlFor="">mobile</label>
-          <input className='input input-bordered' type="text" name='mobile' onChange={e => handleChange(e)} value={state.mobile} />
-        </div>
-
-
-        <div className='my-3'>
-          <label className='label label-text' htmlFor="">country</label>
-          <input className='input input-bordered' type="text" name='country' onChange={e => handleChange(e)} value={state.country} />
-        </div>
-
-        <div className='my-3'>
-          <span className="label label-text">Curriculum: </span>
-          <select required className='select select-bordered' name="curriculumId" onChange={(e) => handleChange(e)} >
-            <option value="">Select</option>
-
-            {curriculum.map(item => <option key={Math.random()} selected={item._id === state.curriculumId} value={item._id}>{item.curriculum}</option>)}
-
-          </select>
-        </div>
-
-        <button type='submit' className="btn">Update</button>
-
-      </form> */}
-
     </div>
   )
 }

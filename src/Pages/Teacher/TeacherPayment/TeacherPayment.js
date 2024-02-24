@@ -35,8 +35,8 @@ export const TeacherPayment = (props) => {
                     <ul class="features-list">
                         <li>Access to All Free Course</li>
                         <li>Access to All Free Solution</li>
-                        <li></li>
                         <li>Get Tution</li>
+                        <li>--</li>
                     </ul>
                     <Link to='/teacher-dashboard/course'> <button class="btn-primary">Get Started</button></Link>
 

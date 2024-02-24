@@ -59,6 +59,7 @@ import Transaction from "../Pages/Admin/Transaction/Transaction";
 import UpcomingCourse from "../Pages/Admin/UpcomingCourse/UpcomingCourse";
 import History from "../Pages/Student/History";
 import TeacherPayment from "../Pages/Teacher/TeacherPayment/TeacherPayment";
+import RequestDemo from "../Pages/RerquestDemo/RequestDemo";
 
 
 
@@ -89,6 +90,11 @@ export const router = createBrowserRouter([
       },
 
       {
+        path: "/request-demo",
+        element: <RequestDemo />
+      },
+
+      {
         path: "/find-tuition",
         element: <FindTuition />,
       },
@@ -103,7 +109,7 @@ export const router = createBrowserRouter([
         element: <Cancel />,
       },
       {
-        path: "/fail",
+        path: "/failure",
         element: <Fail />,
       },
       {

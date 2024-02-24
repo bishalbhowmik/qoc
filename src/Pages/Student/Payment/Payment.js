@@ -61,7 +61,7 @@ export const Payment = (props) => {
                 <div class="pricing-box pricing-box-bg-image3 text-center">
                     <h5>Course</h5>
                     <p class="price"><sup>৳</sup>2500<sub>/mo</sub></p>
-                    <ul class="features-list">
+                    <ul class="features-list" style={{ fontWeight: "bold" }}>
                         <li>Access to All Course</li>
                         <li>Get Paper Solution</li>
                         <li>Get Daily Focus</li>
@@ -72,7 +72,7 @@ export const Payment = (props) => {
 
 
 
-                <div class="pricing-box pricing-box-bg-image2 text-center">
+                <div class="pricing-box pricing-box-bg-image2 text-center text-white">
                     <h5>Assignment</h5>
                     <p class="price"><sup> ৳</sup>500<sub>/mo</sub></p>
                     <ul class="features-list">

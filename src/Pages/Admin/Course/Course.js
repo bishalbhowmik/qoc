@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
+import { addCurriculumApi, deleteCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { Link } from 'react-router-dom'
 import Spinner from '../../../components/Spinner'
 
@@ -64,6 +64,19 @@ export const Course = (props) => {
   }
 
 
+  const deleteCurriculum = id => {
+    
+        if (window.confirm("Along with curriculum deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+
+        deleteCurriculumApi(id).then(data => {
+            // console.log(data)
+            window.alert(data.message)
+        })
+        }
+    
+  }
+
+
   let curriculumShow
   if (curriculum.length === 0) {
     curriculumShow = <div className='p-40 text-center col-span-12'>Not Curriculum found</div>
@@ -71,11 +84,15 @@ export const Course = (props) => {
   else {
     curriculumShow = curriculum.map((item, index) => {
       return (
-        <Link to='/admin-dashboard/curriculum' state={{ curriculum: item }} className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
-          <div className="card-body items-center">
-            <div className="card-title text-center">{item.curriculum}</div>
-          </div>
-        </Link>
+        <div className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
+          <Link to='/admin-dashboard/curriculum' state={{ curriculum: item }} className=''>
+            <div className="card-body items-center">
+              <div className="card-title text-center">{item.curriculum}</div>
+            </div>
+          </Link>
+          {/* <div onClick={() => deleteCurriculum(item._id)} className="btn btn-ghost">delete Curriculum</div> */}
+        </div>
+        
       )
     })
   }

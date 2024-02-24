@@ -11,6 +11,7 @@ import { AUTHENTICATED } from "../../Redux/ActionTypes";
 import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandsClapping } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "../../components/Spinner";
 
 
 const mapStateToProps = (state) => {
@@ -88,6 +89,7 @@ const SignUp = (props) => {
               <option value="">Select</option>
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
+              {/* <option value="admin">Admin</option> */}
             </select>
             {errors.role && (
               <p className="text-red-400  text-xs mt-2">{errors.role?.message}</p>
@@ -208,6 +210,8 @@ const SignUp = (props) => {
         </form>
         {/* <button className="btn btn-outline w-full">Continue With Google</button> */}
       </div>
+
+      {spin && <Spinner />}
     </div>
   );
 };

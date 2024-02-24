@@ -10,6 +10,7 @@ import Spinner from "../../../components/Spinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { createFocusApi, getFocusApi, removeFocusApi, updateFocusApi } from "../../../Api/Admin/FocusApi";
+import { deleteChapterApi } from "../../../Api/Admin/ChapterApi";
 
 export const Subject = (props) => {
   const location = useLocation();
@@ -111,17 +112,31 @@ export const Subject = (props) => {
       });
   };
 
+  const deleteChapter = id => {
+    
+    if (window.confirm("Along with chapter deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+      deleteChapterApi(id).then(data => {
+        console.log(data)
+      window.alert(data.message)
+    })
+    }
+    
+  }
+  
   let chapterShow;
   if (chapter.length === 0) {
     chapterShow = <div className="p-40 text-center col-span-12">Not chapter found</div>;
   } else {
     chapterShow = chapter.map((item, index) => {
       return (
-        <Link to="/admin-dashboard/chapter" state={{ chapter: item }} className="card  col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white ">
-          <div className="card-body items-center">
-            <div className="card-title text-center">{item.chapter}</div>
-          </div>
-        </Link>
+        <div className="card  col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white">
+          <Link to="/admin-dashboard/chapter" state={{ chapter: item }}>
+            <div className="card-body items-center">
+              <div className="card-title text-center">{item.chapter}</div>
+            </div>
+          </Link>
+          <div onClick={() => deleteChapter(item._id)} className="btn btn-ghost">delete Chapter</div>
+        </div>
       );
     });
   }

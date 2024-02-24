@@ -70,6 +70,21 @@ export const addModuleMaterialsApi = async (moduleId, obj) => {
         }
     }).then(data => data.data)
 
+    return module
+
+}
+
+export const deleteModuleApi = async (id) => {
+
+    let module = axios.delete(process.env.REACT_APP_BACKEND_URL + '/api/module/' + id, {
+
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+            // "Content-Type": 'multipart/form-data'
+        }
+
+    }).then(data => data.data)
+
 
     return module
 

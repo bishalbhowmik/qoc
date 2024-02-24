@@ -13,6 +13,7 @@ import Chat from "../Chat/Chat";
 import MessengerChat from "../Chat/MessengerChat";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 
 const mapStateToProps = (state) => {
@@ -72,7 +73,7 @@ function Home() {
                 Get Started
               </button>
               <button className="bg-[#FBF1F2] text-[#92222A] font-semibold hover:bg-transparent   text-xs py-3 px-6 rounded-full border border-[#F7E8E9]">
-                Request Demo
+                <Link to={'/request-demo'}>Request Demo</Link>
               </button>
             </div>
           </div>

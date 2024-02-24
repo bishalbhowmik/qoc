@@ -7,13 +7,6 @@
 	box-sizing: border-box;
 }
 
-body {
-	/* background-color: #f6f5f7; */
-	font-family: 'Open Sans', sans-serif;
-	margin-bottom: 50px;
-}
-
-
 .text-center {
 	text-align: center;
 }
@@ -100,6 +93,7 @@ body {
 
 .pricing-box-bg-image1 .features-list li {
 	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
 }
 
 .pricing-box-bg-image1 .btn-primary {
@@ -120,6 +114,7 @@ body {
 
 .pricing-box-bg-image2 .features-list li {
 	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
 }
 
 .pricing-box-bg-image2 .btn-primary {
@@ -141,6 +136,7 @@ body {
 
 .pricing-box-bg-image3 .features-list li {
 	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
 }
 
 .pricing-box-bg-image3 .btn-primary {

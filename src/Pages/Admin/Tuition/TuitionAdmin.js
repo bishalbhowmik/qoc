@@ -71,16 +71,26 @@ export const TuitionAdmin = (props) => {
 
   tuitionShow = tuition.map((item, index) => {
     return (
-      <div className=' col-span-12 md:col-span-3  card bg-neutral text-neutral-content'>
-        <div className="card-body">
+      <div className='col-span-12 md:col-span-4 my-10 card border-x-8 hover:border-red-800 hover:shadow-lg'>
+          {/* ID: {item.tuitionNumber} <br />  */}
+          <div className="card-body text-sm">
+            <div className="card-title mb-4">Subject: {item.subject}</div>
+            <div><strong>Location:</strong>{item.location}</div>
+            <div><strong>Type:</strong>  {item.tuitionType}</div>
+            <div><strong>Gender:</strong>  {item.tutorGender}</div>
+            <div><strong>Language:</strong>  {item.language}</div>
+            <div><strong>Days:</strong>  {item.daysInWeek} per week</div>
+            <div><strong>Other Requirements:</strong>  {item.otherRequirements}</div>
+            <div className='mt-3'><strong>Salary:</strong>  {item.salary} BDT</div>
+            <div><strong>Time:</strong>  {item.time}</div>  
 
-          ID: {item.tuitionNumber} <br />
-          <div className="card-title">
-            Subject: {item.subject} <br />
+            <div className='flex mt-5'>
+            <button className='btn btn-success me-3 btn-sm' onClick={() => approve(item._id)}>{item.approved ? 'Approved' : 'Approve'}</button>
+            <button className='btn btn-warning btn-sm' onClick={() => assignTeacherModal(item)}>{item.confirmed ? 'Confirmed' : 'Assign Teacher'}</button>
+          </div>    
           </div>
-          <button className='btn btn-success ' onClick={() => approve(item._id)}>{item.approved ? 'Approved' : 'Approve'}</button>
-          <button className='btn btn-warning ' onClick={() => assignTeacherModal(item)}>{item.confirmed ? 'Confirmed' : 'Assign Teacher'}</button>
-        </div>
+
+          
 
       </div>
     )

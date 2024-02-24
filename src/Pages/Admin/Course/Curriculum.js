@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { createSubjectsApi, getSubjectsApi } from '../../../Api/Admin/SubjectApi'
+import { createSubjectsApi, deleteSubjectApi, getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import bufferToDataUrl from 'buffer-to-data-url'
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { showFile } from '../../../Functions/CustomFunction'
@@ -73,6 +73,17 @@ export const Curriculum = (props) => {
             })
     }
 
+    const deleteSubject = id => {
+    
+        if (window.confirm("Along with subject deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+        deleteSubjectApi(id).then(data => {
+            console.log(data)
+            window.alert(data.message)
+        })
+        }
+    
+  }
+
 
     let subjectShow
     if (subject.length === 0) {
@@ -81,11 +92,14 @@ export const Curriculum = (props) => {
     else {
         subjectShow = subject.map((item, index) => {
             return (
-                <Link to='/admin-dashboard/subject' state={{ subject: item }} className='card col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
-                    <div className="card-body items-center">
-                        <div className="card-title text-center">{item.subject}</div>
+                <div className='card col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                    <Link to='/admin-dashboard/subject' state={{ subject: item }}>
+                        <div className="card-body items-center">
+                            <div className="card-title text-center">{item.subject}</div>
                     </div>
-                </Link>
+                    </Link>
+                    <div onClick={() => deleteSubject(item._id)} className="btn btn-ghost">delete Chapter</div>
+                </div>
             )
         })
     }
