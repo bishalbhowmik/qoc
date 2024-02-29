@@ -1,27 +1,26 @@
+import { faCalendarCheck, faHandsClapping } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
-import { getAStudent, getAllActivityApi, updateStudent } from '../../../Api/Student/StudentApi'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarCheck, faHandsClapping, faMoneyBill1, faMoneyBillTransfer, faSackDollar } from '@fortawesome/free-solid-svg-icons'
 import { getFocusApi } from '../../../Api/Admin/FocusApi'
+import { getAStudent, getAllActivityApi } from '../../../Api/Student/StudentApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
-import { getTransactionApi } from '../../../Api/Student/PaymentApi'
-import { Link } from 'react-router-dom'
 
 import {
-  Chart as ChartJS,
+  ArcElement,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
-  Tooltip,
-  Legend,
-  ArcElement
-} from 'chart.js';
-import { Doughnut, Line } from 'react-chartjs-2';
+  Tooltip
+} from 'chart.js'
+import { Doughnut, Line } from 'react-chartjs-2'
 
 ChartJS.register(
   CategoryScale,
@@ -139,31 +138,27 @@ export const StudentDashboard = (props) => {
   })
 
 
-  const handleChange = (e) => {
+  // const handleChange = (e) => {
 
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+  //   setState({
+  //     ...state,
+  //     [e.target.name]: e.target.value
+  //   })
 
-  }
+  // }
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
 
-    e.preventDefault()
+  //   e.preventDefault()
 
-    updateStudent(props.decodedToken._id, state).then(data => {
-      console.log(data)
-    })
-      .catch(err => {
-        console.log(err)
-      })
+  //   updateStudent(props.decodedToken._id, state).then(data => {
+  //     console.log(data)
+  //   })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
 
-  }
-
-
-
-
+  // }
 
 
 
@@ -209,30 +204,47 @@ export const StudentDashboard = (props) => {
     ],
   };
 
+  const piDataArray = () => {
+
+    let worst = 0
+    let good = 0
+    let best = 0
+
+    for (let i in scoreData) {
+      if (scoreData[i] <= 50) {
+        worst = worst + 1;
+      }
+      else if (scoreData[i] > 50 && scoreData[i] <= 80) {
+        good = good + 1;
+      }
+      else {
+        best = best + 1;
+      }
+    }
+
+    return [worst, good, best];
+
+  }
 
 
   const piData = {
 
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: ['>=50%', '50% - 80%', '< 80%'],
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: 'Exam count: ',
+        data: piDataArray(),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
           'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+
         ],
         borderColor: [
           'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
           'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
+          'rgba(54, 162, 235, 1)',
+
         ],
         borderWidth: 1,
       },
