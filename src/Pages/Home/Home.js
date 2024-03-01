@@ -728,7 +728,7 @@ function Home() {
 
 
       <MessengerChat />
-      <Chat />
+      {/* <Chat /> */}
     </div>
   );
 }
