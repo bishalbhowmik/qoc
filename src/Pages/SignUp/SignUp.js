@@ -89,7 +89,7 @@ const SignUp = (props) => {
               <option value="">Select</option>
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
-              {/* <option value="admin">Admin</option> */}
+              <option value="admin">Admin</option>
             </select>
             {errors.role && (
               <p className="text-red-400  text-xs mt-2">{errors.role?.message}</p>
@@ -102,7 +102,7 @@ const SignUp = (props) => {
             </label>
 
             <select {...register("curriculumId", {
-              required: "This field is required",
+              // required: "This field is required",
             })} name="curriculumId" id="" className="w-full select select-bordered">
 
               <option value="">Select</option>
