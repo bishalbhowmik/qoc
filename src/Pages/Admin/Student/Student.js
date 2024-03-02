@@ -1,10 +1,10 @@
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import Spinner from '../../../components/Spinner'
-import { getAllStudent } from '../../../Api/Student/StudentApi'
 import { setAssignmentPremiumApi, setCoursePremiumApi } from '../../../Api/Admin/StudentApi'
+import { getAllStudent } from '../../../Api/Student/StudentApi'
+import Spinner from '../../../components/Spinner'
 
 
 export const Student = (props) => {
@@ -132,11 +132,11 @@ export const Student = (props) => {
 
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Course Premium:  </strong>{selected.course.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}</div>
 
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Course Premium End:  </strong>{selected.course.endTime && new Date(selected.course.endTime).toLocaleString()}</div>
+            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Course Premium End:  </strong>{selected.course.endTime && new Date(selected.course.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
 
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Assignment Premium:  </strong>{selected.assignment.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}</div>
 
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Assignment Premium End:  </strong>{selected.assignment.endTime && new Date(selected.assignment.endTime).toLocaleString()}</div>
+            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Assignment Premium End:  </strong>{selected.assignment.endTime && new Date(selected.assignment.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
 
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Use Times QOC Exam: </strong>{selected.useQocExam}</div>
 

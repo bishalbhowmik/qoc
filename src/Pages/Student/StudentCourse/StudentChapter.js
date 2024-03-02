@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { createModuleApi, getModulesApi } from '../../../Api/Admin/ModuleApi'
-import { showFile } from '../../../Functions/CustomFunction'
 import { getAChapterApi } from '../../../Api/Admin/ChapterApi'
 import { getAllExamApi } from '../../../Api/Admin/ExamApi'
-import bufferToDataUrl from 'buffer-to-data-url'
-import Spinner from '../../../components/Spinner'
 import { getFocusApi } from '../../../Api/Admin/FocusApi'
+import { getModulesApi } from '../../../Api/Admin/ModuleApi'
+import { showFile } from '../../../Functions/CustomFunction'
+import Spinner from '../../../components/Spinner'
 
 
 export const StudentChapter = (props) => {
@@ -120,7 +119,7 @@ export const StudentChapter = (props) => {
                         return (
                             <div className="card border hover:border-red-800 hover:shadow-lg card-body">
                                 <div className=" card-title">{item.title}</div>
-                                <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div>
+                                <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                                 <div className="my-5">{item.description}</div>
                                 <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
 

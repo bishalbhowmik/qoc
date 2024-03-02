@@ -6,7 +6,7 @@ const TopNav = () => {
     <main>
       <section
         id={styles.top_nav}
-        className="bg-normal h-12 text-[#F3E8E9] flex items-center justify-content"
+        className="bg-normal h-12 text-[#F3E8E9] flex items-center justify-content px-10"
       >
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-x-4 mr-5">

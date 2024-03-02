@@ -138,27 +138,7 @@ export const StudentDashboard = (props) => {
   })
 
 
-  // const handleChange = (e) => {
 
-  //   setState({
-  //     ...state,
-  //     [e.target.name]: e.target.value
-  //   })
-
-  // }
-
-  // const handleSubmit = (e) => {
-
-  //   e.preventDefault()
-
-  //   updateStudent(props.decodedToken._id, state).then(data => {
-  //     console.log(data)
-  //   })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-
-  // }
 
 
 
@@ -284,7 +264,7 @@ export const StudentDashboard = (props) => {
             <div className='grid grid-cols-1 md:grid-cols-5'>
               <div className='col-span-4 text-sm'>Lorem ipminus voluptatum necessitatibus, ducimus qui deleniti reiciendis. Expedita nam praesentium exercitationem incidunt vel provident, accusamus et laborum, ipsam atque ratione culpa fugit! Quos dignissimos aliquam blanditiis nulla.</div>
 
-              <div><button className='btn'>Get started</button></div>
+              <div className='md:text-center mt-5 md:mt-0'><button className='btn text-center btn-sm md:btn-md'>Get started</button></div>
             </div>
           </div>
 

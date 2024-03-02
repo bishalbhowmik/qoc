@@ -46,7 +46,7 @@ export const RequestDemo = (props) => {
             <div class="ag-courses-item_date-box text-sm">
               Class Time:
               <span class="ag-courses-item_date ms-3">
-                {new Date(item.classTime).toLocaleString()}
+                {new Date(item.classTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}
               </span>
               <div className=''><a href={item.classLink} target='_blank' className='btn btn-neutral ag_btn btn-sm mt-5' rel="noreferrer">Join Class</a></div>
             </div>

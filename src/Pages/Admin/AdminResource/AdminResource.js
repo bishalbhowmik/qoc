@@ -149,7 +149,7 @@ export const AdminResource = (props) => {
             return (
               <div className={`card border hover:border-red-800 hover:shadow-lg card-body ${(new Date() >= new Date(item.endTime) || new Date() <= new Date(item.startTime) ? ' bg-red-100' : '')}`}>
                 <div className=" card-title">{item.title}</div>
-                <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div>
+                <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                 <div className="my-5">{item.description}</div>
                 <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
 

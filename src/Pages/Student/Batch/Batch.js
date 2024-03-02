@@ -1,9 +1,9 @@
+import bufferToDataUrl from 'buffer-to-data-url'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getAllBatchApi, joiningBatchApi } from '../../../Api/Student/BatchApi'
 import { Link } from 'react-router-dom'
+import { getAllBatchApi, joiningBatchApi } from '../../../Api/Student/BatchApi'
 import Spinner from '../../../components/Spinner'
-import bufferToDataUrl from 'buffer-to-data-url'
 
 export const Batch = (props) => {
 
@@ -30,7 +30,7 @@ export const Batch = (props) => {
     joiningBatchApi({ batchId: batchId, studentId: props.decodedToken._id }).then(data => {
 
       console.log(data)
-      
+
       if (!data.error) {
         window.location.replace(data.data.bkashURL)
       }
@@ -60,7 +60,7 @@ export const Batch = (props) => {
               <div className='text-lg'><strong>Teacher: </strong>{item.teacherId.username}</div>
               <div className='text-lg'><strong>Email: </strong>{item.teacherId.email}</div>
               <div className='text-lg'><strong>Joining Fee: </strong>{item.fees} BDT</div>
-              <div className='text-lg'><strong>Start Date: </strong> {new Date(item.startDate).toLocaleString()}</div>
+              <div className='text-lg'><strong>Start Date: </strong> {new Date(item.startDate).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
               <div className='mt-5'>{item.description}</div>
             </div>
           </div>

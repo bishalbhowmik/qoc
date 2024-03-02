@@ -1,4 +1,8 @@
 import React from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import banner2 from "../../assets/banner-2.png";
 import banner from "../../assets/banner.png";
 import check from "../../assets/check.png";
@@ -7,13 +11,8 @@ import feature from "../../assets/feature.png";
 import tutor from "../../assets/find-tutor.png";
 import person from "../../assets/person.png";
 import student from "../../assets/student.png";
-import styles from "./Home.module.css";
-import { connect } from "react-redux";
-import Chat from "../Chat/Chat";
 import MessengerChat from "../Chat/MessengerChat";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import { Link } from "react-router-dom";
+import styles from "./Home.module.css";
 
 
 const mapStateToProps = (state) => {
@@ -47,13 +46,13 @@ function Home() {
 
 
   return (
-    <div>
+    <div className="">
       {/* Second Section */}
 
       <section id={styles.second} className="bg-[#FAF1F2] h-auto">
         <div
           id="second_container"
-          className="container mx-auto grid grid-cols-1 lg:grid-cols-2 p-5"
+          className="container mx-auto grid grid-cols-1 lg:grid-cols-2 py-5 md:px-10 px-5"
         >
           <div id={styles.second_left} className="mt-10">
             <h1
@@ -91,7 +90,7 @@ function Home() {
 
       {/* Third Section */}
       <section>
-        <div className="container mx-auto grid-cols-2 gap-y-4 grid lg:grid-cols-4 gap-[2px] my-20 rounded-lg">
+        <div className="container mx-auto grid-cols-2 gap-y-4 grid lg:grid-cols-4 gap-[2px] my-20 rounded-lg md:px-10 px-5">
           <div className="flex items-center justify-center gap-x-4 shadow-lg h-36">
             <span className="bg-[#F4F4F4] flex items-center justify-center w-[50px] h-[50px] rounded-full text-[#AC1823]">
               <i className="fa-solid fa-graduation-cap text-2xl" />
@@ -135,7 +134,7 @@ function Home() {
 
       {/* Fourth Section */}
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 container mx-auto pb-10 px-5 md:px-0">
+      <section className="grid grid-cols-1 lg:grid-cols-2 container mx-auto pb-10 md:px-10 px-5">
         <div className="flex items-center justify-center hidden lg:block">
           <img className="w-[573px] " src={banner2} alt="banner-2" />
         </div>
@@ -206,7 +205,7 @@ function Home() {
 
       {/* Fifth Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] py-20 px-5 md:px-0">
+      <section className="bg-[#F1F1F1] h-[auto] py-20 md:px-10 px-5">
         <div className="container mx-auto">
           <div className="pt-10">
             <h1 className="text-[36px] font-semibold mb-3">
@@ -284,7 +283,7 @@ function Home() {
       {/* Sixth Section */}
 
       <section className="h-[400px] lg:h-[600px] flex justify-center items-center">
-        <div className="bg-normal text-white container mx-auto grid grid-cols-1 lg:grid-cols-3 rounded-lg pt-1 pb-16 lg:pb-0">
+        <div className="bg-normal text-white container mx-auto grid grid-cols-1 lg:grid-cols-3 rounded-lg pt-1 pb-16 lg:pb-0 md:px-10 px-5">
           <div className="lg:col-span-2 ml-10 mt-10">
             <h1 className="text-2xl md:text-4xl font-semibold mb-5">
               Purchase your awesome <br /> lessons and find your tutors{" "}
@@ -314,7 +313,7 @@ function Home() {
 
       {/* Seventh Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] pt-10 pb-20 px-5 md:px-0">
+      <section className="bg-[#F1F1F1] h-[auto] pt-10 pb-20 md:px-10 px-5">
         <div className="container mx-auto">
           <div className="pt-10">
             <h1 className="text-[36px] font-semibold mb-3">
@@ -502,8 +501,8 @@ function Home() {
 
       {/* Eighth Section */}
 
-      <section className="h-[auto] py-16">
-        <div className="container mx-auto">
+      <section className="h-[auto] py-16 ">
+        <div className="container mx-auto md:px-10 px-5">
           <div className="pt-10">
             <h1 className="max-md:text-center text-[30px] font-semibold mb-3">
               HOW OUR ONLINE <br /> PUBLIC SCHOOL{" "}
@@ -591,7 +590,7 @@ function Home() {
 
       {/* Ninth Section */}
 
-      <section className="bg-[#F1F1F1] h-[auto] py-24 px-5 md:px-0">
+      <section className="bg-[#F1F1F1] h-[auto] py-24 md:px-10 px-5">
         <div className="container mx-auto">
           <div className="w-[100%]">
             <h1 className="text-[36px] font-semibold mb-3">
@@ -614,47 +613,17 @@ function Home() {
               responsive={responsive}
               // ssr={true} // means to render carousel on server-side.
               infinite={true}
-              autoPlay={true }
+              autoPlay={true}
               autoPlaySpeed={3000}
-              // keyBoardControl={true}
-              // customTransition="all .5"
-              // transitionDuration={500}
-              // containerClass="carousel-container"
-              // removeArrowOnDeviceType={["tablet", "mobile"]}
-              // deviceType={this.props.deviceType}
-              // dotListClass="custom-dot-list-style"
-              // itemClass="carousel-item-padding-40-px"
+            // keyBoardControl={true}
+            // customTransition="all .5"
+            // transitionDuration={500}
+            // containerClass="carousel-container"
+            // removeArrowOnDeviceType={["tablet", "mobile"]}
+            // deviceType={this.props.deviceType}
+            // dotListClass="custom-dot-list-style"
+            // itemClass="carousel-item-padding-40-px"
             >
-              <div className="px-2" style={{height: "400px"}}>
-                <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
-                  <h1 className="text-lg md:text-2xl text-center mb-2">
-                    “Love mathematics because of Besnik Academy”
-                  </h1>
-                  <p className="text-sm md:text-[17px] text-center">
-                    "The curriculum was directly targeted toward applied techniques
-                    with high profile projects – real datasets with industry
-                    partners. It helped me achieve my career transition goal."
-                  </p>
-
-                  <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
-                    <div>
-                      <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
-                      <p className="text-xs xl:text-sm">Ontario, Canada</p>
-                      <span className="text-[#FFB800] text-[10px] xl:text-xs ">
-                        <i className="fa-solid fa-star mr-[2px]" />
-                        <i className="fa-solid fa-star mr-[2px]" />
-                        <i className="fa-solid fa-star mr-[2px]" />
-                        <i className="fa-solid fa-star mr-[2px]" />
-                        <i className="fa-solid fa-star mr-[2px]" />
-                      </span>
-                    </div>
-                    <div>
-                      <img src={student} alt="student" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="px-2" style={{ height: "400px" }}>
                 <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
                   <h1 className="text-lg md:text-2xl text-center mb-2">
@@ -715,13 +684,43 @@ function Home() {
                 </div>
               </div>
 
-       
+              <div className="px-2" style={{ height: "400px" }}>
+                <div className="w-[90%] md:w-[100%] max-md:mx-auto h-[auto] py-16 border border-[#D4D4D4] bg-white relative px-3 rounded-sm">
+                  <h1 className="text-lg md:text-2xl text-center mb-2">
+                    “Love mathematics because of Besnik Academy”
+                  </h1>
+                  <p className="text-sm md:text-[17px] text-center">
+                    "The curriculum was directly targeted toward applied techniques
+                    with high profile projects – real datasets with industry
+                    partners. It helped me achieve my career transition goal."
+                  </p>
+
+                  <div className="bg-white w-[60%] md:w-[60%] h-[89px] absolute top-[85%] left-[20%] flex items-center justify-between rounded-lg shadow-lg p-3">
+                    <div>
+                      <h3 className="text-md xl:text-2xl">Wilson Thai</h3>
+                      <p className="text-xs xl:text-sm">Ontario, Canada</p>
+                      <span className="text-[#FFB800] text-[10px] xl:text-xs ">
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                        <i className="fa-solid fa-star mr-[2px]" />
+                      </span>
+                    </div>
+                    <div>
+                      <img src={student} alt="student" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
             </Carousel>
-            
 
-            
 
-            
+
+
+
           </div>
         </div>
       </section>

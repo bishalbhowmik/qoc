@@ -1,16 +1,14 @@
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { createChapterApi, getChaptersApi } from "../../../Api/Admin/ChapterApi";
-import bufferToDataUrl from "buffer-to-data-url";
+import { createChapterApi, deleteChapterApi, getChaptersApi } from "../../../Api/Admin/ChapterApi";
 import { getAllExamApi, uploadSolutionApi } from "../../../Api/Admin/ExamApi";
-import { showFile } from "../../../Functions/CustomFunction";
-import { addSubjectMaterialsApi, addSubjectOutlineApi, getASubjectsApi, removeSubjectMaterialsApi, removeSubjectOutlineApi } from "../../../Api/Admin/SubjectApi";
-import Spinner from "../../../components/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { createFocusApi, getFocusApi, removeFocusApi, updateFocusApi } from "../../../Api/Admin/FocusApi";
-import { deleteChapterApi } from "../../../Api/Admin/ChapterApi";
+import { addSubjectMaterialsApi, addSubjectOutlineApi, getASubjectsApi, removeSubjectMaterialsApi, removeSubjectOutlineApi } from "../../../Api/Admin/SubjectApi";
+import { showFile } from "../../../Functions/CustomFunction";
+import Spinner from "../../../components/Spinner";
 
 export const Subject = (props) => {
   const location = useLocation();
@@ -79,7 +77,7 @@ export const Subject = (props) => {
         console.log(data)
         if (data.error) throw data.message;
         setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
-      }).catch(err => {})
+      }).catch(err => { })
 
 
     }
@@ -113,16 +111,16 @@ export const Subject = (props) => {
   };
 
   const deleteChapter = id => {
-    
+
     if (window.confirm("Along with chapter deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
       deleteChapterApi(id).then(data => {
         console.log(data)
-      window.alert(data.message)
-    })
+        window.alert(data.message)
+      })
     }
-    
+
   }
-  
+
   let chapterShow;
   if (chapter.length === 0) {
     chapterShow = <div className="p-40 text-center col-span-12">Not chapter found</div>;
@@ -355,7 +353,7 @@ export const Subject = (props) => {
               return (
                 <div className={`card border hover:border-red-800 hover:shadow-lg card-body ${(new Date() >= new Date(item.endTime) || new Date() <= new Date(item.startTime) ? ' bg-red-100' : '')}`}>
                   <div className=" card-title">{item.title}</div>
-                  <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div>
+                  <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                   <div className="my-5">{item.description}</div>
                   <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
 

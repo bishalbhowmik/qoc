@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { showFile } from "../../../Functions/CustomFunction";
-import Spinner from "../../../components/Spinner";
-import { createResourceApi, getResourceApi, removeResourceApi, updateResourceApi } from "../../../Api/Admin/ResourceApi";
-import { getSubjectsApi } from "../../../Api/Admin/SubjectApi";
 import { getAllCurriculumApi } from "../../../Api/Admin/CurriculumApi";
 import { createUpcomingCourseApi, getUpcomingCourseApi, removeUpcomingCourseApi } from "../../../Api/Admin/UpcomingCourseApi";
+import Spinner from "../../../components/Spinner";
 
 
 export const UpcomingCourse = (props) => {
@@ -102,7 +99,7 @@ export const UpcomingCourse = (props) => {
                         return (
                             <div className={`card border hover:border-red-800 hover:shadow-lg card-body`}>
                                 <div className=" card-title">{item.title}</div>
-                                <div className=" text-sm">{new Date(item.startDate).toLocaleString()}</div>
+                                <div className=" text-sm">{new Date(item.startDate).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                                 <div className="my-5">{item.description}</div>
                                 <div className="my-5"># {item.curriculumId.curriculum}</div>
 

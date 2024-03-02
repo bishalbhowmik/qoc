@@ -1,14 +1,10 @@
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getAllCurriculumApi } from '../../Api/Admin/CurriculumApi'
-import { getAStudent, getAllActivityApi, updateStudent } from '../../Api/Student/StudentApi'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarCheck, faHandsClapping, faMoneyBill1, faMoneyBillTransfer, faSackDollar } from '@fortawesome/free-solid-svg-icons'
-import { getFocusApi } from '../../Api/Admin/FocusApi'
+import { getAllActivityApi } from '../../Api/Student/StudentApi'
 import { showFile } from '../../Functions/CustomFunction'
 import Spinner from '../../components/Spinner'
-import { getTransactionApi } from '../../Api/Student/PaymentApi'
-import { Link } from 'react-router-dom'
 
 
 
@@ -95,7 +91,7 @@ export const History = (props) => {
                                     return (
                                         <tr key={item._id}>
                                             <td>{item.exam}</td>
-                                            <td>{new Date(item.startTime).toLocaleString()}</td>
+                                            <td>{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</td>
                                             <td>{item.totalMarks}</td>
                                             {item.participants && item.participants.map(participant => {
 

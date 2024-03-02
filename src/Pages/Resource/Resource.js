@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { getResourceApi } from "../../Api/Admin/ResourceApi";
 import { showFile } from "../../Functions/CustomFunction";
 import Spinner from "../../components/Spinner";
-import { getResourceApi} from "../../Api/Admin/ResourceApi";
 
 
 export const Resource = (props) => {
@@ -31,7 +31,7 @@ export const Resource = (props) => {
   return (
     <div>
 
-      
+
 
       <div className="p-4 md:p-12">
 
@@ -45,7 +45,7 @@ export const Resource = (props) => {
             return (
               <div className={`card shadow-lg border-x-8 hover:border-red-800 card-body ${(new Date() >= new Date(item.endTime) || new Date() <= new Date(item.startTime) ? ' bg-red-100' : '')}`}>
                 <div className=" card-title">{item.title}</div>
-                {/* <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div> */}
+                {/* <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div> */}
                 <div className="my-4">{item.description}</div>
                 <div className="">#{item.curriculumId.curriculum}</div>
                 <div className="mb-4">#{item.subjectId.subject}</div>

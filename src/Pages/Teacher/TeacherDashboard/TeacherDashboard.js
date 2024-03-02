@@ -1,8 +1,8 @@
+import bufferToDataUrl from 'buffer-to-data-url'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTeacher } from '../../../Api/Admin/TeacherApi'
 import { updateTeacherInfoApi } from '../../../Api/Teacher/TeacherApi'
-import bufferToDataUrl from 'buffer-to-data-url'
 
 export const TeacherDashboard = (props) => {
 
@@ -54,7 +54,7 @@ export const TeacherDashboard = (props) => {
         description: data.data[0].description,
         image: data.data[0].image,
         isPremium: data.data[0].batch.isPremium,
-        premiumEnd: new Date(data.data[0].batch.endTime).toLocaleString(),
+        premiumEnd: new Date(data.data[0].batch.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' }),
       })
     })
 

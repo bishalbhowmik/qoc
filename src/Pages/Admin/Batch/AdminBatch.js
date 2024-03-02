@@ -47,7 +47,7 @@ export const AdminBatch = (props) => {
                             <div className='text-lg'><strong>Email: </strong>{item.teacherId.email}</div>
                             <div className='text-lg'><strong>Joining Fee: </strong>{item.fees} BDT</div>
 
-                            <div className='text-lg'><strong>Start Date: </strong> {new Date(item.startDate).toLocaleString()}</div>
+                            <div className='text-lg'><strong>Start Date: </strong> {new Date(item.startDate).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                             <div className='text-lg'><strong>Description: </strong>{item.description}</div>
 
                             <div className='mt-5'>

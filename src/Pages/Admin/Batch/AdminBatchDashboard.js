@@ -57,7 +57,7 @@ export const BatchDashboard = (props) => {
 
         e.preventDefault()
 
-        createAnnouncementApi(batchId, { ...state, createdAt: new Date().toLocaleString() }).then(data => {
+        createAnnouncementApi(batchId, { ...state, createdAt: new Date().toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' }) }).then(data => {
             console.log(data)
             setMessage(data.message)
         })
@@ -105,7 +105,7 @@ export const BatchDashboard = (props) => {
                                 <div className='card glass bg-gray-100 mb-7 hover:shadow-lg p-3'>
                                     <div className='mb-8 flex flex-col md:flex-row justify-between'>
                                         <div className='card-title'>{item.title}</div>
-                                        <div className='text-sm'>Posted on {new Date(item.createdAt).toLocaleString()}</div>
+                                        <div className='text-sm'>Posted on {new Date(item.createdAt).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                                     </div>
                                     <div className=''>
                                         <div className='text-sm'>{item.description}</div>

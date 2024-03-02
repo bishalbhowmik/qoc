@@ -41,7 +41,7 @@ const Main = (props) => {
 
 
   return (
-    <div>
+    <div className="">
       <TopNav></TopNav>
       <BottomNav></BottomNav>
       <Outlet></Outlet>

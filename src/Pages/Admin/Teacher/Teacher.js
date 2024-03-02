@@ -1,8 +1,8 @@
+import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTeacher, setPremiumApi } from '../../../Api/Admin/TeacherApi'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import Spinner from '../../../components/Spinner'
 
 export const Teacher = (props) => {
@@ -60,7 +60,7 @@ export const Teacher = (props) => {
           <td>{item.grading}</td>
           <td>{item.contactAgree}</td>
           <td>{item.batch && item.batch.isPremium ? <FontAwesomeIcon className='fas fa-xl text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='fas fa-xl text-red-500' icon={faCircleXmark} />}</td>
-          <td>{item.premiumEnd && new Date(item.premiumEnd).toLocaleString()}</td>
+          <td>{item.premiumEnd && new Date(item.premiumEnd).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</td>
           <td>{item.batch && !item.batch.isPremium ? <button onClick={() => setPremium(item._id)} className='btn btn-ghost'>Set</button> : ''}</td>
           <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Details</button></td>
         </tr>
@@ -77,7 +77,7 @@ export const Teacher = (props) => {
 
       <div className="overflow-x-auto">
 
-      <h2 className='text-center my-10 text-2xl'>All Teachers</h2>
+        <h2 className='text-center my-10 text-2xl'>All Teachers</h2>
         <table className="table">
           <thead>
             <tr>
@@ -118,7 +118,7 @@ export const Teacher = (props) => {
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Grading:  </strong>{selected.grading}</div>
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Contact Agree:  </strong>{selected.contactAgree}</div>
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium:  </strong>{selected.batch.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}</div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium End:  </strong>{selected.batch.endTime && new Date(selected.batch.endTime).toLocaleString()}</div>
+            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Premium End:  </strong>{selected.batch.endTime && new Date(selected.batch.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
 
 
             <div className='border shadow p-2 rounded col-span-12 md:col-span-6'><strong className='me-2'>Use Times QOC Exam: </strong>{selected.useQocExam}</div>

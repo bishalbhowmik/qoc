@@ -25,7 +25,7 @@ const BottomNav = (props) => {
 
   return (
     <div className="bg-white">
-      <div className="container mx-auto h-[72px] flex justify-between items-center px-4 text-white md:text-navInactive">
+      <div className="container mx-auto h-[72px] flex justify-between items-center px-10 text-white md:text-navInactive">
         <div>
           <Link to="/" smooth={true} duration={500}>
             <img src={logo} alt="logo" />

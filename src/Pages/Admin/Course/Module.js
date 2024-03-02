@@ -1,15 +1,13 @@
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
-import { createChapterApi, getChaptersApi } from '../../../Api/Admin/ChapterApi'
-import { addModuleMaterialsApi, createModuleApi, getAModuleApi, getModulesApi, removeModuleMaterialsApi } from '../../../Api/Admin/ModuleApi'
-import bufferToDataUrl from 'buffer-to-data-url'
+import { useLocation } from 'react-router-dom'
 import { getAllExamApi, uploadSolutionApi } from '../../../Api/Admin/ExamApi'
+import { createFocusApi, getFocusApi, removeFocusApi, updateFocusApi } from '../../../Api/Admin/FocusApi'
+import { addModuleMaterialsApi, getAModuleApi, removeModuleMaterialsApi } from '../../../Api/Admin/ModuleApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
-import { createFocusApi, getFocusApi, removeFocusApi, updateFocusApi } from '../../../Api/Admin/FocusApi'
 
 
 export const Module = (props) => {
@@ -202,7 +200,7 @@ export const Module = (props) => {
                             return (
                                 <div className={`card border hover:border-red-800 hover:shadow-lg card-body ${(new Date() >= new Date(item.endTime) || new Date() <= new Date(item.startTime) ? ' bg-red-100' : '')}`}>
                                     <div className=" card-title">{item.title}</div>
-                                    <div className=" text-sm">{new Date(item.startTime).toLocaleString()} ~ {new Date(item.endTime).toLocaleString()}</div>
+                                    <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                                     <div className="my-5">{item.description}</div>
                                     <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
 
