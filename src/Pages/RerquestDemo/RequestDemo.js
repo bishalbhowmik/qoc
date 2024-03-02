@@ -32,6 +32,7 @@ export const RequestDemo = (props) => {
   else {
     demoClassShow = demoClass.map(item => {
 
+      console.log(item.classTime)
       return (
         <div style={{ backgroundColor: color[Math.floor(Math.random() * color.length)] }} class="ag-courses_item">
           <div class="ag-courses-item_link">

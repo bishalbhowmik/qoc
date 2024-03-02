@@ -136,7 +136,7 @@ export const AdminDemoClass = (props) => {
             startTime: item.startTime,
             endTime: item.endTime,
             chapterId: item.chapterId,
-            clasTime:  item.clasTime ,
+            classTime:  item.classTime ,
             classLink:  item.classLink
         })
 
