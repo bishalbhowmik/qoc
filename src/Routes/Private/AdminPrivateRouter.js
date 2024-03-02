@@ -40,6 +40,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/assignment' className='block m-4 hover:underline'><FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' />Assignment</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/batch' className='block m-4 hover:underline'><FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' />Batch</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/resource' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Resource</Link>
+                    <Link onClick={() => setOpen(!open)} to='/admin-dashboard/demo-class' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Demo Class</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/transaction' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Transactions</Link>
                 </div>
             </div>
@@ -57,6 +58,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link to='/admin-dashboard/assignment' className='block m-4 hover:underline'><FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' />Assignment</Link>
                     <Link to='/admin-dashboard/batch' className='block m-4 hover:underline'><FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' />Batch</Link>
                     <Link to='/admin-dashboard/resource' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Resource</Link>
+                    <Link to='/admin-dashboard/demo-class' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Demo Class</Link>
                     <Link to='/admin-dashboard/transaction' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Transactions</Link>
                 </div>
                 <div className='col-span-12 md:col-span-10 my-10 p-3 mx-0'> <Outlet /></div>

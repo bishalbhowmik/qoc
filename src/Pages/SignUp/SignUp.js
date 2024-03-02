@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "./SignUp.css";
 import axios from "axios";
 import { signupApi } from "../../Api/AuthApi";
-import { saveToken } from "../../Functions/AuthFunctions";
+import { saveToken, tokenDecode } from "../../Functions/AuthFunctions";
 import { connect } from "react-redux";
 import { AUTHENTICATED } from "../../Redux/ActionTypes";
 import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
@@ -56,8 +56,10 @@ const SignUp = (props) => {
 
       setMessage(data.message)
       saveToken(data.value.token)
-      navigate('/')
-      window.location.reload(false)
+      tokenDecode().then(data => {
+        navigate(navigate(`/${data.role}-dashboard`))
+        window.location.reload(true)
+      })
 
     })
       .catch(err => setMessage(err))

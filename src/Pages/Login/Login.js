@@ -1,12 +1,12 @@
+import { faHandsClapping } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import '../SignUp/SignUp';
 import { signinApi } from '../../Api/AuthApi';
-import { saveToken } from '../../Functions/AuthFunctions';
-import Spinner from '../../components/Spinner'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClapperboard, faHandsClapping } from '@fortawesome/free-solid-svg-icons';
+import { saveToken, tokenDecode } from '../../Functions/AuthFunctions';
+import Spinner from '../../components/Spinner';
+import '../SignUp/SignUp';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -19,14 +19,19 @@ const Login = () => {
 
         setSpin(true)
         signinApi(data).then(data => {
-            
+
             setSpin(false)
             if (data.error) throw data.message
 
             setMessage(data.message)
             saveToken(data.value.token)
-            navigate('/')
-            window.location.reload(false)
+
+            tokenDecode().then(data => {
+                navigate(navigate(`/${data.role}-dashboard`))
+                window.location.reload(true)
+            })
+
+            
 
         })
             .catch(err => setMessage(err))
@@ -34,14 +39,14 @@ const Login = () => {
     }
     return (
         <div className='flex flex-col items-center justify-center py-16'>
-            
+
             <div className='text-center mb-10'>
                 <FontAwesomeIcon className='text-amber-500 fa-2xl mb-5' icon={faHandsClapping} />
                 <div className='text-4xl font-semibold mb-5'>Welcome Back</div>
-                <div style={{letterSpacing: "1px"}}>Please login to access your account</div>
+                <div style={{ letterSpacing: "1px" }}>Please login to access your account</div>
             </div>
-            
-            
+
+
             <div className='shadow-lg p-5 md:p-10 rounded signup'>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <h2 className='text-black text-center text-3xl'>Login</h2>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getExamByIdApi } from '../../../Api/Student/ExamApi'
 import { Link } from 'react-router-dom'
+import { getExamByIdApi } from '../../../Api/Student/ExamApi'
 import Spinner from '../../../components/Spinner'
 
 const mapStateToProps = (state) => {
@@ -35,12 +35,13 @@ export const StudentAllExam = (props) => {
     }, [props])
 
     let examShow
-    if(exam.length === 0){ examShow = <div></div> }
-    else{
+    if (exam.length === 0) { examShow = <div></div> }
+    else {
         examShow = exam.map(item => {
 
+            console.log(item.startTime);
             return (
-                <Link aria-disabled to={'/student-dashboard/exam'} state={{exam: item}} className='card card-body glass my-5'>{item.exam}</Link>
+                <Link aria-disabled to={'/student-dashboard/exam'} state={{ exam: item }} className='card card-body glass my-5'>{item.exam}</Link>
             )
         })
     }

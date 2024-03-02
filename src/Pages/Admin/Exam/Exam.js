@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
+import { Link } from 'react-router-dom'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
+import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
+import { createExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
-import { createExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
-import { Link } from 'react-router-dom'
 import Spinner from '../../../components/Spinner'
 
 export const Exam = (props) => {
@@ -142,8 +142,8 @@ export const Exam = (props) => {
     e.preventDefault()
 
     setSpin(true)
-
-    createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString(), endTime: new Date(state.endTime).toLocaleString() }).then(data => {
+    createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }), endTime: new Date(state.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) }).then(data => {
+      
       setSpin(false)
       if (data.error) throw data.message
       setMessage(data.message)
@@ -166,8 +166,8 @@ export const Exam = (props) => {
             <div className=''>Total Marks: {item.totalMarks}</div>
           </div>
           <div className='flex justify-between'>
-            <div className=''>Start Time: {new Date(item.startTime).toLocaleString()}</div>
-            <div className=''>End Time: {new Date(item.endTime).toLocaleString()}</div>
+            <div className=''>Start Time: {new Date(item.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+            <div className=''>End Time: {new Date(item.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
           </div>
           <div className='flex justify-between'>
             <div className=''>Negative Marking: {item.negativeMarking}</div>

@@ -123,6 +123,7 @@ export const BroadQuestion = (props) => {
     e.preventDefault()
     setSpin(true)
     createBroadQuestionApi(state).then(data => {
+      console.log(data)
       setSpin(false)
       window.alert(data.message)
 
@@ -175,7 +176,7 @@ export const BroadQuestion = (props) => {
             <div className='mb-5'>
               <span className="label label-text">Chapter: </span>
               {/* {console.log(chapter)} */}
-              <select className='select select-bordered w-full' name="chapterId" onChange={(e) => handleChange(e)} id="">
+              <select required className='select select-bordered w-full' name="chapterId" onChange={(e) => handleChange(e)} id="">
 
                 {chapter.map((item, index) => <option selected={state.chapterId === item._id} value={index === 0 ? '' : item._id}>{index === 0 ? 'Select' : item.chapter}</option>)}
               </select>

@@ -18,6 +18,9 @@ export const StudentExam = (props) => {
     const [remainingTime, setRemainingTime] = useState('')
 
 
+    
+
+
     useEffect(() => {
 
         if (state) {
@@ -42,8 +45,32 @@ export const StudentExam = (props) => {
     }
 
 
-    if (new Date() < new Date(state.exam.startTime)) {
-        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString()} <br /> Time Remaining: {remainingTime} {spin && <Spinner />}</div>
+    if (new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) < new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })) {
+
+
+        setInterval(() => {
+            if (state && state.exam) {
+
+                let now = new Date();
+                let end = new Date(state.exam.startTime);
+
+                // Convert to local time in "Asia/Dhaka" timezone
+                now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+                end.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+
+                let timeDifference = end - now;
+
+                let seconds = Math.floor((timeDifference / 1000) % 60);
+                let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+                let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
+
+                setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`);
+                // console.log(now, end, timeDifference);
+            }
+        }, 1000)
+
+
+        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })} <br /> Time Remaining: {remainingTime} {spin && <Spinner />}</div>
     }
 
     if (examStatus) {
@@ -77,7 +104,7 @@ export const StudentExam = (props) => {
         </div>
     }
 
-    if (new Date() > new Date(state.exam.endTime)) {
+    if (new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) > new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })) {
         return <div className='text-center text-2xl font-bold mt-10'>Exam has been ended {spin && <Spinner />}</div>
     }
 
@@ -147,14 +174,20 @@ export const StudentExam = (props) => {
     setInterval(() => {
         if (state && state.exam) {
             // console.log(state.exam.endTime)
-            let now = new Date()
-            let end = new Date(state.exam.endTime)
+            let now = new Date();
+            let end = new Date(state.exam.endTime);
+
+            // Convert to local time in "Asia/Dhaka" timezone
+            now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+            end.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+
             let timeDifference = end - now;
 
             let seconds = Math.floor((timeDifference / 1000) % 60);
             let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
             let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-            setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`)
+
+            setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`);
         }
     }, 1000)
 
@@ -165,7 +198,7 @@ export const StudentExam = (props) => {
             <div className='font-bold text-center mb-10 text-xl text-red-800'>Time Remaining: {remainingTime}</div>
 
 
-            <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString()}</div>
+            <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
 
             {state.exam.hasOwnProperty('mcqsId') && state.exam.mcqsId.length != 0 ?
 

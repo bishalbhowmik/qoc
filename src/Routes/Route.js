@@ -60,6 +60,7 @@ import UpcomingCourse from "../Pages/Admin/UpcomingCourse/UpcomingCourse";
 import History from "../Pages/Student/History";
 import TeacherPayment from "../Pages/Teacher/TeacherPayment/TeacherPayment";
 import RequestDemo from "../Pages/RerquestDemo/RequestDemo";
+import AdminDemoClass from "../Pages/Admin/AdminDemoClass/AdminDemoClass";
 
 
 
@@ -193,7 +194,11 @@ export const router = createBrowserRouter([
         {
           path: "resource",
           element: <AdminResource />,
-        },
+          },
+          {
+            path: "demo-class",
+            element: <AdminDemoClass />,
+          },
         {
           path: "transaction",
           element: <Transaction />,
