@@ -40,7 +40,7 @@ export const RequestDemo = (props) => {
 
             <div class="ag-courses-item_title ">
               <div className='text-xl font-bold'>{item.title}</div>
-              <div className='text-white pt-10 text-sm' >{item.description}</div>
+              <div className='text-white pt-7 text-sm' >{item.description}</div>
             </div>
 
             <div class="ag-courses-item_date-box text-sm">
@@ -62,7 +62,7 @@ export const RequestDemo = (props) => {
 
 
   return (
-    <div class="ag-format-container container">
+    <div class="ag-format-container container md:px-0 px-3">
       <div class="ag-courses_box grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
         {demoClassShow}

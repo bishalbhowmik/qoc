@@ -13,7 +13,6 @@ export const UpcomingCourse = (props) => {
     const [subject, setSubject] = useState([])
     const [upcomingCourseState, setUpcomingCourseState] = useState({
         title: '',
-        description: '',
         startDate: '',
         curriculumId: '',
     });
@@ -89,7 +88,6 @@ export const UpcomingCourse = (props) => {
         <div>
 
             <div>
-
                 <div className="my-10 ">
                     <button className="btn btn-primary" onClick={e => document.getElementById('addUpcomingCourseModal').showModal()}>Add Upcoming Course</button>
                 </div>
@@ -99,8 +97,7 @@ export const UpcomingCourse = (props) => {
                         return (
                             <div className={`card border hover:border-red-800 hover:shadow-lg card-body`}>
                                 <div className=" card-title">{item.title}</div>
-                                <div className=" text-sm">{new Date(item.startDate).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
-                                <div className="my-5">{item.description}</div>
+                                <div className=" text-sm">{new Date(item.startDate).toDateString()}</div>
                                 <div className="my-5"># {item.curriculumId.curriculum}</div>
 
                                 <div onClick={e => remove(item._id)} className="btn btn-error btn-sm">Remove</div>
@@ -130,9 +127,6 @@ export const UpcomingCourse = (props) => {
 
                             <label className="label label-text" htmlFor="">Title*</label>
                             <input name="title" value={upcomingCourseState.title} onChange={e => handleChange(e)} required placeholder="" className="input input-bordered w-full my-3" type="text" />
-
-                            <label className="label label-text" htmlFor="">Description</label>
-                            <textarea name="description" value={upcomingCourseState.description} onChange={e => handleChange(e)} placeholder="" className=" textarea textarea-bordered w-full mb-3" type="text" />
 
                             <label className="label label-text" htmlFor="">Start Date*</label>
                             <input name="startDate" value={upcomingCourseState.startDate} onChange={e => handleChange(e)} required className="input input-bordered mb-3 w-full" type="date" />

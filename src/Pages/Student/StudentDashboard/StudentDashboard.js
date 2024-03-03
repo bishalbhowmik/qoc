@@ -63,6 +63,7 @@ export const StudentDashboard = (props) => {
   const [mcqData, setMcqData] = useState([])
   const [bqData, setBqData] = useState([])
   const [scoreData, setScoreData] = useState([])
+  const [notice, setNotice] = useState([])
   const [curriculum, setCurriculum] = useState([])
 
   useEffect(() => {
@@ -105,12 +106,14 @@ export const StudentDashboard = (props) => {
 
 
     getAllActivityApi(props.decodedToken._id).then(data => {
+      console.log(data)
       setSpin(false)
       if (data.error) throw data.message
       setAssignments([...data.data.postedAssignment])
       setBatches([...data.data.batches])
       setExam([...data.data.submittedExam])
       setUpcoming([...data.data.upcomingCourse])
+      setNotice([...data.data.notice])
     }).catch(err => {
       console.log(err)
     })
@@ -290,6 +293,24 @@ export const StudentDashboard = (props) => {
 
         <div className=' col-span-full md:col-span-3'>
 
+          
+          <div className='mb-10'>
+            <div className='text-xl font-bold mb-5 border-b pb-3'>Notice</div>
+            {notice.length === 0 ? <div>No notice found!</div> : notice.map(item => {
+
+              // console.log(item)
+
+              return (
+                <div className='flex mb-4 cursor-pointer'>
+                  <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                  <div>
+                    <span>{item.title}</span> <br />
+                    <span className='text-xs'>{ item.description }</span>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
 
 
           <div className='mb-10'>
@@ -300,7 +321,7 @@ export const StudentDashboard = (props) => {
                   <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
                   <div>
                     <span>{item.title}</span> <br />
-                    <span className='text-sm'>Starting on ~ {new Date(item.startDate).toLocaleDateString()}</span>
+                    <span className='text-sm'>Starting on ~ {new Date(item.startDate).toDateString()}</span> 
                   </div>
                 </div>
               )
@@ -342,32 +363,28 @@ export const StudentDashboard = (props) => {
               <div className='font-bold my-3'>Exams</div>
               {exam.length === 0 ? <div>No exam found</div> : exam.map((item, index) => {
 
-                if (index < 5) {
-                  return (
-                    <div className='flex mb-4 cursor-pointer'>
-                      <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                      <div>
-                        <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
-                      </div>
+                return (
+                  <div className='flex mb-4 cursor-pointer'>
+                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                    <div>
+                      <Link to={'/student-dashboard/exam'} state={{ exam: item }}>{item.exam}</Link> <br />
                     </div>
-                  )
-                }
+                  </div>
+                )
 
               })}
             </div>
             <div className='col-span-full md:col-span-6'>
               <div className='font-bold my-3'>Assignment</div>
               {assignments.length === 0 ? <div>No assignment found</div> : assignments.map((item, index) => {
-                if (index < 5) {
-                  return (
-                    <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
-                      <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
-                      <div>
-                        <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
-                      </div>
+                return (
+                  <div className='flex mb-4 cursor-pointer' onClick={e => showFile(item.assignment)}>
+                    <div className=''><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                    <div>
+                      <span className='italic'>Posted a new assignment ~ <span className=''>{item.title}</span></span> <br />
                     </div>
-                  )
-                }
+                  </div>
+                )
               })}
             </div>
 

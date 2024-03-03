@@ -40,3 +40,18 @@ export const confirmTuitionApi = async (TuitionId, confirmedTeacherId) => {
     return Tuition
 
 }
+
+
+
+export const updateTuitionApi = async (TuitionId, obj) => {
+
+    let Tuition = axios.put(process.env.REACT_APP_BACKEND_URL + '/api/tuition/update/' + TuitionId, obj, {
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+        }
+    }).then(data => data.data)
+
+
+    return Tuition
+
+}

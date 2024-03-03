@@ -41,7 +41,17 @@ export const CreateTuition = (props) => {
 
     e.preventDefault()
 
-    createTuitionApi({ ...state, time: new Date().toTimeString(state.time) }).then(data => {
+    console.log(state.time)
+
+    createTuitionApi({
+      ...state,
+      time: new Date(new Date().toISOString(state.time)).toLocaleTimeString('en-US', {
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric',
+      })
+    })
+      .then(data => {
       console.log(data)
       setMessage(data.message)
 
@@ -85,10 +95,19 @@ export const CreateTuition = (props) => {
             </div>
             <div className='col-span-1'>
               <label className='mt-7 block label label-text' htmlFor="">Tuition Type</label>
-              <select name='tuitionType' className='input input-bordered w-full'>
+              <select onChange={e=>handleChange(e)} value={state.tuitionType} name='tuitionType' className='input input-bordered w-full'>
                 <option value="">Select Tuition Type</option>
                 <option value="Online">Online</option>
                 <option value="Offline">Offline</option>
+              </select>
+            </div>
+
+            <div className='col-span-1'>
+              <label className='mt-7 block label label-text' htmlFor="">Tutor Gender</label>
+              <select onChange={e => handleChange(e)} value={state.tutorGender} name='tutorGender' className='input input-bordered w-full'>
+                <option value="">Select Tutor Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
             </div>
 

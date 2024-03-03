@@ -52,9 +52,9 @@ const SignUp = (props) => {
 
     signupApi(data).then(data => {
 
-      if (data.error) throw data.message
+      if (data.error) throw data.message + '. ' + data.value 
 
-      setMessage(data.message)
+      setMessage(data.message )
       saveToken(data.value.token)
       tokenDecode().then(data => {
         navigate(navigate(`/${data.role}-dashboard`))
@@ -154,6 +154,8 @@ const SignUp = (props) => {
               <span className="label-text">Mobile</span>
             </label>
             <input
+              min='11'
+              max='13'
               type="tel"
               {...register("mobile", {
                 required: "This field is required",

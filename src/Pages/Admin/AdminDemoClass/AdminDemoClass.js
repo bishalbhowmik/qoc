@@ -171,7 +171,7 @@ export const AdminDemoClass = (props) => {
             <div>
 
                 <div className="my-10 ">
-                    <button className="btn btn-primary" onClick={e => document.getElementById('addDemoClassModal').showModal()}>Add DemoClass</button>
+                    <button className="btn btn-primary" onClick={e => document.getElementById('addDemoClassModal').showModal()}>Add Demo Class</button>
                 </div>
 
                 <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">

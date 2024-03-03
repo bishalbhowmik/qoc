@@ -4,7 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import banner2 from "../../assets/banner-2.png";
-import banner from "../../assets/banner.png";
+import banner from "../../assets/banner.svg";
 import check from "../../assets/check.png";
 import course from "../../assets/course.png";
 import feature from "../../assets/feature.png";

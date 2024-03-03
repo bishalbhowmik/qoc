@@ -28,7 +28,7 @@ const BottomNav = (props) => {
       <div className="container mx-auto h-[72px] flex justify-between items-center px-10 text-white md:text-navInactive">
         <div>
           <Link to="/" smooth={true} duration={500}>
-            <img src={logo} alt="logo" />
+            <img className="md:h-14 md:w-14 h-12 w-12" src={logo} alt="logo" />
           </Link>
         </div>
 

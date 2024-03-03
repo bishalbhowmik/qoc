@@ -32,6 +32,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/student' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Student</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/teacher' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Teachers</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/upcoming-course' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Upcoming Course</Link>
+                    <Link onClick={() => setOpen(!open)} to='/admin-dashboard/notice' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Notice Board</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/mcq' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />MCQ</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/broad-question' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Broad Question</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/exam' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Exam</Link>
@@ -50,6 +51,7 @@ export const AdminPrivateRouter = ({ children, authenticated, decodedToken, ...r
                     <Link to='/admin-dashboard/student' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Student</Link>
                     <Link to='/admin-dashboard/teacher' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Teachers</Link>
                     <Link onClick={() => setOpen(!open)} to='/admin-dashboard/upcoming-course' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Upcoming Course</Link>
+                    <Link onClick={() => setOpen(!open)} to='/admin-dashboard/notice' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' />Notice Board</Link>
                     <Link to='/admin-dashboard/mcq' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />MCQ</Link>
                     <Link to='/admin-dashboard/broad-question' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Broad Question</Link>
                     <Link to='/admin-dashboard/exam' className='block m-4 hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Exam</Link>
