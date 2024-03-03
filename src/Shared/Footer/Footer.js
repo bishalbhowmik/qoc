@@ -66,7 +66,7 @@ const Footer = () => {
         <div className="flex h-full items-center">
           <div className="h-auto justify-center align-middle me-2">Developed & Maintained by </div>
           <div>
-            <a target="_blank" className="font-bold" href="https://www.facebook.com/koncepttechofficial"><img className="w-10" src="/logo.svg" alt="" /></a>
+            <a target="_blank" className="font-bold italic" href="https://www.facebook.com/koncepttechofficial">Koncept-Tech</a>
           </div>
         </div>
       </div>
