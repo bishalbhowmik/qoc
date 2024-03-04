@@ -23,11 +23,13 @@ export const StudentCurriculum = (props) => {
 
             setSpin(true)
             getACurriculumApi(curriculum).then(data => {
-                console.log(data)
-                if (data.error) throw data.message
-                setOutlines([...data.data.outlines])
-                setCurriculumName(data.data.curriculum)
-            })
+                console.log(!data.data)
+                if (!data.data) throw data.message
+                else {
+                    setOutlines([...data.data.outlines])
+                    setCurriculumName(data.data.curriculum)
+                }
+            }).catch(err => window.alert(err))
 
             getSubjectsApi(curriculum).then(data => {
                 
@@ -78,7 +80,7 @@ export const StudentCurriculum = (props) => {
                 <div className='bg-red-800 p-3 my-16 text-xl text-center'><span className='text-white rounded'>OUTLINES</span></div>
 
                 <div className='flex flex-col md:flex-row'>
-                    {outlines.map(item => {
+                    {outlines && outlines.map(item => {
                         return (
                             <div onClick={() => showFile(item)} className="btn btn-outline md:me-4 p-2 mt-2">
                                 {item.name}

@@ -18,11 +18,12 @@ import styles from "./Home.module.css";
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-
+    authenticated: state.authenticated,
+    decodedToken: state.decodedToken
   }
 }
 
-function Home() {
+function Home(props) {
 
   const responsive = {
     superLargeDesktop: {
@@ -69,7 +70,7 @@ function Home() {
             </p>
             <div className="text-[2F2F2F] mt-10">
               <button className="bg-normal hover:bg-normalH text-white text-xs py-3 px-6 rounded-full mr-4">
-                Get Started
+                <Link to={props.authenticated ? `/${props.decodedToken.role}-dashboard` : '/sign'}>Get Started</Link>
               </button>
               <button className="bg-[#FBF1F2] text-[#92222A] font-semibold hover:bg-transparent   text-xs py-3 px-6 rounded-full border border-[#F7E8E9]">
                 <Link to={'/request-demo'}>Request Demo</Link>

@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { getFocusApi } from '../../../Api/Admin/FocusApi'
 import { getAStudent, getAllActivityApi } from '../../../Api/Student/StudentApi'
 import { showFile } from '../../../Functions/CustomFunction'
@@ -47,13 +46,6 @@ const mapStateToProps = (state) => {
 
 export const StudentDashboard = (props) => {
 
-  const [state, setState] = useState({
-    username: '',
-    email: '',
-    mobile: '',
-    country: '',
-    curriculumId: '',
-  })
   const [spin, setSpin] = useState(false)
   const [focus, setFocus] = useState([])
   const [batches, setBatches] = useState([])
@@ -64,39 +56,10 @@ export const StudentDashboard = (props) => {
   const [bqData, setBqData] = useState([])
   const [scoreData, setScoreData] = useState([])
   const [notice, setNotice] = useState([])
-  const [curriculum, setCurriculum] = useState([])
 
   useEffect(() => {
 
     setSpin(true)
-    getAllCurriculumApi().then(data => {
-
-      if (data.error) throw data.message
-
-      setCurriculum([...data.data])
-
-    }).catch(err => {
-      window.alert(err)
-    })
-
-    getAStudent(props.decodedToken._id).then(data => {
-
-      if (data.error) throw data.message
-
-      setState({
-        ...state,
-        username: data.data.username,
-        email: data.data.email,
-        mobile: data.data.mobile,
-        country: data.data.country,
-        curriculumId: data.data.curriculum,
-        // password: data.data.password,
-      })
-
-    }).catch(err => {
-      console.log(err)
-    })
-
 
     getFocusApi({}).then((data) => {
 
