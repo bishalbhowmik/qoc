@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { checkAssignmentPremiumApi, createAssignmentApi, getAllAssignmentApi } from '../../../Api/Student/AssignmentApi'
 import Spinner from '../../../components/Spinner'
+import { getAStudent } from '../../../Api/Student/StudentApi'
 
 export const AssignmentHelp = (props) => {
 
@@ -28,7 +29,7 @@ export const AssignmentHelp = (props) => {
 
       else {
         setAssignmentPremium(true)
-        setUser(data.data)
+        
         setMessage({ message: data.message, error: data.error })
         setSpin(true)
         getAllAssignmentApi({ studentId: props.decodedToken._id }).then(data => {
@@ -37,8 +38,13 @@ export const AssignmentHelp = (props) => {
           if (data.error) throw data.message
           setAssignment(data.data)
         }).catch(err => {
-          console.log(err)
+          window.alert(err)
         })
+
+        getAStudent(props.decodedToken._id).then(data => {
+          if (data.error) throw data.message
+          setUser(data.data)
+        }).catch(err => window.alert(err))
 
       }
 
