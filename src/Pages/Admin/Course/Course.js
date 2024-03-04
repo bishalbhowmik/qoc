@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addCurriculumApi, deleteCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import { Link } from 'react-router-dom'
+import { addCurriculumApi, deleteCurriculumApi, getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
 import Spinner from '../../../components/Spinner'
 
 const mapStateToProps = (state) => {
@@ -65,15 +65,15 @@ export const Course = (props) => {
 
 
   const deleteCurriculum = id => {
-    
-        if (window.confirm("Along with curriculum deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
 
-        deleteCurriculumApi(id).then(data => {
-            // console.log(data)
-            window.alert(data.message)
-        })
-        }
-    
+    if (window.confirm("Along with curriculum deletion, all data (Subjects, Chapters, Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+
+      deleteCurriculumApi(id).then(data => {
+        // console.log(data)
+        window.alert(data.message)
+      })
+    }
+
   }
 
 
@@ -90,9 +90,9 @@ export const Course = (props) => {
               <div className="card-title text-center">{item.curriculum}</div>
             </div>
           </Link>
-          {/* <div onClick={() => deleteCurriculum(item._id)} className="btn btn-ghost">delete Curriculum</div> */}
+          <div onClick={() => deleteCurriculum(item._id)} className="btn btn-ghost">delete Curriculum</div>
         </div>
-        
+
       )
     })
   }
