@@ -62,6 +62,12 @@ import TeacherPayment from "../Pages/Teacher/TeacherPayment/TeacherPayment";
 import RequestDemo from "../Pages/RerquestDemo/RequestDemo";
 import AdminDemoClass from "../Pages/Admin/AdminDemoClass/AdminDemoClass";
 import AdminNotice from "../Pages/Admin/AdminNotice/AdminNotice";
+import About from "../Pages/About/About";
+import GetInTouch from "../Pages/GetInTouch/GetInTouch";
+import FAQ from "../Pages/FAQ/FAQ";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import Cookies from "../Pages/Cookies/Cookies";
+import TermsConditions from "../Pages/TermsCondition/TermsConditions";
 
 
 
@@ -118,7 +124,30 @@ export const router = createBrowserRouter([
         path: "/resource",
         element: <Resource />,
       },
-
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/get-in-touch",
+        element: <GetInTouch />,
+      },
+      {
+        path: "/faq",
+        element: <FAQ />,
+      },
+      {
+        path: "/privacy-and-policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/cookies",
+        element: <Cookies />,
+      },
+      {
+        path: "/terms-and-conditions",
+        element: <TermsConditions />,
+      },
 
       {
         path: "/admin-dashboard",
