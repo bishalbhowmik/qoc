@@ -22,6 +22,7 @@ export const AssignmentHelp = (props) => {
 
     setSpin(true)
     checkAssignmentPremiumApi().then(data => {
+      console.log(data.data)
       setSpin(false)
       if (data.error) throw data.message
 
