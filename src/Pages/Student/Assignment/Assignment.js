@@ -16,13 +16,12 @@ export const AssignmentHelp = (props) => {
   const [selected, setSelected] = useState([])
   const [spin, setSpin] = useState(false)
   const [assignmentPremium, setAssignmentPremium] = useState(false)
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
 
     setSpin(true)
     checkAssignmentPremiumApi().then(data => {
-      console.log(data)
       setSpin(false)
       if (data.error) throw data.message
 
@@ -33,7 +32,7 @@ export const AssignmentHelp = (props) => {
         setSpin(true)
         getAllAssignmentApi({ studentId: props.decodedToken._id }).then(data => {
           setSpin(false)
-          console.log(data)
+  
           if (data.error) throw data.message
           setAssignment(data.data)
         }).catch(err => {
@@ -103,7 +102,7 @@ export const AssignmentHelp = (props) => {
       </div>
 
       <div className='my-7'>
-        {assignmentPremium && Object.keys(user).length != 0 && <div className='border inline'>Assignment Count: {user.assignment.count}</div>}
+        {assignmentPremium && user && <div className='border inline'>Assignment Count: {user.assignment.count}</div>}
       </div>
 
       <button className='btn' onClick={() => document.getElementById('createAssignmentModal').showModal()}>Post Assignment</button>
