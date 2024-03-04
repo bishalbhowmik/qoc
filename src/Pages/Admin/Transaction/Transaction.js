@@ -50,9 +50,11 @@ export const Transaction = (props) => {
 
 
     const clearTransaction = () => {
-        deleteransactionApi().then(data => {
-            window.alert(data.message)
-        })
+        if (window.confirm('Are you sure?')) {
+            deleteransactionApi().then(data => {
+                window.alert(data.message)
+            })
+        }
     }
 
 
