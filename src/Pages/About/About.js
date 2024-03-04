@@ -4,7 +4,7 @@ import image from '../../assets/about.svg'
 
 export const About = (props) => {
     return (
-        <div className='px-3 md:px-10'>
+        <div className='px-3 md:px-10 mb-10'>
 
             <div className='text-2xl font-bold text-center my-10'>About</div>
 
@@ -13,13 +13,19 @@ export const About = (props) => {
                     <img className='w-3/4 md:w-5/6' src={image} alt="" />
                 </div>
                 <div className='md:col-span-2'>
-                    <div className='text-xl text-red-800 my-5 font-bold'>Who are we?</div>
+                    <div className='text-xl text-red-800 md:mt-10 mb-5 font-bold'>Who are we?</div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, blanditiis. Animi vero consectetur iste possimus, debitis incidunt unde labore necessitatibus numquam dicta nam quam maiores eaque minima, nisi consequuntur ea quas quae laudantium aut vitae nihil dolorem ipsum? Dignissimos adipisci, accusantium dicta vel veritatis quaerat deserunt eligendi. Incidunt vero mollitia esse reiciendis ratione cumque. Aperiam, assumenda dolore! Necessitatibus nobis voluptatem saepe architecto asperiores quidem repellat rerum sapiente alias. Provident magni illo voluptatibus tempora quia dolore animi. Totam laboriosam est facilis nihil deleniti nam? Tempora quaerat, nesciunt placeat corrupti quo ratione voluptatibus non nostrum, ut minus quam aliquid maxime fugit quasi?
+                        Welcome to QOC - Quorum of Collaborative-learning, a pioneering educational platform where
+                        knowledge seamlessly intertwines with collective exploration. In the dynamic realm of learning,
+                        QOC stands as a testament to the power of shared educational experiences in shaping the
+                        future of learning.
                     </p>
 
                     <p className='mt-8'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non corrupti veniam doloribus sequi iste in voluptate hic, repellat soluta voluptates sunt dolorum rem mollitia culpa quam. Doloremque aspernatur culpa tenetur ab reiciendis possimus voluptatum quae quia libero fugit exercitationem fugiat suscipit cum totam blanditiis ut, nisi ea reprehenderit animi iste?
+                        QOC has meticulously designed a dynamic and engaging learning platform that brings students
+                        and educators together from diverse backgrounds. Whether you are following curriculums like
+                        Cambridge, EdExcel, IB, CBSE, ICSE, NCTB, or exploring our free courses, QOC provides a
+                        space where learning transcends individual endeavors.
                     </p>
                 </div>
             </div>
@@ -27,12 +33,18 @@ export const About = (props) => {
             <div>
                 <div className='my-10'>
                     <div className='text-xl text-red-800 my-5 font-bold'>Our Mission</div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, blanditiis. Animi vero consectetur iste possimus, debitis incidunt unde labore necessitatibus numquam dicta nam quam maiores eaque minima, nisi consequuntur ea quas quae laudantium aut vitae nihil dolorem ipsum? Dignissimos adipisci, accusantium dicta vel veritatis quaerat deserunt eligendi. Incidunt vero mollitia esse reiciendis ratione cumque. Aperiam, assumenda dolore! Necessitatibus nobis voluptatem saepe architecto asperiores quidem repellat rerum sapiente alias. Provident magni illo voluptatibus tempora quia dolore animi. Totam laboriosam est facilis nihil deleniti nam? Tempora quaerat, nesciunt placeat corrupti quo ratione voluptatibus non nostrum, ut minus quam aliquid maxime fugit quasi?
+                    Our mission goes beyond conventional education; QOC is more than just a platform – it's a
+                    community dedicated to the principles of collaborative learning. We aim to empower individuals
+                    to grow intellectually and socially, fostering an environment where learners thrive through
+                    interaction, discussion, and the exchange of insights.
                 </div>
 
                 <div className='my-5'>
                     <div className='text-xl text-red-800 my-5 font-bold'>Our vission</div>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, blanditiis. Animi vero consectetur iste possimus, debitis incidunt unde labore necessitatibus numquam dicta nam quam maiores eaque minima, nisi consequuntur ea quas quae laudantium aut vitae nihil dolorem ipsum? Dignissimos adipisci, accusantium dicta vel veritatis quaerat deserunt eligendi. Incidunt vero mollitia esse reiciendis ratione cumque. Aperiam, assumenda dolore! Necessitatibus nobis voluptatem saepe architecto asperiores quidem repellat rerum sapiente alias. Provident magni illo voluptatibus tempora quia dolore animi. Totam laboriosam est facilis nihil deleniti nam? Tempora quaerat, nesciunt placeat corrupti quo ratione voluptatibus non nostrum, ut minus quam aliquid maxime fugit quasi?
+                    Embark on an exciting journey of exploration, discovery, and education with QOC. Let's together
+                    build a Quorum of Learning that transcends boundaries and transforms the educational
+                    landscape. Join us and become part of a community that cherishes knowledge, values
+                    collaboration, and embraces the transformative power of education.
                 </div>
             </div>
 
