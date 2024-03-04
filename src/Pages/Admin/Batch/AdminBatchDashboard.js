@@ -184,12 +184,13 @@ export const BatchDashboard = (props) => {
             {tab === 'people' && (
                 <div className='my-16 grid grid-cols-1 md:grid-cols-3 gap-4'>
                     {batch && batch.enrolledStudents && batch.enrolledStudents.map(item => {
+                        console.log(item)
                         return (
                             <div className='card card-body card-bordered shadow-lg hover:bg-slate-100 cursor-pointer'>
-                                {item.studentId.username ? <>
+                                {item.studentId ? <>
                                     <div>{item.studentId.username}</div>
                                     <div>{item.studentId.mobile}</div>
-                                    <div>{item.studentId.email}</div></> : <>User deleted</>}
+                                    <div>{item.studentId.email}</div></> : <span className='text-center'>User deleted</span>}
                             </div>
                         )
                     })}

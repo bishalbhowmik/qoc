@@ -191,9 +191,10 @@ export const TeacherBatchDashboard = (props) => {
                     {batch && batch.enrolledStudents && batch.enrolledStudents.map(item => {
                         return (
                             <div className='card card-body card-bordered shadow-lg hover:bg-slate-100 cursor-pointer'>
-                                <div>{item.studentId.username}</div>
-                                <div>{item.studentId.mobile}</div>
-                                <div>{item.studentId.email}</div>
+                                {item.studentId ? <>
+                                    <div>{item.studentId.username}</div>
+                                    <div>{item.studentId.mobile}</div>
+                                    <div>{item.studentId.email}</div></> : <span className='text-center'>User deleted</span>}
                             </div>
                         )
                     })}
