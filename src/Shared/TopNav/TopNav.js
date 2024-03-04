@@ -11,27 +11,27 @@ const TopNav = () => {
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-x-4 mr-5">
             <span>
-              <i className="fa-solid fa-phone text-[1.1rem]"></i>
+              <i className="fa-solid fa-phone text-[1.1rem] mt-1"></i>
             </span>
-            <span className="text-[1rem]">+880123456789</span>
+            <span className="text-[1rem]"><a className='inline' href='tel:01312379588'>+88 012345678</a></span>
             <span>
-              <i className="fa-solid fa-envelope text-[1.1rem]"></i>
+              <i className="fa-solid fa-envelope text-[1.1rem] mt-1"></i>
             </span>
-            <span className="text-[1rem]">mail@gmail.com</span>
+            <span className="text-[1rem]"><a className='inline' href='mailto:qoclearning@gmail.com'>qoclearning@gmail.com</a></span>
           </div>
 
           <div className="flex items-center gap-x-7 text-[1.3rem]">
             <span>
-              <i className="fa-brands fa-facebook "></i>
+              <a href="https://www.facebook.com/norgate.99" target="_blank"><i className="fa-brands fa-facebook "></i></a>
             </span>
             <span>
-              <i className="fa-brands fa-instagram"></i>
+              <a href=""><i className="fa-brands fa-instagram"></i></a>
             </span>
             <span>
-              <i className="fa-brands fa-twitter"></i>
+              <a href=""><i className="fa-brands fa-twitter"></i></a>
             </span>
             <span>
-              <i className="fa-brands fa-youtube"></i>
+              <a href=""><i className="fa-brands fa-youtube"></i></a>
             </span>
           </div>
         </div>
