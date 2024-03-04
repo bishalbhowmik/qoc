@@ -1,8 +1,10 @@
 
 
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getAllTransactionApi } from '../../../Api/Admin/TransactionApi'
+import { deleteransactionApi, getAllTransactionApi } from '../../../Api/Admin/TransactionApi'
 
 export const Transaction = (props) => {
 
@@ -23,11 +25,13 @@ export const Transaction = (props) => {
     let transactionShow
 
     if (transaction.length === 0) { transactionShow = <div className='text-center text-xl my-10'>No transaction Found</div> }
+
+
     else {
         transactionShow = transaction.map((item, index) => {
 
             return (
-                <tr className={`hover my-3 ${item.status==='success' ? 'bg-green-200' : item.status==='failed' ? 'bg-red-200' : 'bg-yellow-200'}`}>
+                <tr className={`hover my-3 ${item.status === 'success' ? 'bg-green-200' : item.status === 'failed' ? 'bg-red-200' : 'bg-yellow-200'}`}>
                     <td>{index + 1}</td>
                     <td>{item.userInfo.username}</td>
                     <td>{item.userInfo.mobile}</td>
@@ -45,11 +49,23 @@ export const Transaction = (props) => {
     }
 
 
+    const clearTransaction = () => {
+        deleteransactionApi().then(data => {
+            window.alert(data.message)
+        })
+    }
+
+
 
     return (
         <div>
 
             <div className='my-16 text-center font-bold text-xl'>All Transactions</div>
+
+
+
+            <div onClick={clearTransaction} className="btn"> <FontAwesomeIcon icon={faTrash} /> Clear All Transactions</div>
+
             <table className="table my-10">
                 <thead>
                     <tr className=' bg-red-700 text-white'>

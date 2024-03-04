@@ -12,3 +12,18 @@ export const getAllTransactionApi = async () => {
 
     return payment
 }
+
+
+
+
+export const deleteransactionApi = async () => {
+
+    let transaction = axios.delete(process.env.REACT_APP_BACKEND_URL + '/api/transaction/', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
+        }
+    }).then(data => data.data)
+
+    return transaction
+}

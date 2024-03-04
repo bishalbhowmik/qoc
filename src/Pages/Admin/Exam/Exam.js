@@ -25,12 +25,12 @@ export const Exam = (props) => {
     chapterId: '',
     moduleId: '',
 
-    numberOfMcq: '',
-    numberOfBroadQuestion: '',
+    numberOfMcq: 0,
+    numberOfBroadQuestion: 0,
     startTime: '',
     endTime: '',
-    negativeMarking: '',
-    perMcqMarks: '',
+    negativeMarking: 0,
+    perMcqMarks: 1,
     totalMarks: ''
 
 
@@ -206,7 +206,7 @@ export const Exam = (props) => {
 
             <div className='mb-5'>
               <span className="label label-text">Name of Exam:</span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.exam} name='exam' type="text" />
+              <input required className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.exam} name='exam' type="text" />
             </div>
 
             <div className='mb-5'>
@@ -243,37 +243,37 @@ export const Exam = (props) => {
 
             <div className='mb-5'>
               <span className="label label-text">Total Marks:</span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.totalMarks} name='totalMarks' type="number" />
+              <input required className='input input-bordered w-full' min='1' onChange={e => handleChange(e)} value={state.totalMarks} name='totalMarks' type="number" />
             </div>
 
             <div className='mb-5'>
               <span className="label label-text">Number of MCQ:</span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.numberOfMcq} name='numberOfMcq' type="number" />
+              <input required className='input input-bordered w-full' min='0' onChange={e => handleChange(e)} value={state.numberOfMcq} name='numberOfMcq' type="number" />
             </div>
 
 
             <div className='mb-5'>
               <span className="label label-text">Negative Marking (%):</span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.negativeMarking} name='negativeMarking' type="number" />
+              <input required className='input input-bordered w-full' min='0' onChange={e => handleChange(e)} value={state.negativeMarking} name='negativeMarking' type="number" />
             </div>
             <div className='mb-5'>
               <span className="label label-text">Per MCQ Marks: </span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.perMcqMarks} name='perMcqMarks' type="number" />
+              <input required className='input input-bordered w-full' min='1' onChange={e => handleChange(e)} value={state.perMcqMarks} name='perMcqMarks' type="number" />
             </div>
 
             <div className='mb-5'>
               <span className="label label-text">Number of Broad Question:</span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.numberOfBroadQuestion} name='numberOfBroadQuestion' type="number" />
+              <input required className='input input-bordered w-full' min='0' onChange={e => handleChange(e)} value={state.numberOfBroadQuestion} name='numberOfBroadQuestion' type="number" />
             </div>
 
             <div className='mb-5'>
               <span className="label label-text">Start Time: </span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.startTime} name='startTime' type="datetime-local" />
+              <input required className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.startTime} name='startTime' type="datetime-local" />
             </div>
 
             <div className='mb-5'>
               <span className="label label-text">End Time: </span>
-              <input className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.endTime} name='endTime' type="datetime-local" />
+              <input required className='input input-bordered w-full' onChange={e => handleChange(e)} value={state.endTime} name='endTime' type="datetime-local" />
             </div>
 
 
