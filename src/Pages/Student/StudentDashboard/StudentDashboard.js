@@ -1,4 +1,4 @@
-import { faCalendarCheck, faHandsClapping } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faCalendarCheck, faHandsClapping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
@@ -302,7 +302,7 @@ export const StudentDashboard = (props) => {
 
               return (
                 <div className='flex mb-4 cursor-pointer'>
-                  <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
+                  <div className='mt-3'><FontAwesomeIcon icon={faBell} className='fas fa-xl text-rose-700 me-6' /></div>
                   <div>
                     <span>{item.title}</span> <br />
                     <span className='text-xs'>{ item.description }</span>

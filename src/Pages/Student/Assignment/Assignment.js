@@ -1,8 +1,8 @@
+import bufferToDataUrl from 'buffer-to-data-url'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { checkAssignmentPremiumApi, createAssignmentApi, createAssignmentPaymentApi, getAllAssignmentApi } from '../../../Api/Student/AssignmentApi'
 import { Link } from 'react-router-dom'
-import bufferToDataUrl from 'buffer-to-data-url'
+import { checkAssignmentPremiumApi, createAssignmentApi, getAllAssignmentApi } from '../../../Api/Student/AssignmentApi'
 import Spinner from '../../../components/Spinner'
 
 export const AssignmentHelp = (props) => {
@@ -15,15 +15,20 @@ export const AssignmentHelp = (props) => {
   const [assignment, setAssignment] = useState([])
   const [selected, setSelected] = useState([])
   const [spin, setSpin] = useState(false)
+  const [assignmentPremium, setAssignmentPremium] = useState(false)
+  const [user, setUser] = useState({})
 
   useEffect(() => {
 
     setSpin(true)
     checkAssignmentPremiumApi().then(data => {
+      console.log(data)
       setSpin(false)
       if (data.error) throw data.message
 
       else {
+        setAssignmentPremium(true)
+        setUser(data.data)
         setMessage({ message: data.message, error: data.error })
         setSpin(true)
         getAllAssignmentApi({ studentId: props.decodedToken._id }).then(data => {
@@ -95,6 +100,10 @@ export const AssignmentHelp = (props) => {
         {message.error ? <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg> : <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
 
         <span>{message.message}</span>
+      </div>
+
+      <div className='my-7 border'>
+        {assignmentPremium && Object.keys(user).length != 0 && <div>Assignment Count: {user.assignment.count}</div>}
       </div>
 
       <button className='btn' onClick={() => document.getElementById('createAssignmentModal').showModal()}>Post Assignment</button>

@@ -76,7 +76,7 @@ export const Payment = (props) => {
                     <h5>Assignment</h5>
                     <p class="price"><sup> ৳</sup>500<sub>/mo</sub></p>
                     <ul class="features-list">
-                        <li>Unlimited Assignment Post</li>
+                        <li>11 Assignment Post per month</li>
                         <li>Get Fastest Solution</li>
                         <li>Access to All Free Courses</li>
                         <li>Find Tution</li>
