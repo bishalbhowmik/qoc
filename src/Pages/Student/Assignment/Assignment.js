@@ -102,8 +102,8 @@ export const AssignmentHelp = (props) => {
         <span>{message.message}</span>
       </div>
 
-      <div className='my-7 border'>
-        {assignmentPremium && Object.keys(user).length != 0 && <div>Assignment Count: {user.assignment.count}</div>}
+      <div className='my-7'>
+        {assignmentPremium && Object.keys(user).length != 0 && <div className='border inline'>Assignment Count: {user.assignment.count}</div>}
       </div>
 
       <button className='btn' onClick={() => document.getElementById('createAssignmentModal').showModal()}>Post Assignment</button>
