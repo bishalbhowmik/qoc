@@ -31,7 +31,7 @@ const Login = () => {
                 window.location.reload(true)
             })
 
-            
+
 
         })
             .catch(err => setMessage(err))
@@ -82,7 +82,7 @@ const Login = () => {
 
                     <div className='my-4 text-center text-red-500'>{message}</div>
 
-                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to QOC Learning? <Link to='/signup' className='text-secondary'>Create New Account</Link></h3>
+                    <h3 className='text-sm mt-4 w-[90%] text-center'>New to QOC Learning? <Link to='/signup' className='text-secondary inline'>Create New Account</Link></h3>
 
                     {/* <div className="flex flex-col w-full border-opacity-50">
 

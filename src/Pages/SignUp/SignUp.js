@@ -203,7 +203,7 @@ const SignUp = (props) => {
 
           <h3 className="text-sm mt-4 w-[90%] text-center">
             Already have an account?{" "}
-            <Link to="/login" className="text-secondary">
+            <Link to="/login" className="text-secondary inline">
               Please Log In
             </Link>
           </h3>
