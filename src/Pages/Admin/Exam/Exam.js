@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
-import { createExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
+import { createExamApi, deleteExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import Spinner from '../../../components/Spinner'
@@ -52,6 +52,7 @@ export const Exam = (props) => {
     })
 
     getAllExamApi({}).then(data => {
+      console.log(data)
       setSpin(false)
       if (data.error) throw data.message
       setExam([...data.data])
@@ -143,7 +144,7 @@ export const Exam = (props) => {
 
     setSpin(true)
     createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }), endTime: new Date(state.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) }).then(data => {
-      
+
       setSpin(false)
       if (data.error) throw data.message
       setMessage(data.message)
@@ -154,30 +155,45 @@ export const Exam = (props) => {
 
   }
 
+  const deleteExam = (id) => {
+    setSpin(true)
+    if (window.confirm("Are you sure you want to delete?")) {
+      setSpin(false)
+      deleteExamApi(id).then(data => {
+        window.alert(data.message)
+      })
+    }
+  }
+
 
   let examShow
   if (exam.length === 0) { examShow = <div className='p-5 bg-neutral text-white my-5'>No Exam Created</div> }
   else {
     examShow = exam.map(item => {
       return (
-        <Link to={`/admin-dashboard/exam-details/${item._id}`} className='card card-body glass my-10 bg-slate-700 text-white'>
-          <div className='flex justify-between'>
-            <div className='font-bold'>Exam Name: {item.exam}</div>
-            <div className=''>Total Marks: {item.totalMarks}</div>
-          </div>
-          <div className='flex justify-between'>
-            <div className=''>Start Time: {new Date(item.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
-            <div className=''>End Time: {new Date(item.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
-          </div>
-          <div className='flex justify-between'>
-            <div className=''>Negative Marking: {item.negativeMarking}</div>
-            <div className=''>Per MCQ Marks: {item.mcqsId.length}</div>
-          </div>
-          <div className='flex justify-between'>
-            <div className=''>Number of MCQ: {item.numberOfMcq}</div>
-            <div className=''>Number of Broad Question: {item.broadQuestionsId.length}</div>
-          </div>
-        </Link>
+        <div className='card card-body glass my-10 bg-slate-700 text-white'>
+          <Link to={`/admin-dashboard/exam-details/${item._id}`} className=''>
+            <div className='flex justify-between'>
+              <div className='font-bold'>Exam Name: {item.exam}</div>
+              <div className=''>Total Marks: {item.totalMarks}</div>
+            </div>
+            <div className='flex justify-between'>
+              <div className=''>Start Time: {new Date(item.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+              <div className=''>End Time: {new Date(item.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+            </div>
+            <div className='flex justify-between'>
+              <div className=''>Negative Marking: {item.negativeMarking}</div>
+              <div className=''>Per MCQ Marks: {item.mcqsId.length}</div>
+            </div>
+            <div className='flex justify-between'>
+              <div className=''>Number of MCQ: {item.numberOfMcq}</div>
+              <div className=''>Number of Broad Question: {item.broadQuestionsId.length}</div>
+            </div>
+
+
+          </Link>
+          <div><button onClick={() => deleteExam(item._id)} className='btn btn-error'>Detete Exam</button></div>
+        </div>
       )
     })
   }

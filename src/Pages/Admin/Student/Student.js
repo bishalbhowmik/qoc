@@ -2,7 +2,7 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { setAssignmentPremiumApi, setCoursePremiumApi } from '../../../Api/Admin/StudentApi'
+import { deleteStudentApi, setAssignmentPremiumApi, setCoursePremiumApi } from '../../../Api/Admin/StudentApi'
 import { getAllStudent } from '../../../Api/Student/StudentApi'
 import Spinner from '../../../components/Spinner'
 
@@ -32,6 +32,7 @@ export const Student = (props) => {
     if (window.confirm('Are you sure you want to?')) {
       setSpin(true)
       setAssignmentPremiumApi(id).then(data => {
+        console.log(data)
         setSpin(false)
         window.alert(data.message);
       })
@@ -49,6 +50,15 @@ export const Student = (props) => {
       })
     }
 
+  }
+
+
+  const deleteStudent = id => {
+    if (window.confirm('Are you sure you want to?')) {
+      deleteStudentApi(id).then(data => {
+        window.alert(data.message)
+      })
+    }
   }
 
 
@@ -82,6 +92,7 @@ export const Student = (props) => {
 
           <td>{item.course && !item.course.isPremium ? <button onClick={() => setCoursePremium(item._id)} className='btn btn-outline'>Set</button> : ''}</td>
           <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Details</button></td>
+          <td><button className='btn btn-error btn-sm' onClick={e => deleteStudent(item._id)}>Remove</button></td>
         </tr>
       )
 
@@ -108,6 +119,7 @@ export const Student = (props) => {
               <th>Set Premium</th>
               <th>Course Premium</th>
               <th>Set Premium</th>
+              <th>{''}</th>
               <th>{''}</th>
 
             </tr>

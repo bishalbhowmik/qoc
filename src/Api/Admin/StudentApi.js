@@ -27,3 +27,16 @@ export const setCoursePremiumApi = async (id) => {
     return student
 
 }
+
+
+export const deleteStudentApi = async (id) => {
+
+    let batch = axios.delete(process.env.REACT_APP_BACKEND_URL + '/api/student/' + id, {
+        headers: {
+            Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
+        }
+    }).then(data => data.data)
+
+    return batch
+
+}

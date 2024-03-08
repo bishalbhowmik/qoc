@@ -47,9 +47,6 @@ export const Curriculum = (props) => {
 
     }, [location]);
 
-    console.log(subject)
-
-
     const handleChange = (e) => {
         setState({
             ...state,
@@ -64,6 +61,7 @@ export const Curriculum = (props) => {
         setSpin(true)
 
         createSubjectsApi({ ...state, curriculumId: location.state ? location.state.curriculum._id : '' }).then(data => {
+            console.log(data)
             setSpin(false)
             if (data.error) throw data.message
             window.alert(data.message)
@@ -154,7 +152,7 @@ export const Curriculum = (props) => {
 
                 <div className='my-10'>
                     <form onSubmit={e => addOutline(e)} action="">
-                        <input required multiple onChange={e => setUpdateState({ ...updateState, outlines: e.target.files })} className='file-input' type="file" name="outlines" id="" />
+                        <input accept="  " required multiple onChange={e => setUpdateState({ ...updateState, outlines: e.target.files })} className='file-input' type="file" name="outlines" id="" />
                         <button className='btn btn-info' type='submit'>Add outline</button>
                     </form>
                 </div>

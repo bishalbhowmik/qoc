@@ -1,9 +1,10 @@
+import bufferToDataUrl from 'buffer-to-data-url'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getAllBatchApi, joiningBatchApi } from '../../../Api/Student/BatchApi'
 import { Link } from 'react-router-dom'
+import { deleteBatchApi } from '../../../Api/Admin/BatchApi'
+import { getAllBatchApi } from '../../../Api/Student/BatchApi'
 import Spinner from '../../../components/Spinner'
-import bufferToDataUrl from 'buffer-to-data-url'
 
 export const AdminBatch = (props) => {
 
@@ -24,6 +25,14 @@ export const AdminBatch = (props) => {
 
     }, [])
 
+
+    const deleteBatch = id => {
+        if (window.confirm('Are you sure you want to?')) {
+            deleteBatchApi(id).then(data => {
+                window.alert(data.message)
+            })
+        }
+    }
 
 
 
@@ -51,8 +60,9 @@ export const AdminBatch = (props) => {
                             <div className='text-lg'><strong>Description: </strong>{item.description}</div>
 
                             <div className='mt-5'>
-                                <Link to={'https://' + item.classLink} target='_blank' className='btn btn-info me-5'>Join Class</Link>
-                                <Link to={'dashboard/' + item._id} className='btn btn-success'>Dashboard</Link>
+                                <Link to={'https://' + item.classLink} target='_blank' className='btn btn-info m-3'>Join Class</Link>
+                                <Link to={'dashboard/' + item._id} className='btn btn-success m-3'>Dashboard</Link>
+                                <Link onClick={() => deleteBatch(item._id)} className='btn btn-error m-3'>Delete</Link>
                             </div>
                         </div>
                     </div>

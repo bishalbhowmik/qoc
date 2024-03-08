@@ -48,24 +48,26 @@ export const ExamDetails = (props) => {
     else {
         participantsShow = participants.map((item, index) => {
 
-            return (
-                <tr className="hover">
-                    <th>{index + 1}</th>
-                    <td>{item.studentId.username}</td>
-                    <td>{item.studentId.mobile}</td>
-                    {exam.mcqsId.length > 0 ? <>
-                        <td className='bg-neutral-100'>{item.mcqMarks}</td>
-                        <td className='bg-neutral-100'>{item.correctMcq}</td>
-                        <td className='bg-neutral-100'>{item.wrongMcq}</td>
-                        <td className='bg-neutral-100'>{item.noAnswer}</td>
-                    </> : ''}
+            if (item.studentId) {
+                return (
+                    <tr className="hover">
+                        <th>{index + 1}</th>
+                        <td>{item.studentId.username}</td>
+                        <td>{item.studentId.mobile}</td>
+                        {exam.mcqsId.length > 0 ? <>
+                            <td className='bg-neutral-100'>{item.mcqMarks}</td>
+                            <td className='bg-neutral-100'>{item.correctMcq}</td>
+                            <td className='bg-neutral-100'>{item.wrongMcq}</td>
+                            <td className='bg-neutral-100'>{item.noAnswer}</td>
+                        </> : ''}
 
-                    {exam.broadQuestionsId.length > 0 ? <>
-                        <td className='bg-slate-200'>{item.broadQuestionMarks}</td>
-                        <td className=''><button onClick={e => viewScript(item)} className='btn btn-sm btn-ghost'>View</button></td>
-                    </> : ''}
-                </tr>
-            )
+                        {exam.broadQuestionsId.length > 0 ? <>
+                            <td className='bg-slate-200'>{item.broadQuestionMarks}</td>
+                            <td className=''><button onClick={e => viewScript(item)} className='btn btn-sm btn-ghost'>View</button></td>
+                        </> : ''}
+                    </tr>
+                )
+            }
 
         })
     }

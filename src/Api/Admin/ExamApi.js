@@ -83,3 +83,23 @@ export const uploadSolutionApi = async (examId, obj) => {
 
   return exam;
 };
+
+
+
+
+export const deleteExamApi = async (id) => {
+
+
+  let exam = axios.delete(process.env.REACT_APP_BACKEND_URL + "/api/exam/" + id, {
+    headers: {
+      Authorization: window.localStorage.getItem(
+        process.env.REACT_APP_LOCAL_TOKEN_NAME
+      ),
+      // "Content-Type": "multipart/form-data",
+    },
+  }
+  )
+    .then((data) => data.data);
+
+  return exam;
+};

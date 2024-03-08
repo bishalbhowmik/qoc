@@ -199,6 +199,8 @@ export const Subject = (props) => {
   const handleFocusSubmit = e => {
     e.preventDefault()
 
+    // console.log({ ...focusState, subjectId: location.state.subject._id, curriculumId: location.state.subject.curriculumId._id })
+
     setSpin(true);
     createFocusApi({ ...focusState, subjectId: location.state.subject._id, curriculumId: location.state.subject.curriculumId._id }).then(data => {
       setSpin(false); //
