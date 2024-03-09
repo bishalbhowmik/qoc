@@ -1,17 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { faHandsClapping } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import "./SignUp.css";
-import axios from "axios";
+import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
 import { signupApi } from "../../Api/AuthApi";
 import { saveToken, tokenDecode } from "../../Functions/AuthFunctions";
-import { connect } from "react-redux";
-import { AUTHENTICATED } from "../../Redux/ActionTypes";
-import { getAllCurriculumApi } from "../../Api/Admin/CurriculumApi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandsClapping } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../../components/Spinner";
+import "./SignUp.css";
 
 
 const mapStateToProps = (state) => {
@@ -26,6 +23,7 @@ const SignUp = (props) => {
   const [curriculum, setCurriculum] = useState([])
   const [message, setMessage] = useState('')
   const [spin, setSpin] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
 
   useEffect(() => {
     setSpin(true)
@@ -50,11 +48,12 @@ const SignUp = (props) => {
 
   const handleSignup = (data) => {
 
+
     signupApi(data).then(data => {
 
-      if (data.error) throw data.message + '. ' + data.value 
+      if (data.error) throw data.message + '. ' + data.value
 
-      setMessage(data.message )
+      setMessage(data.message)
       saveToken(data.value.token)
       tokenDecode().then(data => {
         navigate(navigate(`/${data.role}-dashboard`))
@@ -64,6 +63,12 @@ const SignUp = (props) => {
     })
       .catch(err => setMessage(err))
 
+  };
+
+
+
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
   };
 
   return (
@@ -84,8 +89,9 @@ const SignUp = (props) => {
               <span className="label-text">Signup as</span>
             </label>
 
-            <select {...register("role", {
+            <select onChange={e => handleRoleChange(e)} {...register("role", {
               required: "This field is required",
+              onChange: (e) => handleRoleChange(e)
             })} name="role" id="" className="w-full select select-bordered">
 
               <option value="">Select</option>
@@ -98,22 +104,27 @@ const SignUp = (props) => {
             )}
           </div>
 
-          <div>
-            <label className="label">
-              <span className="label-text">Curriculum</span>
-            </label>
+          {
+            selectedRole === 'student' &&
+            (
+              <div>
+                <label className="label">
+                  <span className="label-text">Curriculum</span>
+                </label>
 
-            <select {...register("curriculumId", {
-              required: "This field is required",
-            })} name="curriculumId" id="" className="w-full select select-bordered">
+                <select {...register("curriculumId", {
+                  required: "This field is required",
+                })} name="curriculumId" id="" className="w-full select select-bordered">
 
-              <option value="">Select</option>
-              {curriculum.map((item, index) => <option value={item._id}>{item.curriculum}</option>)}
-            </select>
-            {errors.curriculumId && (
-              <p className="text-red-400  text-xs mt-2">{errors.curriculumId?.message}</p>
-            )}
-          </div>
+                  <option value="">Select</option>
+                  {curriculum.map((item, index) => <option value={item._id}>{item.curriculum}</option>)}
+                </select>
+                {errors.curriculumId && (
+                  <p className="text-red-400  text-xs mt-2">{errors.curriculumId?.message}</p>
+                )}
+              </div>
+            )
+          }
 
           <div>
             <label className="label">

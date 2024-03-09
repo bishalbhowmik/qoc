@@ -2,7 +2,7 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { getTeacher, setPremiumApi } from '../../../Api/Admin/TeacherApi'
+import { deleteTeacherApi, getTeacher, setPremiumApi } from '../../../Api/Admin/TeacherApi'
 import Spinner from '../../../components/Spinner'
 
 export const Teacher = (props) => {
@@ -42,6 +42,15 @@ export const Teacher = (props) => {
   }
 
 
+  const deleteTeacher = id => {
+    if (window.confirm('Are you sure you want to remove teacher?')) {
+      deleteTeacherApi(id).then(data => {
+        window.alert(data.message);
+      })
+    }
+  }
+
+
   let teacherShow
 
 
@@ -63,6 +72,7 @@ export const Teacher = (props) => {
           <td>{item.premiumEnd && new Date(item.premiumEnd).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</td>
           <td>{item.batch && !item.batch.isPremium ? <button onClick={() => setPremium(item._id)} className='btn btn-ghost'>Set</button> : ''}</td>
           <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Details</button></td>
+          <td><button className='btn btn-error btn-sm' onClick={e => deleteTeacher(item._id)}>Remove</button></td>
         </tr>
       )
 
@@ -92,6 +102,7 @@ export const Teacher = (props) => {
               <th>Premium</th>
               <th>Premium End</th>
               <th>Set Premium</th>
+              <th>{''}</th>
               <th>{''}</th>
 
             </tr>
