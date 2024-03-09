@@ -15,7 +15,6 @@ export const getTeacher = async (obj) => {
 
 }
 
-
 export const setPremiumApi = async (id) => {
 
     let teacher = axios.put(process.env.REACT_APP_BACKEND_URL + '/api/teacher/set-premium/' + id, {}, {

@@ -68,6 +68,8 @@ import FAQ from "../Pages/FAQ/FAQ";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import Cookies from "../Pages/Cookies/Cookies";
 import TermsConditions from "../Pages/TermsCondition/TermsConditions";
+import FindTutors from "../Pages/FindTutors/FindTutors";
+import TutorDetails from "../Pages/FindTutors/TutorDetails";
 
 
 
@@ -147,6 +149,14 @@ export const router = createBrowserRouter([
       {
         path: "/terms-and-conditions",
         element: <TermsConditions />,
+      },
+      {
+        path: "/find-tutors",
+        element: <FindTutors />,
+      },
+      {
+        path: "/tutor-details/:id",
+        element: <TutorDetails />,
       },
 
       {

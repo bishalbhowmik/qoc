@@ -301,7 +301,7 @@ function Home(props) {
                 Book Your Lessons
               </button>
               <button className="bg-transparent text-sm hover:bg-lightA hover:text-[#ac1823] hover:rounded-full hover:w-44 hover:h-11">
-                Find Your Tutors
+                <Link to="/find-tutors">Find Your Tutors</Link>
               </button>
             </span>
           </div>

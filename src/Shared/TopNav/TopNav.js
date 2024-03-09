@@ -22,7 +22,7 @@ const TopNav = () => {
 
           <div className="flex items-center gap-x-7 text-[1.3rem]">
             <span>
-              <a href="https://www.facebook.com/norgate.99" target="_blank"><i className="fa-brands fa-facebook "></i></a>
+              <a href="https://www.facebook.com/qoc.99" target="_blank"><i className="fa-brands fa-facebook "></i></a>
             </span>
             <span>
               <a href=""><i className="fa-brands fa-instagram"></i></a>
