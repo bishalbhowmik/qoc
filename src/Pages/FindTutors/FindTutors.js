@@ -3,14 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTeacher } from '../../Api/Admin/TeacherApi'
 import { Link } from 'react-router-dom'
+import Spinner from '../../components/Spinner'
 
 export const FindTutors = (props) => {
 
     const [teachers, setTeachers] = useState([])
+    const [spin, setSpin] = useState(false)
 
     useEffect(() => {
 
-        getTeacher({"batch.isPremium": true}).then(data => {
+        setSpin(true)
+        getTeacher({ "batch.isPremium": true }).then(data => {
+            setSpin(false)
             if (data.error) throw data.message
             setTeachers(data.data.filter(item => item.batch && (new Date() < new Date(item.batch.endTime))))
         })
@@ -29,9 +33,9 @@ export const FindTutors = (props) => {
                     <div
                         className="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                         <div className="flex justify-center">
-                            <div className="flex justify-center -mt-[75px]">
+                            <div className="flex justify-center -mt-[75px] w-[170px] h-[170px] border rounded-full">
                                 <img src={item.image && item.image.contentType && item.image != '' ? bufferToDataUrl(item.image.contentType, item.image.data) : '/male.png'}
-                                    className="mx-auto rounded-full shadow-lg dark:shadow-black/20 w-[150px]" alt="Avatar" />
+                                    className="mx-auto rounded-full shadow-lg dark:shadow-black/20 w-full h-full" alt="Avatar" />
                             </div>
                         </div>
                         <div className="p-6">
@@ -65,6 +69,9 @@ export const FindTutors = (props) => {
                 </section>
 
             </div>
+
+
+            {spin && <Spinner />}
         </div>
     )
 }

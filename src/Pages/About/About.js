@@ -40,7 +40,7 @@ export const About = (props) => {
                 </div>
 
                 <div className='my-5'>
-                    <div className='text-xl text-red-800 my-5 font-bold'>Our vission</div>
+                    <div className='text-xl text-red-800 my-5 font-bold'>Our vision</div>
                     Embark on an exciting journey of exploration, discovery, and education with QOC. Let's together
                     build a Quorum of Learning that transcends boundaries and transforms the educational
                     landscape. Join us and become part of a community that cherishes knowledge, values

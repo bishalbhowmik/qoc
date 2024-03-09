@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { getTeacher } from "../../Api/Admin/TeacherApi";
 import banner2 from "../../assets/banner-2.png";
 import banner from "../../assets/banner.svg";
 import check from "../../assets/check.png";
 import course from "../../assets/course.png";
 import feature from "../../assets/feature.png";
 import tutor from "../../assets/find-tutor.png";
-import person from "../../assets/person.png";
 import student from "../../assets/student.png";
 import MessengerChat from "../Chat/MessengerChat";
 import styles from "./Home.module.css";
+import bufferToDataUrl from "buffer-to-data-url";
 
 
 const mapStateToProps = (state) => {
@@ -24,6 +25,21 @@ const mapStateToProps = (state) => {
 }
 
 function Home(props) {
+
+  const [teachers, setTeachers] = useState([])
+
+  useEffect(() => {
+
+
+
+    getTeacher({ "batch.isPremium": true }).then(data => {
+      if (data.error) throw data.message
+      setTeachers(data.data.filter(item => item.batch && (new Date() < new Date(item.batch.endTime))))
+    })
+      .catch(err => window.alert(err))
+
+  }, [])
+
 
   const responsive = {
     superLargeDesktop: {
@@ -44,6 +60,21 @@ function Home(props) {
       items: 1
     }
   };
+
+
+
+  // let teacherShow
+  // if (teachers.length === 0) { teacherShow = <div className='p-24 text=center font-bold'>No Teacher Found</div> }
+  // else {
+  //   teacherShow = teachers.map(item => {
+
+  //     return (
+        
+  //     )
+
+  //   })
+  // }
+
 
 
   return (
@@ -220,62 +251,51 @@ function Home(props) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 ">
-            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
-              <img className="w-[100%] rounded-lg" src={person} alt="person" />
-              <div className="flex flex-col gap-y-3 items-center justify-center">
-                <h1 className="text-3xl">Jhon Doe</h1>
-                <p className="text-[#ac1823] text-lg">
-                  Software Engineer Instructors
-                </p>
-                <span className="text-[#FFB800]">
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                </span>
-              </div>
-            </div>
+          <Carousel
+            swipeable={true}
+            // draggable={true}
+            showDots={true}
+            responsive={responsive}
+            // ssr={true} // means to render carousel on server-side.
+            infinite={true}
+            // autoPlay={true}
+            autoPlaySpeed={3000}
+          // keyBoardControl={true}
+          // customTransition="all .5"
+          // transitionDuration={500}
+          >
+            {
+              teachers.length > 0 ? teachers.map(item => {
+                return (
+                  <div className="mt-20 mx-5">
+                    <div style={{height: '300px'}} className="">
+                      <div
+                        className="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                        <div className="flex justify-center">
+                          <div className="flex justify-center -mt-[75px] border rounded-full w-[170px] h-[170px]">
+                            <img src={item.image && item.image.contentType && item.image != '' ? bufferToDataUrl(item.image.contentType, item.image.data) : '/male.png'}
+                              className="mx-auto rounded-full object-contain shadow-lg dark:shadow-black/20 w-full h-full" alt="Avatar" />
+                          </div>
+                        </div>
+                        <div className="p-6">
+                          <h5 className="mb-4 text-lg font-bold text-center">{item.username}</h5>
+                          <p className="mb-6 text-center">{item.bio}</p>
+                          <div className="mx-auto flex list-inside justify-center">
+                            <Link to={`/tutor-details/${item._id}`}><button className='btn btn-outline btn-sm'>See details</button></Link>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }) : <div></div>
+            }
 
-            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
-              <img className="w-[100%] rounded-lg" src={person} alt="person" />
-              <div className="flex flex-col gap-y-3 items-center justify-center">
-                <h1 className="text-3xl">Jhon Doe</h1>
-                <p className="text-[#ac1823] text-lg">
-                  Software Engineer Instructors
-                </p>
-                <span className="text-[#FFB800]">
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                </span>
-              </div>
-            </div>
-
-            <div className="mx-auto w-[85%] md:w-[90%] h-[auto] pb-5 bg-white shadow-lg rounded-lg">
-              <img className="w-[100%] rounded-lg" src={person} alt="person" />
-              <div className="flex flex-col gap-y-3 items-center justify-center">
-                <h1 className="text-3xl">Jhon Doe</h1>
-                <p className="text-[#ac1823] text-lg">
-                  Software Engineer Instructors
-                </p>
-                <span className="text-[#FFB800]">
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                  <i className="fa-solid fa-star mr-1" />
-                </span>
-              </div>
-            </div>
-          </div>
+          </Carousel>
 
           <div className="flex items-center justify-center mt-20">
             <button className="bg-normal hover:bg-normalH text-white text-sm w-48 h-11 rounded-full">
-              View All Instructors
+              <Link to="/find-tutors">View All Instructors</Link>
             </button>
           </div>
         </div>
@@ -297,11 +317,11 @@ function Home(props) {
             </p>
 
             <span className="mt-5">
-              <button className="bg-white text-[#ac1823] w-44 h-11 hover:bg-lightA text-sm rounded-full mr-5">
-                Book Your Lessons
-              </button>
-              <button className="bg-transparent text-sm hover:bg-lightA hover:text-[#ac1823] hover:rounded-full hover:w-44 hover:h-11">
+              <button className="bg-white text-[#ac1823] w-44 h-11 font-bold hover:font-normal text-sm rounded-full mr-5">
                 <Link to="/find-tutors">Find Your Tutors</Link>
+              </button>
+              <button className="text-sm bg-darkH text-white rounded-full w-44 h-11 mt-3 md:mt-0 font-bold hover:font-normal">
+                <Link>Book Your Lessons </Link>
               </button>
             </span>
           </div>

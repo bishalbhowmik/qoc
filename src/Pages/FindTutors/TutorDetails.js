@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getTeacher } from '../../Api/Admin/TeacherApi'
 import { getAllBatchApi } from '../../Api/Student/BatchApi'
+import Spinner from '../../components/Spinner'
 
 export const TutorDetails = (props) => {
 
@@ -11,14 +12,18 @@ export const TutorDetails = (props) => {
     const { id } = useParams()
     const [teacher, setTeacher] = useState(null)
     const [batches, setBatches] = useState([])
+    const [spin, setSpin] = useState(false)
 
     useEffect(() => {
 
+        setSpin(true)
         getTeacher({ _id: id }).then(data => {
             if (data.error) throw data.message
             setTeacher(data.data[0])
 
             getAllBatchApi({ teacherId: id }).then(data => {
+
+                setSpin(false)
 
                 if (data.error) throw data.message
                 setBatches(data.data)
@@ -98,6 +103,8 @@ export const TutorDetails = (props) => {
                     </div>
                 </div>
             </div>
+
+            {spin && <Spinner />}
         </div>
     )
 }
