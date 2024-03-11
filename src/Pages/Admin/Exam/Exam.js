@@ -189,8 +189,6 @@ export const Exam = (props) => {
               <div className=''>Number of MCQ: {item.numberOfMcq}</div>
               <div className=''>Number of Broad Question: {item.broadQuestionsId.length}</div>
             </div>
-
-
           </Link>
           <div><button onClick={() => deleteExam(item._id)} className='btn btn-error'>Detete Exam</button></div>
         </div>

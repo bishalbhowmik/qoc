@@ -86,6 +86,7 @@ export const AdminResource = (props) => {
     setSpin(true);
     createResourceApi(resourceState).then(data => {
       setSpin(false); //
+      console.log(data)
       window.alert(data.message);
 
       document.getElementById('addResourceModal').close()
@@ -119,6 +120,7 @@ export const AdminResource = (props) => {
     e.preventDefault()
     setSpin(true);
     updateResourceApi(selectedResource._id, resourceState).then(data => {
+      console.log(data)
       setSpin(false);
       window.alert(data.message);
       document.getElementById('updateResourceModal').close()

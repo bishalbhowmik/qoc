@@ -56,7 +56,7 @@ export const StudentChapter = (props) => {
             getFocusApi({ chapterId: chapter._id }).then((data) => {
                 console.log(data)
                 if (data.error) throw data.message;
-                setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId') && new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
+                setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId')));
             }).catch(err => { })
         }
 

@@ -8,7 +8,10 @@ export const createResourceApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => {
+        // console.log(data)
+        return data.data
+    })
 
 
     return resource

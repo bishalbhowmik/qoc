@@ -19,7 +19,7 @@ export const Resource = (props) => {
     getResourceApi({}).then(data => {
       setSpin(false)
       if (data.error) throw data.message
-      setResource(data.data.filter(item => new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)))
+      setResource(data.data)
     }).catch(err => {
       console.log(err)
     })

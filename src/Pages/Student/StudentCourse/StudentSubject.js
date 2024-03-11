@@ -60,7 +60,7 @@ export const StudentSubject = (props) => {
             getFocusApi({ subjectId: subject._id }).then((data) => {
                 console.log(data)
                 if (data.error) throw data.message;
-                setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId') && new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
+                setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
             }).catch(err => { })
         }
 

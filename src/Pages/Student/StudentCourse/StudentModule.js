@@ -42,7 +42,7 @@ export const StudentModule = (props) => {
             getFocusApi({ moduleId: module._id }).then((data) => {
                 console.log(data)
                 if (data.error) throw data.message;
-                setFocus(data.data.filter(item => new Date() >= new Date() >= new Date(item.startTime) && new Date() <= new Date(item.endTime)));
+                setFocus(data.data);
             }).catch(err => { })
 
         }
