@@ -9,7 +9,9 @@ export const createNoticeApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return notice
@@ -24,7 +26,9 @@ export const getNoticeApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return notice
@@ -38,7 +42,9 @@ export const deleteNoticeApi = async (id) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return notice

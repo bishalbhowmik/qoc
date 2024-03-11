@@ -7,7 +7,9 @@ export const createTeacherPaymentApi = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return batch
 
@@ -19,7 +21,9 @@ export const checkTeacherPremiumApi = async () => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return batch
 
@@ -32,7 +36,9 @@ export const getAllBatchApi = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return batch
 
@@ -45,7 +51,9 @@ export const createBatchApi = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return batch
 

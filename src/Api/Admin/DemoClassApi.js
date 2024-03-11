@@ -9,7 +9,9 @@ export const createDemoClassApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return demoClass
@@ -24,7 +26,9 @@ export const getDemoClassApi = async () => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return demoClass
@@ -39,7 +43,9 @@ export const updateDemoClassApi = async (demoClassId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return demoClass
@@ -54,7 +60,9 @@ export const removeDemoClassApi = async (demoClassId) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return demoClass

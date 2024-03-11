@@ -8,7 +8,9 @@ export const getTeacher = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return teacher
@@ -21,7 +23,9 @@ export const setPremiumApi = async (id) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return teacher
@@ -35,7 +39,9 @@ export const deleteTeacherApi = async (id) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return teacher
 

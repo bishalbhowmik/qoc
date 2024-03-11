@@ -7,7 +7,9 @@ export const getAllBatchApi = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return batch
 
@@ -20,7 +22,9 @@ export const joiningBatchApi = async (obj) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return batch
 
@@ -33,7 +37,9 @@ export const getEnrolledBatchApi = async (id) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return batch
 
@@ -46,7 +52,9 @@ export const getBatchDashboardApi = async (batchId, str) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return batch
 
@@ -60,7 +68,9 @@ export const createAnnouncementApi = async (batchId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return announcement
 

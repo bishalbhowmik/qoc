@@ -9,8 +9,10 @@ export const createResourceApi = async (obj) => {
             "Content-Type": 'multipart/form-data'
         }
     }).then(data => {
-        // console.log(data)
+        
         return data.data
+    }).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
     })
 
 
@@ -26,7 +28,9 @@ export const getResourceApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return resource
@@ -41,7 +45,9 @@ export const updateResourceApi = async (resourceId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return resource
@@ -56,7 +62,9 @@ export const removeResourceApi = async (resourceId) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
 
     return resource

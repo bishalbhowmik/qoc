@@ -8,7 +8,9 @@ export const getModulesApi = async (chapterId) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return curriculum
@@ -23,7 +25,9 @@ export const createModuleApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return curriculum
@@ -38,7 +42,9 @@ export const getAModuleApi = async (moduleId) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return module
@@ -53,7 +59,9 @@ export const removeModuleMaterialsApi = async (moduleId, pos) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return module
@@ -68,7 +76,9 @@ export const addModuleMaterialsApi = async (moduleId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return module
 
@@ -83,7 +93,9 @@ export const deleteModuleApi = async (id) => {
             // "Content-Type": 'multipart/form-data'
         }
 
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return module

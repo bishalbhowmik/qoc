@@ -9,7 +9,9 @@ export const getExamByIdApi = async (studentId) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             // "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return exam
 
@@ -24,7 +26,9 @@ export const submitExamApi = async (examId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return exam
 
@@ -38,7 +42,9 @@ export const getAExamMarksApi = async (examId, studentId) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return exam
 

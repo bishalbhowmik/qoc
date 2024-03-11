@@ -6,11 +6,13 @@ export const getApprovedTuitionApi = async (id) => {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
             'Access-Control-Allow-Origin': '*',
-            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),            
+            'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
 
         },
-        
-    }).then(data => data.data)
+
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return data
 }
@@ -24,6 +26,9 @@ export const applyTuitionApi = async (tuitionId, teacherId) => {
             'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
         }
     }).then(data => data.data)
+        .catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return data
 }
@@ -36,6 +41,9 @@ export const getConfirmedTuitionApi = async (teacherId) => {
             'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
         }
     }).then(data => data.data)
+        .catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return data
 }

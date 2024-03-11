@@ -8,7 +8,9 @@ export const getChaptersApi = async (subjectId) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return curriculum
@@ -23,7 +25,9 @@ export const createChapterApi = async (obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return curriculum
@@ -38,7 +42,9 @@ export const getAChapterApi = async (chapterId) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return curriculum
@@ -53,7 +59,9 @@ export const removeChapterMaterialsApi = async (chapterId, pos) => {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return chapter
@@ -68,7 +76,9 @@ export const addChapterMaterialsApi = async (chapterId, obj) => {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
             "Content-Type": 'multipart/form-data'
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
     return chapter
 
@@ -84,7 +94,9 @@ export const deleteChapterApi = async (id) => {
             // "Content-Type": 'multipart/form-data'
         }
 
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
 
     return module

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { getTeacher } from '../../../Api/Admin/TeacherApi'
 import { updateTeacherInfoApi } from '../../../Api/Teacher/TeacherApi'
+import Spinner from '../../../components/Spinner'
 
 export const TeacherDashboard = (props) => {
 
@@ -29,9 +30,13 @@ export const TeacherDashboard = (props) => {
     premiumEnd: '',
   })
 
+  const [spin, setSpin] = useState(false)
+
   useEffect(() => {
 
+    setSpin(true)
     getTeacher({ _id: props.decodedToken._id }).then(data => {
+      setSpin(false)
 
       setState({
         ...state,
@@ -72,8 +77,14 @@ export const TeacherDashboard = (props) => {
 
     e.preventDefault()
 
+    setSpin(true)
+
+
     updateTeacherInfoApi(props.decodedToken._id, state).then(data => {
-      console.log(data)
+
+      setSpin(false)
+
+      window.alert(data.message)
     })
   }
 
@@ -188,6 +199,8 @@ export const TeacherDashboard = (props) => {
 
         </form>
       </div>
+
+      {spin && <Spinner />}
 
     </div>
   )

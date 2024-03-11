@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getChaptersApi } from '../../../Api/Admin/ChapterApi'
 import { getAllCurriculumApi } from '../../../Api/Admin/CurriculumApi'
-import { createExamApi, deleteExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
+import { deleteExamApi, getAllExamApi } from '../../../Api/Admin/ExamApi'
+import { getMcqByCriteriaApi } from '../../../Api/Admin/McqApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import Spinner from '../../../components/Spinner'
@@ -17,6 +18,8 @@ export const Exam = (props) => {
   const [module, setModule] = useState([])
   const [exam, setExam] = useState([])
   const [spin, setSpin] = useState(false)
+  const [mcq, setMcq] = useState([]),
+    [broadQuestion, setBroadQuestion] = useState([])
   const [state, setState] = useState({
 
     exam: '',
@@ -31,7 +34,9 @@ export const Exam = (props) => {
     endTime: '',
     negativeMarking: 0,
     perMcqMarks: 1,
-    totalMarks: ''
+    totalMarks: '',
+    manualSelect: true,
+    uploadQuestion: false
 
 
   })
@@ -67,6 +72,7 @@ export const Exam = (props) => {
 
   const handleChange = (e) => {
 
+
     if (e.target.value != '') {
       if (e.target.name === 'curriculumId') {
         setSpin(true)
@@ -91,7 +97,17 @@ export const Exam = (props) => {
       }
 
       else if (e.target.name === 'subjectId') {
+
         setSpin(true)
+
+        getMcqByCriteriaApi({ subjectId: e.target.value }).then(data => {
+          if (!data.error) {
+            setMcq([...data.data])
+          }
+        })
+
+
+
         getChaptersApi(e.target.value).then(data => {
           setSpin(false)
           if (data.error) {
@@ -111,6 +127,13 @@ export const Exam = (props) => {
 
       else if (e.target.name === 'chapterId') {
         setSpin(true)
+
+        getMcqByCriteriaApi({ chapterId: e.target.value }).then(data => {
+          if (!data.error) {
+            setMcq([...data.data])
+          }
+        })
+
         getModulesApi(e.target.value).then(data => {
           setSpin(false)
           if (data.error) {
@@ -126,8 +149,19 @@ export const Exam = (props) => {
       }
 
       else if (e.target.name === 'moduleId') {
+
+        setSpin(true)
+
+        getMcqByCriteriaApi({ moduleId: e.target.value }).then(data => {
+          setSpin(false)
+          if (!data.error) {
+            setMcq([...data.data])
+          }
+        })
+
         setState({ ...state, [e.target.name]: e.target.value })
       }
+
       else {
         setState({
           ...state,
@@ -142,16 +176,18 @@ export const Exam = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    setSpin(true)
-    createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }), endTime: new Date(state.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) }).then(data => {
+    console.log(state)
 
-      setSpin(false)
-      if (data.error) throw data.message
-      setMessage(data.message)
-    })
-      .catch(err => {
-        setMessage(err)
-      })
+    // setSpin(true)
+    // createExamApi({ ...state, startTime: new Date(state.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }), endTime: new Date(state.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) }).then(data => {
+
+    //   setSpin(false)
+    //   if (data.error) throw data.message
+    //   setMessage(data.message)
+    // })
+    //   .catch(err => {
+    //     setMessage(err)
+    //   })
 
   }
 
@@ -253,6 +289,16 @@ export const Exam = (props) => {
               <select className='select select-bordered w-full' name="moduleId" onChange={(e) => handleChange(e)} id="">
                 {module.map((item, index) => <option selected={state.moduleId === item._id} value={index === 0 ? '' : item._id}>{index === 0 ? 'Select' : item.module}</option>)}
               </select>
+            </div>
+
+
+            <div className='mb-5'>
+              <span className="label label-text">Select Mcq: </span>
+
+              
+              {/* <select multiple className='select select-bordered w-full' name="mcq" onChange={(e) => handleChange(e)} id="">
+                {mcq.map((item, index) => <option value={item._id}>{item.question}</option>)}
+              </select> */}
             </div>
 
             <div className='mb-5'>

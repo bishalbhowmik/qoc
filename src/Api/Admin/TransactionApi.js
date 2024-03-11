@@ -8,7 +8,9 @@ export const getAllTransactionApi = async () => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return payment
 }
@@ -23,7 +25,9 @@ export const deleteransactionApi = async () => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME)
         }
-    }).then(data => data.data)
+    }).then(data => data.data).catch(err => {
+        return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+    })
 
     return transaction
 }

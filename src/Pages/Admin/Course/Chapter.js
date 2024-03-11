@@ -57,7 +57,7 @@ export const Chapter = (props) => {
         .catch((err) => { });
       getModulesApi(chapter._id)
         .then((data) => {
-          setSpin(false);
+          
           if (data.error) throw data.message;
           setModules([...data.data]);
         })
@@ -67,7 +67,7 @@ export const Chapter = (props) => {
 
 
       getFocusApi({ chapterId: chapter._id }).then((data) => {
-
+        setSpin(false);
         if (data.error) throw data.message;
         setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId')));
       }).catch(err => { })

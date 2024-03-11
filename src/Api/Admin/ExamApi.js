@@ -10,7 +10,9 @@ export const createExamApi = async (obj) => {
         // "Content-Type": 'multipart/form-data'
       },
     })
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };
@@ -25,7 +27,9 @@ export const getAllExamApi = async (obj) => {
         // "Content-Type": 'multipart/form-data'
       },
     })
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };
@@ -40,7 +44,9 @@ export const getAExamApi = async (examId) => {
         // "Content-Type": 'multipart/form-data'
       },
     })
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };
@@ -61,7 +67,9 @@ export const updateMarksApi = async (examId, studentId, state) => {
         },
       }
     )
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };
@@ -79,7 +87,9 @@ export const uploadSolutionApi = async (examId, obj) => {
     },
   }
   )
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };
@@ -99,7 +109,9 @@ export const deleteExamApi = async (id) => {
     },
   }
   )
-    .then((data) => data.data);
+    .then((data) => data.data).catch(err => {
+            return { message: `Something went wrong. - (${err.message}). Try again`, error: true }
+        })
 
   return exam;
 };

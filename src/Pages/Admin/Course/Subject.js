@@ -63,7 +63,7 @@ export const Subject = (props) => {
 
 
       getChaptersApi(subject._id).then((data) => {
-        setSpin(false);
+        
         if (data.error) throw data.message;
         setChapter([...data.data]);
       })
@@ -74,7 +74,7 @@ export const Subject = (props) => {
 
 
       getFocusApi({ subjectId: subject._id }).then((data) => {
-        console.log(data)
+        setSpin(false);
         if (data.error) throw data.message;
         setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
       }).catch(err => { })
