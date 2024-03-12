@@ -1,3 +1,4 @@
+import bufferToDataUrl from "buffer-to-data-url";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -11,13 +12,13 @@ import course from "../../assets/course.png";
 import feature from "../../assets/feature.png";
 import tutor from "../../assets/find-tutor.png";
 import student from "../../assets/student.png";
+import Spinner from "../../components/Spinner";
 import MessengerChat from "../Chat/MessengerChat";
 import styles from "./Home.module.css";
-import bufferToDataUrl from "buffer-to-data-url";
 
 
 const mapStateToProps = (state) => {
-  console.log(state);
+
   return {
     authenticated: state.authenticated,
     decodedToken: state.decodedToken
@@ -27,12 +28,14 @@ const mapStateToProps = (state) => {
 function Home(props) {
 
   const [teachers, setTeachers] = useState([])
+  const [spin, setSpin] = useState(false)
 
   useEffect(() => {
 
-
+    setSpin(true)
 
     getTeacher({ "batch.isPremium": true }).then(data => {
+      setSpin(false)
       if (data.error) throw data.message
       setTeachers(data.data.filter(item => item.batch && (new Date() < new Date(item.batch.endTime))))
     })
@@ -69,7 +72,7 @@ function Home(props) {
   //   teacherShow = teachers.map(item => {
 
   //     return (
-        
+
   //     )
 
   //   })
@@ -80,6 +83,8 @@ function Home(props) {
   return (
     <div className="">
       {/* Second Section */}
+
+      {spin && <Spinner />}
 
       <section id={styles.second} className="bg-[#FAF1F2] h-auto">
         <div
@@ -268,7 +273,7 @@ function Home(props) {
               teachers.length > 0 ? teachers.map(item => {
                 return (
                   <div className="mt-20 mx-5">
-                    <div style={{height: '300px'}} className="">
+                    <div style={{ height: '300px' }} className="">
                       <div
                         className="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                         <div className="flex justify-center">
