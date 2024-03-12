@@ -35,7 +35,7 @@ export const TutorDetails = (props) => {
 
     }, [id])
 
-    if (!teacher) return <div className='p-24 text-center font-bold'>Teacher not found</div>
+    if (!teacher) return <div className='p-24 text-center font-bold'>Teacher not found {spin && <Spinner />} </div>
 
 
     let batchShow
@@ -45,15 +45,15 @@ export const TutorDetails = (props) => {
             return (
                 <div class="bg-gray-100 shadow-md rounded-lg p-4 flex flex-col space-y-4">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-gray-800">{ item.title }</h3>
-                        <span class="text-sm font-medium bg-green-500 text-white rounded-full px-2 py-1">Enrolled: { item.enrolledStudents.length }</span>
+                        <h3 class="text-xl font-bold text-gray-800">{item.title}</h3>
+                        <span class="text-sm font-medium bg-green-500 text-white rounded-full px-2 py-1">Enrolled: {item.enrolledStudents.length}</span>
                     </div>
                     <div class="text-gray-700">
-                        <p>{ item.description }</p>
+                        <p>{item.description}</p>
                     </div>
                     <div class="flex justify-between items-center text-gray-700">
-                        <span>Start Date: {new Date(item.startDate).toLocaleDateString() }</span>
-                        <span>Fees: ৳{ item.fees }</span>
+                        <span>Start Date: {new Date(item.startDate).toLocaleDateString()}</span>
+                        <span>Fees: ৳{item.fees}</span>
                     </div>
                     <div class="flex space-x-2">
                         <template x-if="batch.pastPaperSolution">
@@ -64,7 +64,7 @@ export const TutorDetails = (props) => {
                 </div>
             )
         })
-            
+
     }
 
 
