@@ -75,7 +75,7 @@ export const TutorDetails = (props) => {
             <div className="container mx-auto px-4 py-8">
                 <div className="flex flex-col lg:flex-row gap-4">
                     <div className="w-full lg:w-1/3 flex justify-center items-center align-middle flex-col">
-                        <img src={teacher.image && teacher.image.contentType && teacher.image != '' ? bufferToDataUrl(teacher.image.contentType, teacher.image.data) : '/male.png'} class="mx-auto rounded-full shadow-lg dark:shadow-black/20 w-3/6" alt="" />
+                        <img src={teacher.image && teacher.image.contentType && teacher.image != '' ? process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + teacher.image.name : '/male.png'} class="mx-auto rounded-full shadow-lg dark:shadow-black/20 w-3/6" alt="" />
                         <div className="text-gray-700 mt-5"> {teacher.bio}</div>
                     </div>
                     <div className="w-full lg:w-2/3 flex flex-col space-y-4">

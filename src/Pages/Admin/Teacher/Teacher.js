@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { deleteTeacherApi, getTeacher, setPremiumApi } from '../../../Api/Admin/TeacherApi'
 import Spinner from '../../../components/Spinner'
+import { updateTeacherInfoApi } from '../../../Api/Teacher/TeacherApi'
 
 export const Teacher = (props) => {
 
@@ -12,23 +13,9 @@ export const Teacher = (props) => {
   const [selected, setSelected] = useState(null)
   const [teacherState, setTeacherState] = useState({
 
-    username: '',
-    email: '',
-    degree: '',
     review: '',
     grading: '',
-    useQocExam: '',
-    checkQocExam: '',
-    contactAgree: '',
-    institution: '',
-    gender: '',
-    address: '',
-    city: '',
-    state: '',
-    zip: '',
-    country: '',
-    bio: '',
-    description: '',
+    featured: ''
 
   })
 
@@ -57,33 +44,19 @@ export const Teacher = (props) => {
 
   const seeDetails = (item) => {
 
-    setSelected(item)
+    // console.log(item)
+    setSelected(null)
 
+    document.getElementById('teacherDetailsModal').showModal()
+    setSelected(item)
     setTeacherState({
-      username: item.username,
-      email: item.email,
-      degree: item.degree,
       review: item.review,
       grading: item.grading,
-      useQocExam: item.useQocExam,
-      checkQocExam: item.checkQocExam,
-      contactAgree: item.contactAgree,
-      institution: item.institution,
-      gender: item.gender,
-      address: item.address,
-      city: item.city,
-      state: item.state,
-      zip: item.zip,
-      country: item.country,
-      bio: item.bio,
-      description: item.description,
+      featured: item.featured
     })
-    
-    document.getElementById('teacherDetailsModal').showModal()
-
   }
 
-  
+
 
 
   const deleteTeacher = id => {
@@ -95,13 +68,20 @@ export const Teacher = (props) => {
   }
 
 
-  const handleUpdateChange = e => {
-    setTeacherState({ ...teacherState, [e.target.name]: e.target.value })
-  }
+  // const handleUpdateChange = e => {
+  //   setTeacherState({ ...teacherState, [e.target.name]: e.target.value })
+  // }
 
   const handleUpdateSubmit = e => {
-    // e.preventDefault()
+    e.preventDefault()
     console.log(teacherState)
+
+    updateTeacherInfoApi(selected._id, teacherState).then(data => {
+
+      setSpin(false)
+
+      window.alert(data.message)
+    })
   }
 
 
@@ -135,11 +115,10 @@ export const Teacher = (props) => {
 
 
 
-  
+
 
   return (
     <div>
-      {console.log(selected)}
       <div className="overflow-x-auto">
 
         <h2 className='text-center my-10 text-2xl'>All Teachers</h2>
@@ -173,90 +152,57 @@ export const Teacher = (props) => {
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
-          <h3 className="font-bold text-lg">Details of {teacherState && teacherState.username}</h3>
 
-          {selected && <div className='my-10 grid grid-cols-12 gap-4'>
-
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Username: </strong>
-              <input value={selected.username} name='username' onChange={e => handleUpdateChange(e)} type="text" />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Mobile: </strong> {selected.mobile}
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Email: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.email} name='email' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Degree: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.degree} name='degree' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Review:  </strong>
-              <input type="number" onChange={e => handleUpdateChange(e)} value={selected.review} name='review' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Grading:  </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.grading} name='grading' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Contact Agree:  </strong>{selected.contactAgree}
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Premium:  </strong>{selected && selected.batch && selected.batch.isPremium ? <FontAwesomeIcon className='text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='text-red-500' icon={faCircleXmark} />}
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Premium End:  </strong>{selected && selected.batch.endTime && new Date(selected.batch.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}
-            </div>
+          {
+            selected && <>
 
 
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Use Times QOC Exam: </strong>
-              <input type="number" onChange={e => handleUpdateChange(e)} value={selected.useQocExam} name='useQocExam' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Check Times QOC Exam: </strong>
-              <input type="number" onChange={e => handleUpdateChange(e)} value={selected.checkQocExam} name='checkQocExam' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Institution: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.institution} name='institution' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Address: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.address} name='address' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>City: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.city} name='city' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>State: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.state} name='state' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Zip: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.zip} name='zip' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Country: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.country} name='country' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Bio: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.bio} name='bio' />
-            </div>
-            <div className='border shadow p-2 rounded col-span-12 md:col-span-6'>
-              <strong className='me-2'>Description: </strong>
-              <input type="text" onChange={e => handleUpdateChange(e)} value={selected.description} name='description' />
-            </div>
+              <h3 className="font-bold text-lg mb-10">Details of {selected && selected.username}</h3>
 
-            {/* <div><strong className='me-2'>image: </strong>{item.image}</div> */}
+              <div className='grid md:grid-cols-2 grid-cols-1 gap-7'>
+                <div className='p-2 border shadow'>
+                  <span>Review:</span> {selected.review}
+                </div>
 
-          </div>}
+                <div className='p-2 border shadow'>
+                  <span>Grading:</span> {selected.grading}
+                </div>
 
-          <div onClick={e => handleUpdateSubmit()} className='btn btn-success'>Update</div>
+                <div className='p-2 border shadow'>
+                  <span>Features:</span> {selected.featured ? "Yes" : "No"}
+                </div>
+              </div>
+
+
+
+              <form onSubmit={e => handleUpdateSubmit(e)} className='py-10' action="">
+
+                <h3 className='text-center my-5 font-bold text-xl'>Edit Field</h3>
+
+                <label htmlFor="" className='label label-text'>Review</label>
+                <input className='input input-bordered w-full' name='review' type="number" value={teacherState.review} onChange={e => setTeacherState({ ...teacherState, [e.target.name]: e.target.value })} />
+
+                <label htmlFor="" className='label label-text'>Grading</label>
+                <input className='input input-bordered w-full' name='grading' type="number" value={teacherState.grading} onChange={e => setTeacherState({ ...teacherState, [e.target.name]: e.target.value })} />
+                
+                <label htmlFor="" className='label label-text'>Features</label>
+                <select className=' select select-bordered w-full' name="featured" id="" onChange={e => setTeacherState({ ...teacherState, [e.target.name]: e.target.value })} >
+                  <option value="">Select</option>
+                  <option value={true}>Yes</option>
+                  <option value={false}>No</option>
+                </select>
+
+
+                <button type='submit' className='btn btn-success mt-5'>Update</button>
+              </form>
+
+
+            </>
+          }
+
+
+
+
 
         </div>
       </dialog>

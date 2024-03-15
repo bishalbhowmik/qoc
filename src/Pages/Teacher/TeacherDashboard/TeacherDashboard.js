@@ -95,7 +95,7 @@ export const TeacherDashboard = (props) => {
     <div>
 
       <div className='w-full'>
-        <img className='rounded-full w-2/12 m-auto my-5' src={state.image && state.image.contentType && state.image != '' ? bufferToDataUrl(state.image.contentType, state.image.data) : 'male.png'} alt="picture" />
+        <img className='rounded-full w-2/12 m-auto my-5' src={state.image && state.image.contentType && state.image != '' ? process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.image.name : 'male.png'} alt="picture" />
         <div className='text-center font-bold text-xl' style={{ letterSpacing: '2px' }}>{props.decodedToken.username}</div>
       </div>
 

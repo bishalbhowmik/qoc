@@ -94,8 +94,6 @@ export const ExamDetails = (props) => {
 
     }
 
-    let imageBuffer = selectedItem && selectedItem.hasOwnProperty('script') ? getFileUrl(selectedItem.script) : ''
-
 
 
     return (
@@ -105,7 +103,7 @@ export const ExamDetails = (props) => {
 
 
 
-            {exam.manualQuestion && <object title={exam.exam} className='w-full' height='600px' data={getFileUrl(exam.attachment)} width="100%"></object>}
+            {exam.manualQuestion && <object title={exam.exam} className='w-full' height='600px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + exam.attachment.name} width="100%"></object>}
 
             {
                 exam.hasOwnProperty('mcqsId') && exam.mcqsId.length > 0 &&
@@ -219,7 +217,7 @@ export const ExamDetails = (props) => {
 
 
                         <div>
-                            {selectedItem.script && <object title={selectedItem.script.name} className='h-screen w-full' data={imageBuffer} width="100%"></object>}
+                            {selectedItem.script && <object title={selectedItem.script.name} className='h-screen w-full' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + selectedItem.script.name} width="100%"></object>}
 
                         </div>
 

@@ -52,7 +52,7 @@ export const Batch = (props) => {
 
           <div className='grid grid-cols-12'>
             <div className='col-span-12 md:col-span-4 flex justify-center p-3'>
-              <Link className='flex align-middle' to=''><img className='rounded-full w-2/5 md:w-2/3 m-auto' src={item.teacherId.image && item.teacherId.image.contentType && item.teacherId.image != '' ? bufferToDataUrl(item.teacherId.image.contentType, item.teacherId.image.data) : '/male.png'} alt="picture" /></Link>
+              <Link className='flex align-middle' to=''><img className='rounded-full w-2/5 md:w-2/3 m-auto' src={item.teacherId.image && item.teacherId.image.contentType && item.teacherId.image != '' ? process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.teacherId.image.name : '/male.png'} alt="picture" /></Link>
             </div>
             <div className='col-span-12 md:col-span-8'>
 

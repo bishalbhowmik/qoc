@@ -247,7 +247,7 @@ export const StudentExam = (props) => {
 
                         <div className='card card-body glass mb-5'>
 
-                             <iframe height='500px' src={getFileUrl(state.exam.attachment)} type=""></iframe>
+                            <iframe height='500px' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></iframe>
 
                             <form onSubmit={e => handleSubmit(e)} action="">
                                 <input name='script' onChange={e => handleChange(e)} type="file" /> <br />

@@ -278,7 +278,7 @@ function Home(props) {
                         className="block h-full rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
                         <div className="flex justify-center">
                           <div className="flex justify-center -mt-[75px] border rounded-full w-[170px] h-[170px]">
-                            <img src={item.image && item.image.contentType && item.image != '' ? bufferToDataUrl(item.image.contentType, item.image.data) : '/male.png'}
+                            <img src={item.image && item.image.contentType && item.image != '' ? process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.image.name : '/male.png'}
                               className="mx-auto rounded-full object-contain shadow-lg dark:shadow-black/20 w-full h-full" alt="Avatar" />
                           </div>
                         </div>
