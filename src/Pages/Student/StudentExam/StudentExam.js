@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-import { timeCheck } from '../../../Functions/CustomFunction'
 import { getAExamMarksApi, submitExamApi } from '../../../Api/Student/ExamApi'
 import Spinner from '../../../components/Spinner'
+import { getFileUrl } from '../../../Functions/CustomFunction'
+import RemainingTimeShow from './RemainingTimeShow'
 
 export const StudentExam = (props) => {
 
@@ -15,13 +17,11 @@ export const StudentExam = (props) => {
     const [examStatus, setExamStatus] = useState(false)
     const [examScript, setExamScript] = useState({})
     const [message, setMessage] = useState('')
-    const [remainingTime, setRemainingTime] = useState('')
 
-
-    
 
 
     useEffect(() => {
+
 
         if (state) {
             setSpin(true)
@@ -36,7 +36,8 @@ export const StudentExam = (props) => {
                 })
         }
 
-    }, [props])
+
+    }, [state])
 
 
 
@@ -47,30 +48,16 @@ export const StudentExam = (props) => {
 
     if (new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) < new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })) {
 
-
         setInterval(() => {
-            if (state && state.exam) {
 
-                let now = new Date();
-                let end = new Date(state.exam.startTime);
-
-                // Convert to local time in "Asia/Dhaka" timezone
-                now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-                end.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-
-                let timeDifference = end - now;
-
-                let seconds = Math.floor((timeDifference / 1000) % 60);
-                let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-                let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-
-                setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`);
-                // console.log(now, end, timeDifference);
+            if (new Date() >= new Date(state.exam.startTime)) {
+                window.location.reload()
             }
+
         }, 1000)
 
 
-        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })} <br /> Time Remaining: {remainingTime} {spin && <Spinner />}</div>
+        return <div className='text-center text-2xl font-bold mt-10'>Exam will start at {new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })} <br />  <RemainingTimeShow state={state.exam.startTime} /> {spin && <Spinner />}</div>
     }
 
     if (examStatus) {
@@ -104,171 +91,187 @@ export const StudentExam = (props) => {
         </div>
     }
 
-    if (new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) > new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })) {
+    if (new Date() > new Date(state.exam.endTime)) {
         return <div className='text-center text-2xl font-bold mt-10'>Exam has been ended {spin && <Spinner />}</div>
     }
 
-    const handleChange = (e) => {
+    else {
+
+        
 
 
-        if (e.target.type === 'file') {
-            setExamForm({ ...examForm, [e.target.name]: e.target.files[0] })
-        } else {
-            setExamForm({
-                ...examForm,
-                [e.target.name]: e.target.value
-            })
-        }
+        const handleChange = (e) => {
 
 
-    }
-
-    const handleSubmit = (e) => {
-
-        e.preventDefault()
-
-
-        if (window.confirm('Are you sure to submit?')) {
-            let correctAnswer = 0
-            let wrongAnswer = 0
-            let noAnswer = 0
-
-            state.exam.mcqsId.map((item, index) => {
-                if (examForm.hasOwnProperty(item._id)) {
-                    if (examForm[item._id] === item.answer) {
-                        correctAnswer++
-                    } else {
-                        wrongAnswer++
-                    }
-                } else {
-                    noAnswer++
-                }
-
-            })
-
-            let mcqMarks = (correctAnswer * state.exam.perMcqMarks) - (wrongAnswer * state.exam.negativeMarking)
-
-            let obj = {
-                studentId: props.decodedToken._id,
-                mcqMarks: mcqMarks,
-                correctMcq: correctAnswer,
-                wrongMcq: wrongAnswer,
-                noAnswer: noAnswer,
-                script: examForm.hasOwnProperty('script') ? examForm.script : null,
+            if (e.target.type === 'file') {
+                setExamForm({ ...examForm, [e.target.name]: e.target.files[0] })
+            } else {
+                setExamForm({
+                    ...examForm,
+                    [e.target.name]: e.target.value
+                })
             }
 
 
-            submitExamApi(state.exam._id, obj).then(data => {
+        }
+
+        const handleSubmit = (e) => {
+
+            e.preventDefault()
+
+            if (window.confirm('Are you sure to submit?')) {
+                let correctAnswer = 0
+                let wrongAnswer = 0
+                let noAnswer = 0
+
+                state.exam.mcqsId.map((item, index) => {
+                    if (examForm.hasOwnProperty(item._id)) {
+                        if (examForm[item._id] === item.answer) {
+                            correctAnswer++
+                        } else {
+                            wrongAnswer++
+                        }
+                    } else {
+                        noAnswer++
+                    }
+
+                })
+
+                let mcqMarks = (correctAnswer * state.exam.perMcqMarks) - (wrongAnswer * state.exam.negativeMarking)
+                // console.log()
+
+                let obj = {
+                    studentId: props.decodedToken._id,
+                    mcqMarks: isNaN(mcqMarks) ? '0' : mcqMarks,
+                    correctMcq: correctAnswer,
+                    wrongMcq: wrongAnswer,
+                    noAnswer: noAnswer,
+                    script: examForm.hasOwnProperty('script') ? examForm.script : null,
+                }
+
+                console.log(obj)
+
+
+                submitExamApi(state.exam._id, obj).then(data => {
+                    window.location.reload()
+                    // console.log(data)
+                    // if(data.error) throw data.message
+                    // setMessage(data.message)
+                }).catch(err => {
+                    // setMessage(err)
+                })
+            }
+        }
+
+
+        setInterval(() => {
+
+            if (new Date() >= new Date(state.exam.endTime)) {
                 window.location.reload()
-                // console.log(data)
-                // if(data.error) throw data.message
-                // setMessage(data.message)
-            }).catch(err => {
-                // setMessage(err)
-            })
-        }
-    }
+            }
+
+        }, 1000)
 
 
 
-    setInterval(() => {
-        if (state && state.exam) {
-            // console.log(state.exam.endTime)
-            let now = new Date();
-            let end = new Date(state.exam.endTime);
+        return (
+            <>
 
-            // Convert to local time in "Asia/Dhaka" timezone
-            now.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
-            end.toLocaleString("en-US", { timeZone: "Asia/Dhaka" });
+                <div className='font-bold text-center  text-2xl'>{state.exam.exam}</div>
 
-            let timeDifference = end - now;
-
-            let seconds = Math.floor((timeDifference / 1000) % 60);
-            let minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-            let hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-
-            setRemainingTime(`${hours} hours, ${minutes} minutes, ${seconds} seconds`);
-        }
-    }, 1000)
-
-    return (
-        <div>
-
-            <div className='font-bold text-center  text-2xl'>{state.exam.exam}</div>
-            <div className='font-bold text-center mb-10 text-xl text-red-800'>Time Remaining: {remainingTime}</div>
+                <RemainingTimeShow state={state.exam.endTime} />
 
 
-            <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+                <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
 
-            {state.exam.hasOwnProperty('mcqsId') && state.exam.mcqsId.length != 0 ?
+                {state.exam.hasOwnProperty('mcqsId') && state.exam.mcqsId.length != 0 ?
+
+                    <div>
+
+                        <div className='font-bold text-center my-10 text-xl underline'>MCQ</div>
+
+                        <form onSubmit={e => handleSubmit(e)} action="">
+
+                            {
+                                state.exam.mcqsId.map((item, index) => {
+
+                                    return (
+                                        <div className='my-3 card card-body glass shadow-lg'>
+                                            {index + 1}. {item.question} <br />
+                                            {item.options && item.options.map((option, index) => <div>
+
+                                                <div className='flex items-center'>
+                                                    <input onChange={e => handleChange(e)} value={option.option} name={item._id} className='radio' type='radio' />
+
+                                                    <span className='label label-text' htmlFor="">{option.value}</span>
+                                                </div>
+
+                                            </div>)}
+
+                                        </div>)
+
+                                })
+                            }
+
+                        </form>
+
+
+                    </div> : ''}
 
                 <div>
 
-                    <div className='font-bold text-center my-10 text-xl underline'>MCQ</div>
+                    {state.exam.hasOwnProperty('broadQuestionsId') && state.exam.broadQuestionsId.length != 0 ? <div className=''>
 
-                    <form onSubmit={e => handleSubmit(e)} action="">
+                        <div className='font-bold text-center my-10 text-xl underline'>Broad Question</div>
 
-                        {
-                            state.exam.mcqsId.map((item, index) => {
+                        <div className='card card-body glass mb-5'>
+                            {
+                                state.exam.broadQuestionsId.map((item, index) => {
 
-                                return (
-                                    <div className='my-3 card card-body glass shadow-lg'>
-                                        {index + 1}. {item.question} <br />
-                                        {item.options && item.options.map((option, index) => <div>
+                                    return <div>{index + 1}. {item.question}</div>
 
-                                            <div className='flex items-center'>
-                                                <input onChange={e => handleChange(e)} value={option.option} name={item._id} className='radio' type='radio' />
+                                })
+                            }
 
-                                                <span className='label label-text' htmlFor="">{option.value}</span>
-                                            </div>
+                            <form onSubmit={e => handleSubmit(e)} action="">
+                                <input name='script' onChange={e => handleChange(e)} type="file" /> <br />
+                            </form>
+                        </div>
 
-                                        </div>)}
 
-                                    </div>)
+                    </div> : ''}
 
-                            })
-                        }
+                    {state.exam.manualQuestion && state.exam.attachment && <div className=''>
 
+                        <div className='font-bold text-center my-10 text-xl underline'>Question Paper</div>
+
+                        <div className='card card-body glass mb-5'>
+
+                             <iframe height='500px' src={getFileUrl(state.exam.attachment)} type=""></iframe>
+
+                            <form onSubmit={e => handleSubmit(e)} action="">
+                                <input name='script' onChange={e => handleChange(e)} type="file" /> <br />
+                            </form>
+                        </div>
+
+
+                    </div>}
+
+
+                    <form className='' onSubmit={e => handleSubmit(e)} action="">
+                        <button type='submit' className='btn btn-primary w-52 my-10'>Submit</button>
                     </form>
 
-
-                </div> : ''}
-
-            <div>
-
-                {state.exam.hasOwnProperty('broadQuestionsId') && state.exam.broadQuestionsId.length != 0 ? <div className=''>
-
-                    <div className='font-bold text-center my-10 text-xl underline'>Broad Question</div>
-
-                    <div className='card card-body glass mb-5'>
-                        {
-                            state.exam.broadQuestionsId.map((item, index) => {
-
-                                return <div>{index + 1}. {item.question}</div>
-
-                            })
-                        }
-
-                        <form onSubmit={e => handleSubmit(e)} action="">
-                            <input name='script' onChange={e => handleChange(e)} type="file" /> <br />
-                        </form>
-                    </div>
+                </div>
 
 
-                </div> : ''}
+                {spin && <Spinner />}
+
+            </>
+        )
+    }
 
 
-                <form className='' onSubmit={e => handleSubmit(e)} action="">
-                    <button type='submit' className='btn btn-primary w-52 my-10'>Submit</button>
-                </form>
-
-            </div>
-
-
-            {spin && <Spinner />}
-
-        </div>
-    )
 }
 
 const mapStateToProps = (state) => {
