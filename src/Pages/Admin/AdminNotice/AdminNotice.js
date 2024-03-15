@@ -26,6 +26,8 @@ export const AdminNotice = (props) => {
         setSpin(true)
         getAllCurriculumApi().then(data => {
 
+            console.log(data)
+
             if (data.error) {
                 setCurriculum([])
             }
@@ -94,6 +96,7 @@ export const AdminNotice = (props) => {
 
               <div className="grid gap-3 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                   {notice.map(item => {
+                      console.log(item)
                       return (
                           <div className={`card border hover:border-red-800 hover:shadow-lg card-body`}>
                               <div className=" card-title">{item.title}</div>

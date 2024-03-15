@@ -29,12 +29,12 @@ export function base64ToBlob(base64, type = "application/octet-stream") {
 
 export const showFile = async (file) => {
 
-    // Need base64ToBlob function
 
-    let base64 = file.data;
-    let blob = base64ToBlob(base64, file.contentType);
-    let url = URL.createObjectURL(blob);
-    window.open(url);
+    // let base64 = file.data;
+    // let blob = base64ToBlob(base64, file.contentType);
+    // let url = URL.createObjectURL(blob);
+    // window.open(url);
+    window.open(process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + file.name);
 };
 
 

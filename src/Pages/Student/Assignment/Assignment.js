@@ -29,12 +29,12 @@ export const AssignmentHelp = (props) => {
 
       else {
         setAssignmentPremium(true)
-        
+
         setMessage({ message: data.message, error: data.error })
         setSpin(true)
         getAllAssignmentApi({ studentId: props.decodedToken._id }).then(data => {
           setSpin(false)
-  
+
           if (data.error) throw data.message
           setAssignment(data.data)
         }).catch(err => {
@@ -108,8 +108,8 @@ export const AssignmentHelp = (props) => {
         <span>{message.message}</span>
       </div>
 
-      <div className='my-7'>
-        {assignmentPremium && user && <div className='border inline'>Assignment Count: {user.assignment.count}</div>}
+      <div className='my-7 text-center'>
+        {assignmentPremium && user && <div className='border inline p-2 font-bold rounded-xl shadow-lg'>Assignment Count: {user.assignment.count}</div>}
       </div>
 
       <button className='btn' onClick={() => document.getElementById('createAssignmentModal').showModal()}>Post Assignment</button>
@@ -157,7 +157,7 @@ export const AssignmentHelp = (props) => {
                 <div className='col-span-12 my-7 p-10'>
                   <div className='font-bold text-2xl my-5'>Solution {index + 1}</div>
                   <div className='font-bold my-5'>{item.name}</div>
-                  <object width='100%' className='h-screen' data={bufferToDataUrl(item.contentType, item.data)} type=""></object>
+                  <iframe width='100%' className='h-screen' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.name} type=""></iframe>
                 </div>
               )
             })}

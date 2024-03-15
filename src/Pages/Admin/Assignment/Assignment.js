@@ -74,7 +74,7 @@ export const Assignment = (props) => {
           {Object.keys(selected).length > 0 && <div className=''>
             <div className='my-7 p-10'>
               <div className='font-bold my-5'>{selected.name}</div>
-              <object width='100%' className='h-screen' data={bufferToDataUrl(selected.contentType, selected.data)} type=""></object>
+              <iframe width='100%' className='h-screen' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + selected.name} type=""></iframe>
             </div>
           </div>}
 
