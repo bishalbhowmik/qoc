@@ -270,6 +270,18 @@ function Home(props) {
           >
             {
               teachers.length > 0 ? teachers.map(item => {
+
+                let rating = [];
+                for (let i = 0; i < 5; i++) {
+                  if (item.review >= i + 1) {
+                    rating.push(<i key={i} className="fas fa-star text-yellow-500"></i>);
+                  } else if (item.review >= i + 0.5) {
+                    rating.push(<i key={i} className="fas fa-star-half-alt text-yellow-500"></i>);
+                  } else {
+                    rating.push(<i key={i} className="far fa-star text-yellow-500"></i>);
+                  }
+                }
+
                 return (
                   <div className="mt-20 mx-5">
                     <div style={{ height: '300px' }} className="">
@@ -281,6 +293,15 @@ function Home(props) {
                               className="mx-auto rounded-full object-contain shadow-lg dark:shadow-black/20 w-full h-full" alt="Avatar" />
                           </div>
                         </div>
+
+                        <div>
+                          <div className="flex justify-center mt-5">
+                            <div className="flex items-center">
+                              {rating}
+                            </div>
+                          </div>
+                        </div>
+
                         <div className="p-6">
                           <h5 className="mb-4 text-lg font-bold text-center">{item.username}</h5>
                           <p className="mb-6 text-center">{item.bio}</p>

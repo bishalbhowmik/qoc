@@ -207,7 +207,7 @@ export const TuitionAdmin = (props) => {
             <input required name="salary" value={selectedTuitionState.salary} onChange={e => handleUpdateChange(e)} placeholder="" className=" input input-bordered w-full mb-3" type="number" />
 
             <label className="label label-text" htmlFor="">Time*</label>
-            <input required name="time" value={selectedTuitionState.time} onChange={e => handleUpdateChange(e)} className="input input-bordered mb-3 w-full" type="time" />
+            <input name="time" value={selectedTuitionState.time} onChange={e => handleUpdateChange(e)} className="input input-bordered mb-3 w-full" type="time" />
 
             <label className="label label-text" htmlFor="">Days In a Week*</label>
             <input required name="daysInWeek" value={selectedTuitionState.daysInWeek} onChange={e => handleUpdateChange(e)} className="input input-bordered mb-3 w-full" type="number" />

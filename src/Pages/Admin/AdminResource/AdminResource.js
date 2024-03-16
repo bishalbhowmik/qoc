@@ -84,9 +84,14 @@ export const AdminResource = (props) => {
     e.preventDefault()
 
     setSpin(true);
-    createResourceApi(resourceState).then(data => {
-      setSpin(false); //
-      console.log(data)
+    createResourceApi(resourceState).then(data => { //
+      getResourceApi({}).then(data => {
+        setSpin(false)
+        if (data.error) throw data.message
+        setResource([...data.data])
+      }).catch(err => {
+        console.log(err)
+      })
       window.alert(data.message);
 
       document.getElementById('addResourceModal').close()
@@ -121,7 +126,13 @@ export const AdminResource = (props) => {
     setSpin(true);
     updateResourceApi(selectedResource._id, resourceState).then(data => {
       console.log(data)
-      setSpin(false);
+      getResourceApi({}).then(data => {
+        setSpin(false)
+        if (data.error) throw data.message
+        setResource([...data.data])
+      }).catch(err => {
+        console.log(err)
+      })
       window.alert(data.message);
       document.getElementById('updateResourceModal').close()
     })
@@ -130,7 +141,13 @@ export const AdminResource = (props) => {
   const removeResource = (id) => {
     setSpin(true);
     removeResourceApi(id).then(data => {
-      setSpin(false);
+      getResourceApi({}).then(data => {
+        setSpin(false)
+        if (data.error) throw data.message
+        setResource([...data.data])
+      }).catch(err => {
+        setResource([])
+      })
       window.alert(data.message);
     })
   }

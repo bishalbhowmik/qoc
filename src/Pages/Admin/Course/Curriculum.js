@@ -41,7 +41,7 @@ export const Curriculum = (props) => {
                 if (data.error) throw data.message
                 setSubject([...data.data])
             }).catch(err => {
-                console.log(err)
+
             })
         }
 
@@ -61,10 +61,18 @@ export const Curriculum = (props) => {
         setSpin(true)
 
         createSubjectsApi({ ...state, curriculumId: location.state ? location.state.curriculum._id : '' }).then(data => {
-            console.log(data)
+
             setSpin(false)
             if (data.error) throw data.message
+            getSubjectsApi(location.state.curriculum._id).then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setSubject([...data.data])
+            }).catch(err => {
+
+            })
             window.alert(data.message)
+            
         })
             .catch(err => {
                 window.alert(err.data)
@@ -74,8 +82,17 @@ export const Curriculum = (props) => {
     const deleteSubject = id => {
     
         if (window.confirm("Along with subject deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+
+            setSpin(true)
         deleteSubjectApi(id).then(data => {
-            console.log(data)
+
+            getSubjectsApi(location.state.curriculum._id).then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setSubject([...data.data])
+            }).catch(err => {
+
+            })
             window.alert(data.message)
         })
         }
@@ -106,7 +123,12 @@ export const Curriculum = (props) => {
     const removeOutline = (position) => {
         setSpin(true)
         removeCurriculumOutlineApi(location.state.curriculum._id, position).then(data => {
-            setSpin(false)
+            
+            getACurriculumApi(location.state.curriculum._id).then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setOutlines([...data.data.outlines])
+            })
             window.alert(data.message)
         })
     }
@@ -116,7 +138,11 @@ export const Curriculum = (props) => {
         e.preventDefault()
         setSpin(true)
         addCurriculumOutlineApi(location.state.curriculum._id, updateState).then(data => {
-            setSpin(false)
+            getACurriculumApi(location.state.curriculum._id).then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setOutlines([...data.data.outlines])
+            })
             window.alert(data.message)
         })
 

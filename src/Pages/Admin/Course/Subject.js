@@ -42,6 +42,9 @@ export const Subject = (props) => {
     if (location.state) {
 
       const { subject } = location.state;
+
+      console.log(subject)
+
       setSpin(true);
 
       getASubjectsApi(subject._id).then((data) => {
@@ -49,7 +52,7 @@ export const Subject = (props) => {
         setOutlines([...data.data.outlines]);
         setMaterials([...data.data.materials]);
       })
-        .catch((err) => console.log(err));
+        .catch((err) => { });
 
 
 
@@ -63,12 +66,14 @@ export const Subject = (props) => {
 
 
       getChaptersApi(subject._id).then((data) => {
-        
+
+        console.log(data)
+
         if (data.error) throw data.message;
         setChapter([...data.data]);
       })
         .catch((err) => {
-          console.log(err);
+
         });
 
 
@@ -103,6 +108,16 @@ export const Subject = (props) => {
       .then((data) => {
         setSpin(false);
         if (data.error) throw data;
+
+        getChaptersApi(location.state.subject._id).then((data) => {
+
+          if (data.error) throw data.message;
+          setChapter([...data.data]);
+        })
+          .catch((err) => {
+
+          });
+
         window.alert(data.message);
       })
       .catch((err) => {
@@ -114,7 +129,14 @@ export const Subject = (props) => {
 
     if (window.confirm("Along with chapter deletion, all data (Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
       deleteChapterApi(id).then(data => {
-        console.log(data)
+        getChaptersApi(location.state.subject._id).then((data) => {
+
+          if (data.error) throw data.message;
+          setChapter([...data.data]);
+        })
+          .catch((err) => {
+
+          });
         window.alert(data.message)
       })
     }
@@ -142,7 +164,15 @@ export const Subject = (props) => {
   const removeOutline = (position) => {
     setSpin(true);
     removeSubjectOutlineApi(location.state.subject._id, position).then((data) => {
-      setSpin(false);
+      getASubjectsApi(location.state.subject._id).then((data) => {
+        setSpin(false)
+        if (data.error) throw data.message;
+        setOutlines([...data.data.outlines]);
+        setMaterials([...data.data.materials]);
+      })
+        .catch((err) => { });
+
+
       window.alert(data.message);
     });
   };
@@ -152,7 +182,15 @@ export const Subject = (props) => {
 
     setSpin(true);
     addSubjectOutlineApi(location.state.subject._id, updateOutline).then((data) => {
-      setSpin(false);
+      getASubjectsApi(location.state.subject._id).then((data) => {
+        setSpin(false)
+        if (data.error) throw data.message;
+        setOutlines([...data.data.outlines]);
+        setMaterials([...data.data.materials]);
+      })
+        .catch((err) => { });
+
+
       window.alert(data.message);
     });
   };
@@ -160,7 +198,13 @@ export const Subject = (props) => {
   const removeMaterial = (position) => {
     setSpin(true);
     removeSubjectMaterialsApi(location.state.subject._id, position).then((data) => {
-      setSpin(false);
+      getASubjectsApi(location.state.subject._id).then((data) => {
+        setSpin(false)
+        if (data.error) throw data.message;
+        setOutlines([...data.data.outlines]);
+        setMaterials([...data.data.materials]);
+      })
+        .catch((err) => console.log(err));
       window.alert(data.message);
     });
   };
@@ -170,7 +214,13 @@ export const Subject = (props) => {
 
     setSpin(true);
     addSubjectMaterialsApi(location.state.subject._id, updateMaterial).then((data) => {
-      setSpin(false);
+      getASubjectsApi(location.state.subject._id).then((data) => {
+        setSpin(false)
+        if (data.error) throw data.message;
+        setOutlines([...data.data.outlines]);
+        setMaterials([...data.data.materials]);
+      })
+        .catch((err) => console.log(err));
       window.alert(data.message);
     });
   };
@@ -181,7 +231,13 @@ export const Subject = (props) => {
     setSpin(true);
 
     uploadSolutionApi(examId, solution).then((data) => {
-      setSpin(false);
+      getAllExamApi({ subjectId: location.state.subject._id }).then((data) => {
+
+        if (data.error) throw data.message;
+        setExam(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
+      })
+        .catch((err) => { });
+
       window.alert(data.message);
     });
   };
@@ -203,7 +259,11 @@ export const Subject = (props) => {
 
     setSpin(true);
     createFocusApi({ ...focusState, subjectId: location.state.subject._id, curriculumId: location.state.subject.curriculumId._id }).then(data => {
-      setSpin(false); //
+      getFocusApi({ subjectId: location.state.subject._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
+      }).catch(err => { })
       window.alert(data.message);
     })
 
@@ -232,7 +292,11 @@ export const Subject = (props) => {
     e.preventDefault()
     setSpin(true);
     updateFocusApi(selectedFocus._id, focusState).then(data => {
-      setSpin(false);
+      getFocusApi({ subjectId: location.state.subject._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
+      }).catch(err => window.alert(err))
       window.alert(data.message);
       document.getElementById('updateFocusModal').close()
     })
@@ -241,7 +305,11 @@ export const Subject = (props) => {
   const removeFocus = (id) => {
     setSpin(true);
     removeFocusApi(id).then(data => {
-      setSpin(false);
+      getFocusApi({ subjectId: location.state.subject._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('chapterId') && !item.hasOwnProperty('moduleId')));
+      }).catch(err => { })
       window.alert(data.message);
     })
   }

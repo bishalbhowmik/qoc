@@ -27,6 +27,7 @@ export const Chapter = (props) => {
     curriculumId: '',
     moduleId: '',
   });
+
   const [focus, setFocus] = useState([]);
   const [state, setState] = useState({
     module: "",
@@ -43,11 +44,11 @@ export const Chapter = (props) => {
 
       getAChapterApi(chapter._id)
         .then((data) => {
-          console.log(data);
+
           if (data.error) throw data.message;
           setMaterials([...data.data.materials]);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => { });
 
       getAllExamApi({ chapterId: chapter._id })
         .then((data) => {
@@ -55,14 +56,15 @@ export const Chapter = (props) => {
           setExam(data.data.filter(item => !item.hasOwnProperty('moduleId')));
         })
         .catch((err) => { });
+
       getModulesApi(chapter._id)
         .then((data) => {
-          
+
           if (data.error) throw data.message;
           setModules([...data.data]);
         })
         .catch((err) => {
-          console.log(err);
+
         });
 
 
@@ -93,8 +95,18 @@ export const Chapter = (props) => {
       chapterId: location.state ? location.state.chapter._id : "",
     })
       .then((data) => {
-        setSpin(false);
+
         if (data.error) throw data;
+
+        getModulesApi(location.state.chapter._id)
+          .then((data) => {
+            setSpin(false);
+            if (data.error) throw data.message;
+            setModules([...data.data]);
+          })
+          .catch((err) => {
+
+          });
         window.alert(data.message);
       })
       .catch((err) => {
@@ -107,7 +119,19 @@ export const Chapter = (props) => {
   const deleteModule = id => {
 
     if (window.confirm("Along with module deletion, all data (Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
+
+      setSpin(true);
       deleteModuleApi(id).then(data => {
+
+        getModulesApi(location.state.chapter._id)
+          .then((data) => {
+            setSpin(false);
+            if (data.error) throw data.message;
+            setModules([...data.data]);
+          })
+          .catch((err) => {
+
+          });
         window.alert(data.message)
       })
     }
@@ -136,7 +160,14 @@ export const Chapter = (props) => {
   const removeMaterial = (position) => {
     setSpin(true);
     removeChapterMaterialsApi(location.state.chapter._id, position).then((data) => {
-      setSpin(false);
+      getAChapterApi(location.state.chapter._id)
+        .then((data) => {
+          setSpin(false)
+          if (data.error) throw data.message;
+          setMaterials([...data.data.materials]);
+        })
+        .catch((err) => { });
+      
       window.alert(data.message);
     });
   };
@@ -145,7 +176,13 @@ export const Chapter = (props) => {
     setSpin(true);
     e.preventDefault();
     addChapterMaterialsApi(location.state.chapter._id, updateMaterial).then((data) => {
-      setSpin(false);
+      getAChapterApi(location.state.chapter._id)
+        .then((data) => {
+          setSpin(false)
+          if (data.error) throw data.message;
+          setMaterials([...data.data.materials]);
+        })
+        .catch((err) => { });
       window.alert(data.message);
     });
   };
@@ -156,7 +193,13 @@ export const Chapter = (props) => {
     setSpin(true);
 
     uploadSolutionApi(examId, solution).then((data) => {
-      setSpin(false);
+      getAllExamApi({ chapterId: location.state.chapter._id })
+        .then((data) => {
+          setSpin(false);
+          if (data.error) throw data.message;
+          setExam(data.data.filter(item => !item.hasOwnProperty('moduleId')));
+        })
+        .catch((err) => { });
       window.alert(data.message);
     });
   };
@@ -176,7 +219,12 @@ export const Chapter = (props) => {
 
     setSpin(true);
     createFocusApi({ ...focusState, subjectId: location.state.chapter.subjectId._id, curriculumId: location.state.chapter.curriculumId._id, chapterId: location.state.chapter._id }).then(data => {
-      setSpin(false); //
+       //
+      getFocusApi({ chapterId: location.state.chapter._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId')));
+      }).catch(err => { })
       window.alert(data.message);
     })
 
@@ -205,7 +253,11 @@ export const Chapter = (props) => {
     e.preventDefault()
     setSpin(true);
     updateFocusApi(selectedFocus._id, focusState).then(data => {
-      setSpin(false);
+      getFocusApi({ chapterId: location.state.chapter._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId')));
+      }).catch(err => { })
       window.alert(data.message);
       document.getElementById('updateFocusModal').close()
     })
@@ -214,7 +266,11 @@ export const Chapter = (props) => {
   const removeFocus = (id) => {
     setSpin(true);
     removeFocusApi(id).then(data => {
-      setSpin(false);
+      getFocusApi({ chapterId: location.state.chapter._id }).then((data) => {
+        setSpin(false);
+        if (data.error) throw data.message;
+        setFocus(data.data.filter(item => !item.hasOwnProperty('moduleId')));
+      }).catch(err => { })
       window.alert(data.message);
     })
   }

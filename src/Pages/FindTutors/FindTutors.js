@@ -28,6 +28,21 @@ export const FindTutors = (props) => {
     else {
         teacherShow = teachers.map(item => {
 
+            let rating = [];
+            for (let i = 0; i < 5; i++) {
+                if (item.review >= i + 1) {
+                    rating.push(<i key={i} className="fas fa-star text-yellow-500"></i>);
+                } else if (item.review >= i + 0.5) {
+                    rating.push(<i key={i} className="fas fa-star-half-alt text-yellow-500"></i>);
+                } else {
+                    rating.push(<i key={i} className="far fa-star text-yellow-500"></i>);
+                }
+            }
+
+            
+            
+            
+
             return (
                 <div className="mb-24 md:mb-0">
                     <div
@@ -38,11 +53,20 @@ export const FindTutors = (props) => {
                                     className="mx-auto rounded-full shadow-lg dark:shadow-black/20 w-full h-full" alt="Avatar" />
                             </div>
                         </div>
-                        <div className="p-6">
-                            <h5 className="mb-4 text-lg font-bold">{item.username}</h5>
-                            <p className="mb-6">{ item.bio }</p>
-                            <div className="mx-auto flex list-inside justify-center">
-                                <Link to={`/tutor-details/${item._id}`}><button className='btn btn-outline btn-sm'>See details</button></Link>
+                        <div>
+                            <div className="flex justify-center mt-5">
+                                <div className="flex items-center">
+                                    {rating}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='p-3'>
+                            <div className="p-6 bg-slate-50 rounded-lg">
+                                <h5 className="mb-4 text-lg font-bold">{item.username}</h5>
+                                <p className="mb-6">{item.bio}</p>
+                                <div className="mx-auto flex list-inside justify-center">
+                                    <Link to={`/tutor-details/${item._id}`}><button className='btn btn-outline btn-sm'>See details</button></Link>
+                                </div>
                             </div>
                         </div>
                     </div>

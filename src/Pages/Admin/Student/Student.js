@@ -32,8 +32,13 @@ export const Student = (props) => {
     if (window.confirm('Are you sure you want to?')) {
       setSpin(true)
       setAssignmentPremiumApi(id).then(data => {
-        console.log(data)
-        setSpin(false)
+        getAllStudent().then(data => {
+          setSpin(false)
+
+          if (data.error) throw data.message
+          setStudents([...data.data])
+
+        }).catch(err => window.alert(err))
         window.alert(data.message);
       })
     }
@@ -45,7 +50,13 @@ export const Student = (props) => {
     if (window.confirm('Are you sure you want to?')) {
       setSpin(true)
       setCoursePremiumApi(id).then(data => {
-        setSpin(false)
+        getAllStudent().then(data => {
+          setSpin(false)
+
+          if (data.error) throw data.message
+          setStudents([...data.data])
+
+        }).catch(err => window.alert(err))
         window.alert(data.message);
       })
     }
@@ -55,7 +66,15 @@ export const Student = (props) => {
 
   const deleteStudent = id => {
     if (window.confirm('Are you sure you want to?')) {
+      setSpin(true)
       deleteStudentApi(id).then(data => {
+        getAllStudent().then(data => {
+          setSpin(false)
+
+          if (data.error) throw data.message
+          setStudents([...data.data])
+
+        }).catch(err => window.alert(err))
         window.alert(data.message)
       })
     }

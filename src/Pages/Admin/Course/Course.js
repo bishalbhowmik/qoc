@@ -49,7 +49,14 @@ export const Course = (props) => {
     addCurriculumApi(state).then(data => {
       setSpin(false)
       if (data.error) throw data.message
-      console.log(data)
+      getAllCurriculumApi().then(data => {
+
+        setSpin(false)
+
+        if (data.error) throw data.message
+        setCurriculum([...data.data])
+
+      }).catch(err => setCurriculum([]))
 
     }).catch(err => console.log(err))
   }
@@ -70,6 +77,14 @@ export const Course = (props) => {
 
       deleteCurriculumApi(id).then(data => {
         console.log(data)
+        getAllCurriculumApi().then(data => {
+
+          setSpin(false)
+
+          if (data.error) throw data.message
+          setCurriculum([...data.data])
+
+        }).catch(err => setCurriculum([]))
         window.alert(data.message)
       })
     }

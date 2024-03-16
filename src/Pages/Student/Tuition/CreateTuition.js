@@ -41,15 +41,11 @@ export const CreateTuition = (props) => {
 
     e.preventDefault()
 
-    console.log(state.time)
+    // console.log(new Date(new Date().toISOString(state.time)).toLocaleTimeString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' }))
 
     createTuitionApi({
       ...state,
-      time: new Date(new Date().toISOString(state.time)).toLocaleTimeString('en-US', {
-        hour12: true,
-        hour: 'numeric',
-        minute: 'numeric',
-      })
+      // time: state.time
     })
       .then(data => {
       console.log(data)
