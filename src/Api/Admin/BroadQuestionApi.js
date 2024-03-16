@@ -5,20 +5,20 @@ import axios from "axios"
 export const createBroadQuestionApi = async (state) => {
 
 
-    let obj = {
-        question: state.question,
-        answer: state.answer,
-        difficulty: state.difficulty,
-        curriculumId: state.curriculumId,
-        subjectId: state.subjectId,
-        chapterId: state.chapterId,
-        moduleId: state.moduleId,
-    }
+    // let obj = {
+    //     question: state.question,
+    //     answer: state.answer,
+    //     difficulty: state.difficulty,
+    //     curriculumId: state.curriculumId,
+    //     subjectId: state.subjectId,
+    //     chapterId: state.chapterId,
+    //     moduleId: state.moduleId,
+    // }
 
-    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/broad-question/", obj, {
+    let data = axios.post(process.env.REACT_APP_BACKEND_URL + "/api/broad-question/", state, {
         headers: {
             Authorization: window.localStorage.getItem(process.env.REACT_APP_LOCAL_TOKEN_NAME),
-            // "Content-Type": 'multipart/form-data'
+            "Content-Type": 'multipart/form-data'
         }
     }).then(data => data.data).catch(err => {
             return { message: `Something went wrong. - (${err.message}). Try again`, error: true }

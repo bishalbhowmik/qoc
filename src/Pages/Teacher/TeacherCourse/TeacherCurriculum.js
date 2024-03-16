@@ -73,7 +73,7 @@ export const TeacherCurriculum = (props) => {
             <div>
                 <div className='text-center my-20'><span className='bg-red-800 p-3 text-white rounded'>OUTLINES</span></div>
 
-                <div className='flex flex-col md:flex-row'>
+                <div className='flex flex-wrap flex-col md:flex-row'>
                     {outlines.map(item => {
                         return (
                             <div onClick={() => showFile(item)} className="btn btn-outline md:me-4 p-2 mt-2">

@@ -1,4 +1,3 @@
-import bufferToDataUrl from "buffer-to-data-url";
 import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -34,7 +33,7 @@ function Home(props) {
 
     setSpin(true)
 
-    getTeacher({ "batch.isPremium": true }).then(data => {
+    getTeacher({ "batch.isPremium": true, featured: true }).then(data => {
       setSpin(false)
       if (data.error) throw data.message
       setTeachers(data.data.filter(item => item.batch && (new Date() < new Date(item.batch.endTime))))
@@ -326,7 +325,7 @@ function Home(props) {
                 <Link to="/find-tutors">Find Your Tutors</Link>
               </button>
               <button className="text-sm bg-darkH text-white rounded-full w-44 h-11 mt-3 md:mt-0 font-bold hover:font-normal">
-                <Link>Book Your Lessons </Link>
+                <Link to={ props.authenticated ? `/${props.decodedToken.role}-dashboard/payment` : '/login'}>Book Your Lessons </Link>
               </button>
             </span>
           </div>
@@ -550,7 +549,7 @@ function Home(props) {
                   field trips.
                 </p>
                 <button className="text-[#ac1823]">
-                  Learn More <i className="fa-solid fa-chevron-right" />
+                  <Link to='/about'>Learn More <i className="fa-solid fa-chevron-right" /></Link>
                 </button>
               </div>
 
@@ -566,7 +565,7 @@ function Home(props) {
                   accreditations.
                 </p>
                 <button className="text-[#ac1823]">
-                  Learn More <i className="fa-solid fa-chevron-right" />
+                  <Link to='/about'>Learn More <i className="fa-solid fa-chevron-right" /></Link>
                 </button>
               </div>
 
@@ -582,7 +581,7 @@ function Home(props) {
                   giving them support.
                 </p>
                 <button className="text-[#ac1823]">
-                  Learn More <i className="fa-solid fa-chevron-right" />
+                  <Link to='/about'>Learn More <i className="fa-solid fa-chevron-right" /></Link>
                 </button>
               </div>
 
@@ -598,7 +597,7 @@ function Home(props) {
                   together.
                 </p>
                 <button className="text-[#ac1823]">
-                  Learn More <i className="fa-solid fa-chevron-right" />
+                  <Link to='/about'>Learn More <i className="fa-solid fa-chevron-right" /></Link>
                 </button>
               </div>
             </div>
@@ -623,10 +622,10 @@ function Home(props) {
               What Our <span className="text-[#ac1823]">Student Say</span>
             </h1>
             <p className="text-[16px] text-[#2F2F2F] mb-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex
+              nisi ut aliquip ex */}
             </p>
           </div>
 

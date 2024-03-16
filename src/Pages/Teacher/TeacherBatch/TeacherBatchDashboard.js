@@ -115,7 +115,7 @@ export const TeacherBatchDashboard = (props) => {
                                     <div className=''>
                                         <div className='text-sm'>{item.description}</div>
 
-                                        <div className='flex flex-col md:flex-row my-3'>
+                                        <div className='flex flex-wrap  flex-col md:flex-row my-3'>
                                             {item.materials && item.materials.length != 0 && item.materials.map((item, index) => {
                                                 return (
                                                     <div className='mt-2'>

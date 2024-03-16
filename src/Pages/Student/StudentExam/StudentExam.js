@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getAExamMarksApi, submitExamApi } from '../../../Api/Student/ExamApi'
 import Spinner from '../../../components/Spinner'
-import { getFileUrl } from '../../../Functions/CustomFunction'
+import { getFileUrl, showFile } from '../../../Functions/CustomFunction'
 import RemainingTimeShow from './RemainingTimeShow'
 
 export const StudentExam = (props) => {
@@ -228,13 +228,20 @@ export const StudentExam = (props) => {
                             {
                                 state.exam.broadQuestionsId.map((item, index) => {
 
-                                    return <div>{index + 1}. {item.question}</div>
+                                    return <div className='py-5 border-b'>
+                                        <strong>{index + 1}.</strong> {item.question} <br />
+                                        {/* {item.questionAttachment && <object height='500px' width='500px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>} */}
+                                        {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                        
+                                    </div>
 
                                 })
                             }
 
-                            <form onSubmit={e => handleSubmit(e)} action="">
-                                <input name='script' onChange={e => handleChange(e)} type="file" /> <br />
+                            <form onSubmit={e => handleSubmit(e)} action="" className='text-center'>
+
+                                <div className='font-bold my-5 text-xl'>Upload Answer Scrit</div>
+                                <input className='file-input file-input-bordered' name='script' onChange={e => handleChange(e)} type="file" /> <br />
                             </form>
                         </div>
 
@@ -249,8 +256,10 @@ export const StudentExam = (props) => {
 
                             <iframe height='500px' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></iframe>
 
-                            <form onSubmit={e => handleSubmit(e)} action="">
-                                <input name='script' onChange={e => handleChange(e)} type="file" /> <br />
+                            <form onSubmit={e => handleSubmit(e)} action="" className='text-center'>
+
+                                <div className='font-bold my-5 text-xl'>Upload Answer Scrit</div>
+                                <input className='file-input file-input-bordered' name='script' onChange={e => handleChange(e)} type="file" /> <br />
                             </form>
                         </div>
 

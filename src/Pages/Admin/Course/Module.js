@@ -171,7 +171,7 @@ export const Module = (props) => {
 
             <div>
 
-                <div className='flex flex-col md:flex-row'>
+                <div className='flex  flex-wrap flex-col md:flex-row'>
                     {materials.map((item, index) => {
                         return (<div className='my-3 flex border-2 p-2 shadow me-3 hover:badge-outline rounded'>
                             <div><span onClick={() => showFile(item)} className="p-3 hover:text-red-800 cursor-pointer">{item.name} </span><span onClick={() => removeMaterial(index)} className='hover:text-red-800 p-3 fa-xl rounded cursor-pointer'> <FontAwesomeIcon icon={faCircleXmark} /> </span></div>

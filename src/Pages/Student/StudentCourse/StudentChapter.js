@@ -99,7 +99,7 @@ export const StudentChapter = (props) => {
 
                 <div className='bg-red-800 p-3 text-center my-20 text-xl'> <span className='text-white rounded'>MATERIALS</span></div>
 
-                <div className='flex flex-col md:flex-row'>
+                <div className='flex flex-wrap  flex-col md:flex-row'>
                     {materials.map(item => {
                         return (
                             <div onClick={() => showFile(item)} className="btn btn-outline md:me-4 p-2 mt-2">

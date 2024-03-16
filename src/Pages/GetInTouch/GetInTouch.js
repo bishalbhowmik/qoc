@@ -1,7 +1,7 @@
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './GetInTouch.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook, faTwitter, faLinkedin, faGithub, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
 export default function GetInTouch() {
     return (
@@ -30,7 +30,7 @@ export default function GetInTouch() {
                         </div>
 
                         <div>
-                            <a href="https://www.facebook.com/norgate.99">
+                            <a href="https://www.facebook.com/qoc.99" target='_blank' rel="noreferrer">
                                 <div class="getintouch_container getintouch_container--facebook">
                                     <div class="box box--middle">
                                         <i className='ion ion-social-facebook'><FontAwesomeIcon icon={faFacebook} /></i>

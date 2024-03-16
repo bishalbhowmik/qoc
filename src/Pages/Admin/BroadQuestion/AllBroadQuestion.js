@@ -151,11 +151,14 @@ export const AllBroadQuestion = (props) => {
     }
     else {
         broadQuestionShow = broadQuestion.map((item, index) => {
+            console.log(item)
             return (
                 <div className='card card-body border my-3'>
                     <div className='font-bold'>{index + 1}. {item.question}</div>
+                    {item.questionAttachment && <div> <object data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object> </div>}
                     <div className='mt-3'>
-                        <strong>Answer: </strong>{item.answer}
+                        <strong>Answer: </strong>{item.answer} <br />
+                        {item.answerAttachment && <div> <object data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.answerAttachment.name} type=""></object> </div>}
                     </div>
                 </div>
             )

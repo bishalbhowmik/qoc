@@ -49,7 +49,7 @@ export const Course = (props) => {
     addCurriculumApi(state).then(data => {
       setSpin(false)
       if (data.error) throw data.message
-      console.log(data.message)
+      console.log(data)
 
     }).catch(err => console.log(err))
   }
@@ -69,7 +69,7 @@ export const Course = (props) => {
     if (window.confirm("Along with curriculum deletion, all data (Subjects, Chapters, Module, Exam, Mcqs, Broadquestions, Resources etc.) in database dependent on it will be deleted. Are you want to procced?")) {
 
       deleteCurriculumApi(id).then(data => {
-        // console.log(data)
+        console.log(data)
         window.alert(data.message)
       })
     }

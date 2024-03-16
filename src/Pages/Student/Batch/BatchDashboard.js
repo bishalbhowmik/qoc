@@ -101,14 +101,14 @@ export const BatchDashboard = (props) => {
                         {batch && batch.announcements.toReversed().map((item, index) => {
                             return (
                                 <div className='card glass bg-gray-100 mb-7 hover:shadow-lg p-3'>
-                                    <div className='mb-8 flex flex-col md:flex-row justify-between'>
+                                    <div className='mb-8 flex  flex-wrap flex-col md:flex-row justify-between'>
                                         <div className='card-title'>{item.title}</div>
                                         <div className='text-sm'>Posted on {new Date(item.createdAt).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
                                     </div>
                                     <div className=''>
                                         <div className='text-sm'>{item.description}</div>
 
-                                        <div className='flex flex-col md:flex-row mt-3'>
+                                        <div className='flex flex-wrap  flex-col md:flex-row flex-wrap  mt-3'>
                                             {item.materials && item.materials.length != 0 && item.materials.map((item, index) => {
                                                 return (
                                                     <div className='mt-2'>
