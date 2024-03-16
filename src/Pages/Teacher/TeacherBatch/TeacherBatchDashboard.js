@@ -60,8 +60,16 @@ export const TeacherBatchDashboard = (props) => {
         e.preventDefault()
 
         createAnnouncementApi(batchId, { ...state, createdAt: new Date().toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' }) }).then(data => {
-            console.log(data)
-            setSpin(false)
+            getBatchDashboardApi(batchId, 'teacher').then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+
+                setBatch(data.data)
+            })
+                .catch(err => {
+                    // window.alert(err)
+                })
             setMessage(data.message)
         })
 
@@ -126,7 +134,7 @@ export const TeacherBatchDashboard = (props) => {
                                         </div>
                                     </div>
 
-                                    <div><button className='btn btn-error btn-sm text-white'><FontAwesomeIcon icon={faTrashCan} /> Delete</button></div>
+                                    {/* <div><button className='btn btn-error btn-sm text-white'><FontAwesomeIcon icon={faTrashCan} /> Delete</button></div> */}
 
 
                                 </div>
