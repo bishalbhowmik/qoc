@@ -366,10 +366,7 @@ function Home(props) {
               Some Of Our Top <span className="text-[#ac1823]">Courses</span>
             </h1>
             <p className="text-[16px] text-[#2F2F2F] mb-10">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex
+
             </p>
 
           </div>
