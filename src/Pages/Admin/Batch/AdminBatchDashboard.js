@@ -114,7 +114,7 @@ export const BatchDashboard = (props) => {
                                             {item.materials && item.materials.length != 0 && item.materials.map((item, index) => {
                                                 return (
                                                     <div className='mt-2'>
-                                                        <button onClick={() => showFile(item)} className='btn btn-sm btn-outline md:me-4 p-1'>{item.name}</button>
+                                                        <a target='_blank' href={process.env.REACT_APP_BACKEND_URL + '/api/uploads/' + item.name} className='btn btn-sm btn-outline md:me-4 p-1'>{item.name}</a>
                                                     </div>
                                                 )
                                             })}
