@@ -48,7 +48,7 @@ export const Resource = (props) => {
                 {/* <div className=" text-sm">{new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })} ~ {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div> */}
                 <div className="my-4">{item.description}</div>
                 <div className="">#{item.curriculumId.curriculum}</div>
-                <div className="mb-4">#{item.subjectId.subject}</div>
+                <div className="mb-4">#{item.subjectId && <span>item.subjectId.subject</span>}</div>
                 <div onClick={e => showFile(item.attachment)} className="btn btn-sm btn-outline">See Attachment</div>
 
               </div>
