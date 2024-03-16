@@ -62,7 +62,6 @@ export const AdminDemoClass = (props) => {
         if (e.target.value != '') {
             if (e.target.name === 'curriculumId') {
 
-
                 setSpin(true)
 
                 getSubjectsApi(e.target.value).then(data => {
@@ -111,8 +110,13 @@ export const AdminDemoClass = (props) => {
         console.log(demoClassState)
         setSpin(true);
         createDemoClassApi(demoClassState).then(data => {
-            console.log(data)
-            setSpin(false); //
+            getDemoClassApi().then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setDemoClass([...data.data])
+            }).catch(err => {
+                console.log(err)
+            })
             window.alert(data.message);
 
             document.getElementById('addDemoClassModal').close()
@@ -149,7 +153,13 @@ export const AdminDemoClass = (props) => {
         e.preventDefault()
         setSpin(true);
         updateDemoClassApi(selectedDemoClass._id, demoClassState).then(data => {
-            setSpin(false);
+            getDemoClassApi().then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setDemoClass([...data.data])
+            }).catch(err => {
+                console.log(err)
+            })
             window.alert(data.message);
             document.getElementById('updateDemoClassModal').close()
         })
@@ -158,7 +168,13 @@ export const AdminDemoClass = (props) => {
     const removeDemoClass = (id) => {
         setSpin(true);
         removeDemoClassApi(id).then(data => {
-            setSpin(false);
+            getDemoClassApi().then(data => {
+                setSpin(false)
+                if (data.error) throw data.message
+                setDemoClass([...data.data])
+            }).catch(err => {
+                setDemoClass([])
+            })
             window.alert(data.message);
         })
     }

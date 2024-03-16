@@ -31,8 +31,15 @@ export const Assignment = (props) => {
   const handleSubmit = (e, id) => {
 
     e.preventDefault()
+
+    setSpin(true)
     submitSolutionApi(id, state).then(data => {
       if (data.error) throw data.message
+      getAllAssignmentApi({}).then(data => {
+        setSpin(false)
+        if (data.error) throw data.message
+        setAssignment(data.data)
+      }).catch(err => console.log(err))
       window.alert(data.message)
     }).catch(err => window.alert(err))
   }

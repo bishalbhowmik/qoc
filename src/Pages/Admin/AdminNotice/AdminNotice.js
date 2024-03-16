@@ -63,8 +63,15 @@ export const AdminNotice = (props) => {
 
         setSpin(true);
         createNoticeApi(noticeState).then(data => {
-            console.log(data)
-            setSpin(false); //
+            getNoticeApi().then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+                setNotice([...data.data])
+            }).catch(err => {
+                console.log(err)
+            })
+
             window.alert(data.message);
 
             document.getElementById('addNoticeModal').close()
@@ -79,7 +86,15 @@ export const AdminNotice = (props) => {
     const remove = (id) => {
         setSpin(true);
         deleteNoticeApi(id).then(data => {
-            setSpin(false);
+            getNoticeApi().then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+                setNotice([...data.data])
+            }).catch(err => {
+                setNotice([])
+            })
+
             window.alert(data.message);
         })
     }

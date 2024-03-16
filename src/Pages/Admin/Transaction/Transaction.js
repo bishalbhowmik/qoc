@@ -52,7 +52,9 @@ export const Transaction = (props) => {
     const clearTransaction = () => {
         if (window.confirm('Are you sure?')) {
             deleteransactionApi().then(data => {
+                setTransaction([])
                 window.alert(data.message)
+
             })
         }
     }

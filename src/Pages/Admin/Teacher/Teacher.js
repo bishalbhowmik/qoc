@@ -34,8 +34,14 @@ export const Teacher = (props) => {
   const setPremium = (id) => {
 
     if (window.confirm('Are you sure you want to?')) {
+
+      setSpin(true)
       setPremiumApi(id).then(data => {
-        console.log(data)
+        getTeacher({}).then(data => {
+          setSpin(false)
+          if (data.error) throw data.message
+          setTeacher([...data.data])
+        }).catch(err => console.log(err))
       })
     }
 
@@ -61,7 +67,13 @@ export const Teacher = (props) => {
 
   const deleteTeacher = id => {
     if (window.confirm('Are you sure you want to remove teacher?')) {
+      setSpin(true)
       deleteTeacherApi(id).then(data => {
+        getTeacher({}).then(data => {
+          setSpin(false)
+          if (data.error) throw data.message
+          setTeacher([...data.data])
+        }).catch(err => console.log(err))
         window.alert(data.message);
       })
     }
@@ -74,11 +86,15 @@ export const Teacher = (props) => {
 
   const handleUpdateSubmit = e => {
     e.preventDefault()
-    console.log(teacherState)
 
+    setSpin(true)
     updateTeacherInfoApi(selected._id, teacherState).then(data => {
 
-      setSpin(false)
+      getTeacher({}).then(data => {
+        setSpin(false)
+        if (data.error) throw data.message
+        setTeacher([...data.data])
+      }).catch(err => console.log(err))
 
       window.alert(data.message)
     })

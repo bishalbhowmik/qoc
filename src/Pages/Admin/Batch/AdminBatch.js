@@ -28,7 +28,17 @@ export const AdminBatch = (props) => {
 
     const deleteBatch = id => {
         if (window.confirm('Are you sure you want to?')) {
+
+            setSpin(true)
             deleteBatchApi(id).then(data => {
+                getAllBatchApi({}).then(data => {
+
+                    setSpin(false)
+                    if (data.error) throw data.message
+
+                    setBatch([...data.data])
+
+                }).catch(err => setBatch([]))
                 window.alert(data.message)
             })
         }

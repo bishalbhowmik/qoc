@@ -61,8 +61,14 @@ export const UpcomingCourse = (props) => {
 
         setSpin(true);
         createUpcomingCourseApi(upcomingCourseState).then(data => {
-            console.log(data)
-            setSpin(false); //
+            getUpcomingCourseApi().then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+                setUpcomingCourse([...data.data])
+            }).catch(err => {
+                console.log(err)
+            })
             window.alert(data.message);
 
             document.getElementById('addUpcomingCourseModal').close()
@@ -77,7 +83,14 @@ export const UpcomingCourse = (props) => {
     const remove = (id) => {
         setSpin(true);
         removeUpcomingCourseApi(id).then(data => {
-            setSpin(false);
+            getUpcomingCourseApi().then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+                setUpcomingCourse([...data.data])
+            }).catch(err => {
+                setUpcomingCourse([])
+            })
             window.alert(data.message);
         })
     }
