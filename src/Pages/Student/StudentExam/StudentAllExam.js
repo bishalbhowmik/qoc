@@ -39,9 +39,15 @@ export const StudentAllExam = (props) => {
     else {
         examShow = exam.map(item => {
 
-            console.log(item.startTime);
             return (
-                <Link aria-disabled to={'/student-dashboard/exam'} state={{ exam: item }} className='card card-body glass my-5'>{item.exam}</Link>
+                <Link aria-disabled to={'/student-dashboard/exam'} state={{ exam: item }} className='card card-body glass my-5 hover:shadow-lg bg-sky-700 text-white'>
+                    <div className='card-title mb-5'>
+                        {item.subjectId.subject} - {item.exam} 
+                    </div>
+                    <div className='card-text'>Start - {new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
+                    <div className='card-text'>End - {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</div>
+
+                </Link>
             )
         })
     }
@@ -49,10 +55,9 @@ export const StudentAllExam = (props) => {
 
     return (
         <div>
-            <div className='p-2 text-center my-10 capitalize font-bold text-2xl'>{message}</div>
+            <div className='p-2 text-center mb-10 capitalize font-bold text-2xl'>{message}</div>
 
-            {examShow}
-
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>{examShow}</div>
 
             {spin ? <Spinner /> : ''}
 

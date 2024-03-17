@@ -99,7 +99,7 @@ export const Course = (props) => {
   else {
     curriculumShow = curriculum.map((item, index) => {
       return (
-        <div className='card  col-span-6 md:col-span-3  glass bg-inherit hover:bg-slate-600 hover:text-white '>
+        <div className='card glass bg-inherit hover:bg-indigo-600 hover:text-white '>
           <Link to='/admin-dashboard/curriculum' state={{ curriculum: item }} className=''>
             <div className="card-body items-center">
               <div className="card-title text-center">{item.curriculum}</div>
@@ -131,7 +131,7 @@ export const Course = (props) => {
       <button onClick={() => document.getElementById('addCurriculumModal').showModal()} className='btn btn-success'>Add Curriculum</button>
 
 
-      <div className='grid gap-10 grid-cols-12 mt-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10'>
         {curriculumShow}
       </div>
 

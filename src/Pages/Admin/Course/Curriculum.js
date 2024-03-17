@@ -107,7 +107,7 @@ export const Curriculum = (props) => {
     else {
         subjectShow = subject.map((item, index) => {
             return (
-                <div className='card col-span-6 md:col-span-3 glass bg-inherit hover:bg-slate-600 hover:text-white '>
+                <div className='card glass bg-inherit hover:bg-indigo-600 hover:text-white '>
                     <Link to='/admin-dashboard/subject' state={{ subject: item }}>
                         <div className="card-body items-center">
                             <div className="card-title text-center">{item.subject}</div>
@@ -161,7 +161,7 @@ export const Curriculum = (props) => {
 
 
 
-            <div className='grid gap-10 grid-cols-12 mt-10'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mt-10'>
                 {subjectShow}
             </div>
 

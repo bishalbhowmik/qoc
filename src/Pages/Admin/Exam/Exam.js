@@ -9,6 +9,8 @@ import { getMcqByCriteriaApi } from '../../../Api/Admin/McqApi'
 import { getModulesApi } from '../../../Api/Admin/ModuleApi'
 import { getSubjectsApi } from '../../../Api/Admin/SubjectApi'
 import Spinner from '../../../components/Spinner'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export const Exam = (props) => {
 
@@ -237,6 +239,7 @@ export const Exam = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    setSpin(true)
     createExamApi({
 
       ...state,
@@ -265,7 +268,7 @@ export const Exam = (props) => {
       setSelectedBroadQuestion([])
       setSelectedMcq([])
       document.getElementById('createExamModal').close()
-      
+
       setSpin(false)
       if (data.error) throw data.message
       setMessage(data.message)
@@ -288,30 +291,32 @@ export const Exam = (props) => {
 
 
   let examShow
-  if (exam.length === 0) { examShow = <div className='p-5 bg-neutral text-white my-5'>No Exam Created</div> }
+  if (exam.length === 0) { examShow = <div className='p-5 bg-neutral text-white my-5 col-span-full'>No Exam Created</div> }
   else {
     examShow = exam.map(item => {
       return (
-        <div className='card card-body glass my-10 bg-slate-700 text-white'>
+
+        <div className='card card-body glass my-10 bg-indigo-900 text-white hover:shadow-lg'>
           <Link to={`/admin-dashboard/exam-details/${item._id}`} className=''>
-            <div className='flex justify-between'>
-              <div className='font-bold'>Exam Name: {item.exam}</div>
-              <div className=''>Total Marks: {item.totalMarks}</div>
-            </div>
-            <div className='flex justify-between'>
-              <div className=''>Start Time: {new Date(item.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
-              <div className=''>End Time: {new Date(item.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
-            </div>
-            <div className='flex justify-between'>
-              <div className=''>Negative Marking: {item.negativeMarking}</div>
-              <div className=''>Per MCQ Marks: {item.mcqsId.length}</div>
-            </div>
-            <div className='flex justify-between'>
-              <div className=''>Number of MCQ: {item.numberOfMcq}</div>
-              <div className=''>Number of Broad Question: {item.broadQuestionsId.length}</div>
+            <div className='card-title'> {item.subjectId.subject} - {item.exam}</div>
+            <div className='card-body'>
+
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+                <div>
+                  <div><strong>Start</strong> - {new Date(item.startTime).toLocaleString('en-US', { hour12: true, timeZone: "Asia/Dhaka" })}</div>
+                  <div><strong>End</strong> - {new Date(item.endTime).toLocaleString('en-US', { hour12: true, timeZone: "Asia/Dhaka" })}</div>
+                  <div><strong>Total Marks</strong> - {item.totalMarks}</div>
+                </div>
+
+                <div>
+                  <div><strong>Total Participants</strong> - {item.participants ? item.participants.length : 0} </div>
+                </div>
+              </div>
+
+
             </div>
           </Link>
-          <div><button onClick={() => deleteExam(item._id)} className='btn btn-error'>Detete Exam</button></div>
+          <div><button onClick={() => deleteExam(item._id)} className='btn btn-error btn-sm'> <FontAwesomeIcon icon={faTrash} /> Detete</button></div>
         </div>
       )
     })
@@ -323,7 +328,7 @@ export const Exam = (props) => {
 
       <button className='btn' onClick={() => document.getElementById('createExamModal').showModal()}>Create Exam</button>
 
-      <div>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-7'>
         {examShow}
       </div>
 

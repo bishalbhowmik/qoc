@@ -190,7 +190,7 @@ export const StudentExam = (props) => {
 
                         <div className='font-bold text-center my-10 text-xl underline'>MCQ</div>
 
-                        <form onSubmit={e => handleSubmit(e)} action="">
+                        <form onSubmit={e => handleSubmit(e)} action="" className="shadow-lg">
 
                             {
                                 state.exam.mcqsId.map((item, index) => {
@@ -224,7 +224,7 @@ export const StudentExam = (props) => {
 
                         <div className='font-bold text-center my-10 text-xl underline'>Broad Question</div>
 
-                        <div className='card card-body glass mb-5'>
+                        <div className='card card-body glass mb-5 shadow-lg'>
                             {
                                 state.exam.broadQuestionsId.map((item, index) => {
 
@@ -252,13 +252,13 @@ export const StudentExam = (props) => {
 
                         <div className='font-bold text-center my-10 text-xl underline'>Question Paper</div>
 
-                        <div className='card card-body glass mb-5'>
+                        <div className='card card-body glass mb-5 shadow-lg'>
 
                             <iframe height='500px' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></iframe>
 
                             <form onSubmit={e => handleSubmit(e)} action="" className='text-center'>
 
-                                <div className='font-bold my-5 text-xl'>Upload Answer Scrit</div>
+                                <div className='font-bold mb-5 mt-10 text-xl'>Upload Answer Scrit</div>
                                 <input className='file-input file-input-bordered' name='script' onChange={e => handleChange(e)} type="file" /> <br />
                             </form>
                         </div>
