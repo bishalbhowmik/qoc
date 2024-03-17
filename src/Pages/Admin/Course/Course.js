@@ -33,7 +33,7 @@ export const Course = (props) => {
       setSpin(false)
 
       if (data.error) throw data.message
-      setCurriculum([...data.data])
+      // setCurriculum([...data.data])
 
     }).catch(err => console.log(err))
 
@@ -94,7 +94,7 @@ export const Course = (props) => {
 
   let curriculumShow
   if (curriculum.length === 0) {
-    curriculumShow = <div className='p-40 text-center col-span-12'>Not Curriculum found</div>
+    curriculumShow = <div className='p-20 text-center col-span-full'>Not Curriculum found</div>
   }
   else {
     curriculumShow = curriculum.map((item, index) => {

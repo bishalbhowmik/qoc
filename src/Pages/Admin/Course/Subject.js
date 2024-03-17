@@ -145,7 +145,7 @@ export const Subject = (props) => {
 
   let chapterShow;
   if (chapter.length === 0) {
-    chapterShow = <div className="p-40 text-center col-span-12">Not chapter found</div>;
+    chapterShow = <div className="p-20 text-center col-span-full">Not chapter found</div>;
   } else {
     chapterShow = chapter.map((item, index) => {
       return (

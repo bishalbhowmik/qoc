@@ -102,7 +102,7 @@ export const Curriculum = (props) => {
 
     let subjectShow
     if (subject.length === 0) {
-        subjectShow = <div className='p-40 text-center col-span-12'>Not Subject found</div>
+        subjectShow = <div className='p-20 text-center col-span-full'>Not Subject found</div>
     }
     else {
         subjectShow = subject.map((item, index) => {

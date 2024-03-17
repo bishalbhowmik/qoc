@@ -141,7 +141,7 @@ export const Chapter = (props) => {
 
   let moduleShow;
   if (modules.length === 0) {
-    moduleShow = <div className="p-40 text-center col-span-12">Not module found</div>;
+    moduleShow = <div className="p-20 text-center col-span-full">Not module found</div>;
   } else {
     moduleShow = modules.map((item, index) => {
       return (
