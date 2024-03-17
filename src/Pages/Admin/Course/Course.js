@@ -33,7 +33,7 @@ export const Course = (props) => {
       setSpin(false)
 
       if (data.error) throw data.message
-      // setCurriculum([...data.data])
+      setCurriculum([...data.data])
 
     }).catch(err => console.log(err))
 
