@@ -346,7 +346,7 @@ function Home(props) {
                 <Link to="/find-tutors">Find Your Tutors</Link>
               </button>
               <button className="text-sm bg-darkH text-white rounded-full w-44 h-11 mt-3 md:mt-0 font-bold hover:font-normal">
-                <Link to={ props.authenticated ? `/${props.decodedToken.role}-dashboard/payment` : '/login'}>Book Your Lessons </Link>
+                <Link to={props.authenticated ? `/${props.decodedToken.role}-dashboard/payment` : '/login'}>Book Your Lessons </Link>
               </button>
             </span>
           </div>
@@ -536,7 +536,7 @@ function Home(props) {
 
           <div className="flex items-center justify-center mt-0 md:mt-5">
             <button className="bg-normal hover:bg-normalH text-white text-sm w-48 h-11 rounded-full">
-              View All Courses
+              <Link to={props.authenticated ? `/${props.decodedToken.role}-dashboard/course` : '/login'}>View All Courses</Link>
             </button>
           </div>
         </div>
