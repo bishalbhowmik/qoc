@@ -121,7 +121,7 @@ export const Teacher = (props) => {
           <td>{item.batch && new Date() < new Date(item.batch.endTime) ? <FontAwesomeIcon className='fas fa-xl text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='fas fa-xl text-red-500' icon={faCircleXmark} />}</td>
           <td>{item.premiumEnd && new Date(item.premiumEnd).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</td>
           <td>{item.batch && new Date() > new Date(item.batch.endTime) ? <button onClick={() => setPremium(item._id)} className='btn btn-ghost'>Set</button> : ''}</td>
-          <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Details</button></td>
+          <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Edit</button></td>
           <td><button className='btn btn-error btn-sm' onClick={e => deleteTeacher(item._id)}>Remove</button></td>
         </tr>
       )

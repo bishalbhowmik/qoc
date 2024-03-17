@@ -414,7 +414,7 @@ function Home(props) {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
                   </p>
                   <button className="text-[#ac1823]">
-                    Book Now <i className="fa-solid fa-chevron-right" />
+                    <Link to={props.authenticated ? `/student-dashboard/payment` : "login"}>Book Now <i className="fa-solid fa-chevron-right" /></Link>
                   </button>
                 </div>
 
@@ -450,7 +450,7 @@ function Home(props) {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
                   </p>
                   <button className="text-[#ac1823]">
-                    Book Now <i className="fa-solid fa-chevron-right" />
+                    <Link to={props.authenticated ? `/student-dashboard/payment` : "login"}>Book Now <i className="fa-solid fa-chevron-right" /></Link>
                   </button>
                 </div>
 
@@ -486,7 +486,7 @@ function Home(props) {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
                   </p>
                   <button className="text-[#ac1823]">
-                    Book Now <i className="fa-solid fa-chevron-right" />
+                    <Link to={props.authenticated ? `/student-dashboard/payment` : "login"}>Book Now <i className="fa-solid fa-chevron-right" /></Link>
                   </button>
                 </div>
 
@@ -522,7 +522,7 @@ function Home(props) {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed{" "}
                   </p>
                   <button className="text-[#ac1823]">
-                    Book Now <i className="fa-solid fa-chevron-right" />
+                    <Link to={props.authenticated ? `/student-dashboard/payment` : "login"}>Book Now <i className="fa-solid fa-chevron-right" /></Link>
                   </button>
                 </div>
 
