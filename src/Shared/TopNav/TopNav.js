@@ -13,7 +13,7 @@ const TopNav = () => {
             <span>
               <i className="fa-solid fa-phone text-[1.1rem] mt-1"></i>
             </span>
-            <span className="text-[1rem]"><a className='inline' href='tel:01312379588'>+88 012345678</a></span>
+            <span className="text-[1rem]"><a className='inline' href='tel:01333559528'>+88 01333559528</a></span>
             <span>
               <i className="fa-solid fa-envelope text-[1.1rem] mt-1"></i>
             </span>

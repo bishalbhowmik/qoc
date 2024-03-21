@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getFocusApi } from '../../../Api/Admin/FocusApi'
-import { getAStudent, getAllActivityApi } from '../../../Api/Student/StudentApi'
+import { getAllActivityApi } from '../../../Api/Student/StudentApi'
 import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
 
@@ -216,14 +216,21 @@ export const StudentDashboard = (props) => {
 
 
 
-      <div>
+      {/* <div className="bg-slate-200">
         <div className=' text-slate-400'>Hello {props.decodedToken.username}! Welcome back <FontAwesomeIcon icon={faHandsClapping} className=' text-amber-600' /></div>
         <div className='text-3xl font-bold'>Your Dashboard Today</div>
-      </div>
+      </div> */}
 
-      <div className='my-14 grid grid-cols-1 md:grid-cols-12 gap-14'>
+      <div className='mb-14 grid grid-cols-1 md:grid-cols-12 gap-14'>
 
         <div className='col-span-full md:col-span-9'>
+
+
+          <div className='mb-10'>
+            <div className=' text-slate-400'>Hello {props.decodedToken.username}! Welcome back <FontAwesomeIcon icon={faHandsClapping} className=' text-amber-600' /></div>
+            <div className='text-3xl font-bold'>Your Dashboard Today</div>
+          </div>
+
           <div className=' bg-red-800 text-white p-5 rounded-2xl '>
             <div className='capitalize text-xl mb-5'>Together we achieve educational excellence</div>
 
@@ -256,7 +263,13 @@ export const StudentDashboard = (props) => {
 
         <div className=' col-span-full md:col-span-3'>
 
-          
+
+          <div className='mb-10 bg-slate-400'>
+
+
+          </div>
+
+
           <div className='mb-10'>
             <div className='text-xl font-bold mb-5 border-b pb-3'>Notice</div>
             {notice.length === 0 ? <div>No notice found!</div> : notice.map(item => {
@@ -268,7 +281,7 @@ export const StudentDashboard = (props) => {
                   <div className='mt-3'><FontAwesomeIcon icon={faBell} className='fas fa-xl text-rose-700 me-6' /></div>
                   <div>
                     <span>{item.title}</span> <br />
-                    <span className='text-xs'>{ item.description }</span>
+                    <span className='text-xs'>{item.description}</span>
                   </div>
                 </div>
               )
@@ -284,7 +297,7 @@ export const StudentDashboard = (props) => {
                   <div className='mt-3'><FontAwesomeIcon icon={faCalendarCheck} className='fas fa-xl text-rose-700 me-6' /></div>
                   <div>
                     <span>{item.title}</span> <br />
-                    <span className='text-sm'>Starting on ~ {new Date(item.startDate).toDateString()}</span> 
+                    <span className='text-sm'>Starting on ~ {new Date(item.startDate).toDateString()}</span>
                   </div>
                 </div>
               )

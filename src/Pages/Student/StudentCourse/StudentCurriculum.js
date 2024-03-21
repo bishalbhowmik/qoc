@@ -73,6 +73,11 @@ export const StudentCurriculum = (props) => {
 
 
             <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
+                <Link to=''  className='card  bg-red-950 text-white glass hover:shadow-lg'>
+                    <div className="card-body items-center">
+                        <div className="card-title text-center">Asvertisement</div>
+                    </div>
+                </Link>
                 {subjectShow}
             </div>
 
