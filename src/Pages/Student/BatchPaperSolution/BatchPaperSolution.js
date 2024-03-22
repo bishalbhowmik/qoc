@@ -1,4 +1,3 @@
-import bufferToDataUrl from 'buffer-to-data-url'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -25,20 +24,23 @@ export const BatchPaperSolution = (props) => {
   }, [])
 
 
-  const joinBatch = (batchId) => {
+  const joinBatch = (batch) => {
 
-
-    joiningBatchApi({ batchId: batchId, studentId: props.decodedToken._id }).then(data => {
-
-      console.log(data)
-
+    setSpin(true)
+    joiningBatchApi({ batchId: batch._id, studentId: props.decodedToken._id }).then(data => {
+      setSpin(false)
       if (!data.error) {
-        window.location.replace(data.data.bkashURL)
+        if (batch.fees === 0) {
+          window.alert(data.message)
+          window.location.replace('/student-dashboard/my-batch')
+        }
+        else window.location.replace(data.data.bkashURL)
       }
       else {
         window.alert(data.message)
       }
     })
+
 
   }
 
@@ -66,7 +68,7 @@ export const BatchPaperSolution = (props) => {
             </div>
           </div>
 
-          <div onClick={e => joinBatch(item._id)} className='col-span-12'><button className='btn btn-accent btn-block btn-sm mt-5'>Join</button></div>
+          <div onClick={e => joinBatch(item)} className='col-span-12'><button className={`rounded hover:font-bold text-white ${item.fees === 0 ? 'bg-green-500 hover:bg-green-600' : ' bg-red-400 hover:bg-red-500'} btn-block btn-sm mt-5`}>Join</button></div>
 
         </div>
       )
