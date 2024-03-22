@@ -156,7 +156,9 @@ export const StudentSubject = (props) => {
                                     <div className='font-bold mb-2'>Broad Questions: </div>
                                     {item.broadQuestionsId && item.broadQuestionsId.length != 0 && item.broadQuestionsId.map((item, index) => {
                                         return (
-                                            <div>{index + 1}. {item.question}</div>
+                                            <div><strong>{index + 1}.</strong> {item.question} <br />
+                                                {/* {item.questionAttachment && <object height='500px' width='500px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>} */}
+                                                {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}</div>
                                         )
                                     })}
                                 </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAExamApi, updateMarksApi } from '../../../Api/Admin/ExamApi';
-import { getFileUrl } from '../../../Functions/CustomFunction';
+import { getFileUrl, showFile } from '../../../Functions/CustomFunction';
 import Spinner from '../../../components/Spinner';
 
 export const ExamDetails = (props) => {
@@ -148,9 +148,12 @@ export const ExamDetails = (props) => {
                         {
                             exam.broadQuestionsId.map((item, index) => {
 
-                                console.log(item)
+                                return <div className='py-5 border-b'>
+                                    <strong>{index + 1}.</strong> {item.question} <br />
+                                    {/* {item.questionAttachment && <object height='500px' width='500px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>} */}
+                                    {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
 
-                                return <div className='p-3'>{index + 1}. {item.question}</div>
+                                </div>
 
                             })
                         }
