@@ -118,9 +118,9 @@ export const ExamDetails = (props) => {
                                 console.log(item)
 
                                 return (<div className='flex border-b py-3'>
-                                    <div className='bg-green-200 me-5 p-3'>{index + 1}. {item.question}</div>
-                                    <div className='p-3 bg-yellow-100'>Options - </div>
-                                    <div className='flex bg-yellow-100 p-3 me-5'>
+                                    <div className='bg-green-200 me-5 p-3 rounded'>{index + 1}. {item.question}</div>
+                                    <div className='p-3 bg-yellow-100 rounded'>Options - </div>
+                                    <div className='flex bg-yellow-100 p-3 me-5 rounded'>
                                         {item.options && item.options.map((option, index) => <div>
                                             <div className='me-5'>
                                                 <span className='' htmlFor="">{option.option}) {option.value}</span>
