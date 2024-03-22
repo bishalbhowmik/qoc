@@ -139,7 +139,7 @@ export const Teacher = (props) => {
     <div>
       <div className="overflow-x-auto">
 
-        <h2 className='text-center my-10 text-2xl'>All Teachers</h2>
+        <h2 className='text-center mb-10 text-2xl'>All Teachers</h2>
         <table className="table">
           <thead>
             <tr>

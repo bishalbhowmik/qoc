@@ -126,7 +126,7 @@ export const Student = (props) => {
 
       <div className="overflow-x-auto">
 
-        <h2 className='text-center my-10 text-2xl'>All students</h2>
+        <h2 className='text-center mb-10 text-2xl'>All students</h2>
         <table className="table">
           <thead>
             <tr>
