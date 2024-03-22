@@ -78,11 +78,12 @@ export const TutorDetails = (props) => {
                         <span>Start Date: {new Date(item.startDate).toLocaleDateString()}</span>
                         <span>Fees: ৳{item.fees}</span>
                     </div>
-                    <div class="flex space-x-2">
+                    <div class="flex">
                         <template x-if="batch.pastPaperSolution">
                             <span class="inline-block rounded-full px-2 py-1 text-center text-xs font-bold text-white bg-purple-500">Past Paper Solutions Included</span>
                         </template>
-                        {props.authenticated && props.decodedToken.role === "student" && <button href="" onClick={()=>joinBatch(item)} class="btn inline-block rounded-full px-3 py-2 text-center text-white bg-blue-500 hover:bg-blue-700" >Join Now</button>}
+
+                        {props.authenticated && props.decodedToken.role === "student" && <button href="" onClick={()=>joinBatch(item)} class="btn inline-block rounded text-center text-white bg-blue-500 hover:bg-blue-700" >Join Now</button>}
                     </div>
                 </div>
             )
