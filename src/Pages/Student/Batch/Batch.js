@@ -26,7 +26,6 @@ export const Batch = (props) => {
 
   const joinBatch = (batch) => {
 
-
     setSpin(true)
 
     joiningBatchApi({ batchId: batch._id, studentId: props.decodedToken._id }).then(data => {

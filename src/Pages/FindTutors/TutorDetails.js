@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getTeacher } from '../../Api/Admin/TeacherApi'
-import { getAllBatchApi } from '../../Api/Student/BatchApi'
+import { getAllBatchApi, joiningBatchApi } from '../../Api/Student/BatchApi'
 import Spinner from '../../components/Spinner'
 
 export const TutorDetails = (props) => {
@@ -38,6 +38,29 @@ export const TutorDetails = (props) => {
     if (!teacher) return <div className='p-24 text-center font-bold'>Teacher not found {spin && <Spinner />} </div>
 
 
+    const joinBatch = (batch) => {
+
+        setSpin(true)
+
+        joiningBatchApi({ batchId: batch._id, studentId: props.decodedToken._id }).then(data => {
+
+            setSpin(false)
+
+            if (!data.error) {
+                if (batch.fees === 0) {
+                    window.alert(data.message)
+                    window.location.replace('/student-dashboard/my-batch')
+                }
+                else window.location.replace(data.data.bkashURL)
+            }
+            else {
+                window.alert(data.message)
+            }
+        })
+
+    }
+
+
     let batchShow
     if (batches.length === 0) { batchShow = <div className='p-24 text-center font-bold'>No Batch Found</div> }
     else {
@@ -59,7 +82,7 @@ export const TutorDetails = (props) => {
                         <template x-if="batch.pastPaperSolution">
                             <span class="inline-block rounded-full px-2 py-1 text-center text-xs font-bold text-white bg-purple-500">Past Paper Solutions Included</span>
                         </template>
-                        {props.authenticated && props.decodedToken.role === "student" && <a href="" class="inline-block rounded-full px-3 py-2 text-center text-white bg-blue-500 hover:bg-blue-700">Join Now</a>}
+                        {props.authenticated && props.decodedToken.role === "student" && <button href="" onClick={()=>joinBatch(item)} class="btn inline-block rounded-full px-3 py-2 text-center text-white bg-blue-500 hover:bg-blue-700" >Join Now</button>}
                     </div>
                 </div>
             )
