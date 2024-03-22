@@ -2,9 +2,10 @@ import { faCircleCheck, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { deleteTeacherApi, getTeacher, setPremiumApi } from '../../../Api/Admin/TeacherApi'
-import Spinner from '../../../components/Spinner'
 import { updateTeacherInfoApi } from '../../../Api/Teacher/TeacherApi'
+import Spinner from '../../../components/Spinner'
 
 export const Teacher = (props) => {
 
@@ -121,6 +122,7 @@ export const Teacher = (props) => {
           <td>{item.batch && new Date() < new Date(item.batch.endTime) ? <FontAwesomeIcon className='fas fa-xl text-success' icon={faCircleCheck} /> : <FontAwesomeIcon className='fas fa-xl text-red-500' icon={faCircleXmark} />}</td>
           <td>{item.premiumEnd && new Date(item.premiumEnd).toLocaleString('en-US', { hour12: true, timeZone: 'Asia/Dhaka' })}</td>
           <td>{item.batch && new Date() > new Date(item.batch.endTime) ? <button onClick={() => setPremium(item._id)} className='btn btn-ghost'>Set</button> : ''}</td>
+          <td><Link to={`/tutor-details/${item._id}`} className='btn btn-neutral btn-sm' onClick={e => ''}>Visit</Link></td>
           <td><button className='btn btn-info btn-sm' onClick={e => seeDetails(item)}>Edit</button></td>
           <td><button className='btn btn-error btn-sm' onClick={e => deleteTeacher(item._id)}>Remove</button></td>
         </tr>
@@ -200,7 +202,7 @@ export const Teacher = (props) => {
 
                 <label htmlFor="" className='label label-text'>Grading</label>
                 <input className='input input-bordered w-full' name='grading' type="number" value={teacherState.grading} onChange={e => setTeacherState({ ...teacherState, [e.target.name]: e.target.value })} />
-                
+
                 <label htmlFor="" className='label label-text'>Features</label>
                 <select className=' select select-bordered w-full' name="featured" id="" onChange={e => setTeacherState({ ...teacherState, [e.target.name]: e.target.value })} >
                   <option value="">Select</option>
