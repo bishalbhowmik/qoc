@@ -17,7 +17,7 @@ const TopNav = () => {
             <span>
               <i className="fa-solid fa-envelope text-[1.1rem] mt-1"></i>
             </span>
-            <span className="text-[1rem]"><a className='inline' href='mailto:qoclearning@gmail.com'>qoclearning@gmail.com</a></span>
+            <span className="text-[1rem]"><a className='inline' href='mailto:contact@qoclearning.com'>contact@qoclearning.com</a></span>
           </div>
 
           <div className="flex items-center gap-x-7 text-[1.3rem]">
