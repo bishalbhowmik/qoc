@@ -117,18 +117,19 @@ export const ExamDetails = (props) => {
 
                                 console.log(item)
 
-                                return (<div className='flex border-b py-3'>
-                                    <div className='bg-green-200 me-5 p-3 rounded'>{index + 1}. {item.question}</div>
-                                    <div className='p-3 bg-yellow-100 rounded'>Options - </div>
-                                    <div className='flex bg-yellow-100 p-3 me-5 rounded'>
+                                return (<div className='border-b py-3'>
+                                    <div className=' bg-sky-100 me-5 p-3 rounded shadow flex flex-col md:flex-row'>
+                                        <div className='me-3'>{index + 1}. {item.question}</div>
+                                        {item.questionAttachment && <button className='btn btn-xs btn-outline' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                    </div>
+                                    <div className='flex bg-yellow-5 p-3 me-5 rounded my-3 flex-col md:flex-row'>
                                         {item.options && item.options.map((option, index) => <div>
-                                            <div className='me-5'>
-                                                <span className='' htmlFor="">{option.option}) {option.value}</span>
+                                            <div className='me-5 my-1'>
+                                                <span className={option.option === item.answer ? 'bg-green-500 text-white p-2 rounded-md' : ''} htmlFor="">{option.option}) {option.value}</span>
                                             </div>
 
                                         </div>)}
                                     </div>
-                                    <div className='p-3 bg-lime-200'>Answer - {item.answer}</div>
                                 </div>)
 
                             })
@@ -149,9 +150,9 @@ export const ExamDetails = (props) => {
                             exam.broadQuestionsId.map((item, index) => {
 
                                 return <div className='py-5 border-b'>
-                                    <strong>{index + 1}.</strong> {item.question} <br />
+                                    <div className=' bg-sky-100 p-3 rounded shadow'><strong>{index + 1}.</strong> {item.question}</div> <br />
                                     {/* {item.questionAttachment && <object height='500px' width='500px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>} */}
-                                    {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                    {item.questionAttachment && <button className='btn btn-sm' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
 
                                 </div>
 

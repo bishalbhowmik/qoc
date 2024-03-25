@@ -280,10 +280,11 @@ export const Exam = (props) => {
   }
 
   const deleteExam = (id) => {
-    setSpin(true)
+    
     if (window.confirm("Are you sure you want to delete?")) {
-      setSpin(false)
+      setSpin(true)
       deleteExamApi(id).then(data => {
+        setSpin(false)
         window.alert(data.message)
       })
     }

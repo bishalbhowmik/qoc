@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getAExamMarksApi, submitExamApi } from '../../../Api/Student/ExamApi'
+import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
-import { getFileUrl, showFile } from '../../../Functions/CustomFunction'
 import RemainingTimeShow from './RemainingTimeShow'
 
 export const StudentExam = (props) => {
@@ -97,7 +97,7 @@ export const StudentExam = (props) => {
 
     else {
 
-        
+
 
 
         const handleChange = (e) => {
@@ -197,7 +197,12 @@ export const StudentExam = (props) => {
 
                                     return (
                                         <div className='my-3 card card-body glass shadow-lg'>
-                                            {index + 1}. {item.question} <br />
+                                            <div className='flex flex-col md:flex-row'>
+                                                <div><strong>{index + 1}.</strong> {item.question} <br /></div>
+                                                <div className='text-sm'>
+                                                    {item.questionAttachment && <button className='btn btn-xs ms-4' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                                </div>
+                                            </div>
                                             {item.options && item.options.map((option, index) => <div>
 
                                                 <div className='flex items-center'>
@@ -230,9 +235,8 @@ export const StudentExam = (props) => {
 
                                     return <div className='py-5 border-b'>
                                         <strong>{index + 1}.</strong> {item.question} <br />
-                                        {/* {item.questionAttachment && <object height='500px' width='500px' data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>} */}
                                         {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
-                                        
+
                                     </div>
 
                                 })

@@ -53,7 +53,14 @@ export const Mcq = (props) => {
 
     const handleChange = (e) => {
 
-        if (e.target.value != '') {
+        if (e.target.name === 'questionAttachment' || e.target.name === 'answerAttachment') {
+            setState({
+                ...state,
+                [e.target.name]: e.target.files[0]
+            })
+        }
+
+        else if (e.target.value != '') {
 
             if (e.target.name === 'curriculumId') {
                 setSpin(true)
@@ -143,6 +150,7 @@ export const Mcq = (props) => {
                 answer: '',
                 hints: '',
                 explanation: '',
+                
             })
         })
     }
@@ -207,6 +215,11 @@ export const Mcq = (props) => {
                             <textarea required name='question' onChange={e => handleChange(e)} value={state.question} type="text" placeholder="Type here" className="input input-bordered w-full textarea" />
                         </div>
 
+                        <div className='mb-5'>
+                            <span className="label label-text">Question Attachment: </span>
+                            <input className='file-input file-input-bordered' type="file" name='questionAttachment' onChange={e => handleChange(e)} />
+                        </div>
+
                         <div className='mb-5'>Options: </div>
 
                         <div className='mb-5'>
@@ -230,6 +243,12 @@ export const Mcq = (props) => {
                             <span className="label label-text">Correct Answer: </span>
                             <input required name='answer' onChange={e => handleChange(e)} value={state.answer} type="text" placeholder="Type A, B, C or D" className="input input-bordered w-full" />
                         </div>
+
+                        <div className='mb-5'>
+                            <span className="label label-text">Answer Attachment: </span>
+                            <input name='answerAttachment' onChange={e => handleChange(e)} type="file" className=" file-input file-input-bordered" />
+                        </div>
+
 
                         <div className='mb-5'>
                             <span className="label label-text">Hints: </span>
