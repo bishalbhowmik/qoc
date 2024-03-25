@@ -75,11 +75,6 @@ export const TeacherBatchDashboard = (props) => {
 
     }
 
-    const showFile = file => {
-        setSelectedFile(file)
-        document.getElementById('showFileModal').showModal()
-    }
-
 
     let allTabs = document.getElementsByClassName('myTab')
 
@@ -176,19 +171,6 @@ export const TeacherBatchDashboard = (props) => {
 
                             </form>
 
-                        </div>
-                    </dialog>
-
-                    <dialog id="showFileModal" className="modal">
-                        <div className="modal-box w-10/12 max-w-full">
-                            <form method="dialog">
-                                {/* if there is a button in form, it will close the modal */}
-                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                            </form>
-
-                            <h3 className="font-bold text-lg mb-5">{selectedFile && selectedFile.name}</h3>
-                            {selectedFile && <object width='100%' className='h-screen' data={bufferToDataUrl(selectedFile.contentType, selectedFile.data)} type=""></object>
-                            }
                         </div>
                     </dialog>
 
