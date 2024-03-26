@@ -46,7 +46,7 @@ export const StudentExam = (props) => {
     }
 
 
-    if (new Date().toLocaleString("en-US", { timeZone: "Asia/Dhaka" }) < new Date(state.exam.startTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })) {
+    if (new Date() < new Date(state.exam.startTime)) {
 
         setInterval(() => {
 
