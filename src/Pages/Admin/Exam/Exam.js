@@ -249,6 +249,7 @@ export const Exam = (props) => {
       broadQuestionsId: selectedBroadQuestion,
 
     }).then(data => {
+
       setState({
         exam: '',
         curriculumId: '',
@@ -269,8 +270,17 @@ export const Exam = (props) => {
       setSelectedMcq([])
       document.getElementById('createExamModal').close()
 
-      setSpin(false)
       if (data.error) throw data.message
+
+
+      getAllExamApi({}).then(data => {
+        console.log(data)
+        setSpin(false)
+        if (data.error) throw data.message
+        setExam([...data.data])
+
+      })
+
       setMessage(data.message)
     })
       .catch(err => {
@@ -284,7 +294,14 @@ export const Exam = (props) => {
     if (window.confirm("Are you sure you want to delete?")) {
       setSpin(true)
       deleteExamApi(id).then(data => {
-        setSpin(false)
+
+        getAllExamApi({}).then(data => {
+          console.log(data)
+          setSpin(false)
+          if (data.error) throw data.message
+          setExam([...data.data])
+
+        })
         window.alert(data.message)
       })
     }

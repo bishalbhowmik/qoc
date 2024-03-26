@@ -31,8 +31,6 @@ export const RequestDemo = (props) => {
 
   else {
     demoClassShow = demoClass.map(item => {
-
-      console.log(item.classTime)
       return (
         <div style={{ backgroundColor: color[Math.floor(Math.random() * color.length)] }} class="ag-courses_item">
           <div class="ag-courses-item_link">
@@ -62,7 +60,7 @@ export const RequestDemo = (props) => {
 
 
   return (
-    <div class="ag-format-container container md:px-0 px-3">
+    <div class="ag-format-container container md:px-5 px-3">
       <div class="ag-courses_box grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
         {demoClassShow}

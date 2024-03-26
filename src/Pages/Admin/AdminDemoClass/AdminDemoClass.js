@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { showFile } from "../../../Functions/CustomFunction";
-import Spinner from "../../../components/Spinner";
+import { getChaptersApi } from "../../../Api/Admin/ChapterApi";
+import { getAllCurriculumApi } from "../../../Api/Admin/CurriculumApi";
 import { createDemoClassApi, getDemoClassApi, removeDemoClassApi, updateDemoClassApi } from "../../../Api/Admin/DemoClassApi";
 import { getSubjectsApi } from "../../../Api/Admin/SubjectApi";
-import { getAllCurriculumApi } from "../../../Api/Admin/CurriculumApi";
-import { getChaptersApi } from "../../../Api/Admin/ChapterApi";
+import { showFile } from "../../../Functions/CustomFunction";
+import Spinner from "../../../components/Spinner";
 
 
 export const AdminDemoClass = (props) => {
@@ -140,8 +140,8 @@ export const AdminDemoClass = (props) => {
             startTime: item.startTime,
             endTime: item.endTime,
             chapterId: item.chapterId,
-            classTime:  item.classTime ,
-            classLink:  item.classLink
+            classTime: item.classTime,
+            classLink: item.classLink
         })
 
         document.getElementById('updateDemoClassModal').showModal()
@@ -222,10 +222,10 @@ export const AdminDemoClass = (props) => {
                                 <label className="label label-text" htmlFor="">Description</label>
                                 <textarea name="description" value={demoClassState.description} onChange={e => handleDemoClassChange(e)} placeholder="" className=" textarea textarea-bordered w-full mb-3" type="text" />
 
-                                <label className="label label-text" htmlFor="">Start Time*</label>
+                                <label className="label label-text" htmlFor="">Show Time*</label>
                                 <input name="startTime" value={demoClassState.startTime} onChange={e => handleDemoClassChange(e)} className="input input-bordered mb-3 w-full" type="datetime-local" />
 
-                                <label className="label label-text" htmlFor="">End Time*</label>
+                                <label className="label label-text" htmlFor="">Hide Time*</label>
                                 <input name="endTime" value={demoClassState.endTime} onChange={e => handleDemoClassChange(e)} className="input input-bordered mb-3 w-full" type="datetime-local" />
 
                                 <label className="label label-text" htmlFor="">Class Link*</label>
@@ -285,10 +285,10 @@ export const AdminDemoClass = (props) => {
                             <label className="label label-text" htmlFor="">Description</label>
                             <textarea name="description" value={demoClassState.description} onChange={e => handleDemoClassChange(e)} placeholder="" className=" textarea textarea-bordered w-full mb-3" type="text" />
 
-                            <label className="label label-text" htmlFor="">Start Time (Visibility)*</label>
+                            <label className="label label-text" htmlFor="">Show Time (Visibility)*</label>
                             <input name="startTime" value={demoClassState.startTime} onChange={e => handleDemoClassChange(e)} required className="input input-bordered mb-3 w-full" type="datetime-local" />
 
-                            <label className="label label-text" htmlFor="">End Time (Visibility)*</label>
+                            <label className="label label-text" htmlFor="">Hide Time (Visibility)*</label>
                             <input name="endTime" value={demoClassState.endTime} onChange={e => handleDemoClassChange(e)} required className="input input-bordered mb-3 w-full" type="datetime-local" />
 
                             <label className="label label-text" htmlFor="">Class Time*</label>
@@ -297,7 +297,7 @@ export const AdminDemoClass = (props) => {
 
                             <label className="label label-text" htmlFor="">Class Link*</label>
                             <input name="classLink" value={demoClassState.classLink} onChange={e => handleDemoClassChange(e)} required className="input input-bordered mb-3 w-full" type="text" />
-                            
+
 
                             <button className="btn btn-warning mb-3" type="submit">Add</button>
                         </form>
