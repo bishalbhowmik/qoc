@@ -33,7 +33,7 @@ export const RemainingTimeShow = (props) => {
 
     return (
         <div>
-            <div className='font-bold text-center mb-10 text-xl text-red-800'>Time Remaining: {remainingTime}</div>
+            <div className='font-bold text-center mb-10 text-red-800'>Time Remaining: {remainingTime}</div>
         </div>
     )
 }

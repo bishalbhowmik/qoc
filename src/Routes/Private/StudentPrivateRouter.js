@@ -42,7 +42,18 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
 
             <div className='grid grid-cols-12'>
                 <div className='col-span-2 px-3 py-4 bg-red-100 h-screen rounde-e-md hidden md:block text-rose-800'>
+
+                    <div className='grid grid-cols-6'>
+                        <div className='col-span-2'>
+                            <FontAwesomeIcon icon={faBook} className='fas fa-lg me-4' />
+                        </div>
+                        <div className='col-span-4'>
+                            Course
+                        </div>
+                    </div>
+
                     <Link to='/student-dashboard/curriculum' state={{ curriculum: decodedToken.curriculumId }} className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faBook} className='fas fa-lg me-4' /> Course</Link>
+                    
                     <Link to='/student-dashboard/all-exam' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Exam</Link>
                     <Link to='/student-dashboard/batch' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /> Batch</Link>
                     <Link to='/student-dashboard/batch-paper-solution' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' />Paper Solution</Link>

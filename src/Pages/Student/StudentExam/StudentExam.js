@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 import { getAExamMarksApi, submitExamApi } from '../../../Api/Student/ExamApi'
-import { showFile } from '../../../Functions/CustomFunction'
 import Spinner from '../../../components/Spinner'
 import RemainingTimeShow from './RemainingTimeShow'
 
@@ -175,14 +174,22 @@ export const StudentExam = (props) => {
 
 
         return (
-            <>
+            <div className='px-5'>
 
-                <div className='font-bold text-center  text-2xl'>{state.exam.exam}</div>
+                <div className='font-bold text-center text-2xl mb-3'>{state.exam.exam}</div>
 
                 <RemainingTimeShow state={state.exam.endTime} />
 
 
-                <div className='my-3 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+                <div className='flex flex-col md:flex-row justify-between'>
+                    <div className='my-2 font-bold'>End Time: {new Date(state.exam.endTime).toLocaleString("en-US", { timeZone: "Asia/Dhaka" })}</div>
+                    <div className='my-2 font-bold'>Total Marks: {state.exam.totalMarks}</div>
+                </div>
+
+                <div>
+                    <div className='my-3 italic underline'>{state.exam.description}</div>
+                </div>
+
 
                 {state.exam.hasOwnProperty('mcqsId') && state.exam.mcqsId.length != 0 ?
 
@@ -195,12 +202,16 @@ export const StudentExam = (props) => {
                             {
                                 state.exam.mcqsId.map((item, index) => {
 
+                                    console.log(item)
+
                                     return (
                                         <div className='my-3 card card-body glass shadow-lg'>
-                                            <div className='flex flex-col md:flex-row'>
+                                            <div className=''>
                                                 <div><strong>{index + 1}.</strong> {item.question} <br /></div>
                                                 <div className='text-sm'>
-                                                    {item.questionAttachment && <button className='btn btn-xs ms-4' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                                    {item.questionAttachment &&
+                                                        <object className='md:w-4/6 rounded-lg w-full shadow-lg border my-3 mx-auto' height={item.questionAttachment.contentType === 'application/pdf' ? '500px' : 'auto'} data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>
+                                                    }
                                                 </div>
                                             </div>
                                             {item.options && item.options.map((option, index) => <div>
@@ -235,7 +246,7 @@ export const StudentExam = (props) => {
 
                                     return <div className='py-5 border-b'>
                                         <strong>{index + 1}.</strong> {item.question} <br />
-                                        {item.questionAttachment && <button className='btn btn-sm mt-5' onClick={() => showFile(item.questionAttachment)}>See attachment</button>}
+                                        {item.questionAttachment && <object className='md:w-4/6 rounded-lg w-full shadow-lg border my-3 mx-auto' height={item.questionAttachment.contentType === 'application/pdf' ? '500px' : 'auto'} data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + item.questionAttachment.name} type=""></object>}
 
                                     </div>
 
@@ -256,9 +267,11 @@ export const StudentExam = (props) => {
 
                         <div className='font-bold text-center my-10 text-xl underline'>Question Paper</div>
 
-                        <div className='card card-body glass mb-5 shadow-lg'>
+                        <div className='card glass mb-5 pb-5 shadow-lg'>
 
-                            <iframe height='500px' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></iframe>
+                            {/* <iframe height='500px' src={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></iframe> */}
+
+                            <object className={`rounded-lg w-full shadow-lg border my-3 mx-auto ${state.exam.attachment.contentType === 'application/pdf' && 'h-screen'}`} data={process.env.REACT_APP_BACKEND_URL + "/api/uploads/" + state.exam.attachment.name} type=""></object>
 
                             <form onSubmit={e => handleSubmit(e)} action="" className='text-center'>
 
@@ -280,7 +293,7 @@ export const StudentExam = (props) => {
 
                 {spin && <Spinner />}
 
-            </>
+            </div>
         )
     }
 
