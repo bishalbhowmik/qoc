@@ -86,7 +86,7 @@ export const StudentChapter = (props) => {
         <div>
 
 
-            <div className='my-10 text-2xl text-center font-bold'>Chapter: {location.state ? location.state.chapter.chapter : ''}</div>
+            <div className='mb-10 text-2xl text-center font-bold'>Chapter: {location.state ? location.state.chapter.chapter : ''}</div>
 
             <div className='bg-red-800 p-3 mb-16 text-xl text-center'> <span className='text-white rounded'>All MODULES</span></div>
 

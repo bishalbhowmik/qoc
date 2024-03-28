@@ -50,7 +50,7 @@ export const StudentModule = (props) => {
 
     return (
         <div>
-            <div className='my-10 text-2xl text-center font-bold'>Module: {location.state ? location.state.module.module : ''}</div>
+            <div className='mb-10 text-2xl text-center font-bold'>Module: {location.state ? location.state.module.module : ''}</div>
 
             <div>
 

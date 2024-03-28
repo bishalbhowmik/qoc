@@ -67,17 +67,17 @@ export const StudentCurriculum = (props) => {
     return (
         <div>
 
-            <div className='my-10 text-2xl text-center font-bold'>{curriculumName}</div>
+            <div className='mb-10 text-2xl text-center font-bold'>{curriculumName}</div>
             <div  className='bg-red-800 p-3 mb-16 text-xl text-center'><span className='text-white rounded'>ALL SUBJECTS</span></div>
 
 
 
             <div className='grid grid-cols-2 md:grid-cols-4 gap-5 mt-10'>
-                <Link to=''  className='card  bg-red-950 text-white glass hover:shadow-lg'>
+                {/* <Link to=''  className='card  bg-red-950 text-white glass hover:shadow-lg'>
                     <div className="card-body items-center">
                         <div className="card-title text-center">Asvertisement</div>
                     </div>
-                </Link>
+                </Link> */}
                 {subjectShow}
             </div>
 

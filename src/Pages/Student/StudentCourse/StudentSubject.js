@@ -89,7 +89,7 @@ export const StudentSubject = (props) => {
         <div>
 
 
-            <div className='my-10 text-2xl text-center font-bold'>Subject: {location.state ? location.state.subject.subject : ''}</div>
+            <div className='mb-10 text-2xl text-center font-bold'>Subject: {location.state ? location.state.subject.subject : ''}</div>
 
             <div className='bg-red-800 p-3 mb-16 text-xl text-center'><span className='text-white rounded'>ALL CHAPTERS</span> </div>
 
