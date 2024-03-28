@@ -36,7 +36,14 @@ export const FindTuition = (props) => {
 
         setSpin(true)
         applyTuitionApi(id, props.decodedToken._id).then(data => {
-            setSpin(false)
+            getApprovedTuitionApi().then(data => {
+                console.log(data)
+                setSpin(false)
+                if (data.error) throw data.message
+
+                setTuition([...data.data])
+
+            })
             window.alert(data.message)
         })
 
@@ -69,7 +76,7 @@ export const FindTuition = (props) => {
                         <div><strong className='me-2'>Time:</strong>  {item.time}</div>
 
                         {
-                            props.authenticated && props.decodedToken.hasOwnProperty('role') && props.decodedToken['role'] === 'teacher' ? <button className='btn btn-primary' onClick={() => apply(item._id)}>Apply</button> : <Link to={'/login'} className='mt-4 text-red-900 text-center font-bold'>Be a teacher to apply first</Link>
+                            props.authenticated && props.decodedToken.hasOwnProperty('role') && props.decodedToken['role'] === 'teacher' ? <button className={`btn btn-primary`} onClick={() => apply(item._id)}>{props.authenticated && item.applicants.includes(props.decodedToken._id) ? 'Already Applied' : 'Apply'}</button> : <Link to={'/login'} className='mt-4 text-red-900 text-center font-bold'>Be a teacher to apply first</Link>
                         }
                     </div>
 
