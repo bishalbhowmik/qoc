@@ -54,19 +54,19 @@ export const FindTuition = (props) => {
         tuitionShow = tuition.map((item, index) => {
             return (
                 <div className='mb-10 card hover:bg-red-50 bg-white border shadow-lg cursor-pointer'>
-                    <span className=' bg-green-200 rounded-t-lg font-bold text-center p-1 shadow-md'>ID ~ { item.tuitionNumber }</span>
+                    <span className=' bg-green-200 rounded-t-lg font-bold text-center p-1 shadow-md'>ID ~ {item.tuitionNumber}</span>
                     <div className="card-body text-sm">
                         <div className="card-title mb-4">Subject: {item.subject}</div>
-                        <div><strong>Location:</strong>{item.location}</div>
-                        <div><strong>Type:</strong>  {item.tuitionType}</div>
-                        <div><strong>Gender:</strong>  {item.tutorGender}</div>
-                        <div><strong>Language:</strong>  {item.language}</div>
-                        <div><strong>Days:</strong>  {item.daysInWeek} per week</div>
-                        <div><strong>Other Requirements:</strong>  {item.otherRequirements}</div>
+                        <div><strong className='me-2'>Location:</strong>{item.location}</div>
+                        <div><strong className='me-2'>Type:</strong>  {item.tuitionType}</div>
+                        <div><strong className='me-2'>Gender:</strong>  {item.tutorGender}</div>
+                        <div><strong className='me-2'>Language:</strong>  {item.language}</div>
+                        <div><strong className='me-2'>Days:</strong>  {item.daysInWeek} per week</div>
+                        <div><strong className='me-2'>Other Requirements:</strong>  {item.otherRequirements}</div>
 
 
-                        <div className='mt-3'><strong>Salary:</strong>  {item.salary} BDT</div>
-                        <div><strong>Time:</strong>  {item.time}</div>
+                        <div className='mt-3'><strong className='me-2'>Salary:</strong>  {item.salary} BDT</div>
+                        <div><strong className='me-2'>Time:</strong>  {item.time}</div>
 
                         {
                             props.authenticated && props.decodedToken.hasOwnProperty('role') && props.decodedToken['role'] === 'teacher' ? <button className='btn btn-primary' onClick={() => apply(item._id)}>Apply</button> : <Link to={'/login'} className='mt-4 text-red-900 text-center font-bold'>Be a teacher to apply first</Link>
