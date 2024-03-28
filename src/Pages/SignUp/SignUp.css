@@ -1,0 +1,14 @@
+
+ .signup {
+        width: 35%;
+        margin: 0 auto;
+    }
+
+
+@media screen and (max-width: 500px) {
+    .signup {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+

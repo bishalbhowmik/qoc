@@ -3,28 +3,25 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 bg-normal rounded text-white">
-      <div className="grid grid-flow-col gap-6">
-        <Link to="" className="link link-hover">
+    <div className="footer md:footer-center p-10 bg-normal rounded text-white">
+      <div className="grid grid-flow-row md:grid-flow-col gap-4">
+        <Link to="/about" className="link link-hover">
           About
         </Link>
-        <Link to="" className="link link-hover">
+        <Link to="/get-in-touch" className="link link-hover">
           Get in touch
         </Link>
-        <Link to="" className="link link-hover">
+        <Link to="/faq" className="link link-hover">
           FAQ
         </Link>
-        <Link to="" className="link link-hover">
+        <Link to="/privacy-and-policy" className="link link-hover">
           Privacy & Policy
         </Link>
-        <Link target="_blank" className="link link-hover">
-          Terms & Conditions
-        </Link>
-        <Link target="_blank" className="link link-hover">
+        <Link to='/cookies' className="link link-hover">
           Cookies
         </Link>
-        <Link target="_blank" className="link link-hover">
-          Support Inbox
+        <Link to='/terms-and-conditions' className="link link-hover">
+          Terms & Conditions
         </Link>
       </div>
       <div>
@@ -51,7 +48,8 @@ const Footer = () => {
               <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
             </svg>
           </a>
-          <a>
+          
+          <a href="https://www.facebook.com/qoc.99">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -66,8 +64,14 @@ const Footer = () => {
       </div>
       <div>
         <p>Copyright © 2023 QOC</p>
+        <div className="flex h-full items-center">
+          <div className="h-auto justify-center align-middle me-2">Developed & Maintained by </div>
+          <div>
+            <a target="_blank" className="font-bold italic" href="https://koncept-tech.com/" rel="noreferrer">Koncept-Tech</a>
+          </div>
+        </div>
       </div>
-    </footer>
+    </div>
   );
 };
 

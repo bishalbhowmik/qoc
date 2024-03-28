@@ -1,0 +1,145 @@
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+* {
+	box-sizing: border-box;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.pricing-box-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.pricing-box {
+	background-color: #ffffff;
+	box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.5);
+	border-radius: 4px;
+	flex: 1;
+	padding: 30px 20px;
+	margin: 2%;
+	min-width: 250px;
+	max-width: 400px;
+}
+
+/* .pricing-box:hover{
+    box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.2) ;
+} */
+
+.pricing-box h5 {
+	text-transform: uppercase;
+}
+
+.price {
+	margin: 24px 0;
+	font-size: 36px;
+	font-weight: 900;
+}
+
+.price sub, .price sup {
+	font-size: 16px;
+	font-weight: 100;
+}
+
+.features-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.features-list li {
+	font-weight: 100;
+	padding: 12px 0;
+	font-weight: 100;
+}
+
+.features-list li:not(:last-of-type) {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+	border-radius: 25px;
+	border: none;
+	background-color: #EC1362;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 10px 15px;
+	margin-top: 20px;
+	text-transform: uppercase;
+	transition: all 0.1s ease-in-out;
+}
+
+.btn-primary:hover {
+	box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.5);
+	transform: translateY(-3px);
+}
+
+
+/* First box bg */
+
+
+.pricing-box-bg-image1 {
+	background-image: url('https://images.unsplash.com/photo-1550029402-226115b7c579?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=701&q=80');
+	background-size: cover;
+	background-position: center center;
+	color: #ffffff;
+}
+
+.pricing-box-bg-image1 .features-list li {
+	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
+}
+
+.pricing-box-bg-image1 .btn-primary {
+	background-color: #ffffff;
+	color: #000;
+}
+
+
+/* Second box bg */
+
+
+.pricing-box-bg-image2 {
+	background-image: url('https://st.depositphotos.com/2718383/58809/i/450/depositphotos_588096076-stock-photo-jigsaw-puzzle-background-design-rendering.jpg');
+	background-size: cover;
+	background-position: center center;
+	color: #ffffff;
+}
+
+.pricing-box-bg-image2 .features-list li {
+	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
+}
+
+.pricing-box-bg-image2 .btn-primary {
+	background-color: #ffffff;
+	color: #000;
+}
+
+
+
+/* Third box bg */
+
+.pricing-box-bg-image3 {
+	background-image: url('https://c0.wallpaperflare.com/preview/700/360/51/bible-wallpaper-devotional-bible-study.jpg');
+	background-size: cover;
+	background-position: center center;
+	color: #ffffff;
+    
+}
+
+.pricing-box-bg-image3 .features-list li {
+	border-bottom-color: rgba(255, 255, 255, 1);
+	font-weight: 300;
+}
+
+.pricing-box-bg-image3 .btn-primary {
+	background-color: #ffffff;
+	color: #000;
+}
