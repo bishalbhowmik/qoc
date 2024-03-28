@@ -235,9 +235,9 @@ export const StudentDashboard = (props) => {
             <div className='capitalize text-xl mb-5'>Together we achieve educational excellence</div>
 
             <div className='grid grid-cols-1 md:grid-cols-5'>
-              <div className='col-span-4 text-sm'>Lorem ipminus voluptatum necessitatibus, ducimus qui deleniti reiciendis. Expedita nam praesentium exercitationem incidunt vel provident, accusamus et laborum, ipsam atque ratione culpa fugit! Quos dignissimos aliquam blanditiis nulla.</div>
+              <div className='col-span-4 text-sm'>QOC isn't just an online school; it's a vibrant learning ecosystem. It's a place where knowledge is not a solitary pursuit but a shared adventure. By joining the QOC community, your child will embark on a journey of intellectual discovery, personal growth, and global connection.</div>
 
-              <div className='md:text-center mt-5 md:mt-0'><button className='btn text-center btn-sm md:btn-md'>Get started</button></div>
+              <div className='md:text-center mt-5 md:mt-0'><Link to='/student-dashboard/batch' className='btn text-center btn-sm md:btn-md'>Get started</Link></div>
             </div>
           </div>
 
