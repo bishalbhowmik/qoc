@@ -1,5 +1,5 @@
 
-import { faBars, faBook, faBookOpenReader, faCaretDown, faCaretUp, faChalkboardUser, faCircleInfo, faClockRotateLeft, faMoneyBill1Wave, faPersonChalkboard, faSquareCaretDown, faSquareCaretUp, faUserGroup } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faBookOpenReader, faCaretDown, faCaretUp, faChalkboardUser, faCircleInfo, faClockRotateLeft, faMoneyBill1Wave, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
@@ -43,26 +43,46 @@ export const StudentPrivateRouter = ({ children, authenticated, decodedToken, ..
             <div className='grid grid-cols-12'>
                 <div className='col-span-2 px-3 py-4 bg-red-100 h-screen rounde-e-md hidden md:block text-rose-800'>
 
-                    <div className='grid grid-cols-6'>
-                        <div className='col-span-2'>
-                            <FontAwesomeIcon icon={faBook} className='fas fa-lg me-4' />
-                        </div>
-                        <div className='col-span-4'>
-                            Course
-                        </div>
-                    </div>
 
-                    <Link to='/student-dashboard/curriculum' state={{ curriculum: decodedToken.curriculumId }} className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faBook} className='fas fa-lg me-4' /> Course</Link>
-                    
-                    <Link to='/student-dashboard/all-exam' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' />Exam</Link>
-                    <Link to='/student-dashboard/batch' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /> Batch</Link>
-                    <Link to='/student-dashboard/batch-paper-solution' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' />Paper Solution</Link>
-                    <Link to='/student-dashboard/tutor' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' /> Tutor</Link>
+                    <Link to='/student-dashboard/curriculum' state={{ curriculum: decodedToken.curriculumId }} className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faBook} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Course</div>
+                    </Link>
+
+                    <Link to='/student-dashboard/all-exam' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faBookOpenReader} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Exam</div>
+                    </Link>
+
+                    <Link to='/student-dashboard/batch' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Batch</div>
+                    </Link>
 
 
-                    <Link to='/student-dashboard/assignment' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' /> Assignment</Link>
-                    <Link to='/student-dashboard/history' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faClockRotateLeft} className='fas fa-lg me-4' /> History</Link>
-                    <Link to='/student-dashboard/payment' className='block focus:bg-rose-800 focus:text-white p-3  hover:underline'> <FontAwesomeIcon icon={faMoneyBill1Wave} className='fas fa-lg me-4' />Payment</Link>
+                    <Link to='/student-dashboard/batch-paper-solution' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'> <FontAwesomeIcon icon={faUserGroup} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Paper Solution</div>
+                    </Link>
+
+                    <Link to='/student-dashboard/tutor' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faChalkboardUser} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Tutor</div>
+                    </Link>
+
+
+                    <Link to='/student-dashboard/assignment' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faCircleInfo} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Assignment</div>
+                    </Link>
+                    <Link to='/student-dashboard/history' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faClockRotateLeft} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>History</div>
+                    </Link>
+                    <Link to='/student-dashboard/payment' className='grid grid-cols-4 focus:bg-rose-800 focus:text-white p-3  hover:underline'>
+                        <div className='col-span-1'><FontAwesomeIcon icon={faMoneyBill1Wave} className='fas fa-lg me-4' /></div>
+                        <div className='col-span-3'>Payment</div>
+                    </Link>
                 </div>
                 <div className='col-span-12 md:col-span-10 my-10 p-3 mx-0'> <Outlet /></div>
 
