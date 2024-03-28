@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { applyTuitionApi, getApprovedTuition, getApprovedTuitionApi } from '../../Api/Teacher/TuitionApi'
 import { Link } from 'react-router-dom'
+import { applyTuitionApi, getApprovedTuitionApi } from '../../Api/Teacher/TuitionApi'
 import Spinner from '../../components/Spinner'
 
 const mapStateToProps = (state) => {
@@ -20,6 +20,7 @@ export const FindTuition = (props) => {
 
         setSpin(true)
         getApprovedTuitionApi().then(data => {
+            console.log(data)
             setSpin(false)
             if (data.error) throw data.message
 
@@ -52,7 +53,8 @@ export const FindTuition = (props) => {
     else {
         tuitionShow = tuition.map((item, index) => {
             return (
-                <div className='my-10 card bg-gray-50 border-x-8 hover:border-red-800 hover:shadow-lg'>
+                <div className='mb-10 card hover:bg-red-50 bg-white border shadow-lg cursor-pointer'>
+                    <span className=' bg-green-200 rounded-t-lg font-bold text-center p-1 shadow-md'>ID ~ { item.tuitionNumber }</span>
                     <div className="card-body text-sm">
                         <div className="card-title mb-4">Subject: {item.subject}</div>
                         <div><strong>Location:</strong>{item.location}</div>
